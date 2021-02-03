@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.CreateAccountActivity">
+    <RelativeLayout
+        android:id="@+id/mainrl"
+        android:layout_centerInParent="true"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
+        android:padding="22dp"
+        android:background="@color/platinum">
+
+        <TextView
+            android:id="@+id/logtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+
+            android:textColor="@color/black"
+            android:text="Create Account"></TextView>
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/usernameEt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="8dp"
+            android:layout_below="@+id/logtv"
+
+            android:hint="@string/hint_username"
+
+            android:inputType="textPersonName"
+            android:padding="8dp"
+
+            />
+
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/emailEt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="8dp"
+
+            android:fontFamily="sans-serif-medium"
+
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:hint="Email"
+            android:layout_below="@+id/usernameEt"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/emailEt"
+            android:id="@+id/forgettv"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Forgot Password"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"></TextView>
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/passwordEt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="8dp"
+
+            android:fontFamily="sans-serif-medium"
+            android:hint="@string/hint_password"
+
+            android:inputType="textPassword"
+            android:padding="8dp"
+
+            android:layout_below="@+id/forgettv"/>
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/passwordagainEt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_pwdagain"
+            android:drawablePadding="8dp"
+
+            android:fontFamily="sans-serif-medium"
+            android:hint="Password again"
+
+            android:inputType="textPassword"
+            android:padding="8dp"
+
+            android:layout_below="@+id/passwordEt"/>
+        <RelativeLayout
+            android:layout_below="@+id/passwordagainEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_centerHorizontal="true"
+
+                android:id="@+id/logInBtn"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_bg"
+                android:gravity="center"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+
+<!--            <TextView-->
+
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_below="@+id/logInBtn"-->
+<!--                android:id="@+id/createtv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:text="Create account from here!"-->
+<!--                android:textColor="@color/blue"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                ></TextView>-->
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

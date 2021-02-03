@@ -1,3 +1,61 @@
 <resources>
     <string name="app_name">Pods Store</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="Open">open</string>
+    <string name="Close">close</string>
+    <string name="sample_string">v_0.0.1</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_inventory">InventoryActivity</string>
+    <string name="title_activity_mapping">MappingActivity</string>
+    <string name="title_activity_pick">PickActivity</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="error_msg_username">Enter Valid Username</string>
+    <string name="error_msg_password">Enter Password</string>
+    <string name="msg_internet_connection">Please Check Your Internet Connection</string>
+    <string name="error_network_msg">Something Went Wrong Please Try Again!</string>
+    <string name="empty_list">No Items to show</string>
+    <string name="no_data_available">No Data Available</string>
+
+    <string name="title_activity_put_away">PutAwayActivity</string>
+    <string name="msg_no_record">No Record</string>
+    <string name="scan">Scan</string>
+    <string name="clear">Clear</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="toggle_turn_on">Turn On</string>
+    <string name="toggle_turn_off">Turn Off</string>
+    <string name="btn_display">Display</string>
+    <string name="mapping">Mapping</string>
+    <string name="large_carton">Large Carton</string>
+    <string name="small_carton">Small Carton</string>
+    <string name="title_activity_device">DeviceActivity</string>
+
+    <string name="select_reader">Select Reader</string>
+
+    <string name="scanning">Scanning for Readers…</string>
+    <string name="none_found">No Readers found</string>
+    <string name="button_add_new">Add New</string>
+    <string name="action_add_new">Add New</string>
+
+    <string name="transport_bt">BT</string>
+    <string name="transport_ble">BLE</string>
+    <string name="transport_usb">USB</string>
+    <string name="description_unknown_device"></string>
+    <string name="power_level_label_text">dBm</string>
+
+    <string name="description_1128">Bluetooth® UHF RFID Reader</string>
+    <string name="connect_reader_menu_item_text">Connect Reader</string>
+    <string name="change_reader_menu_item_text">Change Reader</string>
+    <string name="disconnect_reader_menu_item_text">Disconnect Reader</string>
+    <string name="reset_reader_menu_item_text">Reset Reader</string>
+    <string name="select_your_device">Select Your Device</string>
+    <string name="msg_reader_not_connected">Reader Not Connected</string>
+    <string name="search">Search</string>
+
 </resources>
