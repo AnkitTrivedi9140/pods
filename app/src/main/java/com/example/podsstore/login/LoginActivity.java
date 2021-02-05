@@ -1,15 +1,14 @@
 package com.example.podsstore.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +20,19 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.LoginUserRequest;
+import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -91,10 +103,9 @@ public class LoginActivity extends AppCompatActivity {
 
             switch (v.getId()) {
                 case R.id.logInBtn:
-                    String username = usernameEt.getText().toString();
+                    String username = emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
-                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(login);
+                   smallCarton(username,password);
                     finish();
 
                     break;
@@ -109,6 +120,68 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     };
+    @SuppressLint("CheckResult")
+    private void smallCarton(String useremail,String password) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+
+        List<LoginUserRequest> list = new ArrayList<>();
+
+        LoginUserRequest r = new LoginUserRequest();
+//        r.setUsername(username);
+        r.setUseremail(useremail);
+        r.setPassword(password);
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClient.getApiClient().userlogin(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.body()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), "logIn id create Successful -- " +successResponse.getId(), Toast.LENGTH_SHORT).show();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        }
+                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
 
     private void initViews() {
         logInBtn = findViewById(R.id.logInBtn);
@@ -124,5 +197,6 @@ public class LoginActivity extends AppCompatActivity {
         usernameEt.addTextChangedListener(usernameTextWatcher);
         passwordEt.addTextChangedListener(passwordTextWatcher);
     }
+
 
 }

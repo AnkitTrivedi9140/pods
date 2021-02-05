@@ -53,7 +53,6 @@
 
             android:fontFamily="sans-serif-medium"
 
-            android:inputType="textPassword"
             android:padding="8dp"
             android:hint="Email"
             android:layout_below="@+id/usernameEt"/>
@@ -82,7 +81,6 @@
             android:fontFamily="sans-serif-medium"
             android:hint="@string/hint_password"
 
-            android:inputType="textPassword"
             android:padding="8dp"
 
             android:layout_below="@+id/forgettv"/>
@@ -100,7 +98,6 @@
             android:fontFamily="sans-serif-medium"
             android:hint="Password again"
 
-            android:inputType="textPassword"
             android:padding="8dp"
 
             android:layout_below="@+id/passwordEt"/>

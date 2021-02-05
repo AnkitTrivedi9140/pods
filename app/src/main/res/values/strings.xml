@@ -57,5 +57,9 @@
     <string name="select_your_device">Select Your Device</string>
     <string name="msg_reader_not_connected">Reader Not Connected</string>
     <string name="search">Search</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 
 </resources>
