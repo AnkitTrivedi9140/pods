@@ -1,38 +1,37 @@
-package com.example.podsstore.product;
+package com.example.podsstore.categori;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
+import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.product.ProductListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> {
-    private ProductListAdapter.AdapterListener adapterListener;
-    private List<ProductResponse> productResponseList;
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+    private CategoryAdapter.AdapterListener adapterListener;
+    private List<BusinessCatResponse> productResponseList;
     private Context context;
 
-    private InventoryAdapterListener openListener;
+    private CategoryAdapter.InventoryAdapterListener openListener;
 
 
-    public void setAdapterListener(ProductListAdapter.AdapterListener adapterListener) {
+    public void setAdapterListener(CategoryAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
 
-    public void setAdapterListeners(ProductListAdapter.InventoryAdapterListener adapterListener) {
+    public void setAdapterListeners(CategoryAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
     }
 
@@ -64,46 +63,46 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyItemRangeChanged(position, productResponseList.size());
     }
 
-    public ProductListAdapter(Context context) {
+    public CategoryAdapter(Context context) {
         this.context = context;
         productResponseList = new ArrayList<>();
 
     }
 
-    public ProductListAdapter(List<ProductResponse> moviesList) {
+    public CategoryAdapter(List<BusinessCatResponse> moviesList) {
 
         this.productResponseList = moviesList;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.productlistitems, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new CategoryAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        ProductResponse movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProdname());
-        holder.description.setText("$_"+movies.getPrice());
+    public void onBindViewHolder(CategoryAdapter.MyViewHolder holder, int position) {
+        BusinessCatResponse movies = productResponseList.get(position);
+        holder.tvAssetType.setText(movies.getProductname());
+        holder.description.setText("$_"+movies.getStatus());
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
-                .load(movies.getImageurl().trim().toString())
+                .load(movies.getProductimage().trim().toString())
                 .into(holder.productiv);
 
     }
 
-    public void addAll(List<ProductResponse> list) {
+    public void addAll(List<BusinessCatResponse> list) {
 
-        for (ProductResponse d : list) {
+        for (BusinessCatResponse d : list) {
             add(d);
         }
     }
 
-    public void add(ProductResponse data) {
+    public void add(BusinessCatResponse data) {
         productResponseList.add(data);
         notifyItemInserted(productResponseList.size() - 1);
     }
@@ -128,7 +127,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public interface AdapterListener {
 
 
-        void onItemClick(ProductResponse data);
+        void onItemClick(BusinessCatResponse data);
     }
 
     public interface InventoryAdapterListener {

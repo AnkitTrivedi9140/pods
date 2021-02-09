@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.SplashActivity;
+import com.example.podsstore.categori.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
@@ -41,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button logInBtn;
     private EditText usernameEt, passwordEt, emaiEt;
     private TextView createtv;
-
+ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,16 +108,23 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.logInBtn:
                     String username = emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
-                   smallCarton(username,password);
+                   //smallCarton(username,password);
                     finish();
 
                     break;
                 case R.id.createtv:
-                    Intent createaccount = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                    Intent createaccount = new Intent(LoginActivity.this, CategoryActivity.class);
                     startActivity(createaccount);
                     finish();
                     break;
+                case R.id.ivback:
 
+                    Intent login = new Intent(LoginActivity.this, SplashActivity.class);
+                    startActivity(login);
+                    finish();
+
+
+                    break;
 
             }
 
@@ -190,7 +200,9 @@ public class LoginActivity extends AppCompatActivity {
         emaiEt = findViewById(R.id.emailEt);
         createtv = findViewById(R.id.createtv);
         logInBtn.setOnClickListener(onClickListener);
+        back=findViewById(R.id.ivback);
         createtv.setOnClickListener(onClickListener);
+        back.setOnClickListener(onClickListener);
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);
         passwordEt.setTypeface(typeface);

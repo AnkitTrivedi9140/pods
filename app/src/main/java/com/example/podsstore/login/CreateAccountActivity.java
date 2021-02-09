@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,9 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
+import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
@@ -31,11 +34,13 @@ import retrofit2.Response;
 public class CreateAccountActivity extends AppCompatActivity {
     private Button logInBtn;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         getSupportActionBar().hide();
+
         initViews();
     }
     private TextWatcher usernameTextWatcher = new TextWatcher() {
@@ -88,9 +93,17 @@ public class CreateAccountActivity extends AppCompatActivity {
 //                    startActivity(login);
 //                    finish();
 
-                    smallCarton(username,email,password,reenterpassword);
+                  //  smallCarton(username,email,password,reenterpassword);
                     break;
 
+                case R.id.ivback:
+
+                    Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+                    startActivity(login);
+                    finish();
+
+
+                    break;
 
 
             }
@@ -213,9 +226,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
         emaiEt = findViewById(R.id.emailEt);
+        back=findViewById(R.id.ivback);
         reenterpasswordet = findViewById(R.id.passwordagainEt);
         logInBtn.setOnClickListener(onClickListener);
-
+        back.setOnClickListener(onClickListener);
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);
         passwordEt.setTypeface(typeface);

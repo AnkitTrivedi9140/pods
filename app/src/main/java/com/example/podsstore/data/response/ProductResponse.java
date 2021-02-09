@@ -54,6 +54,8 @@ public class ProductResponse {
 
     @SerializedName("discount")
     private String discount;
+    @SerializedName("price")
+    private String price;
 
     public String getId() {
         return id;
@@ -191,6 +193,14 @@ public class ProductResponse {
         this.discount = discount;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "ProductResponse{" +
@@ -211,6 +221,7 @@ public class ProductResponse {
                 ", redirecturl='" + redirecturl + '\'' +
                 ", status='" + status + '\'' +
                 ", discount='" + discount + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 }

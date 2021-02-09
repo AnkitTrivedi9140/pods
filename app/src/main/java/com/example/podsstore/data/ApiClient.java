@@ -14,7 +14,7 @@ public class ApiClient {
 
    /* public static final String BASE_URL = BuildConfig.BASE_URL;*/
    //public static final String BASE_URL ="http://216.10.243.60:4067/PodsStoreAPI/";
-    public static final String BASE_URL ="http://216.10.243.60:4057/PodAPI/";
+   public static final String BASE_URL ="http://216.10.243.60:4057/PodAPI/";
    private static Retrofit retrofit = null;
 
    public static final long NETWORK_CALL_TIMEOUT = 60;

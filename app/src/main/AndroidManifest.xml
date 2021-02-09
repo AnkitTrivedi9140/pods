@@ -16,18 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".product.ProductListActivity">
+        <activity android:name=".categori.CategoryActivity"></activity>
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".productdetails.ProductDetailsActivity" />
+        <activity android:name=".product.ProductListActivity"></activity>
         <activity android:name=".login.CreateAccountActivity" />
-        <activity android:name=".login.LoginActivity">
-
-        </activity>
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
     </application>
 
