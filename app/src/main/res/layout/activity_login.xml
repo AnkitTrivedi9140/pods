@@ -40,7 +40,7 @@
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="8dp"
             android:ems="10"
-android:visibility="gone"
+            android:visibility="gone"
             android:hint="@string/hint_username"
 
             android:inputType="textPersonName"
@@ -63,7 +63,7 @@ android:visibility="gone"
 
             android:fontFamily="sans-serif-medium"
             android:hint="Email"
-            android:inputType="textPassword"
+
             android:padding="8dp" />
 
         <TextView

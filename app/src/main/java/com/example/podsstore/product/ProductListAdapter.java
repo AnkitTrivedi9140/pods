@@ -1,14 +1,11 @@
 package com.example.podsstore.product;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +20,7 @@ import java.util.List;
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> {
     private ProductListAdapter.AdapterListener adapterListener;
     private List<ProductResponse> productResponseList;
+
     private Context context;
 
     private InventoryAdapterListener openListener;

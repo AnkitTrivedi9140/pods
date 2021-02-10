@@ -10,13 +10,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.categori.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 
 import java.util.List;
@@ -24,8 +25,6 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductListActivity extends AppCompatActivity {
@@ -55,18 +54,20 @@ public class ProductListActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
-        ApiClient.getApiClient().getproducts()
+        Log.e("getProductMasterssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
+        ApiClient.getApiClient().getproducts(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
                     @Override
                     public void onSuccess(Response<List<ProductResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
-
+                        Log.d("onSuccess: ",String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             List<ProductResponse> list = response.body();
-                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            Log.e("getProduct", String.valueOf(list.size()));
                             productListAdapter.addAll(list);
+
 
                         } else {
 
@@ -78,7 +79,7 @@ public class ProductListActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("geterre", String.valueOf(e.getMessage()));
 
                     }
                 });

@@ -27,6 +27,9 @@ import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.LoginResponse;
+import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -50,12 +53,14 @@ ImageView back;
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-//        if (UserPreference.getUserId() != null) {
-//            startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }
         setContentView(R.layout.activity_login);
+        PreferenceManager.init(LoginActivity.this);
+        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         getSupportActionBar().hide();
         initViews();
 
@@ -108,8 +113,8 @@ ImageView back;
                 case R.id.logInBtn:
                     String username = emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
-                   //smallCarton(username,password);
-                    finish();
+                   smallCarton(username,password);
+
 
                     break;
                 case R.id.createtv:
@@ -151,9 +156,9 @@ ImageView back;
         ApiClient.getApiClient().userlogin(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                .subscribeWith(new DisposableSingleObserver<Response<LoginResponse>>() {
                     @Override
-                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+                    public void onSuccess(Response<LoginResponse> response) {
 
                         // binding.progressbar.setVisibility(View.GONE);
 
@@ -161,20 +166,13 @@ ImageView back;
                         Log.e("onSuccess", String.valueOf(response.body()));
                         if (response.isSuccessful()) {
 
-                            CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), "logIn id create Successful -- " +successResponse.getId(), Toast.LENGTH_SHORT).show();
+                            LoginResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), "create Successful -- " +successResponse.getAccessToken(), Toast.LENGTH_SHORT).show();
 
-//                            Log.e("onSuccessaa", successResponse.getChallanid());
-                            if (successResponse != null) {
+                            PreferenceManager.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
+                            PreferenceManager.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
+                            PreferenceManager.setStringValue(Preferences.ACCESS_TOKEN, response.body().getAccessToken());
 
-//                                if (successResponse.getMessage().equals("success")) {
-//                                    // mappingAdapter.clear();
-//
-//                                }
-
-                                //  Toaster.show(mContext, successResponse.getMessage());
-
-                            }
                         } else {
                             // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 

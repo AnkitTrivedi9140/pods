@@ -93,7 +93,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 //                    startActivity(login);
 //                    finish();
 
-                  //  smallCarton(username,email,password,reenterpassword);
+                    smallCarton(username,email,password,reenterpassword);
                     break;
 
                 case R.id.ivback:
@@ -176,7 +176,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient().createuserregister(r)
+        ApiClient.getApiClient(). createuserregister(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -190,7 +190,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), "id create Successful -- " +successResponse.getId(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "create Successful -- " +successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
