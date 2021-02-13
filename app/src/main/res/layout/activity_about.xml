@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".aboutpod.AboutActivity">
+<ScrollView
+    android:layout_marginBottom="62dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<ImageView
+    android:layout_marginTop="16dp"
+    android:id="@+id/ivabout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/aboutpodimage"
+    android:layout_centerHorizontal="true"
+
+
+    >
+
+</ImageView>
+
+<TextView
+    android:id="@+id/tvheading"
+    android:text="Innovation you can trust"
+    android:layout_below="@+id/ivabout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:textColor="@color/black"
+    android:textSize="22dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    ></TextView>
+    <TextView
+        android:id="@+id/tvheadingtext"
+        android:text="Our team consists of international trade and health science experts who use over 20 years of industry experience to execute lasting solutions within today’s world of unprecedented change.\n\nAcross a wide range of medical and healthcare products, existing supply chains are no longer sufficient. To deliver, organisations must pre-empt geopolitical change and leverage upon strong local relationships. At PODS, our skill set is unique, our people are global, and integrity is our greatest asset."
+        android:layout_below="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/manatee"
+        android:textSize="16dp"
+android:layout_marginTop="4dp"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        ></TextView>
+
+
+
+        <TextView
+            android:id="@+id/tvheadingpementmethod"
+            android:text="Accepting all Payment Medhods"
+            android:layout_below="@+id/tvheadingtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+
+
+        <RelativeLayout
+            android:id="@+id/rlimage"
+            android:layout_marginTop="12dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvheadingpementmethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:src="@drawable/grpaymentmethodimage"
+                android:id="@+id/ivpement"
+                android:layout_width="66dp"
+                android:layout_height="66dp"></ImageView>
+            <ImageView
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/visaimage"
+                android:layout_toRightOf="@+id/ivpement"
+                android:id="@+id/ivvisa"
+                android:layout_width="66dp"
+                android:layout_height="66dp"></ImageView>
+            <ImageView
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/paytmimage"
+                android:layout_toRightOf="@+id/ivvisa"
+                android:id="@+id/ivpetm"
+                android:layout_width="66dp"
+                android:layout_height="66dp"></ImageView>
+            <ImageView
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/bankimage"
+                android:layout_toRightOf="@+id/ivpetm"
+                android:id="@+id/ivbank"
+                android:layout_width="66dp"
+                android:layout_height="66dp"></ImageView>
+        </RelativeLayout>
+        <TextView
+            android:layout_below="@+id/rlimage"
+            android:background="@drawable/rippleabout"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentBottom="true"
+            android:lines="1"
+
+            android:id="@+id/tvreact"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="18dp"
+
+         android:layout_centerHorizontal="true"
+
+            android:textColor="@color/term_and_conditions"
+            android:text="Reach Out to US "
+            android:gravity="center"
+            ></TextView>
+    </RelativeLayout>
+</ScrollView>
+    <include
+        layout="@layout/item_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</RelativeLayout>

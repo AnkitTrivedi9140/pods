@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.podsstore.R;
 import com.example.podsstore.data.response.ProductResponse;
 
@@ -87,11 +89,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.tvAssetType.setText(movies.getProdname());
         holder.description.setText("$_"+movies.getPrice());
 
-        //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
+     //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
+//        Glide.with(context)
+//                .load("http://216.10.243.60:8080/PodContent/Medical-Googles.jpg")
+//                .into(holder.productiv);
         Glide.with(context)
-                .load(movies.getImageurl().trim().toString())
+                .load(movies.getImageurl())
                 .into(holder.productiv);
-
     }
 
     public void addAll(List<ProductResponse> list) {

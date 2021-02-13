@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
-import com.example.podsstore.categori.CategoryActivity;
+import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.prefs.PreferenceManager;
@@ -86,7 +86,7 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private ProductListAdapter.AdapterListener adapterListener = data -> {
-        Toast.makeText(getApplicationContext(), data.getId(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
 i.putExtra("userid",data.getId().trim());
         startActivity(i);

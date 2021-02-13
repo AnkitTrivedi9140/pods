@@ -5,44 +5,218 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rlsearch"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/term_and_conditions"
 
+        android:paddingBottom="22dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        >
+
+
+
+        <EditText
+            android:id="@+id/putwaysearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/edittextbackground"
+android:padding="10dp"
+
+            android:drawableLeft="@drawable/search"
+            android:hint="Search your product"
+
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+<androidx.cardview.widget.CardView
+    app:cardCornerRadius="12dp"
+android:id="@+id/cardview"
+android:layout_marginTop="50dp"
+    android:elevation="0dp"
+    android:layout_marginBottom="55dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   ><ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+   android:layout_margin="11dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ivallproduct"
+        android:src="@drawable/imageallproduct"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+
+
+        >
+
+    </ImageView>
 
     <TextView
-        android:id="@+id/toproduct"
+        android:id="@+id/tvall"
+        android:layout_below="@+id/ivallproduct"
         android:layout_width="wrap_content"
+        android:text="All"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="22dp"
+        android:layout_height="wrap_content"></TextView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productrv"
+
+        android:layout_width="match_parent"
+        android:scrollbars="horizontal"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/ivallproduct"
+        android:layout_height="77dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/mainimage"
+        android:layout_below="@+id/productrv"
+        android:src="@drawable/mainimage"
+        android:layout_width="match_parent"
+        android:layout_height="177dp">
+
+    </ImageView>
+
+<TextView
+    android:id="@+id/tvbestselling"
+    android:textSize="22dp"
+    android:text="Bestselling Products"
+    android:layout_width="wrap_content"
+    android:textColor="@color/black"
+    android:layout_below="@+id/mainimage"
+    android:layout_height="wrap_content">
+
+</TextView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bestsellingproductrv"
+android:layout_below="@+id/tvbestselling"
+        android:layout_width="match_parent"
+        android:scrollbars="horizontal"
+        android:orientation="horizontal"
+
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <RelativeLayout
+        android:id="@+id/rltop"
+        android:layout_below="@+id/bestsellingproductrv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello apoorv sir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/nv"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        app:headerLayout="@layout/nav_header_main"-->
+        android:background="@color/btngrn"
+android:layout_marginBottom="22dp"
 
-<!--        app:menu="@menu/activity_main_drawer">-->
+        >
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="6dp">-->
+        <TextView
+            android:id="@+id/headingtopbrands"
+            android:text="Top Brands on POD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            >
 
-<!--            <TextView-->
-<!--                android:id="@+id/cotxt"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:text="v_1.0.2"-->
-<!--                android:textColor="@color/manatee"-->
-<!--                android:textSize="14sp" />-->
+        </TextView>
+<HorizontalScrollView
+    android:layout_below="@+id/headingtopbrands"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-<!--        </RelativeLayout>-->
 
-<!--    </com.google.android.material.navigation.NavigationView>-->
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/ivtop1"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
+            android:src="@drawable/sunpharma"
+            app:civ_border_color="@color/white"
+
+            app:civ_shadow_color="#fff"
+android:layout_marginLeft="8dp"
+            />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/ivtop2"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
+            android:src="@drawable/cipla"
+            app:civ_border_color="@color/white"
+
+            app:civ_shadow_color="#fff"
+            android:layout_toRightOf="@+id/ivtop1"
+            android:layout_marginLeft="14dp"
+            />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/ivtop3"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
+            android:src="@drawable/bharat"
+            app:civ_border_color="@color/white"
+
+            app:civ_shadow_color="#fff"
+            android:layout_toRightOf="@+id/ivtop2"
+            android:layout_marginLeft="14dp"
+            />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/ivtop4"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
+            android:src="@drawable/pfizer"
+            app:civ_border_color="@color/white"
+
+            app:civ_shadow_color="#fff"
+            android:layout_toRightOf="@+id/ivtop3"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="8dp"
+            />
+    </RelativeLayout>
+</HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bestprisedproductrv"
+        android:layout_below="@+id/rltop"
+        android:layout_width="match_parent"
+        android:scrollbars="horizontal"
+        android:orientation="horizontal"
+
+        android:layout_height="188dp"></androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>
+</ScrollView>
+</androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/item_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -43,41 +44,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         initViews();
     }
-    private TextWatcher usernameTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            if (s.toString().isEmpty()) {
-                usernameEt.setError(getString(R.string.error_msg_username));
-            }
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
-
-    private TextWatcher passwordTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            if (s.toString().isEmpty()) {
-                passwordEt.setError(getString(R.string.error_msg_password));
-            }
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -92,8 +59,22 @@ public class CreateAccountActivity extends AppCompatActivity {
 //                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(login);
 //                    finish();
+                    if (TextUtils.isEmpty(username)) {
+                        usernameEt.setError("Name Can't Blank!");
+                    } else if (TextUtils.isEmpty(email)) {
+                        emaiEt.setError("Email Address Can't Blank!");
 
-                    smallCarton(username,email,password,reenterpassword);
+                    }else if (TextUtils.isEmpty(password)) {
+                        passwordEt.setError("Password Can't Blank!");
+
+                    }
+                    else if (TextUtils.isEmpty(reenterpassword)) {
+                        reenterpasswordet.setError("Re_password Can't Blank!");
+
+                    }else{
+                        smallCarton(username,email,password,reenterpassword);
+                    }
+
                     break;
 
                 case R.id.ivback:
@@ -115,55 +96,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void smallCarton(String username,String useremail,String password,String passwordagin) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<CreateLoginUserRequest> list = new ArrayList<>();
-//        List<String> strings = new ArrayList<>();
-//        List<String> ownershiplist = new ArrayList<>();
-//        List<String> fromdatelist = new ArrayList<>();
-//        List<String> todatelist = new ArrayList<>();
-//        List<String> qty = new ArrayList<>();
-//        ArrayList<OutwardScanBarcodeReq> barcodeDataArrayList = new ArrayList<>();
-//        for (ScanBarcodeEntity d : haziraAdapter.get()) {
-//            strings.add(d.getBarcode());
-//        }
-//        for (ScanBarcodeEntity d : haziraAdapter.get()) {
-//            ownershiplist.add(d.getOwnershiptype());
-//        }
-//        for (ScanBarcodeEntity d : haziraAdapter.get()) {
-//            fromdatelist.add(d.getFromdate());
-//        }
-//        for (ScanBarcodeEntity d : haziraAdapter.get()) {
-//            todatelist.add(d.getTodate());
-//        }
-//        for (ScanBarcodeEntity d : haziraAdapter.get()) {
-//            qty.add(d.getQuantity());
-//        }
-//
-//        for (String s : strings) {
-//            OutwardScanBarcodeReq bd = new OutwardScanBarcodeReq();
-//            for (String ownership : ownershiplist) {
-//
-//                bd.setOwnershiptype(ownership);
-//
-//            }
-//            for (String fromdate : fromdatelist) {
-//
-//                bd.setOwnershipfromdate(fromdate);
-//
-//            }
-//            for (String todate : todatelist) {
-//
-//                bd.setOwnershiptodate(todate);
-//
-//            }
-//            for (String qtyy : qty) {
-//
-//                bd.setQty(qtyy);
-//
-//            }
-//            bd.setTag((s));
-//            barcodeDataArrayList.add(bd);
-//        }
-//
-//        Log.e("smallCarton", barcodeDataArrayList.toString());
+
         CreateLoginUserRequest r = new CreateLoginUserRequest();
         r.setUsername(username);
         r.setUseremail(useremail);
@@ -190,7 +123,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), "create Successful -- " +successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "create Account Successful -- " +successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+//                            finish();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -233,7 +169,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);
         passwordEt.setTypeface(typeface);
-        usernameEt.addTextChangedListener(usernameTextWatcher);
-        passwordEt.addTextChangedListener(passwordTextWatcher);
+
     }
 }

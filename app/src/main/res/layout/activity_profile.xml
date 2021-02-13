@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:background="@color/term_and_conditions"></RelativeLayout>
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/ivlogo"
+        android:layout_width="188dp"
+        android:layout_height="188dp"
+        android:src="@drawable/leaf"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="6dp"
+        app:civ_shadow="true"
+
+        app:civ_shadow_color="#fff"
+
+
+        android:layout_centerHorizontal="true"/>
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/ivcamera"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:src="@drawable/camera"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp"
+        app:civ_shadow="true"
+android:layout_marginTop="88dp"
+        app:civ_shadow_color="#fff"
+
+android:layout_marginLeft="200dp"
+  />
+    <TextView
+        android:id="@+id/tvname"
+        android:text="Tell us more"
+        android:layout_below="@+id/ivlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        ></TextView>
+    <TextView
+        android:id="@+id/tvemail"
+        android:text="Our representative soon."
+        android:layout_below="@+id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_setting"
+        android:textSize="16dp"
+        android:layout_marginTop="2dp"
+android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        ></TextView>
+
+    <RelativeLayout
+        android:id="@+id/rladdress"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tvemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvheadingaddress"
+        android:text="Address"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/manatee"
+        android:textSize="16dp"
+
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        ></TextView>
+    <TextView
+        android:id="@+id/tvaddress"
+        android:text="Our representative soon."
+        android:layout_below="@+id/tvheadingaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_setting"
+        android:textSize="16dp"
+        android:layout_marginTop="2dp"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        ></TextView>
+
+        <TextView
+            android:id="@+id/tvaddressedit"
+            android:text="Edit"
+            android:layout_below="@+id/tvheadingaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/term_and_conditions"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+    </RelativeLayout>
+<TextView
+    android:layout_marginTop="16dp"
+    android:background="@color/platinum"
+    android:layout_below="@+id/rladdress"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"></TextView>
+    <RelativeLayout
+
+        android:id="@+id/rlmobile"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/rladdress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvheadingmobile"
+            android:text="Mobile Number"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/manatee"
+            android:textSize="16dp"
+
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+        <TextView
+            android:id="@+id/tvmobile"
+            android:text="9876543210"
+            android:layout_below="@+id/tvheadingmobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_setting"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tvmobileedit"
+            android:text="Edit"
+            android:layout_below="@+id/tvheadingmobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/term_and_conditions"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:background="@color/platinum"
+        android:layout_below="@+id/rlmobile"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></TextView>
+    <RelativeLayout
+
+        android:id="@+id/rlemail"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/rlmobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvheadingemail"
+            android:text="EmailID"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/manatee"
+            android:textSize="16dp"
+
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+        <TextView
+            android:id="@+id/tvemailtxt"
+            android:text="9876543210"
+            android:layout_below="@+id/tvheadingemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_setting"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tvemailedit"
+            android:text="Edit"
+            android:layout_below="@+id/tvheadingemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/term_and_conditions"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="16dp"
+        android:background="@color/platinum"
+        android:layout_below="@+id/rlemail"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></TextView>
+    <RelativeLayout
+
+        android:id="@+id/rlpassword"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/rlemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvheadingpassword"
+            android:text="Password"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/manatee"
+            android:textSize="16dp"
+
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+        <TextView
+            android:id="@+id/tvpassword"
+            android:text="9876543210"
+            android:layout_below="@+id/tvheadingpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_setting"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tvpasswordedit"
+            android:text="Edit"
+            android:layout_below="@+id/tvheadingpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/term_and_conditions"
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            ></TextView>
+    </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+    <include
+        layout="@layout/item_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +23,9 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
-import com.example.podsstore.categori.CategoryActivity;
+import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
-import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
@@ -68,41 +67,7 @@ ImageView back;
         //   binding.url.setOnClickListener(onClickListener);
     }
 
-    private TextWatcher usernameTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            if (s.toString().isEmpty()) {
-                usernameEt.setError(getString(R.string.error_msg_username));
-            }
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
-
-    private TextWatcher passwordTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            if (s.toString().isEmpty()) {
-                passwordEt.setError(getString(R.string.error_msg_password));
-            }
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
 
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -111,9 +76,19 @@ ImageView back;
 
             switch (v.getId()) {
                 case R.id.logInBtn:
-                    String username = emaiEt.getText().toString();
+                    String email = emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
-                   smallCarton(username,password);
+
+                    if (TextUtils.isEmpty(email)) {
+                        emaiEt.setError("Email Address Can't Blank!");
+                    } else if (TextUtils.isEmpty(password)) {
+                        passwordEt.setError("Password Can't Blank!");
+
+                    }else{
+                        smallCarton(email,password);
+                    }
+
+
 
 
                     break;
@@ -172,7 +147,9 @@ ImageView back;
                             PreferenceManager.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
                             PreferenceManager.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
                             PreferenceManager.setStringValue(Preferences.ACCESS_TOKEN, response.body().getAccessToken());
-
+                            Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
@@ -204,8 +181,7 @@ ImageView back;
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);
         passwordEt.setTypeface(typeface);
-        usernameEt.addTextChangedListener(usernameTextWatcher);
-        passwordEt.addTextChangedListener(passwordTextWatcher);
+
     }
 
 

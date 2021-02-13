@@ -9,19 +9,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,12 +57,12 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction;
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        ApiClient.getApiClient().getproductsdetails(getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
+        ApiClient.getApiClient().getproductsdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
             @Override
             public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
 
-                Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getMaterialMasters", response.body().toString());
+               // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
                     List<ProductResponse> list = response.body();
 

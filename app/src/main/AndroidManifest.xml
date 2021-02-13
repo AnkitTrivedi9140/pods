@@ -2,11 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.podsstore">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,7 +30,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".categori.CategoryActivity"></activity>
+        <activity android:name=".aboutpod.ConnectwithPodActivity"></activity>
+        <activity android:name=".profile.ProfileActivity" />
+        <activity android:name=".aboutpod.AboutActivity" />
+        <activity android:name=".category.CategoryActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".productdetails.ProductDetailsActivity" />
-        <activity android:name=".product.ProductListActivity"></activity>
+        <activity android:name=".product.ProductListActivity" />
         <activity android:name=".login.CreateAccountActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />

@@ -7,13 +7,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.podsstore.login.CreateAccountActivity;
 import com.example.podsstore.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 private TextView tvicon,tvwelcomedetails,tvwelcome,tvwelcomedetailsnext,tvsignin,tvsignup;
+ImageView ivlogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,7 @@ private TextView tvicon,tvwelcomedetails,tvwelcome,tvwelcomedetailsnext,tvsignin
         tvwelcomedetailsnext=findViewById(R.id.tvwelcomedetailsnext);
         tvsignin=findViewById(R.id.tvsignin);
         tvsignup=findViewById(R.id.tvsignup);
+        ivlogo=findViewById(R.id.ivlogo);
         getSupportActionBar().hide();
         Typeface typeface= ResourcesCompat.getFont(getApplicationContext(),R.font.architects_daughter);
         Typeface typefacewelcome= ResourcesCompat.getFont(getApplicationContext(),R.font.bentham_rt);
@@ -48,5 +52,7 @@ private TextView tvicon,tvwelcomedetails,tvwelcome,tvwelcomedetailsnext,tvsignin
                 finish();
             }
         });
+
     }
+
 }
