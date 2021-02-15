@@ -140,7 +140,8 @@ android:layout_marginBottom="22dp"
 <HorizontalScrollView
     android:layout_below="@+id/headingtopbrands"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="22dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
