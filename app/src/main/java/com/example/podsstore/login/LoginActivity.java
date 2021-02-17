@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button logInBtn;
     private EditText usernameEt, passwordEt, emaiEt;
     private TextView createtv;
+    private ImageView ivshow;
 ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ ImageView back;
         PreferenceManager.init(LoginActivity.this);
         if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        //    Toast.makeText(getApplicationContext(),PreferenceManager.getStringValue(Preferences.USER_EMAIL),Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
         }
@@ -105,7 +109,11 @@ ImageView back;
 
 
                     break;
+                case R.id.ivshow:
 
+                    passwordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                    break;
             }
 
         }
@@ -147,11 +155,11 @@ ImageView back;
                             PreferenceManager.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
                             PreferenceManager.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
                             PreferenceManager.setStringValue(Preferences.ACCESS_TOKEN, response.body().getAccessToken());
-                            Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getApplicationContext(), "Please check your email id or password.", Toast.LENGTH_SHORT).show();
 
                         }
                      }
@@ -169,6 +177,7 @@ ImageView back;
     }
 
     private void initViews() {
+        ivshow = findViewById(R.id.ivshow);
         logInBtn = findViewById(R.id.logInBtn);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
@@ -178,6 +187,7 @@ ImageView back;
         back=findViewById(R.id.ivback);
         createtv.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
+        ivshow.setOnClickListener(onClickListener);
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);
         passwordEt.setTypeface(typeface);

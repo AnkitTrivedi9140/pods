@@ -2,17 +2,22 @@ package com.example.podsstore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,6 +30,7 @@ import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
+import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.ProductHorizontalAdapter;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
@@ -46,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup radioGroup1;
     RadioButton home, categories, profile, about;
     private RecyclerView recyclerView,bestsellingproductrv,bestprisedproductrv;
-    private ProductHorizontalAdapter productListAdapter;
+    private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
-
+private ImageView ivallproduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         home = (RadioButton) findViewById(R.id.homes);
         categories = (RadioButton) findViewById(R.id.categories);
         profile = (RadioButton) findViewById(R.id.profile);
+        ivallproduct =  findViewById(R.id.ivallproduct);
         home.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bluehome, 0, 0);
         home.setTextColor(Color.parseColor("#007eff"));
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -111,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         bestsellingproductrv = findViewById(R.id.bestsellingproductrv);
         recyclerView = findViewById(R.id.productrv);
         bestSellingProductAdapter = new BestSellingProductAdapter(MainActivity.this);
-        productListAdapter = new ProductHorizontalAdapter(MainActivity.this);
+        productListAdapter = new CategoryHorigentalAdapter(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -119,34 +126,69 @@ public class MainActivity extends AppCompatActivity {
         bestprisedproductrv.setLayoutManager(layoutManagerss);
 //      recyclerView.setEmptyView(binding.emptyView);
         productListAdapter.setAdapterListener(adapterListener);
+        bestSellingProductAdapter.setAdapterListener(adapterListeners);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 8);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(productListAdapter);
 bestsellingproductrv.setAdapter(bestSellingProductAdapter);
         bestprisedproductrv.setAdapter(bestSellingProductAdapter);
-       productlist();
+        categorieslist();
 loadDatabestselling();
 loadDatabestprisedproduct();
+isStoragePermissionGranted();
+        ivallproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent category=new Intent(MainActivity.this,CategoryActivity.class);
+                startActivity(category);
+                finish();
+            }
+        });
+    }
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v("TAG","Permission is granted");
+                return true;
+            } else {
+
+                Log.v("TAGss","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("TAG","Permission is granted");
+            return true;
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            Log.v("TAG","Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+        }
+    }
     @SuppressLint("CheckResult")
-    private void productlist() {
+    private void categorieslist() {
         // binding.progress.setVisibility(View.VISIBLE);
-        Log.e("getProductMasterssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
-        ApiClient.getApiClient().getproducts(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        // binding.progress.setVisibility(View.VISIBLE);
+        ApiClient.getApiClient().getbusinesscat(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
+                .subscribeWith(new DisposableSingleObserver<Response<List<BusinessCatResponse>>>() {
                     @Override
-                    public void onSuccess(Response<List<ProductResponse>> response) {
+                    public void onSuccess(Response<List<BusinessCatResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
-                        Log.d("onSuccess: ", String.valueOf(response.code()));
-                        if (response.isSuccessful()) {
-                            List<ProductResponse> list = response.body();
-                            Log.e("getProduct", String.valueOf(list.size()));
-                            productListAdapter.addAll(list);
 
+                        if (response.isSuccessful()) {
+                            List<BusinessCatResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            productListAdapter.addAll(list);
 
                         } else {
 
@@ -158,15 +200,15 @@ loadDatabestprisedproduct();
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("geterre", String.valueOf(e.getMessage()));
+
 
                     }
                 });
     }
 
-    private ProductHorizontalAdapter.AdapterListener adapterListener = data -> {
+    private CategoryHorigentalAdapter.AdapterListener adapterListener = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
+        Intent i = new Intent(MainActivity.this, ProductListActivity.class);
         i.putExtra("userid", data.getId().trim());
         startActivity(i);
 
@@ -238,4 +280,12 @@ loadDatabestprisedproduct();
                     }
                 });
     }
+    private BestSellingProductAdapter.AdapterListener adapterListeners = data -> {
+        // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
+        i.putExtra("userid", data.getId().trim());
+        startActivity(i);
+
+
+    };
 }

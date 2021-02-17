@@ -57,6 +57,8 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction;
     @SuppressLint("CheckResult")
     private void loadData() {
 
+        Log.e("getssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+getIntent().getStringExtra("userid") );
+
         ApiClient.getApiClient().getproductsdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
             @Override
             public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {

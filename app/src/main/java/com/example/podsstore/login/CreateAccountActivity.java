@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
@@ -33,7 +34,9 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class CreateAccountActivity extends AppCompatActivity {
-    private Button logInBtn;
+    private Button logInBtn,btncontinue;
+
+    RelativeLayout rlaccountconfirmation;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet;
     ImageView back;
     @Override
@@ -86,7 +89,14 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                     break;
 
+                case R.id.btncontinue:
 
+                    Intent logins = new Intent(CreateAccountActivity.this, LoginActivity.class);
+                    startActivity(logins);
+                    finish();
+
+
+                    break;
             }
 
         }
@@ -123,11 +133,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), "create Account Successful -- " +successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
-
+rlaccountconfirmation.setVisibility(View.VISIBLE);
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
@@ -150,21 +160,23 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                    Log.e("onError: " , e.getMessage());
                         Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                        rlaccountconfirmation.setVisibility(View.GONE);
 
-                        // binding.progressbar.setVisibility(View.GONE);
-                        // NetworkHelper.handleNetworkError(e, mContext);
                     }
                 });
     }
 
     private void initViews() {
+        rlaccountconfirmation = findViewById(R.id.rlaccountconfirmation);
         logInBtn = findViewById(R.id.logInBtn);
+        btncontinue = findViewById(R.id.btncontinue);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
         emaiEt = findViewById(R.id.emailEt);
         back=findViewById(R.id.ivback);
         reenterpasswordet = findViewById(R.id.passwordagainEt);
         logInBtn.setOnClickListener(onClickListener);
+        btncontinue.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
         Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
         usernameEt.setTypeface(typeface);

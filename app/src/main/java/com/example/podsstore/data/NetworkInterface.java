@@ -1,5 +1,6 @@
 package com.example.podsstore.data;
 
+import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
@@ -9,10 +10,13 @@ import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.data.response.UploadImageResponse;
 
 import java.util.List;
 
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -20,8 +24,10 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.Header;
 
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -42,6 +48,9 @@ public interface NetworkInterface {
     @POST("productRest/getProd")
     Call<List<ProductResponse>>getproductsdetails(@Header("Authorization") String authHeader,@Query("id") String userId);
 
+    @POST("loginRest/users")
+    Call<ProfileResponses>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
+
     @POST("businessRest/getBusinessCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat(@Header("Authorization") String authHeader);
 
@@ -49,12 +58,17 @@ public interface NetworkInterface {
     @POST("tellUsRest/tellUsMore")
     Single<Response<CreateLoginUserResponse>> tellusmore(@Header("Authorization") String authHeader,@Body TellUsMoreResquest requests);
 
+    @POST("loginRest/changeAddressDetails")
+    Single<Response<CreateLoginUserResponse>> submitaddress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddressDetailsRequest requests);
 
-    @POST("loginRest/users/")
-    Call<List<ProfileResponses>>profile(@Header("Authorization") String authHeader,  @Query("userEmailId") String userId);
     @POST("productRest/getBestSellingProduct")
     Single<Response<List<BestSellingProductResponse>>>getbestsellingproducts(@Header("Authorization") String authHeader);
 
     @POST("productRest/getBestPricedProduct")
     Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct(@Header("Authorization") String authHeader);
+
+    @Multipart
+    @POST("loginRest/uploadProfilePhoto")
+    Call<UploadImageResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
+                                          @Part("userEmailId") RequestBody  userEmailId );
 }

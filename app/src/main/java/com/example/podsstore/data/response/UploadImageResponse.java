@@ -2,29 +2,20 @@ package com.example.podsstore.data.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProfileResponses {
+public class UploadImageResponse {
 
-    @SerializedName("id")
-    private Long id;
-
-    @SerializedName("userName")
-    private String username;
 
     @SerializedName("userEmailId")
     private String useremailid;
 
-    @SerializedName("mobileNumber")
-    private String mobilenumber;
+    @SerializedName("userName")
+    private String username;
 
-    @SerializedName("addressDetails")
-    private String addressdetails;
+    @SerializedName("uploadedDate")
+    private String uploadeddate;
 
-    @SerializedName("password")
-    private String password;
-    @SerializedName("joinedAt")
-    private String joinedat;
     @SerializedName("imageDetails")
-    public Datum data = null;
+    public ProfileResponses.Datum data = null;
 
 
     public class Datum {
@@ -117,13 +108,12 @@ public class ProfileResponses {
         }
     }
 
-
-    public Long getId() {
-        return id;
+    public String getUseremailid() {
+        return useremailid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUseremailid(String useremailid) {
+        this.useremailid = useremailid;
     }
 
     public String getUsername() {
@@ -134,64 +124,28 @@ public class ProfileResponses {
         this.username = username;
     }
 
-    public String getUseremailid() {
-        return useremailid;
+    public String getUploadeddate() {
+        return uploadeddate;
     }
 
-    public void setUseremailid(String useremailid) {
-        this.useremailid = useremailid;
+    public void setUploadeddate(String uploadeddate) {
+        this.uploadeddate = uploadeddate;
     }
 
-    public String getMobilenumber() {
-        return mobilenumber;
-    }
-
-    public void setMobilenumber(String mobilenumber) {
-        this.mobilenumber = mobilenumber;
-    }
-
-    public String getAddressdetails() {
-        return addressdetails;
-    }
-
-    public void setAddressdetails(String addressdetails) {
-        this.addressdetails = addressdetails;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getJoinedat() {
-        return joinedat;
-    }
-
-    public void setJoinedat(String joinedat) {
-        this.joinedat = joinedat;
-    }
-
-    public Datum getData() {
+    public ProfileResponses.Datum getData() {
         return data;
     }
 
-    public void setData(Datum data) {
+    public void setData(ProfileResponses.Datum data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "ProfileResponses{" +
-                "id=" + id +
+        return "UploadImageResponse{" +
+                "useremailid='" + useremailid + '\'' +
                 ", username='" + username + '\'' +
-                ", useremailid='" + useremailid + '\'' +
-                ", mobilenumber='" + mobilenumber + '\'' +
-                ", addressdetails='" + addressdetails + '\'' +
-                ", password='" + password + '\'' +
-                ", joinedat='" + joinedat + '\'' +
+                ", uploadeddate='" + uploadeddate + '\'' +
                 ", data=" + data +
                 '}';
     }

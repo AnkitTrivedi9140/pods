@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".aboutpod.ConnectwithPodActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvheading"
+                android:text="Add Address Details"
+                android:layout_below="@+id/ivabout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/tvheadingtext"
+                android:text="Our representative will connect with your soon."
+                android:layout_below="@+id/tvheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/manatee"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+android:visibility="gone"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                ></TextView>
+
+            <EditText
+                android:id="@+id/etaddress1"
+                android:textSize="16dp"
+                android:layout_marginTop="22dp"
+                android:hint="Address1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/tvheadingtext"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                ></EditText>
+            <EditText
+                android:id="@+id/etaddress2"
+                android:textSize="16dp"
+
+                android:hint="Address2"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/etaddress1"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:layout_marginTop="11dp"
+                ></EditText>
+
+
+
+
+            <EditText
+                android:id="@+id/etaddress3"
+                android:textSize="16dp"
+
+                android:hint="Address3"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/etaddress2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:layout_marginTop="11dp"
+                ></EditText>
+            <EditText
+                android:id="@+id/etzipcode"
+                android:textSize="16dp"
+                android:layout_marginTop="11dp"
+                android:hint="Zipcode"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/etaddress3"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:gravity="start"
+                ></EditText>
+            <EditText
+                android:id="@+id/etcountry"
+                android:textSize="16dp"
+                android:layout_marginTop="11dp"
+                android:hint="Country"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/etzipcode"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:gravity="start"
+                ></EditText>
+
+            <TextView
+                android:layout_below="@+id/etcountry"
+                android:background="@drawable/ripplenext"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="22dp"
+
+                android:lines="1"
+
+                android:id="@+id/tvsubmit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textSize="18dp"
+
+                android:layout_centerHorizontal="true"
+
+                android:textColor="@color/white"
+                android:text="SUBMIT "
+                android:gravity="center"
+                ></TextView>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

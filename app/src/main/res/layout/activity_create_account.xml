@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.CreateAccountActivity">
+
+
+
+
     <ImageView
         android:id="@+id/ivback"
         android:layout_width="44dp"
@@ -136,19 +140,60 @@
                 android:textSize="16dp"
                 />
 
-<!--            <TextView-->
-
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_below="@+id/logInBtn"-->
-<!--                android:id="@+id/createtv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:text="Create account from here!"-->
-<!--                android:textColor="@color/blue"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                ></TextView>-->
         </RelativeLayout>
 
     </RelativeLayout>
     </ScrollView>
+    <RelativeLayout
+android:id="@+id/rlaccountconfirmation"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+                    <TextView
+
+
+android:layout_marginTop="222dp"
+                        android:id="@+id/createtv"
+                        android:textSize="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Account Confirmation"
+                        android:textColor="@color/term_and_conditions"
+
+                        android:layout_height="wrap_content"
+                        ></TextView>
+        <TextView
+
+            android:layout_marginTop="16dp"
+
+            android:id="@+id/createtvv"
+            android:textSize="18dp"
+            android:layout_below="@+id/createtv"
+            android:layout_width="wrap_content"
+           android:layout_marginLeft="22dp"
+            android:text="Your Account verification successfully! \nPress continue to Sign In."
+            android:textColor="@color/black"
+
+            android:layout_height="wrap_content"
+            ></TextView>
+
+        <Button
+
+android:layout_centerHorizontal="true"
+            android:id="@+id/btncontinue"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_bg"
+
+            android:text="Continue..."
+
+            android:textColor="@color/white"
+            android:textSize="16dp"
+
+            android:layout_below="@+id/createtvv"
+            />
+    </RelativeLayout>
 </RelativeLayout>
