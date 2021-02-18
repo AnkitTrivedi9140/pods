@@ -188,9 +188,9 @@ ImageView back;
         createtv.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
         ivshow.setOnClickListener(onClickListener);
-        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
-        usernameEt.setTypeface(typeface);
-        passwordEt.setTypeface(typeface);
+//        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
+//        usernameEt.setTypeface(typeface);
+//        passwordEt.setTypeface(typeface);
 
     }
 

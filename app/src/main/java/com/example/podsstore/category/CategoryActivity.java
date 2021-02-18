@@ -83,9 +83,9 @@ public class CategoryActivity extends AppCompatActivity {
                     case R.id.categories:
                         Log.i("matching", "matching inside1 watchlistAdapter" + checkedId);
 
-//                        in = new Intent(getBaseContext(), CategoryActivity.class);
-//                        startActivity(in);
-                        overridePendingTransition(0, 0);
+                        in = new Intent(getBaseContext(), CategoryActivity.class);
+                        startActivity(in);
+                      overridePendingTransition(0, 0);
 
                         break;
                     case R.id.profile:
@@ -145,7 +145,7 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryAdapter.AdapterListener adapterListener = data -> {
        // Toast.makeText(getApplicationContext(), data.getId(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CategoryActivity.this, ProductListActivity.class);
-        i.putExtra("userid", data.getId().trim());
+        i.putExtra("userid", data.getId());
         startActivity(i);
 
 
@@ -160,5 +160,12 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),CategoryActivity.class);
+        startActivity(i);
+        finish();
     }
 }

@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.aboutpod.AboutActivity;
+import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.BestSellingProductResponse;
@@ -61,6 +63,7 @@ private ImageView ivallproduct;
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Pod");
         getSupportActionBar().setElevation(0);
+       // getMenuInflater().inflate(R.menu.main_menu, menu);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
         home = (RadioButton) findViewById(R.id.homes);
@@ -209,7 +212,7 @@ isStoragePermissionGranted();
     private CategoryHorigentalAdapter.AdapterListener adapterListener = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductListActivity.class);
-        i.putExtra("userid", data.getId().trim());
+        i.putExtra("userid", data.getId());
         startActivity(i);
 
 
@@ -288,4 +291,41 @@ isStoragePermissionGranted();
 
 
     };
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch(item.getItemId()){
+            case R.id.menu_item:   //this item has your app icon
+                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
+                startActivity(intent);
+                finish();
+
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        menu.findItem(R.id.menu_item).setEnabled(true);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

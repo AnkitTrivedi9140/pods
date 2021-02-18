@@ -150,7 +150,7 @@ rlaccountconfirmation.setVisibility(View.VISIBLE);
 
                             }
                         } else {
-                           // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(), "user account already registered!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -178,9 +178,9 @@ rlaccountconfirmation.setVisibility(View.VISIBLE);
         logInBtn.setOnClickListener(onClickListener);
         btncontinue.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
-        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
-        usernameEt.setTypeface(typeface);
-        passwordEt.setTypeface(typeface);
+//        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
+//        usernameEt.setTypeface(typeface);
+//        passwordEt.setTypeface(typeface);
 
     }
 }

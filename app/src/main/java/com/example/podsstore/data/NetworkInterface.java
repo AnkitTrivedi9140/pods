@@ -1,11 +1,13 @@
 package com.example.podsstore.data;
 
 import com.example.podsstore.data.request.AddressDetailsRequest;
+import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
+import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -58,8 +60,13 @@ public interface NetworkInterface {
     @POST("tellUsRest/tellUsMore")
     Single<Response<CreateLoginUserResponse>> tellusmore(@Header("Authorization") String authHeader,@Body TellUsMoreResquest requests);
 
-    @POST("loginRest/changeAddressDetails")
+    @POST("addressRest/changeAddressDetails")
     Single<Response<CreateLoginUserResponse>> submitaddress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddressDetailsRequest requests);
+
+    @POST("cartRest/addToCart")
+    Single<Response<CreateLoginUserResponse>> addtocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);
+
+
 
     @POST("productRest/getBestSellingProduct")
     Single<Response<List<BestSellingProductResponse>>>getbestsellingproducts(@Header("Authorization") String authHeader);
@@ -68,7 +75,12 @@ public interface NetworkInterface {
     Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct(@Header("Authorization") String authHeader);
 
     @Multipart
-    @POST("loginRest/uploadProfilePhoto")
+    @POST("imageRest/uploadProfilePhoto")
     Call<UploadImageResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
                                           @Part("userEmailId") RequestBody  userEmailId );
+
+
+    @POST("cartRest/getCartDetails")
+    Call<List<CartResponse>>getcartdetails(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
+
 }

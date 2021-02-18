@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BusinessCatResponse {
     @SerializedName("id")
-    private String id;
+    private Long id;
 
     @SerializedName("productname")
     private String productname;
@@ -15,11 +15,11 @@ public class BusinessCatResponse {
     @SerializedName("status")
     private String status;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

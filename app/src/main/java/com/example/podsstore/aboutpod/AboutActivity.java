@@ -68,8 +68,8 @@ public class AboutActivity extends AppCompatActivity {
 
                     case R.id.about:
                         Log.i("matching", "matching inside1 deals" + checkedId);
-//                        in = new Intent(getBaseContext(), CategoryActivity.class);
-//                        startActivity(in);
+                       in = new Intent(getBaseContext(), AboutActivity.class);
+                       startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
                     default:
@@ -84,5 +84,12 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),AboutActivity.class);
+        startActivity(i);
+        finish();
     }
 }

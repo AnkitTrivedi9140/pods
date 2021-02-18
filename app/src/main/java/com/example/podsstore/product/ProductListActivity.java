@@ -38,7 +38,7 @@ public class ProductListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new ProductListAdapter(ProductListActivity.this);
-        recyclerView = findViewById(R.id.productrv);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(ProductListActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
         productListAdapter.setAdapterListener(adapterListener);
@@ -86,9 +86,10 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private ProductListAdapter.AdapterListener adapterListener = data -> {
-       // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
+
         Intent i = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
-i.putExtra("userid",data.getId().trim());
+i.putExtra("userid",data.getId());
+        Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
         startActivity(i);
 
 

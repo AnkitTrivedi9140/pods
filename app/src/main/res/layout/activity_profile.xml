@@ -106,7 +106,7 @@ android:layout_centerHorizontal="true"
 
         <TextView
             android:id="@+id/tvaddressedit"
-            android:text="Edit"
+            android:text="Change"
             android:layout_below="@+id/tvheadingaddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,6 +224,7 @@ android:layout_alignParentRight="true"
             android:textColor="@color/term_and_conditions"
             android:textSize="16dp"
             android:layout_marginTop="2dp"
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -271,6 +272,7 @@ android:layout_alignParentRight="true"
             ></TextView>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvpasswordedit"
             android:text="Edit"
             android:layout_below="@+id/tvheadingpassword"

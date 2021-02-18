@@ -128,8 +128,8 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
-//                        in = new Intent(getBaseContext(),CategoryActivity.class);
-//                        startActivity(in);
+                        in = new Intent(getBaseContext(),ProfileActivity.class);
+                        startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
 
@@ -178,6 +178,11 @@ finish();
 });
   loadData();
     }
+
+
+    private void radio() {
+
+    }
     @SuppressLint("CheckResult")
     private void loadData() {
 
@@ -192,11 +197,14 @@ finish();
                 Log.e("getprofile",String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     ProfileResponses list = response.body();
-
+                    for (int i=0; i<list.getAddress().size(); i++) {
+                        tvaddress.setText(list.getAddress().get(i).getAddressline1().toString());
+                        // mappingAdapter.add(new MappingDetails(mainResponse.getBoxRfidResponseepc().get(i)));
+                    }
 
                         tvname.setText(list.getUsername());
                     tvemail.setText(list.getUseremailid());
-                    tvaddress.setText(list.getAddressdetails());
+
 
                     tvmobile.setText(list.getMobilenumber());
                     tvemailtxt.setText(list.getUseremailid());
@@ -301,5 +309,13 @@ public byte[] getBytes(InputStream is) throws IOException {
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(i);
+        finish();
     }
 }

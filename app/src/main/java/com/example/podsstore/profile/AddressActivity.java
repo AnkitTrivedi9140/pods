@@ -38,7 +38,7 @@ private TextView tvsubmit;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Address Detaills");
+        getSupportActionBar().setTitle("Address Details");
 
         etaddress1=findViewById(R.id.etaddress1);
         etaddress2=findViewById(R.id.etaddress2);
@@ -118,7 +118,7 @@ private TextView tvsubmit;
 
                             }
                         } else {
-                            // Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+ Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
                         }
                     }
