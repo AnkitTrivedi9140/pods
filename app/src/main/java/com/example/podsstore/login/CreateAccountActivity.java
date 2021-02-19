@@ -183,4 +183,12 @@ rlaccountconfirmation.setVisibility(View.VISIBLE);
 //        passwordEt.setTypeface(typeface);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(),SplashActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

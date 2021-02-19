@@ -6,6 +6,7 @@
         <item name="colorPrimaryVariant">@color/term_and_conditions</item>
         <item name="colorAccent">@color/term_and_conditions</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
         <!-- Customize your theme here. -->
     </style>
 

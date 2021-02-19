@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.aboutpod.AboutActivity;
+import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
@@ -59,9 +60,23 @@ private TextView tvsubmit;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
-                finish();
+
+                if(getIntent().getStringExtra("at")==null){
+                    Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+
+                    if (getIntent().getStringExtra("at").equalsIgnoreCase("at")) {
+                        Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
                 return true;
         }
 
@@ -135,4 +150,25 @@ private TextView tvsubmit;
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getIntent().getStringExtra("at")==null){
+            Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+
+            if(getIntent().getStringExtra("at").equalsIgnoreCase("at")){
+                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+
+    }
 }

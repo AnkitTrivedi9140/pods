@@ -28,7 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".addtocart.SelectAddressActivity"></activity>
+        <activity android:name=".drower.DrowerActivity"></activity>
+        <activity android:name=".addtocart.PaymentActivity" />
+        <activity android:name=".addtocart.SelectAddressActivity" />
         <activity android:name=".addtocart.AddToCartActivity" />
         <activity android:name=".profile.AddressActivity" />
         <activity android:name=".aboutpod.ConnectwithPodActivity" />

@@ -8,38 +8,97 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/term_and_conditions"
+        android:layout_height="122dp"
+
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+<RelativeLayout
+    android:layout_marginLeft="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="14dp">
+
+<ImageView
+    android:id="@+id/ivtoggle"
+    android:layout_width="33dp"
+    android:src="@drawable/toggle"
+
+    android:layout_height="33dp"></ImageView>
+
+        <TextView
+            android:layout_toRightOf="@+id/ivtoggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:textColor="@color/white"
+            android:text="POD"
+            android:textStyle="bold"
+
+            android:layout_marginLeft="22dp"
+            >
+
+        </TextView>
+
+    <ImageView
+        android:id="@+id/ivcart"
+        android:layout_width="33dp"
+        android:src="@drawable/cart"
+
+        android:layout_alignParentEnd="true"
+        android:layout_height="33dp"
+    
+        android:layout_alignParentRight="true"></ImageView>
+    <EditText
+        android:id="@+id/putwaysearch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+android:layout_marginTop="16dp"
+
+        android:background="@drawable/edittextbackground"
+        android:padding="10dp"
+android:layout_below="@+id/ivcart"
+        android:drawableLeft="@drawable/search"
+        android:hint="Search your product"
+android:layout_centerHorizontal="true"
+        android:textSize="14dp" />
+</RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/rlsearch"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@color/term_and_conditions"
-
+android:layout_below="@+id/toolbar"
         android:paddingBottom="22dp"
-        android:paddingLeft="14dp"
+
         android:paddingRight="14dp"
         >
 
 
 
-        <EditText
-            android:id="@+id/putwaysearch"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/edittextbackground"
-            android:padding="10dp"
 
-            android:drawableLeft="@drawable/search"
-            android:hint="Search your product"
-
-            android:textSize="14dp" />
 
     </RelativeLayout>
 
 <androidx.cardview.widget.CardView
     app:cardCornerRadius="12dp"
 android:id="@+id/cardview"
-android:layout_marginTop="50dp"
+android:layout_marginTop="133dp"
     android:elevation="0dp"
     android:layout_marginBottom="55dp"
     android:layout_width="match_parent"

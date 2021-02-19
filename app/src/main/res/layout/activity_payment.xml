@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addtocart.PaymentActivity">
+    <RelativeLayout
+        android:id="@+id/rlcartseek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/seekrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:layout_marginRight="33dp"
+            android:layout_marginTop="14dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/platinum"
+                android:layout_marginRight="11dp"
+                android:layout_marginLeft="11dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/circleblue"
+                ></ImageView>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/circleblue"
+                ></ImageView>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/circleblue"
+                android:layout_alignParentRight="true"></ImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rltextseek"
+            android:layout_marginBottom="11dp"
+            android:layout_below="@+id/seekrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CART"
+                android:textSize="12dp"
+                android:layout_marginLeft="14dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADDRESS"
+                android:layout_centerHorizontal="true"
+                android:textSize="12dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAYMENT"
+                android:layout_alignParentEnd="true"
+                android:textSize="12dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"></TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#F8F8F8"
+        android:layout_below="@+id/rlcartseek"
+        android:text="SAVED CARDS"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        ></TextView>
+
+    <RadioGroup
+        android:layout_below="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/radioGroup">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  SBI Credit Card"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:textSize="18dp" />
+
+    <ImageView
+    android:layout_alignParentEnd="true"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:src="@drawable/mastercard"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentRight="true"></ImageView>
+        <TextView
+            android:id="@+id/tvcardno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="**** **** **** 2523"
+android:layout_below="@+id/radioMale"
+            android:textSize="16dp"
+android:layout_marginLeft="33dp"
+       ></TextView>
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="fill_parent"
+            android:layout_height="33dp"
+            android:text="   HDFC Debit Card"
+            android:layout_marginTop="12dp"
+            android:checked="false"
+android:layout_below="@+id/tvcardno"
+            android:textSize="18dp" />
+
+    <ImageView
+        android:layout_below="@+id/tvcardno"
+        android:layout_alignParentEnd="true"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:src="@drawable/visad"
+   android:layout_marginTop="22dp"
+        android:layout_alignParentRight="true"></ImageView>
+    <TextView
+        android:id="@+id/tvcardno2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="**** **** **** 5969"
+        android:layout_below="@+id/radioFemale"
+        android:textSize="16dp"
+        android:layout_marginLeft="33dp"
+        ></TextView>
+</RelativeLayout>
+    </RadioGroup>
+    <TextView
+        android:layout_marginTop="12dp"
+        android:id="@+id/tvheadings"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#F8F8F8"
+        android:layout_below="@+id/radioGroup"
+        android:text="OTHER PAMENT OPTIONS"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        ></TextView>
+
+    <RadioGroup
+        android:layout_below="@+id/tvheadings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/radioGroup2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radiowallets"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:text="  Wallets"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/paytmd"
+                android:layout_marginTop="22dp"
+                android:layout_alignParentRight="true"></ImageView>
+
+            <RadioButton
+                android:id="@+id/radioUPI"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:text="   UPI"
+                android:layout_marginTop="12dp"
+                android:checked="false"
+                android:layout_below="@+id/radiowallets"
+                android:textSize="18dp" />
+
+            <RadioButton
+                android:id="@+id/radioatm"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:text="   Credit/Debit/ATM Card"
+                android:layout_marginTop="12dp"
+                android:checked="false"
+                android:layout_below="@+id/radioUPI"
+                android:textSize="18dp" />
+            <RadioButton
+                android:id="@+id/radionetbanking"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:text="   Net Banking"
+                android:layout_marginTop="12dp"
+                android:checked="false"
+                android:layout_below="@+id/radioatm"
+                android:textSize="18dp" />
+            <RadioButton
+                android:id="@+id/radiocod"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:text="   Cash on Delivery"
+                android:layout_marginTop="12dp"
+                android:checked="false"
+                android:layout_below="@+id/radionetbanking"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+    </RadioGroup>
+    <RelativeLayout
+
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/white"
+        >
+        <Button
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/placeorderbtn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="Pay Now"
+            android:textAllCaps="false"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

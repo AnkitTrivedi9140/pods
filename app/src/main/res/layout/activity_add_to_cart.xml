@@ -90,13 +90,12 @@ android:layout_centerVertical="true"
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
-        android:layout_margin="2dp"
+
         android:layout_width="match_parent"
 android:layout_below="@+id/rlcartseek"
-        android:layout_height="322dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginBottom="11dp"
+        android:layout_height="288dp"
+
+        android:layout_marginBottom="6dp"
     >
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -107,7 +106,7 @@ android:layout_below="@+id/rlcartseek"
     android:layout_marginBottom="88dp"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_marginBottom="22dp"
+
         android:layout_width="match_parent"
         android:background="@color/white"
 
@@ -121,7 +120,7 @@ android:id="@+id/tvorder"
         android:text="ORDER SUMMARY"
 android:textColor="@color/text_color_setting"
         android:textSize="18dp"
-android:layout_marginTop="14dp"
+android:layout_marginTop="8dp"
      ></TextView>
         <TextView
             android:id="@+id/tvgotcoupon"
@@ -131,7 +130,7 @@ android:layout_below="@+id/tvorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Got Coupon? "
-android:layout_marginTop="22dp"
+android:layout_marginTop="14dp"
             android:textSize="16dp"
 android:textStyle="bold"
             android:textColor="@color/black"
@@ -147,21 +146,20 @@ android:textStyle="bold"
             android:layout_marginRight="16dp"
             android:layout_below="@+id/tvgotcoupon"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="48dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
-            android:gravity="start"
+
             ></EditText>
 
         <TextView
             android:id="@+id/tvview"
             android:layout_below="@+id/etcoupon"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
+
             android:layout_width="match_parent"
             android:layout_height="2dp"
           android:background="@color/platinum"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="14dp"
             android:textSize="16dp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -186,7 +184,7 @@ android:textStyle="bold"
             android:layout_marginRight="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SUBTOTAL"
+            android:text="0.00"
             android:textColor="@color/text_color_setting"
             android:textSize="16dp"
             android:layout_marginTop="14dp"
@@ -202,7 +200,7 @@ android:textStyle="bold"
             android:text="Discount Amount"
             android:textColor="@color/text_color_setting"
             android:textSize="18dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/tvsubtotal"
             ></TextView>
         <TextView
@@ -215,7 +213,7 @@ android:textStyle="bold"
             android:text="-0.00"
             android:textColor="@color/term_and_conditions"
             android:textSize="16dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/tvsubtotal"
             android:layout_alignParentRight="true"></TextView>
         <TextView
@@ -227,8 +225,9 @@ android:textStyle="bold"
             android:text="Total"
             android:textColor="@color/text_color_setting"
             android:textSize="18dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="8dp"
             android:textStyle="bold"
+            android:layout_marginBottom="8dp"
             android:layout_below="@+id/tvdiscount"
             ></TextView>
         <TextView
@@ -241,7 +240,7 @@ android:textStyle="bold"
             android:text="-0.00"
             android:textColor="@color/term_and_conditions"
             android:textSize="16dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="8dp"
             android:textStyle="bold"
             android:layout_below="@+id/tvdiscount"
 
@@ -255,12 +254,12 @@ android:textStyle="bold"
 android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+
         android:background="@color/white"
      >
         <Button
             android:layout_centerHorizontal="true"
-
+android:layout_centerInParent="true"
             android:id="@+id/placeorderbtn"
             android:layout_width="match_parent"
             android:layout_height="55dp"

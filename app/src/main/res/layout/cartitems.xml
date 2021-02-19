@@ -105,6 +105,18 @@ android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:textStyle="normal" />
+            <ImageView
+android:layout_below="@+id/description"
+                android:id="@+id/deleteproductiv"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_margin="11dp"
+android:src="@drawable/bin"
+                android:layout_alignParentEnd="true"
+
+
+                android:layout_alignParentRight="true">
+            </ImageView>
         </RelativeLayout>
         </RelativeLayout>
 

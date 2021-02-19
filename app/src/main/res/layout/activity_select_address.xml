@@ -4,6 +4,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/platinum"
     tools:context=".addtocart.SelectAddressActivity">
+    <RelativeLayout
+        android:id="@+id/rlcartseek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/seekrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:layout_marginRight="33dp"
+            android:layout_marginTop="14dp"
+            >
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/platinum"
+                android:layout_marginRight="11dp"
+                android:layout_marginLeft="11dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/circleblue"
+                ></ImageView>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/circleblue"
+                ></ImageView>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/circleborder"
+                android:layout_alignParentRight="true"></ImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rltextseek"
+            android:layout_marginBottom="11dp"
+            android:layout_below="@+id/seekrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CART"
+                android:textSize="12dp"
+                android:layout_marginLeft="14dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADDRESS"
+                android:layout_centerHorizontal="true"
+                android:textSize="12dp"
+                android:layout_centerVertical="true"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAYMENT"
+                android:layout_alignParentEnd="true"
+                android:textSize="12dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"></TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_below="@+id/rlcartseek"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAYMENT"
+        android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            ></TextView>
+        <TextView
+            android:id="@+id/tvaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAYMENT"
+
+            android:textSize="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="22dp"
+            android:layout_below="@+id/tvname"
+            ></TextView>
+        <TextView
+            android:background="@drawable/rippleconfirmaddress"
+         android:layout_marginLeft="22dp"
+            android:lines="1"
+
+            android:id="@+id/tvchangeaddtess"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:textSize="18dp"
+
+            android:gravity="center"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:layout_below="@+id/tvaddress"
+
+            android:text="Change or Add Address"
+            ></TextView>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/white"
+        >
+        <Button
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/continuebtn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            />
+
+    </RelativeLayout>
 </RelativeLayout>

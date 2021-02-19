@@ -5,13 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -19,6 +23,7 @@ import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.product.ProductListAdapter;
+import com.example.podsstore.productdetails.ProductDetailsActivity;
 
 import java.util.List;
 
@@ -47,7 +52,9 @@ Button placeorderbtn;
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -84,4 +91,46 @@ Button placeorderbtn;
             }
         });
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                if(getIntent().getStringExtra("main")==null){
+                    Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    if(getIntent().getStringExtra("main").equalsIgnoreCase("main")){
+                        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{ Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+                        startActivity(intent);
+                        finish();}
+
+                }
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getIntent().getStringExtra("main")==null){
+            Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+        if(getIntent().getStringExtra("main").equalsIgnoreCase("main")){
+            Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{ Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+            startActivity(intent);
+            finish();}
+
+    }}
 }

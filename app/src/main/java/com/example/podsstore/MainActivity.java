@@ -31,6 +31,7 @@ import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.drower.DrowerActivity;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.ProductHorizontalAdapter;
@@ -56,13 +57,20 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView,bestsellingproductrv,bestprisedproductrv;
     private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
-private ImageView ivallproduct;
+private ImageView ivallproduct,ivcart,ivtoggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("Pod");
-        getSupportActionBar().setElevation(0);
+        getSupportActionBar().hide();
+//        getSupportActionBar().setTitle("  Pod");
+//        getSupportActionBar().setElevation(0);
+//
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//
+//
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+//        getSupportActionBar().setLogo(R.drawable.toggle);
        // getMenuInflater().inflate(R.menu.main_menu, menu);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
@@ -70,6 +78,8 @@ private ImageView ivallproduct;
         categories = (RadioButton) findViewById(R.id.categories);
         profile = (RadioButton) findViewById(R.id.profile);
         ivallproduct =  findViewById(R.id.ivallproduct);
+        ivcart =  findViewById(R.id.ivcart);
+        ivtoggle =  findViewById(R.id.ivtoggle);
         home.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bluehome, 0, 0);
         home.setTextColor(Color.parseColor("#007eff"));
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -148,7 +158,26 @@ isStoragePermissionGranted();
                 finish();
             }
         });
+        ivcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
+                intent.putExtra("main","main");
+                startActivity(intent);
+                finish();
+            }
+        });
+        ivtoggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), DrowerActivity.class);
+                intent.putExtra("main","main");
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -297,12 +326,14 @@ isStoragePermissionGranted();
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch(item.getItemId()){
-            case R.id.menu_item:   //this item has your app icon
-                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-                startActivity(intent);
-                finish();
+//            case R.id.menu_item:   //this item has your app icon
+//                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
+//                intent.putExtra("main","main");
+//                startActivity(intent);
+//                finish();
+//
+//                return true;
 
-                return true;
 
             default: return super.onOptionsItemSelected(item);
         }
