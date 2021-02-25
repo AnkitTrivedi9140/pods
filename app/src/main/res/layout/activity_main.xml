@@ -67,14 +67,28 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
 android:layout_marginTop="16dp"
-
+android:drawablePadding="18dp"
         android:background="@drawable/edittextbackground"
         android:padding="10dp"
 android:layout_below="@+id/ivcart"
         android:drawableLeft="@drawable/search"
         android:hint="Search your product"
 android:layout_centerHorizontal="true"
-        android:textSize="14dp" />
+        android:textSize="18dp" />
+
+    <ImageView
+        android:layout_marginTop="21dp"
+        android:id="@+id/ivgo"
+        android:layout_width="38dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/gobtngrn"
+        android:layout_below="@+id/ivcart"
+
+        android:layout_height="38dp"
+        android:layout_marginRight="4dp"
+        android:layout_alignParentRight="true">
+
+    </ImageView>
 </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 

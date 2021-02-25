@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".drower.HelpActivity"
+    android:layout_margin="14dp">
+
+    <TextView
+        android:id="@+id/tvhelpheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="Lorem Ipsum is simply dummy text of printing?"
+
+        ></TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tvhelpheadingtxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#3B3B3B"
+        android:textSize="16dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+android:layout_below="@+id/tvhelpheading"
+        ></TextView>
+
+    <TextView
+        android:layout_marginTop="44dp"
+        android:id="@+id/tvhelpheadingcontect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_below="@+id/tvhelpheadingtxt"
+        android:text="Contact Us"
+
+        ></TextView>
+
+
+    <TextView
+        android:layout_marginTop="22dp"
+        android:id="@+id/tvhelpheadingcallus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ABB6C1"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvhelpheadingcontect"
+        android:text="Call Us"
+
+        ></TextView>
+    <TextView
+        android:id="@+id/podno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="1800 222 8888, 1800 364 7890"
+android:layout_below="@+id/tvhelpheadingcallus"
+        ></TextView>
+
+    <TextView
+        android:layout_marginTop="22dp"
+        android:id="@+id/tvemailhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ABB6C1"
+        android:textSize="16dp"
+        android:text="Email Us"
+        android:layout_below="@+id/podno"
+        ></TextView>
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="Care@podshealth.com"
+        android:layout_below="@+id/tvemailhead"
+        ></TextView>
+</RelativeLayout>

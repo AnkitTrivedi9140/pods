@@ -4,6 +4,7 @@ import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
+import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
@@ -53,6 +54,9 @@ public interface NetworkInterface {
     @POST("loginRest/users")
     Call<ProfileResponses>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
 
+    @POST("loginRest/changePhoneNumber")
+    Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
+
     @POST("businessRest/getBusinessCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat(@Header("Authorization") String authHeader);
 
@@ -76,11 +80,32 @@ public interface NetworkInterface {
 
     @Multipart
     @POST("imageRest/uploadProfilePhoto")
-    Call<UploadImageResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
+    Call<CreateLoginUserResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
                                           @Part("userEmailId") RequestBody  userEmailId );
 
 
     @POST("cartRest/getCartDetails")
     Call<List<CartResponse>>getcartdetails(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
 
+    @POST("orderRest/placeOrder")
+    Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body PlaceOrderRequest requests);
+
+    @POST("cartRest/deleteCart")
+    Call<CreateLoginUserResponse>deletecart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
+
+    @POST("wishListRest/addToWishList")
+    Single<Response<CreateLoginUserResponse>> addtowishlist(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);
+
+    @POST("wishListRest/getWishList")
+    Call<List<CartResponse>>getwishlist(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
+
+    @POST("wishListRest/deleteWishList")
+    Call<CreateLoginUserResponse>deletewishlist(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
+    @POST("wishListRest/moveToCart")
+    Call<CreateLoginUserResponse>movetocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
+
+
+    @POST("productRest/search")
+    Single<Response<List<ProductResponse>>>search(@Header("Authorization") String authHeader, @Query("data") String data);
 }
+

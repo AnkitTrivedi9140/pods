@@ -28,7 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drower.DrowerActivity"></activity>
+        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".wishlist.WishListActivity" />
+        <activity android:name=".drower.AddressesActivity" />
+        <activity android:name=".drower.HelpActivity" />
+        <activity android:name=".drower.DrowerActivity" />
         <activity android:name=".addtocart.PaymentActivity" />
         <activity android:name=".addtocart.SelectAddressActivity" />
         <activity android:name=".addtocart.AddToCartActivity" />

@@ -28,7 +28,7 @@ public class ProfileResponses {
     @SerializedName("addressDetails")
     public List<Address> address = new ArrayList<>();
     @SerializedName("imageDetails")
-    public List<Datum> data ;
+    public List<Datum> data = new ArrayList<>() ;
 
     public Long getId() {
         return id;

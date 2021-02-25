@@ -1,4 +1,4 @@
-package com.example.podsstore.product;
+package com.example.podsstore.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,14 +10,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
-import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
+import com.example.podsstore.product.ProductListActivity;
+import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 
 import java.util.List;
@@ -27,21 +31,23 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class ProductListActivity extends AppCompatActivity {
-
+public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ProductListAdapter productListAdapter;
-
+    private SearchAdapter productListAdapter;
+    TextView tvnodata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_search);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Search Result");
         recyclerView = findViewById(R.id.productrv);
-        productListAdapter = new ProductListAdapter(ProductListActivity.this);
+        tvnodata = findViewById(R.id.tvnodata);
+        productListAdapter = new SearchAdapter(SearchActivity.this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(ProductListActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
-        productListAdapter.setAdapterListener(adapterListener);
+    productListAdapter.setAdapterListener(adapterListener);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -50,12 +56,11 @@ public class ProductListActivity extends AppCompatActivity {
         loadData();
     }
 
-
     @SuppressLint("CheckResult")
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
-        Log.e("getProductMasterssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
-        ApiClient.getApiClient().getproducts(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        Log.e("getProductMasterssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
+        ApiClient.getApiClient().search(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),getIntent().getStringExtra("data"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
@@ -67,6 +72,11 @@ public class ProductListActivity extends AppCompatActivity {
                             List<ProductResponse> list = response.body();
                             Log.e("getProduct", String.valueOf(list.size()));
                             productListAdapter.addAll(list);
+                          if(  list.isEmpty()){
+                              tvnodata.setVisibility(View.VISIBLE);
+                          }else{
+                              tvnodata.setVisibility(View.GONE);
+                          }
 
 
                         } else {
@@ -84,28 +94,35 @@ public class ProductListActivity extends AppCompatActivity {
                     }
                 });
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
 
-    private ProductListAdapter.AdapterListener adapterListener = data -> {
+        }
 
-        Intent i = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
-i.putExtra("userid",data.getId());
-i.putExtra("productlist","productlist");
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private SearchAdapter.AdapterListener adapterListener = data -> {
+
+        Intent i = new Intent(SearchActivity.this, ProductDetailsActivity.class);
+        i.putExtra("userid",data.getId());
+        i.putExtra("search","search");
         Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
         startActivity(i);
 
 
     };
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), CategoryActivity.class);
-                startActivity(intent);
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

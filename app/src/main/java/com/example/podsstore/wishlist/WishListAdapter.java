@@ -1,66 +1,50 @@
-package com.example.podsstore.addtocart;
+package com.example.podsstore.wishlist;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
-
-import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.addtocart.AddtocartAdapter;
 import com.example.podsstore.data.response.CartResponse;
-import com.example.podsstore.data.response.CreateLoginUserResponse;
-import com.example.podsstore.prefs.PreferenceManager;
-import com.example.podsstore.prefs.Preferences;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyViewHolder> {
-    private AddtocartAdapter.AdapterListener adapterListener;
+public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyViewHolder> {
+    private WishListAdapter.AdapterListener adapterListener;
     private List<CartResponse> productResponseList;
     private Context context;
 
-    private AddtocartAdapter.InventoryAdapterListener openListener;
+    private WishListAdapter.InventoryAdapterListener openListener;
 
 
-    public void setAdapterListener(AddtocartAdapter.AdapterListener adapterListener) {
+    public void setAdapterListener(WishListAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
 
-    public void setAdapterListeners(AddtocartAdapter.InventoryAdapterListener adapterListener) {
+    public void setAdapterListeners(WishListAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView description, tvAssetType,tvqty,prnumber;
+        public TextView description, tvAssetType,tvqty,prnumber,tvaddwishlist;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
-int counter=0;
+        int counter=0;
         public MyViewHolder(View view) {
             super(view);
             tvqty = (TextView) view.findViewById(R.id.tvqty);
+            tvaddwishlist = (TextView) view.findViewById(R.id.tvaddwishlist);
             description = (TextView) view.findViewById(R.id.description);
             tvAssetType = (TextView) view.findViewById(R.id.tvAssetType);
             cardView = view.findViewById(R.id.cardview);
@@ -70,6 +54,7 @@ int counter=0;
             more = view.findViewById(R.id.more);
             prnumber = view.findViewById(R.id.prnumber);
             wishlist = view.findViewById(R.id.rlwishlist);
+            tvaddwishlist.setText("MOVE TO CART");
             wishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,8 +71,8 @@ int counter=0;
             });
 
             less.setOnClickListener(v -> {
-counter=counter-1;
-prnumber.setText(String.valueOf(counter));
+                counter=counter-1;
+                prnumber.setText(String.valueOf(counter));
             });
             more.setOnClickListener(v -> {
                 counter=counter+1;
@@ -102,36 +87,36 @@ prnumber.setText(String.valueOf(counter));
         notifyItemRangeChanged(position, productResponseList.size());
     }
 
-    public AddtocartAdapter(Context context) {
+    public WishListAdapter(Context context) {
         this.context = context;
         productResponseList = new ArrayList<>();
 
     }
 
-    public AddtocartAdapter(List<CartResponse> moviesList) {
+    public WishListAdapter(List<CartResponse> moviesList) {
 
         this.productResponseList = moviesList;
     }
 
     @Override
-    public AddtocartAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WishListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cartitems, parent, false);
 
-        return new AddtocartAdapter.MyViewHolder(itemView);
+        return new WishListAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AddtocartAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(WishListAdapter.MyViewHolder holder, int position) {
         CartResponse cartResponse = productResponseList.get(position);
         holder.tvAssetType.setText(cartResponse.getProductname());
         holder.description.setText("$_"+cartResponse.getPrice());
         holder.tvqty.setText("Qty_"+cartResponse.getQty());
 
-      // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
-      Glide.with(context)
-              .load(cartResponse.getImageUrl().toString())
-              .into(holder.productiv);
+        // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
+        Glide.with(context)
+                .load(cartResponse.getImageUrl().toString())
+                .into(holder.productiv);
 
     }
 

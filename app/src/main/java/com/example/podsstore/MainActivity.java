@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -41,6 +42,7 @@ import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 import com.example.podsstore.profile.ProfileActivity;
+import com.example.podsstore.search.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView,bestsellingproductrv,bestprisedproductrv;
     private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
-private ImageView ivallproduct,ivcart,ivtoggle;
+private ImageView ivallproduct,ivcart,ivtoggle,ivgo;
+EditText search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,7 @@ private ImageView ivallproduct,ivcart,ivtoggle;
 //        getSupportActionBar().setDisplayUseLogoEnabled(true);
 //        getSupportActionBar().setLogo(R.drawable.toggle);
        // getMenuInflater().inflate(R.menu.main_menu, menu);
+        search=findViewById(R.id.putwaysearch);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
         home = (RadioButton) findViewById(R.id.homes);
@@ -79,6 +83,7 @@ private ImageView ivallproduct,ivcart,ivtoggle;
         profile = (RadioButton) findViewById(R.id.profile);
         ivallproduct =  findViewById(R.id.ivallproduct);
         ivcart =  findViewById(R.id.ivcart);
+        ivgo =  findViewById(R.id.ivgo);
         ivtoggle =  findViewById(R.id.ivtoggle);
         home.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bluehome, 0, 0);
         home.setTextColor(Color.parseColor("#007eff"));
@@ -176,6 +181,20 @@ isStoragePermissionGranted();
                 finish();
             }
         });
+        ivgo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(search.getText().toString().equalsIgnoreCase("")){
+                    Toast.makeText(getApplicationContext(),"Fill Some data to search",Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent searchs=new Intent(getApplicationContext(), SearchActivity.class);
+                    searchs.putExtra("data",search.getText().toString());
+                    startActivity(searchs);
+                    finish();
+                }
+
+            }
+        });
     }
 
     public  boolean isStoragePermissionGranted() {
@@ -242,6 +261,7 @@ isStoragePermissionGranted();
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductListActivity.class);
         i.putExtra("userid", data.getId());
+        i.putExtra("main","main");
         startActivity(i);
 
 

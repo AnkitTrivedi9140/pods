@@ -9,14 +9,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
+import com.example.podsstore.profile.AddressActivity;
+import com.example.podsstore.profile.ProfileActivity;
+import com.example.podsstore.wishlist.WishListActivity;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,15 +34,29 @@ import retrofit2.Response;
 public class DrowerActivity extends AppCompatActivity {
 TextView tvusername,tvemail;
 ImageView ivcut;
+CircularImageView productiv;
 Button btnlogout;
+
+RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecountry,rlhelp,rluserimage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drower);
         tvusername=findViewById(R.id.tvusername);
         tvemail=findViewById(R.id.tvemail);
+        productiv=findViewById(R.id.productiv);
         ivcut=findViewById(R.id.ivcut);
         btnlogout=findViewById(R.id.btnlogout);
+
+        rlorder=findViewById(R.id.rlorder);
+        rladdress=findViewById(R.id.rladdress);
+        rlwishlist=findViewById(R.id.rlwishlist);
+        rlsettings=findViewById(R.id.rlsettings);
+        rlsavedcard=findViewById(R.id.rlsavedcard);
+        rlchoosecountry=findViewById(R.id.rlchoosecountry);
+        rluserimage=findViewById(R.id.rluserimage);
+        rlhelp=findViewById(R.id.rlhelp);
+
         getSupportActionBar().hide();
         loadData();
         ivcut.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +71,41 @@ Button btnlogout;
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PreferenceManager.logout();
 
+                finish();
+                System.exit(0);
+            }
+        });
+        rlhelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent help=new Intent(getApplicationContext(),HelpActivity.class);
+                startActivity(help);
+                finish();
+            }
+        });
+        rluserimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile=new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(profile);
+                finish();
+            }
+        });
+        rladdress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile=new Intent(getApplicationContext(), AddressesActivity.class);
+                startActivity(profile);
+                finish();
+            }
+        });
+        rlwishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile=new Intent(getApplicationContext(), WishListActivity.class);
+                startActivity(profile);
                 finish();
             }
         });
@@ -70,6 +127,19 @@ Button btnlogout;
                     for (int i=0; i<list.getAddress().size(); i++) {
                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
 
+                    }
+
+                    for (int i = 0; i < list.getData().size(); i++) {
+                        Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
+                        GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
+                                new LazyHeaders.Builder()
+                                        .addHeader("Authorization", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                        .build());
+
+                        Glide.with(getApplicationContext())
+                                .load(glideUrl)
+                                .into(productiv);
                     }
                     tvusername.setText(list.getUsername());
                     tvemail.setText(list.getUseremailid());

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
@@ -50,8 +52,40 @@ private TextView tvsubmit;
         tvsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                smallCarton(etaddress1.getText().toString(),etaddress2.getText().toString(),etaddress3.getText().toString(),etzipcode.getText().toString(),etcountry.getText().toString());
-            }
+
+                String address1 = etaddress1.getText().toString();
+                String address2=etaddress2.getText().toString();
+                String address3 = etaddress3.getText().toString();
+                String zipcode = etzipcode.getText().toString();
+                String country = etcountry.getText().toString();
+                //Toast.makeText(getApplicationContext(),username,Toast.LENGTH_LONG).show();
+//                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(login);
+//                    finish();
+                if (TextUtils.isEmpty(address1)) {
+                    etaddress1.setError("Address Can't Blank!");
+                } else if (TextUtils.isEmpty(address2)) {
+                    etaddress2.setError("Address Can't Blank!");
+
+                }else if (TextUtils.isEmpty(address3)) {
+                    etaddress3.setError("Address Can't Blank!");
+
+                }
+                else if (TextUtils.isEmpty(zipcode)) {
+                    etzipcode.setError("zipcode Can't Blank!");
+
+                } else if (TextUtils.isEmpty(country)) {
+                    etcountry.setError("country Can't Blank!");
+
+                }else{
+                    smallCarton(etaddress1.getText().toString(),etaddress2.getText().toString(),etaddress3.getText().toString(),etzipcode.getText().toString(),etcountry.getText().toString());
+
+                }
+
+
+
+
+                      }
         });
     }
 
@@ -61,21 +95,31 @@ private TextView tvsubmit;
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                if(getIntent().getStringExtra("at")==null){
-                    Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+                if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
+
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                }else{
 
-                    if (getIntent().getStringExtra("at").equalsIgnoreCase("at")) {
-                        Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                }
+                if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
+
+                    Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+
+                }
+
+                if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
+
+                    Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else{
+
                 }
                 return true;
         }
@@ -117,9 +161,32 @@ private TextView tvsubmit;
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
-//                            startActivity(login);
-//                            finish();
+                            if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
+
+                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+                            if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+
+                            if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }else{
+
+                            }
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -153,21 +220,31 @@ private TextView tvsubmit;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getIntent().getStringExtra("at")==null){
-            Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+        if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
+
+            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(intent);
             finish();
         }else{
 
-            if(getIntent().getStringExtra("at").equalsIgnoreCase("at")){
-                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
-                startActivity(intent);
-                finish();
-            }else{
-                Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        }
+        if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
+
+            Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+
+        }
+
+        if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
+
+            Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+            startActivity(intent);
+            finish();
+
+        }else{
+
         }
 
     }

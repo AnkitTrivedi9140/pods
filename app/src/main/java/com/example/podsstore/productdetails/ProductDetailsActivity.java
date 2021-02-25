@@ -15,16 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.addtocart.AddToCartActivity;
+import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
+import com.example.podsstore.profile.ProfileActivity;
+import com.example.podsstore.search.SearchActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -61,9 +66,37 @@ Button logInBtn;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
-                startActivity(intent);
-                finish();
+
+
+                if(getIntent().getStringExtra("main")==null && getIntent().getStringExtra("search")==null ){
+
+                    Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+
+                }
+                if(getIntent().getStringExtra("productlist")==null &&getIntent().getStringExtra("search")==null) {
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+
+                }
+
+                if (getIntent().getStringExtra("productlist")==null&&getIntent().getStringExtra("main")==null) {
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else{
+
+                }
+
+
+
                 return true;
             case R.id.menu_item:   //this item has your app icon
                 Intent cart=new Intent(getApplicationContext(), AddToCartActivity.class);
@@ -201,5 +234,38 @@ Button logInBtn;
         menu.findItem(R.id.menu_item).setEnabled(true);
 
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getIntent().getStringExtra("main")==null && getIntent().getStringExtra("search")==null ){
+
+            Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+
+        }
+        if(getIntent().getStringExtra("productlist")==null &&getIntent().getStringExtra("search")==null) {
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+
+        }
+
+        if (getIntent().getStringExtra("productlist")==null&&getIntent().getStringExtra("main")==null) {
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }else{
+
+        }
+
+
     }
 }
