@@ -76,7 +76,7 @@ android:textStyle="bold"
             android:layout_alignParentRight="true"
             android:layout_marginTop="16dp"
             android:text="Forgot Password"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/black"></TextView>
 
         <EditText
@@ -128,15 +128,15 @@ android:layout_marginRight="4dp"
                 android:textSize="16dp" />
 
             <TextView
-android:visibility="gone"
+
                 android:id="@+id/createtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logInBtn"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
-                android:text="Go for test!"
-                android:textColor="@color/blue"></TextView>
+                android:text="Sign Up!"
+                android:textColor="@color/term_and_conditions"></TextView>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

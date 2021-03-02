@@ -55,7 +55,7 @@ public class ProductListActivity extends AppCompatActivity {
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
         Log.e("getProductMasterssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
-        ApiClient.getApiClient().getproducts(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        ApiClient.getApiClient().getproducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {

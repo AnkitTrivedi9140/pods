@@ -25,6 +25,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 
 import retrofit2.http.Field;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 
 import retrofit2.http.Multipart;
@@ -46,10 +47,10 @@ public interface NetworkInterface {
 
 
     @POST("productRest/getProduct")
-    Single<Response<List<ProductResponse>>>getproducts(@Header("Authorization") String authHeader);
+    Single<Response<List<ProductResponse>>>getproducts();
 
     @POST("productRest/getProd")
-    Call<List<ProductResponse>>getproductsdetails(@Header("Authorization") String authHeader,@Query("id") String userId);
+    Call<List<ProductResponse>>getproductsdetails(@Query("id") String userId);
 
     @POST("loginRest/users")
     Call<ProfileResponses>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
@@ -58,7 +59,7 @@ public interface NetworkInterface {
     Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
 
     @POST("businessRest/getBusinessCategory")
-    Single<Response<List<BusinessCatResponse>>>getbusinesscat(@Header("Authorization") String authHeader);
+    Single<Response<List<BusinessCatResponse>>>getbusinesscat();
 
 
     @POST("tellUsRest/tellUsMore")
@@ -70,13 +71,11 @@ public interface NetworkInterface {
     @POST("cartRest/addToCart")
     Single<Response<CreateLoginUserResponse>> addtocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);
 
-
-
     @POST("productRest/getBestSellingProduct")
-    Single<Response<List<BestSellingProductResponse>>>getbestsellingproducts(@Header("Authorization") String authHeader);
+    Single<Response<List<BestSellingProductResponse>>>getbestsellingproducts();
 
     @POST("productRest/getBestPricedProduct")
-    Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct(@Header("Authorization") String authHeader);
+    Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct();
 
     @Multipart
     @POST("imageRest/uploadProfilePhoto")
@@ -101,11 +100,12 @@ public interface NetworkInterface {
 
     @POST("wishListRest/deleteWishList")
     Call<CreateLoginUserResponse>deletewishlist(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
+
     @POST("wishListRest/moveToCart")
     Call<CreateLoginUserResponse>movetocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
 
 
-    @POST("productRest/search")
-    Single<Response<List<ProductResponse>>>search(@Header("Authorization") String authHeader, @Query("data") String data);
+    @GET("productRest/search")
+    Single<Response<List<ProductResponse>>>search(@Query("data") String data);
 }
 

@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.drower.DrowerActivity;
+import com.example.podsstore.login.LoginActivity;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.ProductHorizontalAdapter;
@@ -66,6 +69,7 @@ EditText search;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        PreferenceManager.init(MainActivity.this);
 //        getSupportActionBar().setTitle("  Pod");
 //        getSupportActionBar().setElevation(0);
 //
@@ -110,9 +114,16 @@ EditText search;
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
-                        in = new Intent(getBaseContext(), ProfileActivity.class);
-                        startActivity(in);
-                        overridePendingTransition(0, 0);
+
+                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            in = new Intent(getBaseContext(), ProfileActivity.class);
+                            startActivity(in);
+                            overridePendingTransition(0, 0);
+                        }else{
+                            showAlertDialog();
+                        }
+
+
                         break;
 
                     case R.id.about:
@@ -166,19 +177,35 @@ isStoragePermissionGranted();
         ivcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-                intent.putExtra("main","main");
-                startActivity(intent);
-                finish();
+
+                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
+                    intent.putExtra("main","main");
+                    startActivity(intent);
+                    finish();
+                }else{
+                    showAlertDialog();
+                }
+
             }
         });
         ivtoggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), DrowerActivity.class);
-                intent.putExtra("main","main");
-                startActivity(intent);
-                finish();
+
+
+
+                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent intent=new Intent(getApplicationContext(), DrowerActivity.class);
+                    intent.putExtra("main","main");
+                    startActivity(intent);
+                    finish();
+                }else{
+                    showAlertDialog();
+                }
+
+
             }
         });
         ivgo.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +255,7 @@ isStoragePermissionGranted();
     private void categorieslist() {
         // binding.progress.setVisibility(View.VISIBLE);
         // binding.progress.setVisibility(View.VISIBLE);
-        ApiClient.getApiClient().getbusinesscat(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        ApiClient.getApiClient().getbusinesscat()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<BusinessCatResponse>>>() {
@@ -270,7 +297,7 @@ isStoragePermissionGranted();
     @SuppressLint("CheckResult")
     private void loadDatabestselling() {
         // binding.progress.setVisibility(View.VISIBLE);
-        ApiClient.getApiClient().getbestsellingproducts(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        ApiClient.getApiClient().getbestsellingproducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<BestSellingProductResponse>>>() {
@@ -304,7 +331,7 @@ isStoragePermissionGranted();
     @SuppressLint("CheckResult")
     private void loadDatabestprisedproduct() {
         // binding.progress.setVisibility(View.VISIBLE);
-        ApiClient.getApiClient().getbestpricedproduct(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        ApiClient.getApiClient().getbestpricedproduct()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<BestSellingProductResponse>>>() {
@@ -378,5 +405,37 @@ isStoragePermissionGranted();
         Intent i=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
         finish();
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.alertlogin, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+   //     EditText et =customLayout.findViewById(R.id.etmobile);
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+Intent intent=new Intent(getApplicationContext(),SplashActivity.class);
+startActivity(intent);
+finish();
+
+            }
+        });
+        alert.show();
     }
 }

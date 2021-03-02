@@ -6,17 +6,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.SplashActivity;
 import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.BusinessCatResponse;
@@ -42,7 +47,7 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-
+        PreferenceManager.init(CategoryActivity.this);
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new CategoryAdapter(CategoryActivity.this);
         recyclerView = findViewById(R.id.productrv);
@@ -90,10 +95,14 @@ public class CategoryActivity extends AppCompatActivity {
                         break;
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
+                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            in = new Intent(getBaseContext(), ProfileActivity.class);
+                            startActivity(in);
+                            overridePendingTransition(0, 0);
+                        }else{
+                            showAlertDialog();
+                        }
 
-                        in = new Intent(getBaseContext(), ProfileActivity.class);
-                        startActivity(in);
-                        overridePendingTransition(0, 0);
                         break;
 
                     case R.id.about:
@@ -108,12 +117,42 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
     }
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CategoryActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.alertlogin, null);
 
+
+        alertDialog.setView(customLayout);
+        TextView btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        //     EditText et =customLayout.findViewById(R.id.etmobile);
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SplashActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        alert.show();
+    }
 
     @SuppressLint("CheckResult")
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
-        ApiClient.getApiClient().getbusinesscat(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+        ApiClient.getApiClient().getbusinesscat()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<BusinessCatResponse>>>() {

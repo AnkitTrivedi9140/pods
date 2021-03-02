@@ -18,13 +18,13 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Help / FAQ");
+      getSupportActionBar().setTitle("");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent=new Intent(getApplicationContext(), HelpAndFAQActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -37,7 +37,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent=new Intent(getApplicationContext(), HelpAndFAQActivity.class);
         startActivity(intent);
         finish();
     }

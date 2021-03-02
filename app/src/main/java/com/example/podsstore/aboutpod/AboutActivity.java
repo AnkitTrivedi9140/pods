@@ -2,18 +2,23 @@ package com.example.podsstore.aboutpod;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.SplashActivity;
 import com.example.podsstore.category.CategoryActivity;
+import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.profile.ProfileActivity;
 
@@ -25,6 +30,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        PreferenceManager.init(AboutActivity.this);
         getSupportActionBar().setTitle("About POD");
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         tvreact=findViewById(R.id.tvreact);
@@ -61,9 +67,13 @@ public class AboutActivity extends AppCompatActivity {
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
-                        in = new Intent(getBaseContext(), ProfileActivity.class);
-                        startActivity(in);
-                        overridePendingTransition(0, 0);
+                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            in = new Intent(getBaseContext(), ProfileActivity.class);
+                            startActivity(in);
+                            overridePendingTransition(0, 0);
+                        }else{
+                            showAlertDialog();
+                        }
                         break;
 
                     case R.id.about:
@@ -92,4 +102,36 @@ public class AboutActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AboutActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.alertlogin, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        //     EditText et =customLayout.findViewById(R.id.etmobile);
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SplashActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        alert.show();
+    }
+
 }

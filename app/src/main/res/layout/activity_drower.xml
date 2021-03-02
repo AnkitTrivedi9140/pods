@@ -315,6 +315,7 @@ android:layout_alignParentEnd="true"
             android:id="@+id/rlsavedcard"
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp"
+            android:visibility="gone"
             android:layout_below="@+id/rlsettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -363,7 +364,7 @@ android:layout_alignParentEnd="true"
                 android:id="@+id/rlchoosecountry"
                 android:layout_marginLeft="11dp"
                 android:layout_marginRight="11dp"
-                android:layout_below="@+id/rlsavedcard"
+                android:layout_below="@+id/rlsettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
 android:textColor="@color/black"
         android:textSize="18dp"
+        android:textStyle="bold"
         android:text="Lorem Ipsum is simply dummy text of printing?"
 
         ></TextView>
@@ -36,7 +37,7 @@ android:layout_below="@+id/tvhelpheading"
         android:textSize="18dp"
         android:layout_below="@+id/tvhelpheadingtxt"
         android:text="Contact Us"
-
+        android:textStyle="bold"
         ></TextView>
 
 
@@ -59,6 +60,7 @@ android:layout_below="@+id/tvhelpheading"
         android:textSize="18dp"
         android:text="1800 222 8888, 1800 364 7890"
 android:layout_below="@+id/tvhelpheadingcallus"
+        android:textStyle="bold"
         ></TextView>
 
     <TextView
@@ -78,6 +80,7 @@ android:layout_below="@+id/tvhelpheadingcallus"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:text="Care@podshealth.com"
+        android:textStyle="bold"
         android:layout_below="@+id/tvemailhead"
         ></TextView>
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.podsstore.productdetails;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.SplashActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
@@ -52,6 +54,7 @@ Button logInBtn;
         setContentView(R.layout.activity_product_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Product Details");
+        PreferenceManager.init(ProductDetailsActivity.this);
         ivproduct=findViewById(R.id.ivproduct);
         tvProductname=findViewById(R.id.tvProductname);
         logInBtn=findViewById(R.id.logInBtn);
@@ -99,21 +102,58 @@ Button logInBtn;
 
                 return true;
             case R.id.menu_item:   //this item has your app icon
-                Intent cart=new Intent(getApplicationContext(), AddToCartActivity.class);
-                startActivity(cart);
-                finish();
+
+
+                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent cart=new Intent(getApplicationContext(), AddToCartActivity.class);
+                    startActivity(cart);
+                    finish();
+
+                }else{
+                    showAlertDialog();
+                }
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProductDetailsActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.alertlogin, null);
 
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        //     EditText et =customLayout.findViewById(R.id.etmobile);
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SplashActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        alert.show();
+    }
     @SuppressLint("CheckResult")
     private void loadData() {
 
         Log.e("getssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+getIntent().getStringExtra("userid") );
 
-        ApiClient.getApiClient().getproductsdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
+        ApiClient.getApiClient().getproductsdetails(getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
             @Override
             public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
 
@@ -136,7 +176,14 @@ Button logInBtn;
                         logInBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),list.get(finalI).getPrice(),"1");
+
+                                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                                    smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),list.get(finalI).getPrice(),"1");
+                                }else{
+                                    showAlertDialog();
+                                }
+
+
                             }
                         });
                     }

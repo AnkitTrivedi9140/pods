@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
         Log.e("getProductMasterssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
-        ApiClient.getApiClient().search(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),getIntent().getStringExtra("data"))
+        ApiClient.getApiClient().search(getIntent().getStringExtra("data"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {

@@ -97,7 +97,7 @@ ImageView back;
 
                     break;
                 case R.id.createtv:
-                    Intent createaccount = new Intent(LoginActivity.this, CategoryActivity.class);
+                    Intent createaccount = new Intent(LoginActivity.this, CreateAccountActivity.class);
                     startActivity(createaccount);
                     finish();
                     break;

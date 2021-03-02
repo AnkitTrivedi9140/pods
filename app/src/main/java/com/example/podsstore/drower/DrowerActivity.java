@@ -80,7 +80,7 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
         rlhelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent help=new Intent(getApplicationContext(),HelpActivity.class);
+                Intent help=new Intent(getApplicationContext(),HelpAndFAQActivity.class);
                 startActivity(help);
                 finish();
             }
