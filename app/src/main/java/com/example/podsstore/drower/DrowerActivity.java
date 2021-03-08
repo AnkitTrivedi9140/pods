@@ -20,6 +20,7 @@ import com.example.podsstore.R;
 import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.getorder.MyOrderActivity;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.profile.AddressActivity;
@@ -75,6 +76,14 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
 
                 finish();
                 System.exit(0);
+            }
+        });
+        rlorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent help=new Intent(getApplicationContext(), MyOrderActivity.class);
+                startActivity(help);
+                finish();
             }
         });
         rlhelp.setOnClickListener(new View.OnClickListener() {

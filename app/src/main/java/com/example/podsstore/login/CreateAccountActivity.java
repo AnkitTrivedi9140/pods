@@ -13,9 +13,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
@@ -35,8 +37,9 @@ import retrofit2.Response;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Button logInBtn,btncontinue;
-
+TextView signintv;
     RelativeLayout rlaccountconfirmation;
+    CheckBox checkBoxterms;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet;
     ImageView back;
     @Override
@@ -62,7 +65,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 //                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(login);
 //                    finish();
-                    if (TextUtils.isEmpty(username)) {
+
+                if (TextUtils.isEmpty(username)) {
                         usernameEt.setError("Name Can't Blank!");
                     } else if (TextUtils.isEmpty(email)) {
                         emaiEt.setError("Email Address Can't Blank!");
@@ -75,7 +79,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                         reenterpasswordet.setError("Re_password Can't Blank!");
 
                     }else{
+                    if(checkBoxterms.isChecked()){
                         smallCarton(username,email,password,reenterpassword);
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Please click on checkBox to continue.",Toast.LENGTH_LONG).show();
+                    }
+
                     }
 
                     break;
@@ -93,6 +102,14 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                     Intent logins = new Intent(CreateAccountActivity.this, LoginActivity.class);
                     startActivity(logins);
+                    finish();
+
+
+                    break;
+                case R.id.signintv:
+
+                    Intent  signin = new Intent(CreateAccountActivity.this, LoginActivity.class);
+                    startActivity(signin);
                     finish();
 
 
@@ -173,11 +190,15 @@ rlaccountconfirmation.setVisibility(View.VISIBLE);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
         emaiEt = findViewById(R.id.emailEt);
+        signintv = findViewById(R.id.signintv);
+        checkBoxterms = findViewById(R.id.checkBoxterms);
         back=findViewById(R.id.ivback);
         reenterpasswordet = findViewById(R.id.passwordagainEt);
         logInBtn.setOnClickListener(onClickListener);
         btncontinue.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
+        signintv.setOnClickListener(onClickListener);
+
 //        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
 //        usernameEt.setTypeface(typeface);
 //        passwordEt.setTypeface(typeface);

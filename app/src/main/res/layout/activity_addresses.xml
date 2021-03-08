@@ -4,54 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".drower.AddressesActivity">
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addressrv"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content">
 
-        android:layout_below="@+id/rlcartseek"
-        android:layout_margin="14dp"
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:background="@drawable/rippleconfirmaddress"
+        android:layout_marginLeft="22dp"
+        android:lines="1"
 
-        android:background="@color/white"
-        >
+        android:id="@+id/tvchangeaddtess"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:textSize="18dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
 
-        <TextView
-            android:id="@+id/tvname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAYMENT"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="22dp"
-            ></TextView>
-        <TextView
-            android:id="@+id/tvaddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAYMENT"
-
-            android:textSize="16dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="22dp"
-            android:layout_below="@+id/tvname"
-            ></TextView>
-        <TextView
-            android:background="@drawable/rippleconfirmaddress"
-            android:layout_marginLeft="22dp"
-            android:lines="1"
-
-            android:id="@+id/tvchangeaddtess"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:textSize="18dp"
-android:layout_alignParentBottom="true"
-            android:gravity="center"
-
-            android:layout_centerHorizontal="true"
-         android:layout_margin="11dp"
-            android:text="Change or Add Address"
-            ></TextView>
-    </RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_margin="11dp"
+        android:text="Change or Add Address"
+        ></TextView>
 </RelativeLayout>

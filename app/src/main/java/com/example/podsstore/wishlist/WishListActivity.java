@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
@@ -33,6 +35,7 @@ import retrofit2.Response;
 public class WishListActivity extends AppCompatActivity {
 RecyclerView recyclerView;
     WishListAdapter productListAdapter;
+    TextView tvnodata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ RecyclerView recyclerView;
         getSupportActionBar().setTitle("Your Wishlist");
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new WishListAdapter(WishListActivity.this);
-
+        tvnodata = findViewById(R.id.tvnodata);
         recyclerView.setLayoutManager(new LinearLayoutManager(WishListActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
       //  productListAdapter.setAdapterListener(adapterListener);
@@ -52,7 +55,7 @@ RecyclerView recyclerView;
         productListAdapter.setAdapterListener(adapterListener);
         productListAdapter.setAdapterListeners(listener);
         recyclerView.setAdapter(productListAdapter);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         loadData();
     }
     @SuppressLint("CheckResult")
@@ -69,7 +72,7 @@ RecyclerView recyclerView;
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
                     productListAdapter.addAll(list);
-                    getSupportActionBar().setTitle("Cart"+" ("+list.size()+")");
+                    getSupportActionBar().setTitle("Your Wishlist"+" ("+list.size()+")");
                     int totalPrice = 0;
                     for (int i = 0; i < list.size(); i++) {
                         totalPrice += list.get(i).getPrice();
@@ -78,11 +81,11 @@ RecyclerView recyclerView;
 //                        tvtotaltxt.setText(String.valueOf(totalPrice));
 
                     }
-                    if (list != null) {
-
-
+                    if(  list.isEmpty()){
+                        tvnodata.setVisibility(View.VISIBLE);
+                    }else{
+                        tvnodata.setVisibility(View.GONE);
                     }
-
                 }
             }
 
@@ -175,6 +178,9 @@ deletewishlish(data.getProductid().toString());
                     startActivity(getIntent());
                     overridePendingTransition( 0, 0);
                     productListAdapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Item already in cart",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

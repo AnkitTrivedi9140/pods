@@ -6,22 +6,22 @@ public class AddtocartRequest {
 
 
     @SerializedName("productId")
-    private String productid;
+    private Long productid;
 
     @SerializedName("productName")
     private String productname;
 
     @SerializedName("price")
-    private String price;
+    private Long price;
 
     @SerializedName("quantity")
-    private String quantity;
+    private Long quantity;
 
-    public String getProductid() {
+    public Long getProductid() {
         return productid;
     }
 
-    public void setProductid(String productid) {
+    public void setProductid(Long productid) {
         this.productid = productid;
     }
 
@@ -33,29 +33,29 @@ public class AddtocartRequest {
         this.productname = productname;
     }
 
-    public String getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public String getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
     @Override
     public String toString() {
         return "AddtocartRequest{" +
-                "productid='" + productid + '\'' +
+                "productid=" + productid +
                 ", productname='" + productname + '\'' +
-                ", price='" + price + '\'' +
-                ", quantity='" + quantity + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }

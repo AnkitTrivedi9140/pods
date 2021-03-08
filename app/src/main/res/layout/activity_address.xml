@@ -95,7 +95,7 @@ android:visibility="gone"
                 android:layout_height="55dp"
                 android:background="@drawable/edittext_bg"
                 android:padding="10dp"
-                android:gravity="start"
+
                 ></EditText>
             <EditText
                 android:id="@+id/etcountry"
@@ -109,7 +109,7 @@ android:visibility="gone"
                 android:layout_height="55dp"
                 android:background="@drawable/edittext_bg"
                 android:padding="10dp"
-                android:gravity="start"
+         
                 ></EditText>
 
             <TextView
@@ -117,13 +117,13 @@ android:visibility="gone"
                 android:background="@drawable/ripplenext"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="22dp"
-
+                android:layout_marginTop="28dp"
+android:layout_marginBottom="22dp"
                 android:lines="1"
 
                 android:id="@+id/tvsubmit"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="55dp"
                 android:textSize="18dp"
 
                 android:layout_centerHorizontal="true"

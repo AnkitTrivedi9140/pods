@@ -2,6 +2,7 @@ package com.example.podsstore.addtocart;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +41,8 @@ public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyVi
     private AddtocartAdapter.AdapterListener adapterListener;
     private List<CartResponse> productResponseList;
     private Context context;
-
+    DataTransferInterface dtInterface;
+String qty;
     private AddtocartAdapter.InventoryAdapterListener openListener;
 
 
@@ -57,6 +59,7 @@ public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyVi
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
+        ArrayList<String> arrayList;
 int counter=0;
         public MyViewHolder(View view) {
             super(view);
@@ -84,7 +87,12 @@ int counter=0;
                     adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
                 }
             });
-
+            arrayList=new ArrayList<>();
+            arrayList.add("1");
+            arrayList.add("22");
+            arrayList.add("33");
+            arrayList.add("4");
+dtInterface.onSetValues(arrayList);
             less.setOnClickListener(v -> {
 counter=counter-1;
 prnumber.setText(String.valueOf(counter));
@@ -102,9 +110,11 @@ prnumber.setText(String.valueOf(counter));
         notifyItemRangeChanged(position, productResponseList.size());
     }
 
-    public AddtocartAdapter(Context context) {
+    public AddtocartAdapter(Context context, DataTransferInterface dtInterface) {
         this.context = context;
         productResponseList = new ArrayList<>();
+        this.dtInterface = dtInterface;
+
 
     }
 
@@ -174,4 +184,7 @@ prnumber.setText(String.valueOf(counter));
         void onAdapterItemClicked(CartResponse data);
     }
 
+    public interface DataTransferInterface {
+        public void onSetValues(ArrayList<String> al);
+    }
 }

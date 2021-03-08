@@ -27,7 +27,9 @@ android:layout_marginTop="44dp"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="22dp"
+
+        android:layout_marginRight="22dp"
+        android:layout_marginLeft="22dp"
       >
 
         <TextView
@@ -43,7 +45,7 @@ android:textStyle="bold"
             android:id="@+id/usernameEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:drawableLeft="@drawable/ic_person"
@@ -62,13 +64,13 @@ android:textStyle="bold"
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="8dp"
 
-            android:fontFamily="sans-serif-medium"
+
 
             android:padding="8dp"
             android:hint="Email ID"
@@ -80,13 +82,12 @@ android:textStyle="bold"
             android:id="@+id/passwordEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="8dp"
 
-            android:fontFamily="sans-serif-medium"
             android:hint="@string/hint_password"
 
             android:padding="8dp"
@@ -97,13 +98,13 @@ android:textStyle="bold"
             android:id="@+id/passwordagainEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:drawableLeft="@drawable/ic_pwdagain"
             android:drawablePadding="8dp"
 
-            android:fontFamily="sans-serif-medium"
+
             android:hint="Confirm Password"
 
             android:padding="8dp"
@@ -111,19 +112,26 @@ android:textStyle="bold"
             android:layout_below="@+id/passwordEt"/>
 
 
-    <TextView
-        android:layout_marginTop="4dp"
-        android:id="@+id/tvcreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordagainEt"
-        android:text="By creating an account you agree to our \nTerms of Service and Privacy Policy."
-        >
+<!--    <TextView-->
+<!--        android:layout_marginTop="22dp"-->
+<!--        android:id="@+id/tvcreate"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/passwordagainEt"-->
+<!--        android:text="By creating an account you agree to our \nTerms of Service and Privacy Policy."-->
+<!--        >-->
 
-    </TextView>
-
+<!--    </TextView>-->
+        <CheckBox
+            android:id="@+id/checkBoxterms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:textColor="@color/text_color_device_found"
+            android:layout_marginTop="11dp"
+            android:text="By creating an account you agree to our Terms of Service and Privacy Policy."
+            android:layout_below="@+id/passwordagainEt"/>
         <RelativeLayout
-            android:layout_below="@+id/tvcreate"
+            android:layout_below="@+id/checkBoxterms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="44dp">
@@ -133,7 +141,7 @@ android:textStyle="bold"
                 android:id="@+id/logInBtn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="33dp"
                 android:background="@drawable/button_bg"
                 android:gravity="center"
                 android:text="Create Account"
@@ -141,6 +149,17 @@ android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 />
+
+            <TextView
+
+                android:id="@+id/signintv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logInBtn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Sign in!"
+                android:textColor="@color/term_and_conditions"></TextView>
 
         </RelativeLayout>
 
@@ -150,20 +169,21 @@ android:textStyle="bold"
 android:id="@+id/rlaccountconfirmation"
         android:background="@color/white"
         android:visibility="gone"
+        android:layout_centerInParent="true"
+android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
                     <TextView
 
 
-android:layout_marginTop="222dp"
                         android:id="@+id/createtv"
                         android:textSize="18dp"
                         android:layout_width="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Account Confirmation"
                         android:textColor="@color/term_and_conditions"
-
+android:textStyle="bold"
                         android:layout_height="wrap_content"
                         ></TextView>
         <TextView
@@ -186,8 +206,8 @@ android:layout_marginTop="222dp"
 android:layout_centerHorizontal="true"
             android:id="@+id/btncontinue"
             android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="22dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/button_bg"
 
             android:text="Continue..."

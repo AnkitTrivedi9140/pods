@@ -151,7 +151,7 @@ Button logInBtn;
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+getIntent().getStringExtra("userid") );
+        Log.e("getssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
 
         ApiClient.getApiClient().getproductsdetails(getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
             @Override
@@ -178,7 +178,7 @@ Button logInBtn;
                             public void onClick(View v) {
 
                                 if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                                    smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),list.get(finalI).getPrice(),"1");
+                                    smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong("1"));
                                 }else{
                                     showAlertDialog();
                                 }
@@ -202,7 +202,7 @@ Button logInBtn;
         });
     }
     @SuppressLint("CheckResult")
-    private void smallCarton(String prodid,String prodname,String price,String qty) {
+    private void smallCarton(Long prodid,String prodname,Long price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -225,18 +225,16 @@ Button logInBtn;
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
                     @Override
                     public void onSuccess(Response<CreateLoginUserResponse> response) {
-
+                        CreateLoginUserResponse successResponse = response.body();
                         // binding.progressbar.setVisibility(View.GONE);
 
 
                         Log.e("onSuccess", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
-                            CreateLoginUserResponse successResponse = response.body();
+
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
-//                            startActivity(login);
-//                            finish();
+
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -250,7 +248,7 @@ Button logInBtn;
 
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                          Toast.makeText(getApplicationContext(),"Item already in cart.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

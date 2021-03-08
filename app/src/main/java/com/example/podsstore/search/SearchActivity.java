@@ -118,9 +118,9 @@ public class SearchActivity extends AppCompatActivity {
     private SearchAdapter.AdapterListener adapterListener = data -> {
 
         Intent i = new Intent(SearchActivity.this, ProductDetailsActivity.class);
-        i.putExtra("userid",data.getId());
+        i.putExtra("userid",String.valueOf(data.getId()));
         i.putExtra("search","search");
-        Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
         startActivity(i);
 
 

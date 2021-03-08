@@ -287,7 +287,7 @@ isStoragePermissionGranted();
     private CategoryHorigentalAdapter.AdapterListener adapterListener = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductListActivity.class);
-        i.putExtra("userid", data.getId());
+        i.putExtra("userid", String.valueOf(data.getId()));
         i.putExtra("main","main");
         startActivity(i);
 
@@ -362,7 +362,7 @@ isStoragePermissionGranted();
     private BestSellingProductAdapter.AdapterListener adapterListeners = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
-        i.putExtra("userid", data.getId().trim());
+        i.putExtra("userid", String.valueOf(data.getId().trim()));
         startActivity(i);
 
 

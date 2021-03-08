@@ -1,6 +1,9 @@
 package com.example.podsstore.drower;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,30 +13,42 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.response.AddressResponse;
+import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.mainactivityadapters.AddressAdapter;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
+import com.example.podsstore.product.ProductListActivity;
+import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.profile.AddressActivity;
 
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddressesActivity extends AppCompatActivity {
-    TextView tvname,tvaddress,tvchangeaddtess;
+    TextView tvchangeaddtess;
     Button continuebtn;
+    private RecyclerView recyclerView;
+    private AddressAdapter addressAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addresses);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Saved Address");
-        tvname=findViewById(R.id.tvname);
-        tvaddress=findViewById(R.id.tvaddress);
+
         tvchangeaddtess=findViewById(R.id.tvchangeaddtess);
         tvchangeaddtess.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +59,19 @@ public class AddressesActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        recyclerView = findViewById(R.id.addressrv);
+        addressAdapter = new AddressAdapter(AddressesActivity.this);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(AddressesActivity.this));
+//      recyclerView.setEmptyView(binding.emptyView);
+        //addressAdapter.setAdapterListener(adapterListener);
+
+        recyclerView.setAdapter(addressAdapter);
+
+
+
         loadData();
     }
     @Override
@@ -64,29 +92,33 @@ public class AddressesActivity extends AppCompatActivity {
 
         Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
         );
+        ApiClient.getApiClient().getalladdress(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<AddressResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<AddressResponse>> response) {
+                        // binding.progress.setVisibility(View.GONE);
 
-        ApiClient.getApiClient().profile(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
-            @Override
-            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
+                        if (response.isSuccessful()) {
+                            List<AddressResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            addressAdapter.addAll(list);
 
-                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
-                if (response.isSuccessful()) {
-                    ProfileResponses list = response.body();
-                    for (int i=0; i<list.getAddress().size(); i++) {
-                        tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
 
                     }
-                    tvname.setText(list.getUsername());
+
+                    @Override
+                    public void onError(Throwable e) {
 
 
-                }
-            }
-            @Override
-            public void onFailure(Call<ProfileResponses> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
-            }
-        });
+                    }
+                });
     }
     @Override
     public void onBackPressed() {

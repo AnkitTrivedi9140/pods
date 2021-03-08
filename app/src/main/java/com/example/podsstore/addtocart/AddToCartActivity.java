@@ -21,6 +21,7 @@ import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -41,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddToCartActivity extends AppCompatActivity {
+public class AddToCartActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
     TextView tvsubtotaltxt,tvtotaltxt;
@@ -57,7 +58,7 @@ Button placeorderbtn;
         tvtotaltxt = findViewById(R.id.tvtotaltxt);
         recyclerView = findViewById(R.id.productrv);
         placeorderbtn = findViewById(R.id.placeorderbtn);
-        productListAdapter = new AddtocartAdapter(AddToCartActivity.this);
+        productListAdapter = new AddtocartAdapter(AddToCartActivity.this,this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
@@ -70,6 +71,7 @@ Button placeorderbtn;
                 Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
     }
@@ -166,7 +168,7 @@ Button placeorderbtn;
     @SuppressLint("CheckResult")
     private void deletecart(String mobilenumber) {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)+"lllll"+mobilenumber
         );
 
         ApiClient.getApiClient().deletecart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),mobilenumber).enqueue(new Callback<CreateLoginUserResponse>() {
@@ -174,16 +176,17 @@ Button placeorderbtn;
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
+                Log.e("getdelete",String.valueOf(response.code()));
+                overridePendingTransition( 0, 0);
+                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
+                productListAdapter.notifyDataSetChanged();
                 if (response.isSuccessful()) {
                     CreateLoginUserResponse list = response.body();
 
                     Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
 
-                    overridePendingTransition( 0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition( 0, 0);
-                    productListAdapter.notifyDataSetChanged();
+
                 }
             }
             @Override
@@ -195,12 +198,12 @@ Button placeorderbtn;
 
     private AddtocartAdapter.AdapterListener adapterListener = data -> {
 
-        deletecart(data.getProductid().toString());
-
+        deletecart(String.valueOf(data.getProductid().toString()));
+//Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
 
     };
     @SuppressLint("CheckResult")
-    private void addtowishlist(String prodid,String prodname,String price,String qty) {
+    private void addtowishlist(Long prodid,String prodname,Long price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -248,7 +251,7 @@ Button placeorderbtn;
 
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Item already in wishlist", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -267,9 +270,23 @@ Button placeorderbtn;
 
     private AddtocartAdapter.InventoryAdapterListener listener = data -> {
 
-        addtowishlist(data.getProductid().toString(),data.getProductname(),data.getPrice().toString(),data.getQty().toString());
+        addtowishlist(data.getProductid(),data.getProductname(),data.getPrice(),data.getQty());
 
 
     };
 
+    @Override
+    public void onSetValues(ArrayList<String> al) {
+        Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
+        placeorderbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
+                intent.putExtra("QuestionListExtra", al);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+    }
 }

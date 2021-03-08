@@ -150,7 +150,7 @@ ImageView back;
                         if (response.isSuccessful()) {
 
                             LoginResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), "create Successful -- " +successResponse.getAccessToken(), Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
 
                             PreferenceManager.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
                             PreferenceManager.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
