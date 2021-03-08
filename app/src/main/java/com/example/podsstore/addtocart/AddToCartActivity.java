@@ -277,7 +277,7 @@ Button placeorderbtn;
 
     @Override
     public void onSetValues(ArrayList<String> al) {
-        Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -330,7 +330,7 @@ ImageView cut=customLayout.findViewById(R.id.ivcut);
             public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile", String.valueOf(response.toString()));
+                Log.e("getprofile", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     ProfileResponses list = response.body();
 
