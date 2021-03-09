@@ -85,7 +85,7 @@ Button continuebtn;
                      tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
 
                     }
-tvname.setText(list.getUsername());
+                tvname.setText(list.getUsername());
 
 
                 }

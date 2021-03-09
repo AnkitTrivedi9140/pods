@@ -78,7 +78,7 @@ TextView placeorderbtn;
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("cartaaa",String.valueOf(response.code()) );
+                Log.e("cartaaa",String.valueOf(response.body()) );
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
 
@@ -91,6 +91,8 @@ TextView placeorderbtn;
                             @Override
                             public void onClick(View v) {
                                 List<String> questions = new ArrayList<String>();
+                                Log.d( "onClick: ",list.get(finalI).getProductid().toString());
+                                Toast.makeText(getApplicationContext(),list.get(finalI).getProductid().toString(),Toast.LENGTH_SHORT).show();
                                 questions = (ArrayList<String>)getIntent().getSerializableExtra("QuestionListExtra");
                                 placeorder("1",String.valueOf(list.get(finalI).getProductid().toString()),String.valueOf(list.get(finalI).getProductname()),String.valueOf(list.get(finalI).getImageUrl()),"21",String.valueOf(list.get(finalI).getTotalprice()),String.valueOf(list.get(finalI).getPrice().toString()));
                             }
@@ -113,7 +115,7 @@ TextView placeorderbtn;
     }
     @SuppressLint("CheckResult")
     private void placeorder(String orderid,String productid,String productname,String productimage,String qty,String totalprice,String subtotal) {
-        // binding.progressbar.setVisibility(View.VISIBLE);
+
         List<PlaceOrderRequest> list = new ArrayList<>();
 
         PlaceOrderRequest r = new PlaceOrderRequest();
@@ -126,13 +128,13 @@ TextView placeorderbtn;
         r.setSubtotal(subtotal);
 
 
-     list.add(r);
+        list.add(r);
 
 
         Log.e("postDatalist", list.toString());
 
 
-        Log.e("postData", new Gson().toJson(r));
+        Log.e("postData", new Gson().toJson(list));
 
         ApiClient.getApiClient(). placeOrder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),list)
                 .subscribeOn(Schedulers.io())
@@ -149,19 +151,9 @@ TextView placeorderbtn;
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
-//                            startActivity(login);
-//                            finish();
 
-//                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
-//                                if (successResponse.getMessage().equals("success")) {
-//                                    // mappingAdapter.clear();
-//
-//                                }
-
-                                //  Toaster.show(mContext, successResponse.getMessage());
 
                             }
                         } else {
@@ -176,8 +168,6 @@ TextView placeorderbtn;
                         Log.e("onError: " , e.getMessage());
                         Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
-                        // binding.progressbar.setVisibility(View.GONE);
-                        // NetworkHelper.handleNetworkError(e, mContext);
                     }
                 });
     }

@@ -164,7 +164,8 @@ Button placeorderbtn;
             startActivity(intent);
             finish();}
 
-    }}
+    }
+    }
     @SuppressLint("CheckResult")
     private void deletecart(String mobilenumber) {
 

@@ -11,13 +11,16 @@
     </style>
 
     <style name="Theme.PodsStore.NoActionBar">
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.PodsStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.PodsStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.PodsStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"
+
+        />
     <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
     <!--  -->

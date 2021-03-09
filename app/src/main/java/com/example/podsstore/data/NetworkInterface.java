@@ -59,8 +59,8 @@ public interface NetworkInterface {
 
     @POST("addressRest/getAddressDetails")
     Single<Response<List<AddressResponse>>>getalladdress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
-    @POST("loginRest/changePhoneNumber")
 
+    @POST("loginRest/changePhoneNumber")
     Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
 
     @POST("businessRest/getBusinessCategory")
@@ -111,7 +111,6 @@ public interface NetworkInterface {
 
     @POST("wishListRest/moveToCart")
     Call<CreateLoginUserResponse>movetocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("productId") String productId);
-
 
     @GET("productRest/search")
     Single<Response<List<ProductResponse>>>search(@Query("data") String data);

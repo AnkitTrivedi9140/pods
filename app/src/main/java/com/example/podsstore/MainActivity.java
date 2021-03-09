@@ -2,6 +2,7 @@ package com.example.podsstore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,17 +60,19 @@ public class MainActivity extends AppCompatActivity {
     private TextView toproduct;
     RadioGroup radioGroup1;
     RadioButton home, categories, profile, about;
-    private RecyclerView recyclerView,bestsellingproductrv,bestprisedproductrv;
+    private RecyclerView recyclerView, bestsellingproductrv, bestprisedproductrv;
     private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
-private ImageView ivallproduct,ivcart,ivtoggle,ivgo;
-EditText search;
+    private ImageView ivallproduct, ivcart, ivtoggle, ivgo;
+    EditText search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         PreferenceManager.init(MainActivity.this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 //        getSupportActionBar().setTitle("  Pod");
 //        getSupportActionBar().setElevation(0);
 //
@@ -78,17 +81,17 @@ EditText search;
 //
 //        getSupportActionBar().setDisplayUseLogoEnabled(true);
 //        getSupportActionBar().setLogo(R.drawable.toggle);
-       // getMenuInflater().inflate(R.menu.main_menu, menu);
-        search=findViewById(R.id.putwaysearch);
+        // getMenuInflater().inflate(R.menu.main_menu, menu);
+        search = findViewById(R.id.putwaysearch);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
         home = (RadioButton) findViewById(R.id.homes);
         categories = (RadioButton) findViewById(R.id.categories);
         profile = (RadioButton) findViewById(R.id.profile);
-        ivallproduct =  findViewById(R.id.ivallproduct);
-        ivcart =  findViewById(R.id.ivcart);
-        ivgo =  findViewById(R.id.ivgo);
-        ivtoggle =  findViewById(R.id.ivtoggle);
+        ivallproduct = findViewById(R.id.ivallproduct);
+        ivcart = findViewById(R.id.ivcart);
+        ivgo = findViewById(R.id.ivgo);
+        ivtoggle = findViewById(R.id.ivtoggle);
         home.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bluehome, 0, 0);
         home.setTextColor(Color.parseColor("#007eff"));
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -119,7 +122,7 @@ EditText search;
                             in = new Intent(getBaseContext(), ProfileActivity.class);
                             startActivity(in);
                             overridePendingTransition(0, 0);
-                        }else{
+                        } else {
                             showAlertDialog();
                         }
 
@@ -143,7 +146,7 @@ EditText search;
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManagerss
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        bestprisedproductrv= findViewById(R.id.bestprisedproductrv);
+        bestprisedproductrv = findViewById(R.id.bestprisedproductrv);
         bestsellingproductrv = findViewById(R.id.bestsellingproductrv);
         recyclerView = findViewById(R.id.productrv);
         bestSellingProductAdapter = new BestSellingProductAdapter(MainActivity.this);
@@ -160,16 +163,16 @@ EditText search;
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(productListAdapter);
-bestsellingproductrv.setAdapter(bestSellingProductAdapter);
+        bestsellingproductrv.setAdapter(bestSellingProductAdapter);
         bestprisedproductrv.setAdapter(bestSellingProductAdapter);
         categorieslist();
-loadDatabestselling();
-loadDatabestprisedproduct();
-isStoragePermissionGranted();
+        loadDatabestselling();
+        loadDatabestprisedproduct();
+        isStoragePermissionGranted();
         ivallproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent category=new Intent(MainActivity.this,CategoryActivity.class);
+                Intent category = new Intent(MainActivity.this, CategoryActivity.class);
                 startActivity(category);
                 finish();
             }
@@ -178,13 +181,13 @@ isStoragePermissionGranted();
             @Override
             public void onClick(View v) {
 
-                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
                 if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                    Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-                    intent.putExtra("main","main");
+                    Intent intent = new Intent(getApplicationContext(), AddToCartActivity.class);
+                    intent.putExtra("main", "main");
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     showAlertDialog();
                 }
 
@@ -195,13 +198,12 @@ isStoragePermissionGranted();
             public void onClick(View v) {
 
 
-
                 if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                    Intent intent=new Intent(getApplicationContext(), DrowerActivity.class);
-                    intent.putExtra("main","main");
+                    Intent intent = new Intent(getApplicationContext(), DrowerActivity.class);
+                    intent.putExtra("main", "main");
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     showAlertDialog();
                 }
 
@@ -211,11 +213,11 @@ isStoragePermissionGranted();
         ivgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(search.getText().toString().equalsIgnoreCase("")){
-                    Toast.makeText(getApplicationContext(),"Fill Some data to search",Toast.LENGTH_SHORT).show();
-                }else{
-                    Intent searchs=new Intent(getApplicationContext(), SearchActivity.class);
-                    searchs.putExtra("data",search.getText().toString());
+                if (search.getText().toString().equalsIgnoreCase("")) {
+                    Toast.makeText(getApplicationContext(), "Fill Some data to search", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent searchs = new Intent(getApplicationContext(), SearchActivity.class);
+                    searchs.putExtra("data", search.getText().toString());
                     startActivity(searchs);
                     finish();
                 }
@@ -224,21 +226,20 @@ isStoragePermissionGranted();
         });
     }
 
-    public  boolean isStoragePermissionGranted() {
+    public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v("TAG","Permission is granted");
+                Log.v("TAG", "Permission is granted");
                 return true;
             } else {
 
-                Log.v("TAGss","Permission is revoked");
+                Log.v("TAGss", "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("TAG","Permission is granted");
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("TAG", "Permission is granted");
             return true;
         }
     }
@@ -246,11 +247,12 @@ isStoragePermissionGranted();
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            Log.v("TAG","Permission: "+permissions[0]+ "was "+grantResults[0]);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.v("TAG", "Permission: " + permissions[0] + "was " + grantResults[0]);
             //resume tasks needing this permission
         }
     }
+
     @SuppressLint("CheckResult")
     private void categorieslist() {
         // binding.progress.setVisibility(View.VISIBLE);
@@ -288,7 +290,7 @@ isStoragePermissionGranted();
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductListActivity.class);
         i.putExtra("userid", String.valueOf(data.getId()));
-        i.putExtra("main","main");
+        i.putExtra("main", "main");
         startActivity(i);
 
 
@@ -308,7 +310,7 @@ isStoragePermissionGranted();
                         if (response.isSuccessful()) {
                             List<BestSellingProductResponse> list = response.body();
                             Log.e("getbestseddd", String.valueOf(list.toString()));
-                       bestSellingProductAdapter.addAll(list);
+                            bestSellingProductAdapter.addAll(list);
 
                         } else {
 
@@ -325,7 +327,6 @@ isStoragePermissionGranted();
                     }
                 });
     }
-
 
 
     @SuppressLint("CheckResult")
@@ -359,6 +360,7 @@ isStoragePermissionGranted();
                     }
                 });
     }
+
     private BestSellingProductAdapter.AdapterListener adapterListeners = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
@@ -370,9 +372,9 @@ isStoragePermissionGranted();
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
 //            case R.id.menu_item:   //this item has your app icon
 //                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
 //                intent.putExtra("main","main");
@@ -382,27 +384,30 @@ isStoragePermissionGranted();
 //                return true;
 
 
-            default: return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu){
+    public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_item).setEnabled(true);
 
         return super.onPrepareOptionsMenu(menu);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
     }
@@ -413,9 +418,9 @@ isStoragePermissionGranted();
 
 
         alertDialog.setView(customLayout);
-        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
-        ImageView cut=customLayout.findViewById(R.id.ivcut);
-   //     EditText et =customLayout.findViewById(R.id.etmobile);
+        TextView btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
+        ImageView cut = customLayout.findViewById(R.id.ivcut);
+        //     EditText et =customLayout.findViewById(R.id.etmobile);
 
 
         AlertDialog alert = alertDialog.create();
@@ -430,9 +435,9 @@ isStoragePermissionGranted();
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-Intent intent=new Intent(getApplicationContext(),SplashActivity.class);
-startActivity(intent);
-finish();
+                Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+                startActivity(intent);
+                finish();
 
             }
         });
