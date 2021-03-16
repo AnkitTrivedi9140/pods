@@ -89,7 +89,7 @@ public class CategoryHorigentalAdapter extends RecyclerView.Adapter<CategoryHori
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
-                .load(movies.getProductimage().trim().toString())
+                .load(movies.getProductimage())
                 .into(holder.productiv);
 
     }

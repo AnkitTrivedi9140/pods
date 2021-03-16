@@ -23,6 +23,7 @@ public class CartResponse {
 
     @SerializedName("price")
     private Long price;
+
     @SerializedName("discount")
     private String discount;
 

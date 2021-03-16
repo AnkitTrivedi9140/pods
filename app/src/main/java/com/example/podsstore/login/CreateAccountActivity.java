@@ -146,7 +146,7 @@ TextView signintv;
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.body()));
+                        Log.e("onSuccess", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
@@ -154,7 +154,7 @@ TextView signintv;
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
-rlaccountconfirmation.setVisibility(View.VISIBLE);
+                                  rlaccountconfirmation.setVisibility(View.VISIBLE);
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
@@ -167,7 +167,7 @@ rlaccountconfirmation.setVisibility(View.VISIBLE);
 
                             }
                         } else {
-                         Toast.makeText(getApplicationContext(), "user account already registered!", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(), "server error!", Toast.LENGTH_SHORT).show();
 
                         }
                     }

@@ -88,7 +88,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
-                .load(movies.getProductimage().trim().toString())
+                .load(movies.getProductimage())
                 .into(holder.productiv);
 
     }

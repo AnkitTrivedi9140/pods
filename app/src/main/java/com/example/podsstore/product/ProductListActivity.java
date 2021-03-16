@@ -90,7 +90,7 @@ public class ProductListActivity extends AppCompatActivity {
         Intent i = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
 i.putExtra("userid",String.valueOf(data.getId()));
 i.putExtra("productlist","productlist");
-        //Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getApplicationContext(), String.valueOf(data.getId()), Toast.LENGTH_SHORT).show();
         startActivity(i);
 
 

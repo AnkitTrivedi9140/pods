@@ -18,12 +18,15 @@ import android.widget.Toast;
 
 
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.prefs.PreferenceManager;
@@ -33,6 +36,11 @@ import com.example.podsstore.prefs.Preferences;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,8 +51,10 @@ public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyVi
     private Context context;
     DataTransferInterface dtInterface;
 String qty;
+    private QuantityViewModel viewModel;
     private AddtocartAdapter.InventoryAdapterListener openListener;
-
+    private AddtocartAdapter.AdapterListenerplus adapterListenerplus;
+    private AddtocartAdapter.AdapterListenerless adapterListenerless;
 
     public void setAdapterListener(AddtocartAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
@@ -53,14 +63,20 @@ String qty;
     public void setAdapterListeners(AddtocartAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
     }
+    public void setAdapterListenerplus(AddtocartAdapter.AdapterListenerplus adapterListener) {
+        this.adapterListenerplus = adapterListener;
+    }
 
+    public void setAdapterListenersless(AddtocartAdapter.AdapterListenerless adapterListener) {
+        this.adapterListenerless = adapterListener;
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView description, tvAssetType,tvqty,prnumber;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
         ArrayList<String> arrayList;
-int counter=0;
+        int counter=0;
         public MyViewHolder(View view) {
             super(view);
             tvqty = (TextView) view.findViewById(R.id.tvqty);
@@ -81,26 +97,44 @@ int counter=0;
                     }
                 }
             });
-            deleteproductiv.setOnClickListener(v -> {
+            deleteproductiv.setOnClickListener( v -> {
 
                 if (adapterListener != null) {
                     adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
                 }
-            });
-            arrayList=new ArrayList<>();
-            arrayList.add("1");
-            arrayList.add("22");
-            arrayList.add("33");
-            arrayList.add("4");
-dtInterface.onSetValues(arrayList);
+            }
+            );
+
             less.setOnClickListener(v -> {
-counter=counter-1;
-prnumber.setText(String.valueOf(counter));
+            counter=counter-1;
+            prnumber.setText(String.valueOf(counter));
+
+                if (adapterListener != null) {
+                    adapterListenerplus.onItemClickplus(productResponseList.get(getAdapterPosition()),prnumber.getText().toString());
+                }
             });
             more.setOnClickListener(v -> {
                 counter=counter+1;
                 prnumber.setText(String.valueOf(counter));
+
+//                for(int i=0;i<productResponseList.size();i++) {
+//                    for(int j=0;j<arrayList.size();j++) {
+//                        Log.d( "arrayListsssized",String.valueOf(arrayList.size()));
+//
+//                        update(arrayList.get(j),productResponseList.get(i).getProductid().toString());
+//                        Log.d( "arrayListsss",productResponseList.get(i).getProductid().toString());
+//                    }
+//                }
+                if (adapterListener != null) {
+                    adapterListenerless.onItemClickless(productResponseList.get(getAdapterPosition()),prnumber.getText().toString());
+                }
             });
+            arrayList=new ArrayList<>();
+            arrayList.add(prnumber.getText().toString());
+            dtInterface.onSetValues(arrayList);
+
+
+
         }
     }
 
@@ -137,7 +171,9 @@ prnumber.setText(String.valueOf(counter));
         holder.tvAssetType.setText(cartResponse.getProductname());
         holder.description.setText("$_"+cartResponse.getPrice());
         holder.tvqty.setText("Qty_"+cartResponse.getQty());
-
+        viewModel = ViewModelProviders.of((FragmentActivity) context).get(QuantityViewModel.class);
+        String lastqty = viewModel.getqty(cartResponse.getProductid().toString());
+holder.prnumber.setText(String.valueOf(lastqty));
       // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
       Glide.with(context)
               .load(cartResponse.getImageUrl().toString())
@@ -183,8 +219,17 @@ prnumber.setText(String.valueOf(counter));
     public interface InventoryAdapterListener {
         void onAdapterItemClicked(CartResponse data);
     }
-
     public interface DataTransferInterface {
         public void onSetValues(ArrayList<String> al);
+    }
+
+    public interface AdapterListenerplus {
+
+
+        void onItemClickplus(CartResponse data,String qty);
+    }
+
+    public interface AdapterListenerless{
+        void onItemClickless(CartResponse data,String qty);
     }
 }

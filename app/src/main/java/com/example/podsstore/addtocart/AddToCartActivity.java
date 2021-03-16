@@ -1,6 +1,7 @@
 package com.example.podsstore.addtocart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +20,9 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.request.AddressDetailsRequest;
+import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
@@ -35,7 +38,10 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -47,13 +53,21 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
     private AddtocartAdapter productListAdapter;
     TextView tvsubtotaltxt,tvtotaltxt;
 Button placeorderbtn;
+    ArrayList<String> arrPackage;
+    ArrayList<AddtoCartWithQty> qtylist;
+
+
+    private QuantityViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        viewModel = ViewModelProviders.of(AddToCartActivity.this).get(QuantityViewModel.class);
 
         loadData();
+        arrPackage = new ArrayList<>();
+        qtylist=new ArrayList<>();
         tvsubtotaltxt = findViewById(R.id.tvsubtotaltxt);
         tvtotaltxt = findViewById(R.id.tvtotaltxt);
         recyclerView = findViewById(R.id.productrv);
@@ -65,6 +79,9 @@ Button placeorderbtn;
         recyclerView.setAdapter(productListAdapter);
         productListAdapter.setAdapterListener(adapterListener);
      productListAdapter.setAdapterListeners(listener);
+        productListAdapter.setAdapterListenerplus(adapterListenerpluss);
+        productListAdapter.setAdapterListenersless(adapterListenerless);
+
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +114,12 @@ Button placeorderbtn;
                         //Log.e("onResponses", list.get(i).getPrice().toString());
                      tvsubtotaltxt.setText(String.valueOf(totalPrice));
                      tvtotaltxt.setText(String.valueOf(totalPrice));
+                     AddtoCartWithQty addtoCartWithQty= new AddtoCartWithQty();
+                         addtoCartWithQty.setOrderid("1");
+                        addtoCartWithQty.setProductid(list.get(i).getProductid().toString());
+                        addtoCartWithQty.setProductimage(list.get(i).getProductname());
+                        addtoCartWithQty.setProductimage(list.get(i).getImageUrl());
+                        addtoCartWithQty.setQuantity(list.get(i).getQty().toString());
 
                     }
                     if (list != null) {
@@ -167,12 +190,12 @@ Button placeorderbtn;
     }
     }
     @SuppressLint("CheckResult")
-    private void deletecart(String mobilenumber) {
+    private void deletecart(String productid) {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)+"lllll"+mobilenumber
+        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)+"lllll"+productid
         );
 
-        ApiClient.getApiClient().deletecart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),mobilenumber).enqueue(new Callback<CreateLoginUserResponse>() {
+        ApiClient.getApiClient().deletecart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),productid).enqueue(new Callback<CreateLoginUserResponse>() {
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
@@ -203,6 +226,99 @@ Button placeorderbtn;
 //Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
 
     };
+//    private AddtocartAdapter.AdapterListenerplus adapterListenerplus = data -> {
+//
+//
+//Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
+//
+//    };
+    private AddtocartAdapter.AdapterListenerplus adapterListenerpluss  = new AddtocartAdapter.AdapterListenerplus() {
+
+
+        @Override
+        public void onItemClickplus(CartResponse data, String qty) {
+            Toast.makeText(getApplicationContext(),qty.toString(),Toast.LENGTH_SHORT).show();
+
+            String aa = viewModel.isexist(data.getProductid().toString());
+
+            if(aa==null){
+                Toast.makeText(getApplicationContext(),"insert",Toast.LENGTH_SHORT).show();
+                insert(data.getProductid().toString(),qty,"1");
+            }else{
+                Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
+                update(qty,data.getProductid().toString());
+            }
+        }
+
+
+    };
+    private AddtocartAdapter.AdapterListenerless adapterListenerless =new AddtocartAdapter.AdapterListenerless() {
+
+
+        @Override
+        public void onItemClickless(CartResponse data, String qty) {
+
+            String aa = viewModel.isexist(data.getProductid().toString());
+            if(aa==null){
+                Toast.makeText(getApplicationContext(),"insert",Toast.LENGTH_SHORT).show();
+                insert(data.getProductid().toString(),qty,"1");
+            }else{
+                Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
+                update(qty,data.getProductid().toString());
+            }
+        }
+
+    };
+    public void insert(String productid,String qty,String userid) {
+
+        Completable.fromAction(() -> viewModel.insert(productid,qty,userid))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("onComplete: ", "completessss");
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: ", e.getMessage());
+                    }
+                });
+    }
+    public void update(String qty,String productid) {
+     //   Toast.makeText(context,"hogya",Toast.LENGTH_SHORT).show();
+        Completable.fromAction(() -> viewModel.update(qty,productid))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("onupdate: ", "complete");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("onErrorup: ", e.getMessage());
+                    }
+                });
+
+
+
+    }
     @SuppressLint("CheckResult")
     private void addtowishlist(Long prodid,String prodname,Long price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
@@ -215,9 +331,6 @@ Button placeorderbtn;
         r.setQuantity(qty);
 
         // list.add(r);
-
-
-
 
         Log.e("postData", new Gson().toJson(r));
 
@@ -278,7 +391,7 @@ Button placeorderbtn;
 
     @Override
     public void onSetValues(ArrayList<String> al) {
-     //   Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
+ //Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

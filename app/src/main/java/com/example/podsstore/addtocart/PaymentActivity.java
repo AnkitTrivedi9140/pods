@@ -36,25 +36,27 @@ import retrofit2.Response;
 public class PaymentActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-TextView placeorderbtn;
+    TextView placeorderbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        placeorderbtn=findViewById(R.id.placeorderbtn);
-        productListAdapter = new AddtocartAdapter(PaymentActivity.this,this);
+        placeorderbtn = findViewById(R.id.placeorderbtn);
+        productListAdapter = new AddtocartAdapter(PaymentActivity.this, this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Payment");
         loadData();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-              Intent intent=new Intent(getApplicationContext(),SelectAddressActivity.class);
-              startActivity(intent);
-              finish();
+                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                startActivity(intent);
+                finish();
                 return true;
         }
 
@@ -64,41 +66,37 @@ TextView placeorderbtn;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(getApplicationContext(),SelectAddressActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
         startActivity(intent);
         finish();
     }
+
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("cartaaa",String.valueOf(response.body()) );
+                Log.e("cartaaa", String.valueOf(response.body()));
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
+                    Log.e("list", String.valueOf(list));
+               //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
 
-                    getSupportActionBar().setTitle("Cart"+" ("+list.size()+")");
-                    int totalPrice = 0;
-                    for (int i = 0; i < list.size(); i++) {
+                    placeorderbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (int i = 0; i < list.size(); i++) {
+                                Log.d("onClickgg ", list.get(i).getProductid().toString());
+                                placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "21", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
 
-                        int finalI = i;
-                        placeorderbtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                List<String> questions = new ArrayList<String>();
-                                Log.d( "onClick: ",list.get(finalI).getProductid().toString());
-                                Toast.makeText(getApplicationContext(),list.get(finalI).getProductid().toString(),Toast.LENGTH_SHORT).show();
-                                questions = (ArrayList<String>)getIntent().getSerializableExtra("QuestionListExtra");
-                                placeorder("1",String.valueOf(list.get(finalI).getProductid().toString()),String.valueOf(list.get(finalI).getProductname()),String.valueOf(list.get(finalI).getImageUrl()),"21",String.valueOf(list.get(finalI).getTotalprice()),String.valueOf(list.get(finalI).getPrice().toString()));
                             }
-                        });
-                    }
-
+                        }
+                    });
                     if (list != null) {
 
 
@@ -109,12 +107,13 @@ TextView placeorderbtn;
 
             @Override
             public void onFailure(Call<List<CartResponse>> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
+
     @SuppressLint("CheckResult")
-    private void placeorder(String orderid,String productid,String productname,String productimage,String qty,String totalprice,String subtotal) {
+    private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal) {
 
         List<PlaceOrderRequest> list = new ArrayList<>();
 
@@ -136,7 +135,7 @@ TextView placeorderbtn;
 
         Log.e("postData", new Gson().toJson(list));
 
-        ApiClient.getApiClient(). placeOrder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),list)
+        ApiClient.getApiClient().placeOrder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -150,7 +149,7 @@ TextView placeorderbtn;
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                             if (successResponse != null) {
 
@@ -165,7 +164,7 @@ TextView placeorderbtn;
                     @Override
                     public void onError(Throwable e) {
 
-                        Log.e("onError: " , e.getMessage());
+                        Log.e("onError: ", e.getMessage());
                         Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
                     }
