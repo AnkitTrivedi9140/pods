@@ -21,7 +21,7 @@ ImageView ivlogo;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        tvicon=findViewById(R.id.tvicon);
+
         tvwelcomedetails=findViewById(R.id.tvwelcomedetails);
         tvwelcome=findViewById(R.id.tvwelcode);
         tvwelcomedetailsnext=findViewById(R.id.tvwelcomedetailsnext);
@@ -32,7 +32,7 @@ ImageView ivlogo;
         Typeface typeface= ResourcesCompat.getFont(getApplicationContext(),R.font.architects_daughter);
         Typeface typefacewelcome= ResourcesCompat.getFont(getApplicationContext(),R.font.bentham_rt);
         Typeface typefacewelcomedetails= ResourcesCompat.getFont(getApplicationContext(),R.font.advent_pro);
-        tvicon.setTypeface(typeface);
+
         tvwelcome.setTypeface(typefacewelcome);
         tvwelcomedetails.setTypeface(typefacewelcomedetails);
         tvwelcomedetailsnext.setTypeface(typefacewelcomedetails);

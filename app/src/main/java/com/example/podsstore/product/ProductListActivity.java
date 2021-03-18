@@ -108,4 +108,9 @@ i.putExtra("productlist","productlist");
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

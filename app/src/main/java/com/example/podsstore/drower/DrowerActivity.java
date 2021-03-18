@@ -118,6 +118,14 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
                 finish();
             }
         });
+        rlchoosecountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile=new Intent(getApplicationContext(), ChooseCountryActivity.class);
+                startActivity(profile);
+                finish();
+            }
+        });
     }
     @SuppressLint("CheckResult")
     private void loadData() {

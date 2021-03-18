@@ -19,12 +19,15 @@
         card_view:cardCornerRadius="0dp"
 
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <ImageView
         android:layout_marginTop="8dp"
         android:id="@+id/productiv"
         android:layout_width="144dp"
         android:layout_height="144dp"
-android:layout_gravity="center_horizontal"
+android:layout_centerHorizontal="true"
         android:background="@color/platinum"
         android:cropToPadding="true"
         >
@@ -32,8 +35,8 @@ android:layout_gravity="center_horizontal"
         <RelativeLayout
             android:layout_below="@+id/productiv"
             android:id="@+id/relative"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="4dp"
+       android:layout_marginTop="18dp"
+            android:layout_marginLeft="11dp"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -67,7 +70,7 @@ android:layout_gravity="center_horizontal"
                         android:textSize="14dp"
                         android:textStyle="normal" />
                 </RelativeLayout>
-
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

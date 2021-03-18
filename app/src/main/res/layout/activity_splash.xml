@@ -8,17 +8,17 @@
     android:background="@color/term_and_conditions"
     >
 
-<TextView
+<ImageView
     android:id="@+id/tvicon"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="66dp"
     android:textSize="55dp"
     android:textStyle="bold"
     android:layout_marginTop="55dp"
     android:layout_centerHorizontal="true"
-    android:textColor="@color/white"
+   android:src="@drawable/removebgpodicon"
     android:text="Pod"
-    ></TextView>
+    ></ImageView>
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/ivlogo"
         android:layout_width="300dp"

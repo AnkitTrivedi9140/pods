@@ -84,7 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public void onBindViewHolder(CategoryAdapter.MyViewHolder holder, int position) {
         BusinessCatResponse movies = productResponseList.get(position);
         holder.tvAssetType.setText(movies.getProductname());
-        holder.description.setText("$_"+movies.getStatus());
+       holder.description.setVisibility(View.GONE);
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
         Glide.with(context)

@@ -40,19 +40,17 @@
 
     android:layout_height="33dp"></ImageView>
 
-        <TextView
-            android:layout_toRightOf="@+id/ivtoggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:textColor="@color/white"
-            android:text="POD"
-            android:textStyle="bold"
+    <ImageView
+        android:id="@+id/tvicon"
+        android:layout_width="99dp"
+        android:layout_height="40dp"
+        android:textSize="55dp"
+        android:textStyle="bold"
+android:layout_marginLeft="28dp"
 
-            android:layout_marginLeft="22dp"
-            >
-
-        </TextView>
+        android:src="@drawable/removebgpodicon"
+        android:text="Pod"
+        ></ImageView>
 
     <ImageView
         android:id="@+id/ivcart"

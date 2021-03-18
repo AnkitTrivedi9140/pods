@@ -38,7 +38,7 @@ public class AddressAdapter  extends RecyclerView.Adapter<AddressAdapter.MyViewH
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView description, tvAssetType,tvaddress1;
-        public ImageView productiv;
+        public ImageView deleteadd;
         public CardView cardView;
         public MyViewHolder(View view) {
             super(view);
@@ -47,9 +47,14 @@ public class AddressAdapter  extends RecyclerView.Adapter<AddressAdapter.MyViewH
             tvaddress1 = (TextView) view.findViewById(R.id.tvaddress1);
 
 
+            deleteadd =  view.findViewById(R.id.deleteadd);
+            deleteadd.setOnClickListener( v -> {
 
-
-
+                        if (adapterListener != null) {
+                            adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                        }
+                    }
+            );
 
         }
     }

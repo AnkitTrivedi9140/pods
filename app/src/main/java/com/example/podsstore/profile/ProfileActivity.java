@@ -214,7 +214,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         loadData();
         String aa=decryptAndGetPassword();
-        Toast.makeText(getApplicationContext(),aa,Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),aa,Toast.LENGTH_LONG).show();
     }
     private String decryptAndGetPassword() {
         SharedPreferences prefs = getSharedPreferences("pswd", MODE_PRIVATE);
@@ -496,7 +496,7 @@ progressBar.setVisibility(View.VISIBLE);
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
     }

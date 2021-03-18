@@ -98,7 +98,7 @@ android:layout_centerHorizontal="true"
         ></TextView>
     <TextView
         android:id="@+id/tvaddress"
-        android:text="Our representative soon."
+        android:text="Add Address"
         android:layout_below="@+id/tvheadingaddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -243,7 +243,7 @@ android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="1dp"></TextView>
     <RelativeLayout
-
+android:visibility="gone"
         android:id="@+id/rlpassword"
         android:layout_marginTop="33dp"
         android:layout_below="@+id/rlemail"

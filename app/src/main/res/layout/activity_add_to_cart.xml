@@ -8,271 +8,287 @@
 
     tools:context=".addtocart.AddToCartActivity">
 
-<RelativeLayout
-android:id="@+id/rlcartseek"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
     <RelativeLayout
-        android:id="@+id/seekrl"
+        android:id="@+id/rlcartseek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="33dp"
-        android:layout_marginRight="33dp"
-        android:layout_marginTop="14dp"
-        >
+        android:background="@color/white">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="2dp"
-    android:background="@color/platinum"
-android:layout_marginRight="11dp"
-    android:layout_marginLeft="11dp"
-android:layout_centerVertical="true"
-    ></TextView>
+        <RelativeLayout
+            android:id="@+id/seekrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="33dp">
 
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:src="@drawable/circleblue"
-            ></ImageView>
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/circleborder"
-            ></ImageView>
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/circleborder"
-            android:layout_alignParentRight="true"></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/platinum"></TextView>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/circleblue"></ImageView>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/circleborder"></ImageView>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/circleborder"></ImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rltextseek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekrl"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginBottom="11dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:text="CART"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="ADDRESS"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="PAYMENT"
+                android:textSize="12dp"></TextView>
+        </RelativeLayout>
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rltextseek"
-        android:layout_marginBottom="11dp"
-        android:layout_below="@+id/seekrl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:text="CART"
-            android:textSize="12dp"
-       android:layout_marginLeft="14dp"
-            android:layout_centerVertical="true"
-            ></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADDRESS"
-            android:layout_centerHorizontal="true"
-            android:textSize="12dp"
-            android:layout_centerVertical="true"
-            ></TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAYMENT"
-           android:layout_alignParentEnd="true"
-            android:textSize="12dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"></TextView>
-    </RelativeLayout>
-</RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
 
         android:layout_width="match_parent"
-android:layout_below="@+id/rlcartseek"
         android:layout_height="288dp"
-
-        android:layout_marginBottom="6dp"
-    >
+        android:layout_below="@+id/rlcartseek"
+android:layout_above="@+id/scr"
+        android:layout_marginBottom="6dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-<ScrollView
-    android:id="@+id/scr"
-    android:layout_below="@+id/productrv"
-    android:layout_width="match_parent"
-    android:layout_marginBottom="88dp"
-    android:layout_height="wrap_content">
-    <RelativeLayout
 
-        android:layout_width="match_parent"
-        android:background="@color/white"
+    <ScrollView
 
-        android:layout_height="wrap_content">
-    <TextView
-android:id="@+id/tvorder"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ORDER SUMMARY"
-android:textColor="@color/text_color_setting"
-        android:textSize="18dp"
-android:layout_marginTop="8dp"
-     ></TextView>
-        <TextView
-            android:id="@+id/tvgotcoupon"
-android:layout_below="@+id/tvorder"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Got Coupon? "
-android:layout_marginTop="14dp"
-            android:textSize="16dp"
-android:textStyle="bold"
-            android:textColor="@color/black"
-            ></TextView>
-
-        <EditText
-
-            android:id="@+id/etcoupon"
-            android:textSize="16dp"
-            android:layout_marginTop="11dp"
-            android:hint="Coupon Code"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_below="@+id/tvgotcoupon"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/edittext_bg"
-            android:padding="10dp"
-
-            ></EditText>
-
-        <TextView
-            android:id="@+id/tvview"
-            android:layout_below="@+id/etcoupon"
-
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-          android:background="@color/platinum"
-            android:layout_marginTop="14dp"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            ></TextView>
-
-        <TextView
-            android:id="@+id/tvsubtotal"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SUBTOTAL"
-            android:textColor="@color/text_color_setting"
-            android:textSize="18dp"
-            android:layout_marginTop="14dp"
-            android:layout_below="@+id/tvview"
-            ></TextView>
-        <TextView
-            android:id="@+id/tvsubtotaltxt"
-           android:layout_alignParentEnd="true"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.00"
-            android:textColor="@color/text_color_setting"
-            android:textSize="16dp"
-            android:layout_marginTop="14dp"
-            android:textStyle="bold"
-            android:layout_below="@+id/tvview"
-            android:layout_alignParentRight="true"></TextView>
-        <TextView
-            android:id="@+id/tvdiscount"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Discount Amount"
-            android:textColor="@color/text_color_setting"
-            android:textSize="18dp"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/tvsubtotal"
-            ></TextView>
-        <TextView
-            android:id="@+id/tvdiscounttxt"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-0.00"
-            android:textColor="@color/term_and_conditions"
-            android:textSize="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/tvsubtotal"
-            android:layout_alignParentRight="true"></TextView>
-        <TextView
-            android:id="@+id/tvtotal"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total"
-            android:textColor="@color/text_color_setting"
-            android:textSize="18dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            android:layout_below="@+id/tvdiscount"
-            ></TextView>
-        <TextView
-            android:id="@+id/tvtotaltxt"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-0.00"
-            android:textColor="@color/term_and_conditions"
-            android:textSize="16dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:layout_below="@+id/tvdiscount"
-
-            android:layout_alignParentRight="true"></TextView>
-
-
-    </RelativeLayout>
-</ScrollView>
-    <RelativeLayout
-
-android:layout_alignParentBottom="true"
+        android:id="@+id/scr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="@color/white"
-     >
+        android:layout_above="@+id/rlbtn"
+       >
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tvgotcoupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="14dp"
+                android:text="Got Coupon? "
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+
+                android:id="@+id/etcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/tvgotcoupon"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_bg"
+                android:hint="Coupon Code"
+                android:padding="10dp"
+                android:textSize="16dp"
+
+                ></EditText>
+
+            <TextView
+
+                android:id="@+id/tvapply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvgotcoupon"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
+                android:padding="10dp"
+                android:text="Apply"
+                android:textColor="@color/term_and_conditions"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvview"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/etcoupon"
+                android:layout_marginTop="14dp"
+                android:background="@color/platinum"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvsubtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvview"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="14dp"
+                android:text="SUBTOTAL"
+                android:textColor="@color/text_color_setting"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvsubtotaltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvview"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="14dp"
+                android:text="0.00"
+
+                android:textColor="@color/text_color_setting"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/dollar"
+                android:drawablePadding="11dp"
+                android:drawableLeft="@drawable/dollar"></TextView>
+
+            <TextView
+                android:id="@+id/tvdiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvsubtotal"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="14dp"
+                android:text="Discount Amount"
+                android:textColor="@color/text_color_setting"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvdiscounttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvsubtotal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="14dp"
+                android:text="0.00"
+                android:drawableStart="@drawable/discount"
+                android:drawablePadding="11dp"
+                android:textColor="@color/term_and_conditions"
+                android:textSize="16dp"
+                android:drawableLeft="@drawable/minus"></TextView>
+
+            <TextView
+                android:id="@+id/tvtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvdiscount"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginBottom="8dp"
+                android:text="Total"
+                android:textColor="@color/text_color_setting"
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvtotaltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvdiscount"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="14dp"
+                android:text="0.00"
+                android:textColor="@color/term_and_conditions"
+                android:textSize="16dp"
+                android:drawableStart="@drawable/dollar"
+                android:drawablePadding="11dp"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/dollar"></TextView>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:background="@color/white">
+
         <Button
-            android:layout_centerHorizontal="true"
-android:layout_centerInParent="true"
             android:id="@+id/placeorderbtn"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="22dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/button_bg"
             android:gravity="center"
             android:text="Place Order"
             android:textAllCaps="false"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
-            />
+            android:textSize="16dp" />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".getorder.MyOrderActivity"></activity>
+        <activity android:name=".drower.ChooseCountryActivity"></activity>
+        <activity android:name=".getorder.MyOrderActivity" />
         <activity android:name=".drower.HelpAndFAQActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".wishlist.WishListActivity" />
@@ -43,12 +44,14 @@
         <activity android:name=".profile.ProfileActivity" />
         <activity android:name=".aboutpod.AboutActivity" />
         <activity android:name=".category.CategoryActivity" />
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
         <activity android:name=".productdetails.ProductDetailsActivity" />
         <activity android:name=".product.ProductListActivity" />
         <activity android:name=".login.CreateAccountActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

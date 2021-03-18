@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.addtocart.AddtocartAdapter;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
+import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.mainactivityadapters.AddressAdapter;
 import com.example.podsstore.prefs.PreferenceManager;
@@ -66,7 +68,7 @@ public class AddressesActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(AddressesActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
-        //addressAdapter.setAdapterListener(adapterListener);
+       addressAdapter.setAdapterListener(adapterListener);
 
         recyclerView.setAdapter(addressAdapter);
 
@@ -102,7 +104,7 @@ public class AddressesActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
                             List<AddressResponse> list = response.body();
-                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            Log.e("getProductMasters", String.valueOf(list.toString()));
                             addressAdapter.addAll(list);
 
                         } else {
@@ -126,5 +128,41 @@ public class AddressesActivity extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    private AddressAdapter.AdapterListener adapterListener = data -> {
+
+        deletecart(String.valueOf(data.getAddressid().toString()));
+//Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
+
+    };
+    @SuppressLint("CheckResult")
+    private void deletecart(String productid) {
+
+        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)+"lllll"+productid
+        );
+
+        ApiClient.getApiClient().deleteaddress(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),productid).enqueue(new Callback<CreateLoginUserResponse>() {
+            @Override
+            public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getdelete",String.valueOf(response.code()));
+                overridePendingTransition( 0, 0);
+                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
+                addressAdapter.notifyDataSetChanged();
+                if (response.isSuccessful()) {
+                    CreateLoginUserResponse list = response.body();
+
+                    Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+            @Override
+            public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
     }
 }

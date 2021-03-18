@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,13 +53,14 @@ import retrofit2.Response;
 public class AddToCartActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-    TextView tvsubtotaltxt,tvtotaltxt;
-Button placeorderbtn;
+    TextView tvsubtotaltxt, tvtotaltxt, tvapply,tvdiscounttxt;
+    Button placeorderbtn;
     ArrayList<String> arrPackage;
     ArrayList<AddtoCartWithQty> qtylist;
 
-
+    EditText etcoupon;
     private QuantityViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,27 +70,43 @@ Button placeorderbtn;
 
         loadData();
         arrPackage = new ArrayList<>();
-        qtylist=new ArrayList<>();
+        qtylist = new ArrayList<>();
         tvsubtotaltxt = findViewById(R.id.tvsubtotaltxt);
         tvtotaltxt = findViewById(R.id.tvtotaltxt);
         recyclerView = findViewById(R.id.productrv);
         placeorderbtn = findViewById(R.id.placeorderbtn);
-        productListAdapter = new AddtocartAdapter(AddToCartActivity.this,this);
+        tvapply = findViewById(R.id.tvapply);
+        etcoupon = findViewById(R.id.etcoupon);
+        tvdiscounttxt = findViewById(R.id.tvdiscounttxt);
+        productListAdapter = new AddtocartAdapter(AddToCartActivity.this, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
         recyclerView.setAdapter(productListAdapter);
         productListAdapter.setAdapterListener(adapterListener);
-     productListAdapter.setAdapterListeners(listener);
+        productListAdapter.setAdapterListeners(listener);
         productListAdapter.setAdapterListenerplus(adapterListenerpluss);
         productListAdapter.setAdapterListenersless(adapterListenerless);
 
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
                 startActivity(intent);
                 finish();
+
+            }
+        });
+        tvapply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = etcoupon.getText().toString().trim();
+
+                if (TextUtils.isEmpty(number)) {
+                    etcoupon.setError("Coupon Can't Blank!");
+                }else{
+                    getcoupon(etcoupon.getText().toString());
+                }
 
             }
         });
@@ -96,26 +115,35 @@ Button placeorderbtn;
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("cartaaa",String.valueOf(response.code()) );
+                Log.e("cartaaa", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
+                    productListAdapter.clear();
                     productListAdapter.addAll(list);
-                    getSupportActionBar().setTitle("Cart"+" ("+list.size()+")");
+                    getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
                     int totalPrice = 0;
                     for (int i = 0; i < list.size(); i++) {
-                        totalPrice += list.get(i).getPrice();
+                        String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
+                        if (lastqty == null) {
+                            totalPrice += (list.get(i).getPrice());
+                        } else {
+                            totalPrice += (list.get(i).getPrice() * Integer.valueOf(lastqty));
+                        }
+
                         //Log.e("onResponses", list.get(i).getPrice().toString());
-                     tvsubtotaltxt.setText(String.valueOf(totalPrice));
-                     tvtotaltxt.setText(String.valueOf(totalPrice));
-                     AddtoCartWithQty addtoCartWithQty= new AddtoCartWithQty();
-                         addtoCartWithQty.setOrderid("1");
+                        tvsubtotaltxt.setText(String.valueOf(totalPrice));
+                        tvtotaltxt.setText(String.valueOf(totalPrice));
+                        //  Toast.makeText(getApplicationContext(),totalPrice,Toast.LENGTH_SHORT).show();
+
+                        AddtoCartWithQty addtoCartWithQty = new AddtoCartWithQty();
+                        addtoCartWithQty.setOrderid("1");
                         addtoCartWithQty.setProductid(list.get(i).getProductid().toString());
                         addtoCartWithQty.setProductimage(list.get(i).getProductname());
                         addtoCartWithQty.setProductimage(list.get(i).getImageUrl());
@@ -132,14 +160,15 @@ Button placeorderbtn;
 
             @Override
             public void onFailure(Call<List<CartResponse>> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
-    private int grandTotal(List<CartResponse> items){
+
+    private int grandTotal(List<CartResponse> items) {
 
         int totalPrice = 0;
-        for(int i = 0 ; i < items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             totalPrice += items.get(i).getPrice();
         }
 
@@ -151,18 +180,20 @@ Button placeorderbtn;
         switch (item.getItemId()) {
             case android.R.id.home:
                 super.onBackPressed();
-                if(getIntent().getStringExtra("main")==null){
-                    Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+                if (getIntent().getStringExtra("main") == null) {
+                    Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
-                    if(getIntent().getStringExtra("main").equalsIgnoreCase("main")){
-                        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                } else {
+                    if (getIntent().getStringExtra("main").equalsIgnoreCase("main")) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
-                    }else{ Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
                         startActivity(intent);
-                        finish();}
+                        finish();
+                    }
 
                 }
                 return true;
@@ -174,48 +205,52 @@ Button placeorderbtn;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getIntent().getStringExtra("main")==null){
-            Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+        if (getIntent().getStringExtra("main") == null) {
+            Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
             startActivity(intent);
             finish();
-        }else{
-        if(getIntent().getStringExtra("main").equalsIgnoreCase("main")){
-            Intent intent=new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }else{ Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
-            startActivity(intent);
-            finish();}
+        } else {
+            if (getIntent().getStringExtra("main").equalsIgnoreCase("main")) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
+        }
     }
-    }
+
     @SuppressLint("CheckResult")
     private void deletecart(String productid) {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)+"lllll"+productid
+        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManager.getStringValue(Preferences.USER_EMAIL) + "lllll" + productid
         );
 
-        ApiClient.getApiClient().deletecart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),productid).enqueue(new Callback<CreateLoginUserResponse>() {
+        ApiClient.getApiClient().deletecart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), productid).enqueue(new Callback<CreateLoginUserResponse>() {
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getdelete",String.valueOf(response.code()));
-                overridePendingTransition( 0, 0);
+                Log.e("getdelete", String.valueOf(response.code()));
+                overridePendingTransition(0, 0);
                 startActivity(getIntent());
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
                 productListAdapter.notifyDataSetChanged();
                 if (response.isSuccessful()) {
                     CreateLoginUserResponse list = response.body();
 
-                    Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), list.getMessage(), Toast.LENGTH_SHORT).show();
 
 
                 }
             }
+
             @Override
             public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
@@ -226,52 +261,54 @@ Button placeorderbtn;
 //Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
 
     };
-//    private AddtocartAdapter.AdapterListenerplus adapterListenerplus = data -> {
+    //    private AddtocartAdapter.AdapterListenerplus adapterListenerplus = data -> {
 //
 //
 //Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
 //
 //    };
-    private AddtocartAdapter.AdapterListenerplus adapterListenerpluss  = new AddtocartAdapter.AdapterListenerplus() {
+    private AddtocartAdapter.AdapterListenerplus adapterListenerpluss = new AddtocartAdapter.AdapterListenerplus() {
 
 
         @Override
         public void onItemClickplus(CartResponse data, String qty) {
-            Toast.makeText(getApplicationContext(),qty.toString(),Toast.LENGTH_SHORT).show();
 
+          //  Toast.makeText(getApplicationContext(), qty.toString(), Toast.LENGTH_SHORT).show();
+tvdiscounttxt.setText("0.00");
             String aa = viewModel.isexist(data.getProductid().toString());
 
-            if(aa==null){
-                Toast.makeText(getApplicationContext(),"insert",Toast.LENGTH_SHORT).show();
-                insert(data.getProductid().toString(),qty,"1");
-            }else{
-                Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
-                update(qty,data.getProductid().toString());
+            if (aa == null) {
+               // Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
+                insert(data.getProductid().toString(), qty, "1");
+            } else {
+                //Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
+                update(qty, data.getProductid().toString());
             }
         }
 
 
     };
-    private AddtocartAdapter.AdapterListenerless adapterListenerless =new AddtocartAdapter.AdapterListenerless() {
+    private AddtocartAdapter.AdapterListenerless adapterListenerless = new AddtocartAdapter.AdapterListenerless() {
 
 
         @Override
         public void onItemClickless(CartResponse data, String qty) {
-
+            tvdiscounttxt.setText("0.00");
             String aa = viewModel.isexist(data.getProductid().toString());
-            if(aa==null){
-                Toast.makeText(getApplicationContext(),"insert",Toast.LENGTH_SHORT).show();
-                insert(data.getProductid().toString(),qty,"1");
-            }else{
-                Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
-                update(qty,data.getProductid().toString());
+            if (aa == null) {
+              //  Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
+                insert(data.getProductid().toString(), qty, "1");
+            } else {
+               // Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
+                update(qty, data.getProductid().toString());
             }
         }
 
     };
-    public void insert(String productid,String qty,String userid) {
 
-        Completable.fromAction(() -> viewModel.insert(productid,qty,userid))
+    public void insert(String productid, String qty, String userid) {
+
+        Completable.fromAction(() -> viewModel.insert(productid, qty, userid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -284,7 +321,7 @@ Button placeorderbtn;
                     public void onComplete() {
                         Log.i("onComplete: ", "completessss");
 
-
+                        loadData();
                     }
 
                     @Override
@@ -294,9 +331,10 @@ Button placeorderbtn;
                     }
                 });
     }
-    public void update(String qty,String productid) {
-     //   Toast.makeText(context,"hogya",Toast.LENGTH_SHORT).show();
-        Completable.fromAction(() -> viewModel.update(qty,productid))
+
+    public void update(String qty, String productid) {
+        //   Toast.makeText(context,"hogya",Toast.LENGTH_SHORT).show();
+        Completable.fromAction(() -> viewModel.update(qty, productid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -308,6 +346,7 @@ Button placeorderbtn;
                     @Override
                     public void onComplete() {
                         Log.e("onupdate: ", "complete");
+                        loadData();
                     }
 
                     @Override
@@ -317,10 +356,10 @@ Button placeorderbtn;
                 });
 
 
-
     }
+
     @SuppressLint("CheckResult")
-    private void addtowishlist(Long prodid,String prodname,Long price,Long qty) {
+    private void addtowishlist(Long prodid, String prodname, Long price, Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -334,7 +373,7 @@ Button placeorderbtn;
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). addtowishlist(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient().addtowishlist(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -348,7 +387,7 @@ Button placeorderbtn;
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
@@ -373,7 +412,7 @@ Button placeorderbtn;
                     @Override
                     public void onError(Throwable e) {
 
-                        Log.e("onError: " , e.getMessage());
+                        Log.e("onError: ", e.getMessage());
                         Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
                         // binding.progressbar.setVisibility(View.GONE);
@@ -384,22 +423,55 @@ Button placeorderbtn;
 
     private AddtocartAdapter.InventoryAdapterListener listener = data -> {
 
-        addtowishlist(data.getProductid(),data.getProductname(),data.getPrice(),data.getQty());
+        addtowishlist(data.getProductid(), data.getProductname(), data.getPrice(), data.getQty());
 
 
     };
 
     @Override
     public void onSetValues(ArrayList<String> al) {
- //Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
                 intent.putExtra("QuestionListExtra", al);
                 startActivity(intent);
                 finish();
 
+            }
+        });
+    }
+
+    @SuppressLint("CheckResult")
+    private void getcoupon(String code) {
+
+        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+
+        ApiClient.getApiClient().getcoupon(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), code).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+
+                if (response.isSuccessful()) {
+
+
+                    Toast.makeText(getApplicationContext(), "success coupon", Toast.LENGTH_SHORT).show();
+                    Log.e("getprofile", String.valueOf(response.body()));
+                    tvdiscounttxt.setText(String.valueOf(response.body()));
+                    String totalprice= tvtotaltxt.getText().toString();
+                    int totaltv=Integer.valueOf(totalprice)-Integer.valueOf(tvdiscounttxt.getText().toString());
+                    tvtotaltxt.setText(String.valueOf(totaltv));
+etcoupon.setText("");
+                } else {
+                    Toast.makeText(getApplicationContext(), "Coupon code is not correct!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("onerrors", t.getMessage());
             }
         });
     }

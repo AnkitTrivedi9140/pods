@@ -76,7 +76,7 @@ String qty;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
         ArrayList<String> arrayList;
-        int counter=0;
+        int counter=1;
         public MyViewHolder(View view) {
             super(view);
             tvqty = (TextView) view.findViewById(R.id.tvqty);
@@ -106,8 +106,14 @@ String qty;
             );
 
             less.setOnClickListener(v -> {
+
             counter=counter-1;
-            prnumber.setText(String.valueOf(counter));
+            if(counter<=0)  {
+                prnumber.setText(String.valueOf("1"));
+            }else{
+                prnumber.setText(String.valueOf(counter));
+            }
+
 
                 if (adapterListener != null) {
                     adapterListenerplus.onItemClickplus(productResponseList.get(getAdapterPosition()),prnumber.getText().toString());
@@ -115,16 +121,22 @@ String qty;
             });
             more.setOnClickListener(v -> {
                 counter=counter+1;
-                prnumber.setText(String.valueOf(counter));
 
-//                for(int i=0;i<productResponseList.size();i++) {
-//                    for(int j=0;j<arrayList.size();j++) {
-//                        Log.d( "arrayListsssized",String.valueOf(arrayList.size()));
-//
-//                        update(arrayList.get(j),productResponseList.get(i).getProductid().toString());
-//                        Log.d( "arrayListsss",productResponseList.get(i).getProductid().toString());
-//                    }
-//                }
+                if(counter<=0)  {
+                    prnumber.setText(String.valueOf("1"));
+                }else{
+                    prnumber.setText(String.valueOf(counter));
+                }
+              //  prnumber.setText(String.valueOf(counter));
+
+                for(int i=0;i<productResponseList.size();i++) {
+                    for(int j=0;j<arrayList.size();j++) {
+
+/*
+                        update(arrayList.get(j),productResponseList.get(i).getProductid().toString());*/
+
+                    }
+                }
                 if (adapterListener != null) {
                     adapterListenerless.onItemClickless(productResponseList.get(getAdapterPosition()),prnumber.getText().toString());
                 }
@@ -173,7 +185,13 @@ String qty;
         holder.tvqty.setText("Qty_"+cartResponse.getQty());
         viewModel = ViewModelProviders.of((FragmentActivity) context).get(QuantityViewModel.class);
         String lastqty = viewModel.getqty(cartResponse.getProductid().toString());
-holder.prnumber.setText(String.valueOf(lastqty));
+
+if(lastqty==null){
+    holder.prnumber.setText(String.valueOf("1"));
+}else {
+    holder.prnumber.setText(String.valueOf(lastqty));
+}
+
       // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
       Glide.with(context)
               .load(cartResponse.getImageUrl().toString())
