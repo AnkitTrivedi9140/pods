@@ -182,9 +182,9 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private CategoryAdapter.AdapterListener adapterListener = data -> {
-       // Toast.makeText(getApplicationContext(), data.getId(), Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(CategoryActivity.this, ProductListActivity.class);
-        i.putExtra("userid", data.getId());
+     // Toast.makeText(getApplicationContext(), data.getId().toString(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(CategoryActivity.this, SubCategoryActivity.class);
+        i.putExtra("userid", data.getId().toString());
         startActivity(i);
 
 

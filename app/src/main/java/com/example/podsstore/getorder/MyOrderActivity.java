@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.podsstore.MainActivity;
@@ -34,6 +35,8 @@ public class MyOrderActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyOrderAdapter productListAdapter;
     TextView tvnodata;
+    ProgressBar progressBar;
+    TextView progresstext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,8 @@ public class MyOrderActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.productrv);
         tvnodata = findViewById(R.id.tvnodata);
         productListAdapter = new MyOrderAdapter(MyOrderActivity.this);
-
+        progressBar=findViewById(R.id.progress);
+        progresstext=findViewById(R.id.progresstext);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyOrderActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
         //  productListAdapter.setAdapterListener(adapterListener);
@@ -58,13 +62,15 @@ loadData();
 
     @SuppressLint("CheckResult")
     private void loadData() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
         Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
 
         ApiClient.getApiClient().getplaceorder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<OrderResponse>>() {
             @Override
             public void onResponse(Call<List<OrderResponse>> call, Response<List<OrderResponse>> response) {
-
+                progressBar.setVisibility(View.GONE);
+                progresstext.setVisibility(View.GONE);
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("cartaaa",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
@@ -91,6 +97,8 @@ loadData();
             @Override
             public void onFailure(Call<List<OrderResponse>> call, Throwable t) {
                 Log.e("onerrors",t.getMessage());
+                progressBar.setVisibility(View.GONE);
+                progresstext.setVisibility(View.GONE);
             }
         });
     }

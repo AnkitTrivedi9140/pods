@@ -175,13 +175,15 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
         return totalPrice;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 super.onBackPressed();
                 if (getIntent().getStringExtra("main") == null) {
-                    Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
                     startActivity(intent);
                     finish();
                 } else {
@@ -190,7 +192,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                         startActivity(intent);
                         finish();
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -206,7 +208,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
     public void onBackPressed() {
         super.onBackPressed();
         if (getIntent().getStringExtra("main") == null) {
-            Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -215,7 +217,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                 startActivity(intent);
                 finish();
             } else {
-                Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -383,7 +385,7 @@ tvdiscounttxt.setText("0.00");
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+                        Log.e("onSuccesswish", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
@@ -451,9 +453,8 @@ tvdiscounttxt.setText("0.00");
         ApiClient.getApiClient().getcoupon(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), code).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
+                Log.e("onRespo ",String.valueOf(response.body()) );
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-
                 if (response.isSuccessful()) {
 
 

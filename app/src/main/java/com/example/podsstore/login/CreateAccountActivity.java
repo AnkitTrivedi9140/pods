@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
@@ -41,7 +42,7 @@ TextView signintv;
     RelativeLayout rlaccountconfirmation;
     CheckBox checkBoxterms;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet;
-    ImageView back;
+    ImageView back,tvicon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ TextView signintv;
         getSupportActionBar().hide();
 
         initViews();
+        Glide.with(this).load(R.drawable.podgif).into(tvicon);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -193,6 +195,7 @@ TextView signintv;
         signintv = findViewById(R.id.signintv);
         checkBoxterms = findViewById(R.id.checkBoxterms);
         back=findViewById(R.id.ivback);
+        tvicon=findViewById(R.id.tvicon);
         reenterpasswordet = findViewById(R.id.passwordagainEt);
         logInBtn.setOnClickListener(onClickListener);
         btncontinue.setOnClickListener(onClickListener);

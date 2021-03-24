@@ -3,6 +3,8 @@ package com.example.podsstore.drower;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,10 +74,35 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceManager.logout();
 
-                finish();
-                System.exit(0);
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(DrowerActivity.this);
+                dialog.setCancelable(true);
+                dialog.setTitle("Exit from Pod!");
+                dialog.setMessage("Are you sure you want to exit from application?" );
+                dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Action for "Delete".
+                        PreferenceManager.logout();
+                        finish();
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    }
+                })
+                        .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Action for "Cancel".
+                                dialog.cancel();
+                            }
+                        });
+
+                final AlertDialog alert = dialog.create();
+                alert.show();
             }
         });
         rlorder.setOnClickListener(new View.OnClickListener() {

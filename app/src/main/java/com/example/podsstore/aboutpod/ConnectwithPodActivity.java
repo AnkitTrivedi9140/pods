@@ -101,7 +101,7 @@ TextView btnsubmit;
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). tellusmore(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),r)
+        ApiClient.getApiClient(). tellusmore(PreferenceManager.getStringValue(Preferences.USER_EMAIL),r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -111,14 +111,14 @@ TextView btnsubmit;
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+                        Log.e("onSuccesstellusmore", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
-//                            startActivity(login);
-//                            finish();
+                            Intent login = new Intent(ConnectwithPodActivity.this, AboutActivity.class);
+                            startActivity(login);
+                           finish();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {

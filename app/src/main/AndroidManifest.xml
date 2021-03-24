@@ -12,6 +12,7 @@
         android:name="android.hardware.camera.flash"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drower.ChooseCountryActivity"></activity>
+        <activity android:name=".category.SubCategoryProductActivity"></activity>
+        <activity android:name=".category.SubCategoryActivity" />
+        <activity android:name=".drower.ChooseCountryActivity" />
         <activity android:name=".getorder.MyOrderActivity" />
         <activity android:name=".drower.HelpAndFAQActivity" />
         <activity android:name=".search.SearchActivity" />

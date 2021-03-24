@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
+import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
@@ -90,8 +91,15 @@ public class AboutActivity extends AppCompatActivity {
         tvreact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent    in = new Intent(getBaseContext(), ConnectwithPodActivity.class);
-                startActivity(in);
+                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent    in = new Intent(getBaseContext(), ConnectwithPodActivity.class);
+                    startActivity(in);
+                } else {
+                    showAlertDialog();
+                }
+
+
             }
         });
     }

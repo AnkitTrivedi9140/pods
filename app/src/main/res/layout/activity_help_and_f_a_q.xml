@@ -7,9 +7,16 @@
     tools:context=".drower.HelpAndFAQActivity"
     android:layout_margin="14dp"
     >
+    <ScrollView
+        android:layout_marginBottom="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 <TextView
     android:id="@+id/tvfaq1"
-    android:text="Lorem Ipsum is simply dummy text of printing?"
+    android:text="Who is Pods Health, is Pods Health new to the industry?"
     android:layout_width="match_parent"
     android:layout_toLeftOf="@+id/ivgofaq1"
     android:layout_marginRight="11dp"
@@ -36,7 +43,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq1"
         android:id="@+id/tvfaq2"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum ?"
+        android:text="Are the products sold by Pods Health certified?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:layout_marginRight="11dp"
@@ -66,7 +73,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq2"
         android:id="@+id/tvfaq3"
-        android:text="Lorem Ipsum is simply dummy text of printing?"
+        android:text="I want to become a partner of Pods Health, who should I contact?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -84,4 +91,130 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="50dp"
         ></ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/platinum"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/tvfaq3"
+        ></TextView>
+    <TextView
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tvfaq3"
+        android:id="@+id/tvfaq4"
+        android:text="Is Pods Health a manufacture?"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/ivgofaq2"
+        android:textSize="16dp"
+        android:layout_marginRight="11dp"
+        android:layout_height="wrap_content"></TextView>
+
+    <ImageView
+        android:layout_below="@+id/tvfaq3"
+        android:id="@+id/ivgofaq4"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/goo"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        ></ImageView>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/platinum"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/tvfaq4"
+        ></TextView>
+    <TextView
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tvfaq4"
+        android:id="@+id/tvfaq5"
+        android:text="Does Pods Health provide other services other than products listed on the website?"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/ivgofaq2"
+        android:textSize="16dp"
+        android:layout_marginRight="11dp"
+        android:layout_height="wrap_content"></TextView>
+
+    <ImageView
+        android:layout_below="@+id/tvfaq4"
+        android:id="@+id/ivgofaq5"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/goo"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        ></ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/platinum"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/tvfaq5"
+        ></TextView>
+    <TextView
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tvfaq5"
+        android:id="@+id/tvfaq6"
+        android:text="Who are Pods Health customers?"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/ivgofaq2"
+        android:textSize="16dp"
+        android:layout_marginRight="11dp"
+        android:layout_height="wrap_content"></TextView>
+
+    <ImageView
+        android:layout_below="@+id/tvfaq5"
+        android:id="@+id/ivgofaq6"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/goo"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        ></ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/platinum"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/tvfaq6"
+        ></TextView>
+    <TextView
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tvfaq6"
+        android:id="@+id/tvfaq7"
+        android:text="What should I do if I have questions regarding the services and product questions after my purchase? "
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/ivgofaq2"
+        android:textSize="16dp"
+        android:layout_marginRight="11dp"
+        android:layout_height="wrap_content"></TextView>
+
+    <ImageView
+        android:layout_below="@+id/tvfaq6"
+        android:id="@+id/ivgofaq7"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/goo"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="58dp"
+        ></ImageView>
+        </RelativeLayout>
+    </ScrollView>
+
+
 </RelativeLayout>

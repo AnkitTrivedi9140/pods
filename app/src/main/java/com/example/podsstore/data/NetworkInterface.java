@@ -2,6 +2,7 @@ package com.example.podsstore.data;
 
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
@@ -16,6 +17,8 @@ import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.data.response.SubCategoryProductResponce;
+import com.example.podsstore.data.response.SubCategoryResponce;
 import com.example.podsstore.data.response.UploadImageResponse;
 
 import java.util.List;
@@ -49,6 +52,11 @@ public interface NetworkInterface {
     Single<Response<LoginResponse>> userlogin(@Body LoginUserRequest requests);
 
 
+    @POST("loginRest/passwordChange")
+    Single<Response<CreateLoginUserResponse>> pwdsuccess(@Query("userEmailId") String emailId,@Body ChangePasswordRequest requests);
+
+
+
     @POST("productRest/getProduct")
     Single<Response<List<ProductResponse>>>getproducts();
 
@@ -63,7 +71,7 @@ public interface NetworkInterface {
 
 
     @POST("loginRest/forgotPassword")
-    Call<CreateLoginUserResponse>forgotpassword(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
+    Call<CreateLoginUserResponse>forgotpassword(@Query("userEmailId") String emailId);
 
     @POST("addressRest/getAddressDetails")
     Single<Response<List<AddressResponse>>>getalladdress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
@@ -71,16 +79,18 @@ public interface NetworkInterface {
     @POST("loginRest/changePhoneNumber")
     Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
 
-    @POST("loginRest/confirmReset")
-    Call<CreateLoginUserResponse>confirmotp(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("otp") String otp);
 
-
-    @POST("businessRest/getBusinessCategory")
+    @GET("businessRest/homeCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat();
 
+    @GET("businessRest/homeSubCategory")
+    Single<Response<List<SubCategoryResponce>>>getsubcategory(@Query("id") String id);
+
+    @GET("businessRest/homeSubCatInfo")
+    Single<Response<List<SubCategoryProductResponce>>>getproductbycategory(@Query("catid") String catid, @Query("id") String id);
 
     @POST("tellUsRest/tellUsMore")
-    Single<Response<CreateLoginUserResponse>> tellusmore(@Header("Authorization") String authHeader,@Body TellUsMoreResquest requests);
+    Single<Response<CreateLoginUserResponse>> tellusmore(@Query("userEmailId") String emailId,@Body TellUsMoreResquest requests);
 
     @POST("addressRest/changeAddressDetails")
     Single<Response<CreateLoginUserResponse>> submitaddress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddressDetailsRequest requests);
@@ -89,7 +99,7 @@ public interface NetworkInterface {
     Single<Response<CreateLoginUserResponse>> addtocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);
 
     @POST("productRest/getBestSellingProduct")
-    Single<Response<List<BestSellingProductResponse>>>getbestsellingproducts();
+    Single<Response<List<ProductResponse>>>getbestsellingproducts();
 
     @POST("productRest/getBestPricedProduct")
     Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct();
@@ -142,6 +152,11 @@ public interface NetworkInterface {
 
     @POST("couponRest/applyCoupon")
     Call<String>getcoupon(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("couponCode") String couponno);
+
+
+    @POST("loginRest/confirmReset")
+    Call<CreateLoginUserResponse>confirmotp(@Query("userEmailId") String emailId, @Query("otp") String otp);
+
 
 }
 

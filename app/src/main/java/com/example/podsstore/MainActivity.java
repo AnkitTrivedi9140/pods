@@ -4,18 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,14 +37,19 @@ import android.widget.Toast;
 import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.category.CategoryActivity;
+import com.example.podsstore.category.SubCategoryActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
+import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.drower.DrowerActivity;
 import com.example.podsstore.login.LoginActivity;
+import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
+import com.example.podsstore.mainactivityadapters.CustomAdapter;
 import com.example.podsstore.mainactivityadapters.ProductHorizontalAdapter;
 import com.example.podsstore.prefs.PreferenceManager;
 import com.example.podsstore.prefs.Preferences;
@@ -50,22 +61,38 @@ import com.example.podsstore.search.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView toproduct;
+    private TextView tvcartsize;
     RadioGroup radioGroup1;
     RadioButton home, categories, profile, about;
     private RecyclerView recyclerView, bestsellingproductrv, bestprisedproductrv;
     private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
+    BestPricedAdapter bestPricedAdapter;
     private ImageView ivallproduct, ivcart, ivtoggle, ivgo;
     EditText search;
+    ViewPager viewPager;
+    Integer[] imageId = {R.drawable.mainimage, R.drawable.podimgc, R.drawable.podimgb, R.drawable.podimgd};
+    String[] imagesName = {"image1","image2","image3","image4"};
 
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 400;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 2000; // time in milliseconds between successive task executions.
+
+    private int dotscount;
+    private ImageView[] dots;
+    LinearLayout sliderDotspanel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().setLogo(R.drawable.toggle);
         // getMenuInflater().inflate(R.menu.main_menu, menu);
         search = findViewById(R.id.putwaysearch);
+        tvcartsize = findViewById(R.id.tvcartsize);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
         home = (RadioButton) findViewById(R.id.homes);
@@ -150,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         bestsellingproductrv = findViewById(R.id.bestsellingproductrv);
         recyclerView = findViewById(R.id.productrv);
         bestSellingProductAdapter = new BestSellingProductAdapter(MainActivity.this);
+        bestPricedAdapter = new BestPricedAdapter(MainActivity.this);
         productListAdapter = new CategoryHorigentalAdapter(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -159,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
 //      recyclerView.setEmptyView(binding.emptyView);
         productListAdapter.setAdapterListener(adapterListener);
         bestSellingProductAdapter.setAdapterListener(adapterListeners);
+        bestPricedAdapter.setAdapterListener(pricedlistner);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 8);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
@@ -222,6 +252,102 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
 
+            }
+        });
+
+
+
+        sliderDotspanel = findViewById(R.id.SliderDots);
+        viewPager = findViewById(R.id.viewpager);
+
+        PagerAdapter adapter = new CustomAdapter(MainActivity.this,imageId,imagesName);
+        viewPager.setAdapter(adapter);
+
+        dotscount = adapter.getCount();
+        dots = new ImageView[dotscount];
+
+        for(int i = 0; i < dotscount; i++){
+
+            dots[i] = new ImageView(this);
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(8, 0, 8, 0);
+
+            sliderDotspanel.addView(dots[i], params);
+
+        }
+
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                for(int i = 0; i< dotscount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
+                }
+
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        /*After setting the adapter use the timer */
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == 4) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, DELAY_MS, PERIOD_MS);
+
+
+
+        loadDatacart();
+    }
+    @SuppressLint("CheckResult")
+    private void loadDatacart() {
+
+        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+
+        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+            @Override
+            public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("cartaaa", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    List<CartResponse> list = response.body();
+
+                    tvcartsize.setText(String.valueOf(list.size()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CartResponse>> call, Throwable t) {
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
@@ -288,9 +414,9 @@ public class MainActivity extends AppCompatActivity {
 
     private CategoryHorigentalAdapter.AdapterListener adapterListener = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(MainActivity.this, ProductListActivity.class);
-        i.putExtra("userid", String.valueOf(data.getId()));
-        i.putExtra("main", "main");
+        Intent i = new Intent(MainActivity.this, SubCategoryActivity.class);
+        i.putExtra("userid", data.getId().toString());
+
         startActivity(i);
 
 
@@ -302,13 +428,13 @@ public class MainActivity extends AppCompatActivity {
         ApiClient.getApiClient().getbestsellingproducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<List<BestSellingProductResponse>>>() {
+                .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
                     @Override
-                    public void onSuccess(Response<List<BestSellingProductResponse>> response) {
+                    public void onSuccess(Response<List<ProductResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
 
                         if (response.isSuccessful()) {
-                            List<BestSellingProductResponse> list = response.body();
+                            List<ProductResponse> list = response.body();
                             Log.e("getbestseddd", String.valueOf(list.toString()));
                             bestSellingProductAdapter.addAll(list);
 
@@ -343,7 +469,7 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             List<BestSellingProductResponse> list = response.body();
                             Log.e("getbestprised", String.valueOf(list.toString()));
-                            bestSellingProductAdapter.addAll(list);
+                            bestPricedAdapter.addAll(list);
 
                         } else {
 
@@ -364,12 +490,19 @@ public class MainActivity extends AppCompatActivity {
     private BestSellingProductAdapter.AdapterListener adapterListeners = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
-        i.putExtra("userid", String.valueOf(data.getId().trim()));
+        i.putExtra("userid", String.valueOf(data.getId()));
         startActivity(i);
 
 
     };
+    private BestPricedAdapter.AdapterListener pricedlistner = data -> {
+        // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
+        i.putExtra("userid", String.valueOf(data.getId()));
+        startActivity(i);
 
+
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -406,10 +539,38 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        //super.onBackPressed();
+        /*Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
-        finish();
+        finish();*/
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setCancelable(true);
+        dialog.setTitle("Exit from Pod!");
+        dialog.setMessage("Are you sure you want to exit from application?" );
+        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //Action for "Delete".
+                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+        }
+        )
+                .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                 dialog.cancel();
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
     }
 
     private void showAlertDialog() {

@@ -1,6 +1,7 @@
 package com.example.podsstore.addtocart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -12,8 +13,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
@@ -37,6 +40,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
     TextView placeorderbtn;
+    private QuantityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
         productListAdapter = new AddtocartAdapter(PaymentActivity.this, this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Payment");
+        viewModel = ViewModelProviders.of(PaymentActivity.this).get(QuantityViewModel.class);
         loadData();
     }
 
@@ -85,14 +90,21 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
                     Log.e("list", String.valueOf(list));
-               //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
+                    //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
 
                     placeorderbtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (int i = 0; i < list.size(); i++) {
                                 Log.d("onClickgg ", list.get(i).getProductid().toString());
-                                placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "21", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+                                String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
+                                if(lastqty==null) {
+                                    placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "1", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+
+                                }else {
+                                    placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), lastqty, String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+
+                                }
 
                             }
                         }
@@ -150,7 +162,9 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
+                            Intent main = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(main);
+                            finish();
                             if (successResponse != null) {
 
 

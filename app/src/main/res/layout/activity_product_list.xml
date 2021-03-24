@@ -7,7 +7,25 @@
     tools:context=".product.ProductListActivity"
     android:background="@color/platinum"
     >
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+android:tooltipText="djsadjkahdskjdsah"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
+    <TextView
+        android:visibility="gone"
+        android:text="Loading..."
+        android:id="@+id/progresstext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/progress"
+        >
+
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
         android:layout_margin="2dp"

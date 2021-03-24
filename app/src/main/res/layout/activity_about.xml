@@ -66,6 +66,7 @@ android:layout_marginTop="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:visibility="gone"
             ></TextView>
 
 
@@ -75,7 +76,9 @@ android:layout_marginTop="4dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tvheadingpementmethod"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
 
 
             <ImageView
@@ -106,11 +109,11 @@ android:layout_marginTop="4dp"
                 android:layout_height="66dp"></ImageView>
         </RelativeLayout>
         <TextView
-            android:layout_below="@+id/rlimage"
+            android:layout_below="@+id/tvheadingtext"
             android:background="@drawable/rippleabout"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="33dp"
             android:layout_alignParentBottom="true"
             android:lines="1"
 

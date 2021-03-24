@@ -15,8 +15,8 @@ import com.example.podsstore.login.CreateAccountActivity;
 import com.example.podsstore.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
-private TextView tvicon,tvwelcomedetails,tvwelcome,tvwelcomedetailsnext,tvsignin,tvsignup;
-ImageView ivlogo;
+private TextView tvwelcomedetails,tvwelcome,tvwelcomedetailsnext,tvsignin,tvsignup;
+ImageView ivlogo,tvicon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +28,16 @@ ImageView ivlogo;
         tvsignin=findViewById(R.id.tvsignin);
         tvsignup=findViewById(R.id.tvsignup);
         ivlogo=findViewById(R.id.ivlogo);
+        tvicon=findViewById(R.id.tvicon);
+
         getSupportActionBar().hide();
         Typeface typeface= ResourcesCompat.getFont(getApplicationContext(),R.font.architects_daughter);
         Typeface typefacewelcome= ResourcesCompat.getFont(getApplicationContext(),R.font.bentham_rt);
         Typeface typefacewelcomedetails= ResourcesCompat.getFont(getApplicationContext(),R.font.advent_pro);
 
         tvwelcome.setTypeface(typefacewelcome);
-        tvwelcomedetails.setTypeface(typefacewelcomedetails);
-        tvwelcomedetailsnext.setTypeface(typefacewelcomedetails);
+       /* tvwelcomedetails.setTypeface(typefacewelcomedetails);
+        tvwelcomedetailsnext.setTypeface(typefacewelcomedetails);*/
         tvsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +54,7 @@ ImageView ivlogo;
                 finish();
             }
         });
+        Glide.with(this).load(R.drawable.gif).into(tvicon);
 
     }
 

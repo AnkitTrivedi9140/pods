@@ -1,5 +1,7 @@
 package com.example.podsstore.data;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
@@ -25,7 +27,6 @@ public static final String BASE_URL ="http://216.10.243.60:4067/PodsStoreAPI/";
 
 
 
-
     public static NetworkInterface getApiClient() {
         final OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(NETWORK_CALL_TIMEOUT, TimeUnit.SECONDS)
@@ -35,11 +36,15 @@ public static final String BASE_URL ="http://216.10.243.60:4067/PodsStoreAPI/";
                 .build();
 
         if (retrofit == null) {
+
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
                     .client(okHttpClient)
+
                     .build();
         }
         return retrofit.create(NetworkInterface.class);

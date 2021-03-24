@@ -6,304 +6,409 @@
     android:layout_height="match_parent"
 
     tools:context=".MainActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:background="@color/term_and_conditions"
-        android:layout_height="122dp"
-
-        android:contentInsetLeft="0dp"
-        android:contentInsetStart="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetEnd="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp"
-        >
-
-<RelativeLayout
-    android:layout_marginLeft="14dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="14dp">
-
-<ImageView
-    android:id="@+id/ivtoggle"
-    android:layout_width="33dp"
-    android:src="@drawable/toggle"
-
-    android:layout_height="33dp"></ImageView>
-
-    <ImageView
-        android:id="@+id/tvicon"
-        android:layout_width="99dp"
-        android:layout_height="40dp"
-        android:textSize="55dp"
-        android:textStyle="bold"
-android:layout_marginLeft="28dp"
-
-        android:src="@drawable/removebgpodicon"
-        android:text="Pod"
-        ></ImageView>
-
-    <ImageView
-        android:id="@+id/ivcart"
-        android:layout_width="33dp"
-        android:src="@drawable/cart"
-
-        android:layout_alignParentEnd="true"
-        android:layout_height="33dp"
-    
-        android:layout_alignParentRight="true"></ImageView>
-    <EditText
-        android:id="@+id/putwaysearch"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-android:layout_marginTop="16dp"
-android:drawablePadding="18dp"
-        android:background="@drawable/edittextbackground"
-        android:padding="10dp"
-android:layout_below="@+id/ivcart"
-        android:drawableLeft="@drawable/search"
-        android:hint="Search your product"
-android:layout_centerHorizontal="true"
-        android:textSize="18dp" />
-
-    <ImageView
-        android:layout_marginTop="21dp"
-        android:id="@+id/ivgo"
-        android:layout_width="38dp"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/gobtngrn"
-        android:layout_below="@+id/ivcart"
-
-        android:layout_height="38dp"
-        android:layout_marginRight="4dp"
-        android:layout_alignParentRight="true">
-
-    </ImageView>
-</RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/rlsearch"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:background="@color/term_and_conditions"
-android:layout_below="@+id/toolbar"
-        android:paddingBottom="22dp"
-
-        android:paddingRight="14dp"
-        >
+        android:layout_height="match_parent">
 
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:background="@color/term_and_conditions"
+
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp">
+
+                <ImageView
+                    android:id="@+id/ivtoggle"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+
+                    android:src="@drawable/toggle"></ImageView>
+
+                <ImageView
+                    android:id="@+id/tvicon"
+                    android:layout_width="99dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="28dp"
+                    android:src="@drawable/removebgpodicon"
+                    android:text="Pod"
+
+                    android:textSize="55dp"
+                    android:textStyle="bold"></ImageView>
+
+                <ImageView
+                    android:id="@+id/ivcart"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+
+                    android:src="@drawable/cart"></ImageView>
+
+                <RelativeLayout
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/cartcircle">
+
+                    <TextView
+                        android:id="@+id/tvcartsize"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="10dp"
+                        android:textStyle="bold"></TextView>
+
+                </RelativeLayout>
 
 
+                <EditText
+                    android:id="@+id/putwaysearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/ivcart"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edittextbackground"
+                    android:drawableLeft="@drawable/search"
+                    android:drawablePadding="18dp"
+                    android:hint="Search your product"
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/ivgo"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_below="@+id/ivcart"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
 
-<androidx.cardview.widget.CardView
-    app:cardCornerRadius="12dp"
-android:id="@+id/cardview"
-android:layout_marginTop="133dp"
-    android:elevation="0dp"
-    android:layout_marginBottom="55dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-   ><ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<RelativeLayout
-   android:layout_margin="11dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/ivallproduct"
-        android:src="@drawable/imageallproduct"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/gobtngrn">
 
+                </ImageView>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-        >
+        <RelativeLayout
+            android:id="@+id/rlsearch"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/term_and_conditions"
+            android:paddingRight="14dp"
 
-    </ImageView>
-
-    <TextView
-        android:id="@+id/tvall"
-        android:layout_below="@+id/ivallproduct"
-        android:layout_width="wrap_content"
-        android:text="All"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="22dp"
-        android:layout_height="wrap_content"></TextView>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productrv"
-
-        android:layout_width="match_parent"
-        android:scrollbars="horizontal"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@+id/ivallproduct"
-        android:layout_height="77dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <ImageView
-        android:id="@+id/mainimage"
-        android:layout_below="@+id/productrv"
-        android:src="@drawable/mainimage"
-        android:layout_width="match_parent"
-        android:layout_height="177dp">
-
-    </ImageView>
-
-<TextView
-    android:id="@+id/tvbestselling"
-    android:textSize="22dp"
-    android:text="Bestselling Products"
-    android:layout_width="wrap_content"
-    android:textColor="@color/black"
-    android:layout_below="@+id/mainimage"
-    android:layout_height="wrap_content"
-
-    >
-
-</TextView>
+            android:paddingBottom="22dp">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bestsellingproductrv"
-        android:layout_below="@+id/tvbestselling"
-        android:layout_width="match_parent"
-        android:scrollbars="horizontal"
-        android:orientation="horizontal"
+        </RelativeLayout>
 
-        android:layout_height="wrap_content">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-    <RelativeLayout
-        android:id="@+id/rltop"
-        android:layout_below="@+id/bestsellingproductrv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/btngrn"
-        android:layout_marginBottom="22dp"
-
-        >
-
-        <TextView
-            android:id="@+id/headingtopbrands"
-            android:text="Top Brands on POD"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            >
-        </TextView>
-<HorizontalScrollView
-    android:layout_below="@+id/headingtopbrands"
+            android:layout_marginTop="133dp"
+            android:layout_marginBottom="55dp"
+            android:elevation="0dp"
+            app:cardCornerRadius="12dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="11dp">
+
+                    <ImageView
+                        android:id="@+id/ivallproduct"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/imageallproduct"
+
+
+                        >
+
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/tvall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ivallproduct"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginTop="4dp"
+                        android:text="All"></TextView>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/productrv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="77dp"
+                        android:layout_toRightOf="@+id/ivallproduct"
+                        android:orientation="horizontal"
+                        android:scrollbars="horizontal">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+<RelativeLayout
+    android:id="@+id/pager"
+    android:layout_below="@+id/productrv"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="22dp">
+    android:layout_height="wrap_content">
+                  <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="144dp"
 
+                        android:layout_marginTop="16dp"
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <LinearLayout
+                        android:id="@+id/SliderDots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
+                        android:layout_marginStart="8dp"
 
+                        android:layout_marginEnd="8dp"
+                       android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/ivtop1"
-            android:layout_width="111dp"
-            android:layout_height="111dp"
-            android:src="@drawable/sunpharma"
-            app:civ_border_color="@color/white"
-
-            app:civ_shadow_color="#fff"
-            android:layout_marginLeft="8dp"
-            />
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/ivtop2"
-            android:layout_width="111dp"
-            android:layout_height="111dp"
-            android:src="@drawable/cipla"
-            app:civ_border_color="@color/white"
-
-            app:civ_shadow_color="#fff"
-            android:layout_toRightOf="@+id/ivtop1"
-            android:layout_marginLeft="14dp"
-            />
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/ivtop3"
-            android:layout_width="111dp"
-            android:layout_height="111dp"
-            android:src="@drawable/bharat"
-            app:civ_border_color="@color/white"
-
-            app:civ_shadow_color="#fff"
-            android:layout_toRightOf="@+id/ivtop2"
-            android:layout_marginLeft="14dp"
-            />
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/ivtop4"
-            android:layout_width="111dp"
-            android:layout_height="111dp"
-            android:src="@drawable/pfizer"
-            app:civ_border_color="@color/white"
-
-            app:civ_shadow_color="#fff"
-            android:layout_toRightOf="@+id/ivtop3"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="8dp"
-            />
-    </RelativeLayout>
-</HorizontalScrollView>
-
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/tvbestprice"
-        android:textSize="22dp"
-        android:text="Best Priced Products"
-        android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:layout_below="@+id/rltop"
-        android:layout_height="wrap_content">
-
-    </TextView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginBottom="22dp"
-        android:layout_marginTop="11dp"
-        android:id="@+id/bestprisedproductrv"
-        android:layout_below="@+id/tvbestprice"
-        android:layout_width="match_parent"
-        android:scrollbars="horizontal"
-        android:orientation="horizontal"
-
-        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-
+                        android:layout_alignParentBottom="true"
+                        />
 </RelativeLayout>
-</ScrollView>
-</androidx.cardview.widget.CardView>
+                    <!--
+                                       <TextView
+                                           android:id="@+id/offers"
+                                           android:text="Get Membership"
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:textSize="22dp"
 
-    <include
-        layout="@layout/item_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</RelativeLayout>
+
+                                           android:layout_marginBottom="8dp"
+                                           android:layout_below="@+id/SliderDots"
+
+                                           android:textColor="@color/black"></TextView>
+                                       <androidx.cardview.widget.CardView
+                                           android:id="@+id/cv"
+                                           android:layout_below="@+id/offers"
+                                           android:layout_width="match_parent"
+                                           android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp"
+                                           >
+
+                                           <RelativeLayout
+                                               android:layout_width="match_parent"
+                                               android:background="@drawable/cardgradient"
+                                               android:layout_height="122dp"
+                                               >
+                                               <ImageView
+                                                   android:id="@+id/cardimg"
+                                                   android:layout_width="88dp"
+                                                   android:layout_height="88dp"
+                                                   android:src="@drawable/membership"
+                                                   android:layout_centerVertical="true"
+                                                   android:layout_alignParentEnd="true"
+                                                   android:layout_marginRight="11dp"
+                                                   android:layout_alignParentRight="true"></ImageView>
+                                               <TextView
+                                                   android:id="@+id/txtcard"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   android:text="Get lifetime membership "
+                                                   android:textColor="@color/white"
+                                                   android:textSize="18dp"
+                                                   android:layout_marginLeft="6dp"
+                                                   android:layout_marginTop="33dp"
+
+                                                   >
+
+                                               </TextView>
+
+                                               <TextView
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   android:text="Click here to proceed"
+                                                   android:textColor="@color/yellow"
+                                                   android:textSize="16dp"
+                                                   android:layout_toLeftOf="@+id/cardimg"
+                                                   android:layout_below="@+id/txtcard"
+                                                   android:layout_marginRight="48dp"
+                                                   android:textStyle="italic"
+                                                   >
+
+                                               </TextView>
+                                           </RelativeLayout>
+
+                                       </androidx.cardview.widget.CardView>-->
+                    <TextView
+                        android:id="@+id/tvbestselling"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pager"
+                        android:text="Bestselling Products"
+                        android:textColor="@color/black"
+                        android:textSize="22dp"
+                        android:layout_marginTop="12dp"
+
+                        >
+
+                    </TextView>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/bestsellingproductrv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvbestselling"
+                        android:orientation="horizontal"
+
+                        android:scrollbars="horizontal">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rltop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bestsellingproductrv"
+                        android:layout_marginBottom="22dp"
+                        android:background="@color/btngrn"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/headingtopbrands"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Top Brands on POD"
+                            android:textColor="@color/white"
+                            android:textSize="22dp"></TextView>
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/headingtopbrands"
+                            android:layout_marginBottom="22dp">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/ivtop1"
+                                    android:layout_width="111dp"
+                                    android:layout_height="111dp"
+                                    android:layout_marginLeft="8dp"
+                                    android:src="@drawable/sunpharma"
+
+                                    app:civ_border_color="@color/white"
+                                    app:civ_shadow_color="#fff" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/ivtop2"
+                                    android:layout_width="111dp"
+                                    android:layout_height="111dp"
+                                    android:layout_marginLeft="14dp"
+                                    android:layout_toRightOf="@+id/ivtop1"
+
+                                    android:src="@drawable/cipla"
+                                    app:civ_border_color="@color/white"
+                                    app:civ_shadow_color="#fff" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/ivtop3"
+                                    android:layout_width="111dp"
+                                    android:layout_height="111dp"
+                                    android:layout_marginLeft="14dp"
+                                    android:layout_toRightOf="@+id/ivtop2"
+
+                                    android:src="@drawable/bharat"
+                                    app:civ_border_color="@color/white"
+                                    app:civ_shadow_color="#fff" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/ivtop4"
+                                    android:layout_width="111dp"
+                                    android:layout_height="111dp"
+                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginRight="8dp"
+
+                                    android:layout_toRightOf="@+id/ivtop3"
+                                    android:src="@drawable/pfizer"
+                                    app:civ_border_color="@color/white"
+                                    app:civ_shadow_color="#fff" />
+                            </RelativeLayout>
+                        </HorizontalScrollView>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvbestprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rltop"
+                        android:text="Best Priced Products"
+                        android:textColor="@color/black"
+                        android:textSize="22dp">
+
+                    </TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/bestprisedproductrv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvbestprice"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="22dp"
+                        android:orientation="horizontal"
+
+                        android:scrollbars="horizontal"></androidx.recyclerview.widget.RecyclerView>
+
+
+                </RelativeLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+        <include
+            layout="@layout/item_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

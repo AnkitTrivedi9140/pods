@@ -38,7 +38,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView description, tvAssetType,tvqty,prnumber;
+        public TextView description, tvAssetType,tvqty,tvcome;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
@@ -52,7 +52,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
             cardView = view.findViewById(R.id.cardview);
             productiv = view.findViewById(R.id.productiv);
 
-
+            tvcome = view.findViewById(R.id.tvcome);
 
 
 
@@ -92,8 +92,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         OrderResponse cartResponse = productResponseList.get(position);
         holder.tvAssetType.setText(cartResponse.getProductname());
         holder.description.setText("$_"+cartResponse.getPrice());
-        holder.tvqty.setText("Qty_"+cartResponse.getQty());
-
+        holder.tvqty.setText("Qty: "+cartResponse.getQty());
+        holder.tvcome.setText("Ordered on- "+cartResponse.getItempresentin());
         // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(cartResponse.getProductimage())

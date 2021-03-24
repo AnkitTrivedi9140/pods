@@ -80,7 +80,7 @@ android:layout_centerVertical="true"
 
                     android:lines="1"
                     android:layout_below="@+id/tvAssetType"
-                    android:text="Laptop"
+                    android:text="price"
                     android:textColor="@color/term_and_conditions"
                     android:textSize="18dp"
                     android:textStyle="normal" />

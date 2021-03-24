@@ -58,10 +58,11 @@ android:layout_below="@+id/tvhelpheading"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:text="1800 222 8888, 1800 364 7890"
-android:layout_below="@+id/tvhelpheadingcallus"
+        android:text="+1 604 912 0520"
+        android:layout_below="@+id/tvhelpheadingcallus"
         android:textStyle="bold"
-        ></TextView>
+        android:drawableEnd="@drawable/phonecall"
+        android:drawableRight="@drawable/phonecall"></TextView>
 
     <TextView
         android:layout_marginTop="22dp"
@@ -79,8 +80,10 @@ android:layout_below="@+id/tvhelpheadingcallus"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:text="Care@podshealth.com"
+        android:text="info@podshealth.com"
         android:textStyle="bold"
         android:layout_below="@+id/tvemailhead"
+        android:drawableEnd="@drawable/ic_email"
+        android:drawableRight="@drawable/ic_email"
         ></TextView>
 </RelativeLayout>

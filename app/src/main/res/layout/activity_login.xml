@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+   android:background="@color/white"
     tools:context=".login.LoginActivity">
 <ImageView
     android:id="@+id/ivback"
@@ -12,9 +13,23 @@
     android:src="@drawable/ic_back"
     android:layout_margin="8dp"
 ></ImageView>
+
+    <ImageView
+        android:id="@+id/tvicon"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:textSize="55dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentEnd="true"
+android:layout_marginRight="8dp"
+        android:text="Pod"
+        android:layout_alignParentRight="true"></ImageView>
+
     <ScrollView
         android:layout_marginTop="44dp"
         android:layout_marginBottom="44dp"
+
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -34,7 +49,7 @@
 android:textStyle="bold"
 
             android:textColor="@color/black"
-            android:textSize="22dp"></TextView>
+            android:textSize="18dp"></TextView>
 
         <EditText
             android:id="@+id/usernameEt"
@@ -58,7 +73,7 @@ android:textStyle="bold"
         <EditText
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="44dp"
             android:layout_below="@+id/usernameEt"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
@@ -83,12 +98,13 @@ android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text="Forgot Password"
             android:visibility="visible"
+            android:textStyle="bold"
             android:textColor="@color/text_color_setting"></TextView>
 
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="44dp"
             android:layout_below="@+id/forgettv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
@@ -123,7 +139,7 @@ android:layout_marginRight="4dp"
                 android:id="@+id/logInBtn"
 
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/button_bg"

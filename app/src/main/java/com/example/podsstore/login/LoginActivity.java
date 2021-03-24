@@ -24,11 +24,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 
+import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.AddressDetailsRequest;
+import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
@@ -56,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameEt, passwordEt, emaiEt,otpEt;
     private TextView createtv,forgettv;
     private ImageView ivshow;
-ImageView back;
+ImageView back,tvicon;
 RelativeLayout rlaccountconfirmation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,7 @@ RelativeLayout rlaccountconfirmation;
         getSupportActionBar().hide();
         initViews();
 
-
+        Glide.with(this).load(R.drawable.podgif).into(tvicon);
         //   binding.url.setOnClickListener(onClickListener);
     }
 
@@ -105,15 +109,16 @@ RelativeLayout rlaccountconfirmation;
 
                     break;
                 case R.id.btncontinue:
+
                     String otp = otpEt.getText().toString();
 
 
                     if (TextUtils.isEmpty(otp)) {
                         emaiEt.setError("OTP Can't Blank!");
                     } else{
-                  confirmotp(otp);
-                    }
 
+                    }
+                    confirmotp(otp.trim());
 
 
 
@@ -147,26 +152,33 @@ showAlertDialog();
     };
     @SuppressLint("CheckResult")
     private void confirmotp(String otp) {
-
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
-        );
-
-        ApiClient.getApiClient().confirmotp(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),otp).enqueue(new Callback<CreateLoginUserResponse>() {
+        Toast.makeText(getApplicationContext(),PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL) ,Toast.LENGTH_SHORT).show();
+        /*Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
+        );*/
+      //  if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+        ApiClient.getApiClient().confirmotp(PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL) , otp).enqueue(new Callback<CreateLoginUserResponse>() {
+        //ApiClient.getApiClient().confirmotp("fff", otp).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
-                if (response.isSuccessful()) {
-                    CreateLoginUserResponse list = response.body();
+                Log.e("onResp ",String.valueOf(response.code() ));
 
-                    Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
-                   showAlertDialogconfirm();
+
+                if (response.isSuccessful()) {
+
+
+                   // Toast.makeText(getApplicationContext(), String.valueOf(response.toString()), Toast.LENGTH_SHORT).show();
+                    showAlertDialogconfirm();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Code is not correct!", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
@@ -176,13 +188,14 @@ showAlertDialog();
 
         Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
         );
-        ApiClient.getApiClient().forgotpassword(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),emailid).enqueue(new Callback<CreateLoginUserResponse>() {
+        ApiClient.getApiClient().forgotpassword(emailid).enqueue(new Callback<CreateLoginUserResponse>() {
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("getprofile",String.valueOf(response.code()));
                 if (response.isSuccessful()) {
+                    PreferenceManager.setStringValue(Preferences.USER_OTP_EMAIL, emailid);
                     CreateLoginUserResponse list = response.body();
 
                     Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
@@ -259,6 +272,7 @@ showAlertDialog();
     }
 
     private void initViews() {
+        tvicon = findViewById(R.id.tvicon);
         ivshow = findViewById(R.id.ivshow);
         logInBtn = findViewById(R.id.logInBtn);
         btncontinue = findViewById(R.id.btncontinue);
@@ -267,7 +281,7 @@ showAlertDialog();
         emaiEt = findViewById(R.id.emailEt);
         otpEt = findViewById(R.id.otpEt);
         createtv = findViewById(R.id.createtv);
-rlaccountconfirmation=findViewById(R.id.rlaccountconfirmation);
+        rlaccountconfirmation=findViewById(R.id.rlaccountconfirmation);
         forgettv = findViewById(R.id.forgettv);
         logInBtn.setOnClickListener(onClickListener);
         btncontinue.setOnClickListener(onClickListener);
@@ -312,7 +326,7 @@ rlaccountconfirmation=findViewById(R.id.rlaccountconfirmation);
 //                    startActivity(login);
 //                    finish();
                 if (TextUtils.isEmpty(number)) {
-                    et.setError("Number Can't Blank!");
+                    et.setError("Email Can't Blank!");
                 }else{
                 loadData(et.getText().toString().trim());
                     alert.dismiss();
@@ -360,15 +374,81 @@ rlaccountconfirmation=findViewById(R.id.rlaccountconfirmation);
                 }
                 else{
                  //   loadData(et.getText().toString().trim());
+
+                    changepassword(etpassword.getText().toString(),etagainpassword.getText().toString());
                     alert.dismiss();
-                    finish();
-                    overridePendingTransition( 0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition( 0, 0);
                 }
 
             }
         });
         alert.show();
     }
+
+    @SuppressLint("CheckResult")
+    private void changepassword( String newpwd, String confirmpwd) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+        List<AddressDetailsRequest> list = new ArrayList<>();
+
+        ChangePasswordRequest r = new ChangePasswordRequest();
+        r.setNewpassword(newpwd);
+        r.setConfirmpassword(confirmpwd);
+
+
+        // list.add(r);
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClient.getApiClient().pwdsuccess( PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL), r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+//                            finish();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+
+                            finish();
+                            overridePendingTransition( 0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition( 0, 0);
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Item already in wishlist", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: ", e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
+
 }

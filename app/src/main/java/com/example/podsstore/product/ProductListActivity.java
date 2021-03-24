@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
@@ -28,8 +31,10 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ProductListActivity extends AppCompatActivity {
-
+    ProgressBar progressBar;
+    TextView progresstext;
     private RecyclerView recyclerView;
+
     private ProductListAdapter productListAdapter;
 
     @Override
@@ -37,6 +42,8 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
         recyclerView = findViewById(R.id.productrv);
+        progressBar=findViewById(R.id.progress);
+        progresstext=findViewById(R.id.progresstext);
         productListAdapter = new ProductListAdapter(ProductListActivity.this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(ProductListActivity.this));
@@ -53,6 +60,8 @@ public class ProductListActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void loadData() {
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
         // binding.progress.setVisibility(View.VISIBLE);
         Log.e("getProductMasterssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
         ApiClient.getApiClient().getproducts()
@@ -61,7 +70,8 @@ public class ProductListActivity extends AppCompatActivity {
                 .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
                     @Override
                     public void onSuccess(Response<List<ProductResponse>> response) {
-                        // binding.progress.setVisibility(View.GONE);
+                   progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
                         Log.d("onSuccess: ",String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             List<ProductResponse> list = response.body();
@@ -80,7 +90,8 @@ public class ProductListActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("geterre", String.valueOf(e.getMessage()));
-
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
                     }
                 });
     }

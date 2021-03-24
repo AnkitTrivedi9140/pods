@@ -21,7 +21,7 @@ import java.util.List;
 
 public class BestSellingProductAdapter extends RecyclerView.Adapter<BestSellingProductAdapter.MyViewHolder> {
     private BestSellingProductAdapter.AdapterListener adapterListener;
-    private List<BestSellingProductResponse> productResponseList;
+    private List<ProductResponse> productResponseList;
 
     private Context context;
 
@@ -70,7 +70,7 @@ public class BestSellingProductAdapter extends RecyclerView.Adapter<BestSellingP
 
     }
 
-    public BestSellingProductAdapter(List<BestSellingProductResponse> moviesList) {
+    public BestSellingProductAdapter(List<ProductResponse> moviesList) {
 
         this.productResponseList = moviesList;
     }
@@ -85,9 +85,9 @@ public class BestSellingProductAdapter extends RecyclerView.Adapter<BestSellingP
 
     @Override
     public void onBindViewHolder(BestSellingProductAdapter.MyViewHolder holder, int position) {
-        BestSellingProductResponse movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProductname());
-        holder.description.setText("$_"+movies.getProductprice());
+        ProductResponse movies = productResponseList.get(position);
+        holder.tvAssetType.setText(movies.getProdname());
+        holder.description.setText("$_"+movies.getPrice());
         //Toast.makeText(context,movies.getProductname(),Toast.LENGTH_SHORT).show();
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
 //        Glide.with(context)
@@ -98,14 +98,14 @@ public class BestSellingProductAdapter extends RecyclerView.Adapter<BestSellingP
                 .into(holder.productiv);
     }
 
-    public void addAll(List<BestSellingProductResponse> list) {
+    public void addAll(List<ProductResponse> list) {
 
-        for (BestSellingProductResponse d : list) {
+        for (ProductResponse d : list) {
             add(d);
         }
     }
 
-    public void add(BestSellingProductResponse data) {
+    public void add(ProductResponse data) {
         productResponseList.add(data);
         notifyItemInserted(productResponseList.size() - 1);
     }
@@ -130,7 +130,7 @@ public class BestSellingProductAdapter extends RecyclerView.Adapter<BestSellingP
     public interface AdapterListener {
 
 
-        void onItemClick(BestSellingProductResponse data);
+        void onItemClick(ProductResponse data);
     }
 
     public interface InventoryAdapterListener {

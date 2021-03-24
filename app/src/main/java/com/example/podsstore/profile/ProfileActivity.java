@@ -90,7 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
     CircularImageView ivuser, ivcamera;
     ProgressBar progressBar;
 
-
+    ImageView ivlogo,tvicons;
     //dricpt
     public static final String PROVIDER = "BC";
     public static final int SALT_LENGTH = 20;
@@ -107,8 +107,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getSupportActionBar().setTitle("My Profile");
-        getSupportActionBar().setElevation(0);
+
+        getSupportActionBar().hide();
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         about = (RadioButton) findViewById(R.id.about);
         home = (RadioButton) findViewById(R.id.homes);
@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvpasswordedit = findViewById(R.id.tvpasswordedit);
         ivuser = findViewById(R.id.ivlogo);
         ivcamera = findViewById(R.id.ivcamera);
-
+        tvicons = findViewById(R.id.tvicons);
         profile.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.blueprofile, 0, 0);
         profile.setTextColor(Color.parseColor("#007eff"));
 
@@ -214,6 +214,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         loadData();
         String aa=decryptAndGetPassword();
+        Glide.with(this).load(R.drawable.gif).into(tvicons);
        // Toast.makeText(getApplicationContext(),aa,Toast.LENGTH_LONG).show();
     }
     private String decryptAndGetPassword() {
@@ -313,7 +314,9 @@ ImageView cut=customLayout.findViewById(R.id.ivcut);
 //                    finish();
                 if (TextUtils.isEmpty(number)) {
                     et.setError("Number Can't Blank!");
-                }else{changenumber(et.getText().toString().trim());}
+                }else {
+                    changenumber(et.getText().toString().trim());
+                }
 
             }
         });
@@ -436,6 +439,7 @@ ImageView cut=customLayout.findViewById(R.id.ivcut);
     @SuppressLint("CheckResult")
     private void uploadData(Uri fileUri) {
 progressBar.setVisibility(View.VISIBLE);
+
         File file = new File(convertMediaUriToPath(fileUri));
         RequestBody requestUserEmailId = RequestBody.create(MediaType.parse("multipart/form-data"), PreferenceManager.getStringValue(Preferences.USER_EMAIL));
         MultipartBody.Part requesestImage = null;
@@ -460,6 +464,7 @@ progressBar.setVisibility(View.VISIBLE);
             @Override
             public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
                 Log.e("onerrors", t.getMessage());
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
     }

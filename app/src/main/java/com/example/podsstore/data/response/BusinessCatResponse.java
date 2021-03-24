@@ -6,11 +6,14 @@ public class BusinessCatResponse {
     @SerializedName("id")
     private Long id;
 
-    @SerializedName("productname")
+    @SerializedName("productcatalogname")
     private String productname;
 
-    @SerializedName("productimage")
+    @SerializedName("imgurl")
     private String productimage;
+
+    @SerializedName("priority")
+    private String priority;
 
     @SerializedName("status")
     private String status;
@@ -39,6 +42,14 @@ public class BusinessCatResponse {
         this.productimage = productimage;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -50,9 +61,10 @@ public class BusinessCatResponse {
     @Override
     public String toString() {
         return "BusinessCatResponse{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", productname='" + productname + '\'' +
                 ", productimage='" + productimage + '\'' +
+                ", priority='" + priority + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

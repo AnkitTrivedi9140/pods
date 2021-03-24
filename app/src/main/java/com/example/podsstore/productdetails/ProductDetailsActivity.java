@@ -24,6 +24,7 @@ import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.drower.AddressesActivity;
@@ -45,31 +46,34 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-ImageView ivproduct;
-TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction;
+ImageView ivproduct,ivtoggle,ivcart;
+TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
 Button logInBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Product Details");
+        getSupportActionBar().hide();
         PreferenceManager.init(ProductDetailsActivity.this);
         ivproduct=findViewById(R.id.ivproduct);
+        ivtoggle=findViewById(R.id.ivtoggle);
+        ivcart=findViewById(R.id.ivcart);
+        tvcartsize=findViewById(R.id.tvcartsize);
         tvProductname=findViewById(R.id.tvProductname);
         logInBtn=findViewById(R.id.logInBtn);
         tvProductprice=findViewById(R.id.tvProductprice);
         tvdetails=findViewById(R.id.tvdetails);
         tvfeature=findViewById(R.id.tvfeature);
         tvfunction=findViewById(R.id.tvfunction);
+
+
+        tvdetailtitle=findViewById(R.id.tvdetailtitle);
+        tvfeaturetitle=findViewById(R.id.tvfeaturetitle);
+        tvfunctiontitle=findViewById(R.id.tvfunctiontitle);
         loadData();
-
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
+        ivtoggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
                 if(getIntent().getStringExtra("main")==null && getIntent().getStringExtra("search")==null ){
 
@@ -99,10 +103,11 @@ Button logInBtn;
                 }
 
 
-
-                return true;
-            case R.id.menu_item:   //this item has your app icon
-
+            }
+        });
+        ivcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
                 if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                     Intent cart=new Intent(getApplicationContext(), AddToCartActivity.class);
@@ -112,6 +117,55 @@ Button logInBtn;
                 }else{
                     showAlertDialog();
                 }
+            }
+        });
+
+loadDatacart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
+
+    @SuppressLint("CheckResult")
+    private void loadDatacart() {
+
+        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+
+        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+            @Override
+            public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("cartaaa", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    List<CartResponse> list = response.body();
+
+                    tvcartsize.setText(String.valueOf(list.size()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CartResponse>> call, Throwable t) {
+                Log.e("onerrors", t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+
+
+                return true;
+            case R.id.menu_item:   //this item has your app icon
+
+
                 return true;
         }
 
@@ -234,7 +288,7 @@ Button logInBtn;
 
 
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
+                            loadDatacart();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {

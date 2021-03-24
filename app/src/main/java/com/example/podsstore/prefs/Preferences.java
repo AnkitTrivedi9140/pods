@@ -10,4 +10,6 @@ public class Preferences {
     public static String TOKEN_TYPE="tokentype";
     public static String ACCESS_TOKEN="accesstoken";
 
+    public static String USER_OTP_EMAIL="userotpemail";
+
 }

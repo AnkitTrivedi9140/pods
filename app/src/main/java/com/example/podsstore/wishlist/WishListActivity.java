@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,8 @@ public class WishListActivity extends AppCompatActivity {
 RecyclerView recyclerView;
     WishListAdapter productListAdapter;
     TextView tvnodata;
-
+    ProgressBar progressBar;
+    TextView progresstext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ RecyclerView recyclerView;
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new WishListAdapter(WishListActivity.this);
         tvnodata = findViewById(R.id.tvnodata);
+        progressBar=findViewById(R.id.progress);
+        progresstext=findViewById(R.id.progresstext);
         recyclerView.setLayoutManager(new LinearLayoutManager(WishListActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
       //  productListAdapter.setAdapterListener(adapterListener);
@@ -60,13 +64,15 @@ RecyclerView recyclerView;
     }
     @SuppressLint("CheckResult")
     private void loadData() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
         Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
 
         ApiClient.getApiClient().getwishlist(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
-
+                progressBar.setVisibility(View.GONE);
+                progresstext.setVisibility(View.GONE);
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("cartaaa",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
@@ -92,6 +98,8 @@ RecyclerView recyclerView;
             @Override
             public void onFailure(Call<List<CartResponse>> call, Throwable t) {
                 Log.e("onerrors",t.getMessage());
+                progressBar.setVisibility(View.GONE);
+                progresstext.setVisibility(View.GONE);
             }
         });
     }

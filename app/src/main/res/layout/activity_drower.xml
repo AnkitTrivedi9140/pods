@@ -39,8 +39,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_margin="2dp"
-                android:layout_marginRight="11dp"
-                android:layout_marginLeft="11dp"
+
                 android:layout_height="wrap_content">
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/productiv"
@@ -97,7 +96,7 @@
                         android:layout_below="@+id/tvusername"
                         android:text="Laptop"
                         android:textColor="@color/term_and_conditions"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -109,7 +108,7 @@ android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/goo"
                         android:cropToPadding="true"
-                        android:layout_marginRight="10dp"
+
                         android:layout_alignParentRight="true">
                     </ImageView>
                 </RelativeLayout>
@@ -117,8 +116,7 @@ android:layout_alignParentEnd="true"
 <RelativeLayout
     android:id="@+id/rlorder"
 
-    android:layout_marginLeft="11dp"
-    android:layout_marginRight="11dp"
+
     android:layout_below="@+id/rluserimage"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -166,8 +164,7 @@ android:layout_alignParentEnd="true"
 
         <RelativeLayout
             android:id="@+id/rladdress"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
+
             android:layout_below="@+id/rlorder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -213,8 +210,7 @@ android:layout_alignParentEnd="true"
 
         <RelativeLayout
             android:id="@+id/rlwishlist"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
+
             android:layout_below="@+id/rladdress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -261,8 +257,7 @@ android:layout_alignParentEnd="true"
 
         <RelativeLayout
             android:id="@+id/rlsettings"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
+        android:visibility="gone"
             android:layout_below="@+id/rlwishlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -313,10 +308,9 @@ android:layout_alignParentEnd="true"
 
         <RelativeLayout
             android:id="@+id/rlsavedcard"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
+
             android:visibility="gone"
-            android:layout_below="@+id/rlsettings"
+            android:layout_below="@+id/rlwishlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -362,8 +356,7 @@ android:layout_alignParentEnd="true"
 
             <RelativeLayout
                 android:id="@+id/rlchoosecountry"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
+
                 android:layout_below="@+id/rlsettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -387,7 +380,7 @@ android:layout_alignParentEnd="true"
                         android:layout_toRightOf="@+id/ivchoosecountry"
                         android:lines="1"
 
-                        android:text="Choose contry"
+                        android:text="Choose country"
                         android:textColor="#505A63"
                         android:textSize="18dp"
                         android:layout_marginLeft="44dp"
@@ -411,8 +404,7 @@ android:layout_alignParentEnd="true"
             <RelativeLayout
                 android:layout_marginBottom="99dp"
                 android:id="@+id/rlhelp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
+
                 android:layout_below="@+id/rlchoosecountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -474,7 +466,7 @@ android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:id="@+id/btnlogout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="48dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/button_bg"
             android:gravity="center"

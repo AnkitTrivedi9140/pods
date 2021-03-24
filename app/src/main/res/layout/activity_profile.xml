@@ -12,7 +12,59 @@
 
         android:layout_centerInParent="true"
         android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/term_and_conditions"
+        android:layout_height="58dp"
+
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp">
+
+
+
+            <TextView
+                android:id="@+id/tvicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textStyle="bold"
+
+android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="My Profile"
+                ></TextView>
+
+            <ImageView
+                android:id="@+id/tvicons"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textSize="55dp"
+                android:textStyle="bold"
+             android:layout_alignParentEnd="true"
+android:layout_centerVertical="true"
+                android:text="Pod"
+                android:layout_alignParentRight="true"></ImageView>
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
     <ScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout

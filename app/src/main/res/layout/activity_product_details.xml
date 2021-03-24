@@ -5,7 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productdetails.ProductDetailsActivity">
+
+
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/term_and_conditions"
+        android:layout_height="55dp"
+
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+<RelativeLayout
+    android:layout_marginLeft="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="14dp">
+
+<ImageView
+    android:id="@+id/ivtoggle"
+    android:layout_width="33dp"
+    android:src="@drawable/backwhite"
+
+    android:layout_height="33dp"></ImageView>
+
+    <TextView
+        android:id="@+id/tvicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:textStyle="bold"
+android:layout_marginLeft="48dp"
+
+  android:textColor="@color/white"
+        android:text="Product Details"
+        ></TextView>
+    <ImageView
+        android:id="@+id/ivcart"
+        android:layout_width="33dp"
+        android:src="@drawable/cart"
+
+        android:layout_alignParentEnd="true"
+        android:layout_height="33dp"
+
+        android:layout_alignParentRight="true"></ImageView>
+<RelativeLayout
+    android:background="@drawable/cartcircle"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    >
+<TextView
+    android:id="@+id/tvcartsize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    android:text="0"
+    android:gravity="center"
+    android:textColor="@color/white"
+   android:layout_centerInParent="true"
+    android:textStyle="bold"
+    ></TextView>
+</RelativeLayout>
+
+
+</RelativeLayout>
+      </androidx.appcompat.widget.Toolbar>
 <ScrollView
+    android:layout_below="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="66dp"
