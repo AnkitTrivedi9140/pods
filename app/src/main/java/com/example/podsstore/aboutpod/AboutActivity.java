@@ -16,11 +16,9 @@ import android.widget.TextView;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
-import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.category.CategoryActivity;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.profile.ProfileActivity;
 
 public class AboutActivity extends AppCompatActivity {
@@ -31,7 +29,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        PreferenceManager.init(AboutActivity.this);
+        PreferenceManagerss.init(AboutActivity.this);
         getSupportActionBar().setTitle("About POD");
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         tvreact=findViewById(R.id.tvreact);
@@ -68,7 +66,7 @@ public class AboutActivity extends AppCompatActivity {
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
-                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                             in = new Intent(getBaseContext(), ProfileActivity.class);
                             startActivity(in);
                             overridePendingTransition(0, 0);
@@ -91,8 +89,8 @@ public class AboutActivity extends AppCompatActivity {
         tvreact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
-                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                     Intent    in = new Intent(getBaseContext(), ConnectwithPodActivity.class);
                     startActivity(in);
                 } else {

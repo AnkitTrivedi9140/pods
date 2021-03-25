@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/nvscan"
+
+        android:icon="@drawable/myorder"
+        android:title="My Order"/>
+    <item android:id="@+id/nvhistory"
+        android:icon="@drawable/address"
+        app:actionViewClass="android.widget.TextView"
+        android:title="Addresses"/>
+    <item android:id="@+id/nvsettings"
+        android:icon="@drawable/chooselanguage"
+        android:title="Choose Country"/>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+    <item android:id="@+id/nvrate"
+        android:icon="@drawable/about"
+        android:title="Contact Us"/>
+    <item android:id="@+id/nvshare"
+        android:icon="@drawable/help"
+        android:title="Help /FAQs"/>
+
+    </group>
+    <item android:id="@+id/nvsolution"
+        android:icon="@drawable/logout"
+        android:title="Log Out"/>
+</menu>

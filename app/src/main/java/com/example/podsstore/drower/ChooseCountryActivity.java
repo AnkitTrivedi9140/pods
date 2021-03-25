@@ -9,31 +9,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CountryResponse;
-import com.example.podsstore.data.response.ProfileResponses;
-import com.example.podsstore.mainactivityadapters.AddressAdapter;
+
 import com.example.podsstore.mainactivityadapters.CountryAdapter;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.profile.AddressActivity;
+
 
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChooseCountryActivity extends AppCompatActivity {
@@ -56,8 +48,10 @@ public class ChooseCountryActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(addressAdapter);
 
+
 loadData();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -74,9 +68,9 @@ loadData();
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
-        ApiClient.getApiClient().getcountry(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL))
+        ApiClient.getApiClient().getcountry()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<List<CountryResponse>>>() {

@@ -15,12 +15,10 @@ import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.product.ProductListActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -101,7 +99,7 @@ TextView btnsubmit;
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). tellusmore(PreferenceManager.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient(). tellusmore(PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {

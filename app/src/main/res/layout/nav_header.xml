@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="166dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/cardgradient">
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileimage"
+        app:civ_border_width="2dp"
+       android:layout_marginTop="11dp"
+
+        app:civ_border_color="@color/platinum"
+        android:layout_width="99dp"
+        android:layout_height="99dp"/>
+    <TextView
+        android:id="@+id/headerusername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart Scanner"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:layout_centerHorizontal="true"
+
+
+        android:layout_below="@+id/profileimage"
+        />
+    <TextView
+        android:id="@+id/tvemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:lines="1"
+        android:layout_below="@+id/headerusername"
+        android:text="Laptop"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="normal" />
+
+</LinearLayout>

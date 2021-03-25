@@ -16,14 +16,10 @@ import android.widget.TextView;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.OrderResponse;
-import com.example.podsstore.drower.HelpAndFAQActivity;
 import com.example.podsstore.mainactivityadapters.MyOrderAdapter;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.wishlist.WishListActivity;
-import com.example.podsstore.wishlist.WishListAdapter;
 
 import java.util.List;
 
@@ -64,9 +60,9 @@ loadData();
     private void loadData() {
         progressBar.setVisibility(View.VISIBLE);
         progresstext.setVisibility(View.VISIBLE);
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"///"+PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"///"+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getplaceorder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<OrderResponse>>() {
+        ApiClient.getApiClient().getplaceorder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<OrderResponse>>() {
             @Override
             public void onResponse(Call<List<OrderResponse>> call, Response<List<OrderResponse>> response) {
                 progressBar.setVisibility(View.GONE);

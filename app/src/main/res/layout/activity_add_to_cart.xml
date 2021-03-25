@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/platinum"
+
 
     tools:context=".addtocart.AddToCartActivity">
 
@@ -94,7 +94,8 @@
         android:layout_height="288dp"
         android:layout_below="@+id/rlcartseek"
 android:layout_above="@+id/scr"
-        android:layout_marginBottom="6dp">
+
+        android:layout_margin="4dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -151,12 +152,12 @@ android:layout_above="@+id/scr"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginRight="16dp"
                 android:padding="10dp"
                 android:text="Apply"
                 android:textColor="@color/term_and_conditions"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -180,7 +181,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="14dp"
                 android:text="SUBTOTAL"
                 android:textColor="@color/text_color_setting"
-                android:textSize="18dp"></TextView>
+                android:textSize="14dp"></TextView>
 
             <TextView
                 android:id="@+id/tvsubtotaltxt"
@@ -195,7 +196,7 @@ android:layout_above="@+id/scr"
                 android:text="0.00"
 
                 android:textColor="@color/text_color_setting"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/dollar"
                 android:drawablePadding="11dp"
@@ -211,7 +212,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="14dp"
                 android:text="Discount Amount"
                 android:textColor="@color/text_color_setting"
-                android:textSize="18dp"></TextView>
+                android:textSize="14dp"></TextView>
 
             <TextView
                 android:id="@+id/tvdiscounttxt"
@@ -227,7 +228,7 @@ android:layout_above="@+id/scr"
                 android:drawableStart="@drawable/discount"
                 android:drawablePadding="11dp"
                 android:textColor="@color/term_and_conditions"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:drawableLeft="@drawable/minus"></TextView>
 
             <TextView
@@ -241,7 +242,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginBottom="8dp"
                 android:text="Total"
                 android:textColor="@color/text_color_setting"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -256,7 +257,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="14dp"
                 android:text="0.00"
                 android:textColor="@color/term_and_conditions"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:drawableStart="@drawable/dollar"
                 android:drawablePadding="11dp"
                 android:textStyle="bold"

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,9 +27,8 @@ import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.BusinessCatResponse;
 
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.profile.ProfileActivity;
 
 import java.util.List;
@@ -43,11 +43,16 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryAdapter productListAdapter;
     private  RadioGroup radioGroup1;
     private RadioButton home,categories,profile,about;
+
+    ProgressBar progressBar;
+    TextView progresstext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        PreferenceManager.init(CategoryActivity.this);
+        PreferenceManagerss.init(CategoryActivity.this);
+        progressBar=findViewById(R.id.progress);
+        progresstext=findViewById(R.id.progresstext);
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new CategoryAdapter(CategoryActivity.this);
         recyclerView = findViewById(R.id.productrv);
@@ -95,7 +100,7 @@ public class CategoryActivity extends AppCompatActivity {
                         break;
                     case R.id.profile:
                         Log.i("matching", "matching inside1 rate" + checkedId);
-                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                             in = new Intent(getBaseContext(), ProfileActivity.class);
                             startActivity(in);
                             overridePendingTransition(0, 0);
@@ -151,6 +156,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void loadData() {
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
         // binding.progress.setVisibility(View.VISIBLE);
         ApiClient.getApiClient().getbusinesscat()
                 .subscribeOn(Schedulers.io())
@@ -159,7 +166,8 @@ public class CategoryActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Response<List<BusinessCatResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
-
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
                             List<BusinessCatResponse> list = response.body();
                             Log.e("getProductMasters", String.valueOf(list.size()));
@@ -175,7 +183,8 @@ public class CategoryActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
 
                     }
                 });

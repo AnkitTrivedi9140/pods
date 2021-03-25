@@ -15,11 +15,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
-import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 
@@ -63,7 +63,7 @@ public class ProductListActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         progresstext.setVisibility(View.VISIBLE);
         // binding.progress.setVisibility(View.VISIBLE);
-        Log.e("getProductMasterssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
+        Log.e("getProductMasterssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN));
         ApiClient.getApiClient().getproducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,7 +111,7 @@ i.putExtra("productlist","productlist");
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), CategoryActivity.class);
+                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -123,5 +123,8 @@ i.putExtra("productlist","productlist");
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

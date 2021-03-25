@@ -85,7 +85,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(SearchAdapter.MyViewHolder holder, int position) {
         ProductResponse movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProdname());
+        holder.tvAssetType.setText(movies.getProdtype());
         holder.description.setText("$_"+movies.getPrice());
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();

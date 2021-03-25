@@ -34,7 +34,7 @@
             android:layout_marginLeft="14dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="14dp">
+            android:layout_marginRight="0dp">
 
 
 
@@ -53,7 +53,7 @@ android:layout_centerVertical="true"
             <ImageView
                 android:id="@+id/tvicons"
                 android:layout_width="wrap_content"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:textSize="55dp"
                 android:textStyle="bold"
              android:layout_alignParentEnd="true"

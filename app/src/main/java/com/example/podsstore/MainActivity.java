@@ -1,11 +1,13 @@
 package com.example.podsstore;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -21,8 +23,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,36 +38,43 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.podsstore.aboutpod.AboutActivity;
+import com.example.podsstore.aboutpod.ConnectwithPodActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.category.SubCategoryActivity;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.drower.AddressesActivity;
+import com.example.podsstore.drower.ChooseCountryActivity;
 import com.example.podsstore.drower.DrowerActivity;
-import com.example.podsstore.login.LoginActivity;
+import com.example.podsstore.drower.HelpAndFAQActivity;
+import com.example.podsstore.getorder.MyOrderActivity;
 import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.CustomAdapter;
-import com.example.podsstore.mainactivityadapters.ProductHorizontalAdapter;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
-import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.search.SearchActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -72,7 +83,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvcartsize;
+    private TextView tvcartsize,tvbestpriceseeall,tvbestsellingseeall,headerusername,tvemail;
     RadioGroup radioGroup1;
     RadioButton home, categories, profile, about;
     private RecyclerView recyclerView, bestsellingproductrv, bestprisedproductrv;
@@ -82,24 +93,33 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivallproduct, ivcart, ivtoggle, ivgo;
     EditText search;
     ViewPager viewPager;
-    Integer[] imageId = {R.drawable.mainimage, R.drawable.podimgc, R.drawable.podimgb, R.drawable.podimgd};
+    Integer[] imageId = {R.drawable.catc, R.drawable.catb, R.drawable.catd, R.drawable.cata, R.drawable.cate, R.drawable.catf};
     String[] imagesName = {"image1","image2","image3","image4"};
 
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 400;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 2000; // time in milliseconds between successive task executions.
+    final long DELAY_MS = 800;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
 
     private int dotscount;
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
+CircleImageView profileimage;
+
+    private DrawerLayout dl;
+
+private Toolbar toolbar;
+    private NavigationView nv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-        PreferenceManager.init(MainActivity.this);
+
+        PreferenceManagerss.init(MainActivity.this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getSupportActionBar().hide();
+
 //        getSupportActionBar().setTitle("  Pod");
 //        getSupportActionBar().setElevation(0);
 //
@@ -109,6 +129,22 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayUseLogoEnabled(true);
 //        getSupportActionBar().setLogo(R.drawable.toggle);
         // getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        toolbar = findViewById(R.id.toolbar);
+
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        dl = (DrawerLayout)findViewById(R.id.mainactivity);
+      //  t = new ActionBarDrawerToggle(this, dl,toolbar,R.string.Open, R.string.Close);
+
+
+
+
+        tvbestpriceseeall = findViewById(R.id.tvbestpriceseeall);
+        tvbestsellingseeall = findViewById(R.id.tvbestsellingseeall);
+        sliderDotspanel = findViewById(R.id.SliderDots);
+        viewPager = findViewById(R.id.viewpager);
+
         search = findViewById(R.id.putwaysearch);
         tvcartsize = findViewById(R.id.tvcartsize);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
@@ -146,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
 
-                        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                             in = new Intent(getBaseContext(), ProfileActivity.class);
                             startActivity(in);
                             overridePendingTransition(0, 0);
@@ -168,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManagers
@@ -211,8 +248,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
-                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+
+                Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                     Intent intent = new Intent(getApplicationContext(), AddToCartActivity.class);
                     intent.putExtra("main", "main");
                     startActivity(intent);
@@ -228,11 +266,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                    Intent intent = new Intent(getApplicationContext(), DrowerActivity.class);
-                    intent.putExtra("main", "main");
-                    startActivity(intent);
-                    finish();
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                   dl.open();
                 } else {
                     showAlertDialog();
                 }
@@ -256,9 +291,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-        sliderDotspanel = findViewById(R.id.SliderDots);
-        viewPager = findViewById(R.id.viewpager);
 
         PagerAdapter adapter = new CustomAdapter(MainActivity.this,imageId,imagesName);
         viewPager.setAdapter(adapter);
@@ -308,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == 4) {
+                if (currentPage == 6) {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
@@ -323,16 +355,116 @@ public class MainActivity extends AppCompatActivity {
             }
         }, DELAY_MS, PERIOD_MS);
 
+tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent priced=new Intent(getApplicationContext(),ProductListActivity.class);
+        startActivity(priced);
+        finish();
 
-
+    }
+});
+        tvbestsellingseeall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selling=new Intent(getApplicationContext(),ProductListActivity.class);
+                startActivity(selling);
+                finish();
+            }
+        });
         loadDatacart();
+
+
+    /*    dl.addDrawerListener(t);
+
+        t.syncState();*/
+
+
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.nvscan:
+                        Intent nvscan=new Intent(MainActivity.this, MyOrderActivity.class);
+                        startActivity(nvscan);
+                        dl.closeDrawers();
+                        break;
+                    case R.id.nvsettings:
+                        Intent nvsettings=new Intent(MainActivity.this, ChooseCountryActivity.class);
+                        startActivity(nvsettings);
+                        dl.closeDrawers();
+                        break;
+                    case R.id.nvhistory:
+                        Intent nvhistory=new Intent(MainActivity.this, AddressesActivity.class);
+                        startActivity(nvhistory);
+                        dl.closeDrawers();
+                        break;
+                    case R.id.nvrate:
+                        Intent connct=new Intent(MainActivity.this, ConnectwithPodActivity.class);
+                        startActivity(connct);
+                        dl.closeDrawers();
+                        break;
+                    case R.id.nvshare:
+                        Intent help=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        startActivity(help);
+                        dl.closeDrawers();
+                        break;
+
+                    case R.id.nvsolution:
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setCancelable(true);
+                        dialog.setTitle("Exit from Pod!");
+                        dialog.setMessage("Are you sure you want to exit from POD?" );
+                        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                //Action for "Delete".
+                                PreferenceManagerss.logout();
+                                finish();
+                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_HOME);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+
+                            }
+                        })
+                                .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //Action for "Cancel".
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        final AlertDialog alert = dialog.create();
+                        alert.show();
+                        dl.closeDrawers();
+                        break;
+//                    case R.id.mycart:
+//                        Toast.makeText(MainActivity.this, "My Cart",Toast.LENGTH_SHORT).show();break;
+//                    default:
+//                        return true;
+                }
+
+
+
+                return true;
+
+            }
+        });
+
+
+       profileloadData();
     }
     @SuppressLint("CheckResult")
     private void loadDatacart() {
 
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+        ApiClient.getApiClient().getcartdetails(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
@@ -504,23 +636,15 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
-    @Override
+  /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-//            case R.id.menu_item:   //this item has your app icon
-//                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-//                intent.putExtra("main","main");
-//                startActivity(intent);
-//                finish();
-//
-//                return true;
+        if(t.onOptionsItemSelected(item))
+            return true;
 
+        return super.onOptionsItemSelected(item);
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -604,4 +728,75 @@ public class MainActivity extends AppCompatActivity {
         });
         alert.show();
     }
+    @SuppressLint("CheckResult")
+    private void profileloadData() {
+
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        );
+
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+            @Override
+            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
+                View headerView = nv.getHeaderView(0);
+                headerusername = headerView.findViewById(R.id.headerusername);
+                tvemail = headerView.findViewById(R.id.tvemail);
+                profileimage= headerView.findViewById(R.id.profileimage);
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getprofile",String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    ProfileResponses list = response.body();
+                    for (int i=0; i<list.getAddress().size(); i++) {
+                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+
+                    }
+
+                    for (int i = 0; i < list.getData().size(); i++) {
+                        Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
+                        GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
+                                new LazyHeaders.Builder()
+                                        .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                        .build());
+
+                        Glide.with(getApplicationContext())
+                                .load(glideUrl)
+                                .into(profileimage);
+                    }
+
+                    headerusername.setText(list.getUsername());
+
+                    tvemail.setText(list.getUseremailid());
+profileimage.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
+});
+                    headerusername.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    tvemail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<ProfileResponses> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
+    }
+
 }

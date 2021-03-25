@@ -252,7 +252,7 @@ android:layout_below="@+id/tvcardno"
 
         android:background="@color/white"
         >
-        <Button
+        <TextView
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:id="@+id/placeorderbtn"
@@ -267,6 +267,23 @@ android:layout_below="@+id/tvcardno"
             android:layout_marginLeft="16dp"
             android:textColor="@color/white"
             android:textSize="16dp"
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/placeorderbtnbuynow"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="Buy Now"
+            android:textAllCaps="false"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:visibility="gone"
             />
 
     </RelativeLayout>

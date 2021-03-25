@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CountryResponse;
@@ -41,6 +42,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
         public MyViewHolder(View view) {
             super(view);
             countrytv = (TextView) view.findViewById(R.id.tvcountry);
+            productiv =  view.findViewById(R.id.countryimage);
 
 
 
@@ -80,6 +82,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
     public void onBindViewHolder(CountryAdapter.MyViewHolder holder, int position) {
         CountryResponse addressResponse = productResponseList.get(position);
        holder.countrytv.setText(addressResponse.getCountryname());
+        Glide.with(context)
+                .load(addressResponse.getConuntryimage())
+                .into(holder.productiv);
     }
 
     public void addAll(List<CountryResponse> list) {

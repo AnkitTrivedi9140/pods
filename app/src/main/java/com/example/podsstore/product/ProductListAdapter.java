@@ -86,8 +86,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ProductResponse movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProdname());
-        holder.description.setText("$_"+movies.getPrice());
+        holder.tvAssetType.setText(movies.getProdtype());
+        holder.description.setText("$ "+movies.getPrice());
 
      //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
 //        Glide.with(context)

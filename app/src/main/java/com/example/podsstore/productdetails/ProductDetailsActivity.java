@@ -20,19 +20,17 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
-import com.example.podsstore.addtocart.SelectAddressActivity;
+import com.example.podsstore.addtocart.PaymentActivity;
+import com.example.podsstore.buynow.BuyNowActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
-import com.example.podsstore.drower.AddressesActivity;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
-import com.example.podsstore.profile.ProfileActivity;
-import com.example.podsstore.search.SearchActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -48,19 +46,20 @@ import retrofit2.Response;
 public class ProductDetailsActivity extends AppCompatActivity {
 ImageView ivproduct,ivtoggle,ivcart;
 TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
-Button logInBtn;
+    TextView logInBtn,tvbuynow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         getSupportActionBar().hide();
-        PreferenceManager.init(ProductDetailsActivity.this);
+        PreferenceManagerss.init(ProductDetailsActivity.this);
         ivproduct=findViewById(R.id.ivproduct);
         ivtoggle=findViewById(R.id.ivtoggle);
         ivcart=findViewById(R.id.ivcart);
         tvcartsize=findViewById(R.id.tvcartsize);
         tvProductname=findViewById(R.id.tvProductname);
         logInBtn=findViewById(R.id.logInBtn);
+        tvbuynow=findViewById(R.id.tvsignin);
         tvProductprice=findViewById(R.id.tvProductprice);
         tvdetails=findViewById(R.id.tvdetails);
         tvfeature=findViewById(R.id.tvfeature);
@@ -70,6 +69,9 @@ Button logInBtn;
         tvdetailtitle=findViewById(R.id.tvdetailtitle);
         tvfeaturetitle=findViewById(R.id.tvfeaturetitle);
         tvfunctiontitle=findViewById(R.id.tvfunctiontitle);
+
+
+
         loadData();
         ivtoggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +111,7 @@ Button logInBtn;
             @Override
             public void onClick(View v) {
 
-                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                     Intent cart=new Intent(getApplicationContext(), AddToCartActivity.class);
                     startActivity(cart);
                     finish();
@@ -122,6 +124,7 @@ Button logInBtn;
 
 loadDatacart();
 
+
     }
 
     @Override
@@ -133,9 +136,9 @@ loadDatacart();
     @SuppressLint("CheckResult")
     private void loadDatacart() {
 
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+        ApiClient.getApiClient().getcartdetails(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
@@ -205,7 +208,7 @@ loadDatacart();
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getssss",PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
 
         ApiClient.getApiClient().getproductsdetails(getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
             @Override
@@ -222,17 +225,63 @@ loadDatacart();
                                 .load(list.get(i).getImageurl().trim().toString())
                                 .into(ivproduct);
                         tvProductname.setText(list.get(i).getProdname());
-                        tvProductprice.setText("$_"+list.get(i).getPrice());
+                        tvProductprice.setText("$ "+list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
+
+                        if(tvfunction.getText().toString().length()>4){
+                            tvfunctiontitle.setVisibility(View.VISIBLE);
+                            tvfunction.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvfunctiontitle.setVisibility(View.GONE);
+                            tvfunction.setVisibility(View.GONE);
+                        } if (tvfeature.getText().toString().length()>4){
+                            tvfeaturetitle.setVisibility(View.VISIBLE);
+                            tvfeature.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            tvfeaturetitle.setVisibility(View.GONE);
+                            tvfeature.setVisibility(View.GONE);
+                        }
+                        if(tvdetails.getText().toString().length()>4){
+                            tvdetails.setVisibility(View.VISIBLE);
+                            tvdetailtitle.setVisibility(View.VISIBLE);
+                        }
+                        else{
+
+                            tvdetails.setVisibility(View.GONE);
+                            tvdetailtitle.setVisibility(View.GONE);
+
+                            // Toast.makeText(getApplicationContext(),"niotna",Toast.LENGTH_SHORT).show();
+                        }
+
+
                         int finalI = i;
                         logInBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
-                                if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                                     smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong("1"));
+                                }else{
+                                    showAlertDialog();
+                                }
+
+
+                            }
+                        });
+
+                        tvbuynow.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                                    Intent intent=new Intent(getApplicationContext(), BuyNowActivity.class);
+                                    intent.putExtra("userid",getIntent().getStringExtra("userid"));
+                                    startActivity(intent);
+                                    finish();
                                 }else{
                                     showAlertDialog();
                                 }
@@ -273,7 +322,7 @@ loadDatacart();
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). addtocart(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient(). addtocart(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -303,6 +352,72 @@ loadDatacart();
                             }
                         } else {
                           Toast.makeText(getApplicationContext(),"Item already in cart.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
+
+
+    @SuppressLint("CheckResult")
+    private void smallCartonbuy(Long prodid,String prodname,Long price,Long qty) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+        List<AddressDetailsRequest> list = new ArrayList<>();
+
+        AddtocartRequest r = new AddtocartRequest();
+        r.setProductid(prodid);
+        r.setProductname(prodname);
+        r.setPrice(price);
+        r.setQuantity(qty);
+
+        // list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClient.getApiClient(). addtocart(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+                        CreateLoginUserResponse successResponse = response.body();
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+
+                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadDatacart();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+
+                        } else {
+                            Toast.makeText(getApplicationContext(),"Item already in cart.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

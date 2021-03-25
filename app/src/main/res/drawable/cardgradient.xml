@@ -2,20 +2,20 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#3f5063" />
     <corners
-        android:bottomLeftRadius="8dp"
-        android:bottomRightRadius="8dp"
-        android:topLeftRadius="8dp"
-        android:topRightRadius="8dp" />
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp" />
     <padding
         android:bottom="2dp"
         android:left="2dp"
         android:right="2dp"
         android:top="2dp" />
     <gradient
-        android:angle="45"
-android:centerColor="@color/dashboard_header_start_color"
-        android:endColor="@color/dashboard_header_end_color"
-        android:startColor="@color/red" />
+        android:angle="360"
+android:centerColor="@color/term_and_conditions"
+        android:endColor="@color/term_and_conditions"
+        android:startColor="@color/term_and_conditions" />
     <stroke
         android:width="0dp"
         android:color="#000000" />

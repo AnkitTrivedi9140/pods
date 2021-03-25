@@ -84,7 +84,7 @@ public class SubCategoryProductAdapter  extends RecyclerView.Adapter<SubCategory
     @Override
     public void onBindViewHolder(SubCategoryProductAdapter.MyViewHolder holder, int position) {
         SubCategoryProductResponce movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProdname());
+        holder.tvAssetType.setText(movies.getProdtype());
         holder.description.setVisibility(View.GONE);
 
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();

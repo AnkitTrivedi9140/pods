@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".productdetails.ProductDetailsActivity">
 
 
@@ -11,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:background="@color/term_and_conditions"
-        android:layout_height="55dp"
+        android:layout_height="58dp"
 
         android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
@@ -33,7 +34,7 @@
     android:id="@+id/ivtoggle"
     android:layout_width="33dp"
     android:src="@drawable/backwhite"
-
+    android:layout_centerVertical="true"
     android:layout_height="33dp"></ImageView>
 
     <TextView
@@ -41,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22dp"
-        android:textStyle="bold"
-android:layout_marginLeft="48dp"
 
+android:layout_marginLeft="48dp"
+android:layout_centerVertical="true"
   android:textColor="@color/white"
         android:text="Product Details"
         ></TextView>
@@ -51,7 +52,7 @@ android:layout_marginLeft="48dp"
         android:id="@+id/ivcart"
         android:layout_width="33dp"
         android:src="@drawable/cart"
-
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_height="33dp"
 
@@ -88,6 +89,11 @@ android:layout_marginLeft="48dp"
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="#F5F5F5"
+        android:id="@+id/rlimage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/ivproduct"
         android:layout_width="266dp"
@@ -95,16 +101,19 @@ android:layout_marginLeft="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         ></ImageView>
-
+    </RelativeLayout>
 <RelativeLayout
     android:id="@+id/rlprice"
-    android:layout_below="@+id/ivproduct"
+    android:layout_below="@+id/rlimage"
     android:layout_width="match_parent"
-    android:background="@color/platinum"
+android:background="@color/white"
 android:padding="8dp"
+
     android:layout_marginTop="4dp"
     android:layout_height="88dp">
     <TextView
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:id="@+id/tvProductname"
 android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
@@ -115,6 +124,8 @@ android:layout_marginTop="4dp"
         ></TextView>
 
     <TextView
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:id="@+id/tvProductprice"
 android:layout_below="@+id/tvProductname"
         android:layout_width="wrap_content"
@@ -128,97 +139,124 @@ android:layout_below="@+id/tvProductname"
 
     <RelativeLayout
         android:id="@+id/rldetails"
-        android:layout_below="@+id/rlprice"
         android:layout_width="match_parent"
-        android:background="@color/platinum"
-        android:padding="8dp"
-        android:layout_marginTop="14dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlprice"
+
+        android:layout_marginTop="8dp"
+
+        android:background="@color/white"
+        android:padding="8dp">
+
         <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/tvdetailtitle"
-            android:layout_marginTop="22dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
             android:text="Procuct Details"
             android:textColor="@color/black"
-            android:textSize="22dp"
-            ></TextView>
+            android:textSize="18dp"></TextView>
 
         <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/tvdetails"
-            android:layout_below="@+id/tvdetailtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Procuct"
-            android:textSize="16dp"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_color_setting"
-            ></TextView>
+            android:layout_below="@+id/tvdetailtitle"
 
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
 
 
         <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/tvfeaturetitle"
-            android:layout_marginTop="22dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvdetails"
+            android:layout_marginTop="22dp"
             android:text="Feature"
             android:textColor="@color/black"
-            android:textSize="22dp"
 
-            android:layout_below="@+id/tvdetails"
-            ></TextView>
+            android:textSize="18dp"></TextView>
 
         <TextView
             android:id="@+id/tvfeature"
-            android:layout_below="@+id/tvfeaturetitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="feature"
-            android:textSize="16dp"
+            android:layout_below="@+id/tvfeaturetitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_color_setting"
-            ></TextView>
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
 
         <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/tvfunctiontitle"
-            android:layout_marginTop="22dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvfeature"
+            android:layout_marginTop="22dp"
             android:text="Functions"
             android:textColor="@color/black"
-            android:textSize="22dp"
-            android:layout_below="@+id/tvfeature"
-            ></TextView>
+            android:textSize="18dp"></TextView>
 
         <TextView
             android:id="@+id/tvfunction"
-            android:layout_below="@+id/tvfunctiontitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="feature"
-            android:textSize="16dp"
+            android:layout_below="@+id/tvfunctiontitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_color_setting"
-            ></TextView>
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
 
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>
 
-    <Button
-        android:id="@+id/logInBtn"
 
-        android:layout_width="333dp"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/button_bg"
+
+
+    <TextView
+        android:background="@drawable/rippleabout"
+        android:layout_marginLeft="14dp"
+        android:lines="1"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/logInBtn"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:textSize="14dp"
+
         android:gravity="center"
-        android:text="Add to Cart"
-        android:textAllCaps="false"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/term_and_conditions"
+        android:text="Add To Cart"
+        ></TextView>
+    <TextView
+        android:background="@drawable/ripplenext"
+        android:layout_marginRight="14dp"
+        android:layout_alignParentBottom="true"
+        android:lines="1"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/tvsignin"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:textSize="14dp"
+
+        android:layout_marginTop="2dp"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/white"
-        android:textSize="16dp" />
+        android:text="Buy Now"
+        android:gravity="center"
+        android:layout_alignParentRight="true"></TextView>
 </RelativeLayout>

@@ -1,20 +1,12 @@
 package com.example.podsstore.addtocart;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.cardview.widget.CardView;
@@ -25,25 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 
-import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.response.CartResponse;
-import com.example.podsstore.data.response.CreateLoginUserResponse;
-import com.example.podsstore.prefs.PreferenceManager;
-import com.example.podsstore.prefs.Preferences;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyViewHolder> {
     private AddtocartAdapter.AdapterListener adapterListener;
@@ -180,8 +159,8 @@ String qty;
     @Override
     public void onBindViewHolder(AddtocartAdapter.MyViewHolder holder, int position) {
         CartResponse cartResponse = productResponseList.get(position);
-        holder.tvAssetType.setText(cartResponse.getProductname());
-        holder.description.setText("$_"+cartResponse.getPrice());
+        holder.tvAssetType.setText(cartResponse.getProducttype());
+        holder.description.setText("$ "+cartResponse.getPrice());
         holder.tvqty.setText("Qty_"+cartResponse.getQty());
         viewModel = ViewModelProviders.of((FragmentActivity) context).get(QuantityViewModel.class);
         String lastqty = viewModel.getqty(cartResponse.getProductid().toString());

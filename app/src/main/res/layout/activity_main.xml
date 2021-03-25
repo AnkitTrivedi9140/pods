@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:id="@+id/mainactivity"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="122dp"
+            android:layout_height="wrap_content"
             android:background="@color/term_and_conditions"
 
             android:contentInsetStart="0dp"
@@ -35,19 +35,19 @@
 
                 <ImageView
                     android:id="@+id/ivtoggle"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:visibility="visible"
                     android:src="@drawable/toggle"></ImageView>
 
                 <ImageView
                     android:id="@+id/tvicon"
-                    android:layout_width="99dp"
+                    android:layout_width="66dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="28dp"
+
                     android:src="@drawable/removebgpodicon"
                     android:text="Pod"
-
+android:layout_marginLeft="66dp"
                     android:textSize="55dp"
                     android:textStyle="bold"></ImageView>
 
@@ -82,54 +82,56 @@
                 </RelativeLayout>
 
 
-                <EditText
-                    android:id="@+id/putwaysearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/ivcart"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/edittextbackground"
-                    android:drawableLeft="@drawable/search"
-                    android:drawablePadding="18dp"
-                    android:hint="Search your product"
-                    android:padding="10dp"
-                    android:textSize="18dp" />
 
-                <ImageView
-                    android:id="@+id/ivgo"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:layout_below="@+id/ivcart"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-
-                    android:layout_marginTop="21dp"
-                    android:layout_marginRight="4dp"
-                    android:src="@drawable/gobtngrn">
-
-                </ImageView>
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
             android:id="@+id/rlsearch"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="77dp"
             android:layout_below="@+id/toolbar"
             android:background="@color/term_and_conditions"
-            android:paddingRight="14dp"
-
-            android:paddingBottom="22dp">
 
 
+
+            >
+
+            <EditText
+                android:id="@+id/putwaysearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_centerHorizontal="true"
+
+                android:background="@drawable/edittextbackground"
+                android:drawableLeft="@drawable/search"
+                android:drawablePadding="18dp"
+                android:hint="Search your product"
+                android:padding="10dp"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/ivgo"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="26dp"
+                android:src="@drawable/gobtngrn">
+
+            </ImageView>
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="133dp"
+            android:layout_marginTop="122dp"
             android:layout_marginBottom="55dp"
             android:elevation="0dp"
             app:cardCornerRadius="12dp">
@@ -160,24 +162,31 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ivallproduct"
                         android:layout_marginLeft="22dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="6dp"
+                        android:textSize="12dp"
+                        android:textColor="@color/black"
                         android:text="All"></TextView>
 
-
+<RelativeLayout
+    android:id="@+id/rlcategory"
+    android:layout_toRightOf="@+id/ivallproduct"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/productrv"
+android:layout_marginLeft="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                        android:layout_width="match_parent"
-                        android:layout_height="77dp"
-                        android:layout_toRightOf="@+id/ivallproduct"
                         android:orientation="horizontal"
                         android:scrollbars="horizontal">
 
                     </androidx.recyclerview.widget.RecyclerView>
-
+</RelativeLayout>
 <RelativeLayout
+
     android:id="@+id/pager"
-    android:layout_below="@+id/productrv"
+    android:layout_below="@+id/rlcategory"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
                   <androidx.viewpager.widget.ViewPager
@@ -194,7 +203,7 @@
                     <LinearLayout
                         android:id="@+id/SliderDots"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="14dp"
 
                         android:layout_marginStart="8dp"
 
@@ -277,21 +286,33 @@
                         android:layout_below="@+id/pager"
                         android:text="Bestselling Products"
                         android:textColor="@color/black"
-                        android:textSize="22dp"
+                        android:textSize="20dp"
                         android:layout_marginTop="12dp"
 
                         >
 
                     </TextView>
 
+                    <TextView
+                        android:id="@+id/tvbestsellingseeall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pager"
+                        android:text="See All"
+                        android:textColor="@color/text_color_setting"
+                        android:textSize="14dp"
+                        android:layout_marginTop="18dp"
+android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true">
 
+                    </TextView>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/bestsellingproductrv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvbestselling"
                         android:orientation="horizontal"
-
+android:layout_marginTop="8dp"
                         android:scrollbars="horizontal">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -302,9 +323,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bestsellingproductrv"
-                        android:layout_marginBottom="22dp"
+                        android:layout_marginBottom="16dp"
                         android:background="@color/btngrn"
-
+android:layout_marginTop="8dp"
                         >
 
                         <TextView
@@ -314,7 +335,7 @@
                             android:padding="10dp"
                             android:text="Top Brands on POD"
                             android:textColor="@color/white"
-                            android:textSize="22dp"></TextView>
+                            android:textSize="20dp"></TextView>
 
                         <HorizontalScrollView
                             android:layout_width="match_parent"
@@ -383,10 +404,22 @@
                         android:layout_below="@+id/rltop"
                         android:text="Best Priced Products"
                         android:textColor="@color/black"
-                        android:textSize="22dp">
+                        android:textSize="20dp">
 
                     </TextView>
+                    <TextView
+                        android:id="@+id/tvbestpriceseeall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rltop"
+                        android:text="See All"
+                        android:textColor="@color/black"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="14dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_alignParentRight="true">
 
+                    </TextView>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/bestprisedproductrv"
                         android:layout_width="match_parent"
@@ -410,5 +443,35 @@
             android:layout_alignParentBottom="true"
             app:layout_constraintBottom_toBottomOf="parent" />
     </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_menu"
+        android:background="@color/white"
+        android:layout_gravity="start"
+        app:itemTextColor="#505A63"
+        app:itemIconTint="#505A63"
+        app:itemIconPadding="33dp"
+        app:headerLayout="@layout/nav_header"
+        android:theme="@style/NavigationView"
+        android:id="@+id/nv">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/cotxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/sample_string"
+                android:textColor="@color/term_and_conditions"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

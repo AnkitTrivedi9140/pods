@@ -9,12 +9,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.SubCategoryProductResponce;
 import com.example.podsstore.data.response.SubCategoryResponce;
+import com.example.podsstore.productdetails.ProductDetailsActivity;
 
 import java.util.List;
 
@@ -26,10 +31,14 @@ import retrofit2.Response;
 public class SubCategoryProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SubCategoryProductAdapter productListAdapter;
+    ProgressBar progressBar;
+    TextView progresstext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_category_product);
+        progressBar=findViewById(R.id.progress);
+        progresstext=findViewById(R.id.progresstext);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Sub Category Product");
         recyclerView = findViewById(R.id.productrv);
@@ -51,7 +60,9 @@ public class SubCategoryProductActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void loadData() {
-        Toast.makeText(getApplicationContext(),getIntent().getStringExtra("userid"),Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
+       // Toast.makeText(getApplicationContext(),getIntent().getStringExtra("userid"),Toast.LENGTH_SHORT).show();
         ApiClient.getApiClient().getproductbycategory(getIntent().getStringExtra("catid"),getIntent().getStringExtra("userid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -59,6 +70,8 @@ public class SubCategoryProductActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Response<List<SubCategoryProductResponce>> response) {
                         // binding.progress.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
                         Log.d("onSuccess: ",String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             List<SubCategoryProductResponce> list = response.body();
@@ -66,7 +79,8 @@ public class SubCategoryProductActivity extends AppCompatActivity {
                             productListAdapter.addAll(list);
 
                         } else {
-
+                            progressBar.setVisibility(View.GONE);
+                            progresstext.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
                         }
 
@@ -75,18 +89,39 @@ public class SubCategoryProductActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
                         Log.e( "onError: ",e.getMessage() );
                     }
                 });
     }
     private SubCategoryProductAdapter.AdapterListener adapterListener = data -> {
-        // Toast.makeText(getApplicationContext(), data.getId(), Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(SubCategoryProductActivity.this, SubCategoryProductActivity.class);
-        i.putExtra("userid", data.getId());
-        i.putExtra("catid",data.getCatid());
+     // Toast.makeText(getApplicationContext(), data.getId().toString(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(SubCategoryProductActivity.this, ProductDetailsActivity.class);
+        i.putExtra("userid", data.getId().toString());
+        i.putExtra("catid",data.getCatid().toString());
         startActivity(i);
 
 
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

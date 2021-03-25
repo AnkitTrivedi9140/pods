@@ -3,13 +3,9 @@ package com.example.podsstore.login;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,25 +17,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
-import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
-import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
-import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.profile.ProfileActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -68,8 +59,8 @@ RelativeLayout rlaccountconfirmation;
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        PreferenceManager.init(LoginActivity.this);
-        if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+        PreferenceManagerss.init(LoginActivity.this);
+        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         //    Toast.makeText(getApplicationContext(),PreferenceManager.getStringValue(Preferences.USER_EMAIL),Toast.LENGTH_SHORT).show();
             startActivity(intent);
@@ -152,11 +143,11 @@ showAlertDialog();
     };
     @SuppressLint("CheckResult")
     private void confirmotp(String otp) {
-        Toast.makeText(getApplicationContext(),PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL) ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL) ,Toast.LENGTH_SHORT).show();
         /*Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
         );*/
       //  if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-        ApiClient.getApiClient().confirmotp(PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL) , otp).enqueue(new Callback<CreateLoginUserResponse>() {
+        ApiClient.getApiClient().confirmotp(PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL) , otp).enqueue(new Callback<CreateLoginUserResponse>() {
         //ApiClient.getApiClient().confirmotp("fff", otp).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
@@ -186,7 +177,7 @@ showAlertDialog();
     @SuppressLint("CheckResult")
     private void loadData(String emailid) {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
         ApiClient.getApiClient().forgotpassword(emailid).enqueue(new Callback<CreateLoginUserResponse>() {
             @Override
@@ -195,7 +186,7 @@ showAlertDialog();
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("getprofile",String.valueOf(response.code()));
                 if (response.isSuccessful()) {
-                    PreferenceManager.setStringValue(Preferences.USER_OTP_EMAIL, emailid);
+                    PreferenceManagerss.setStringValue(Preferences.USER_OTP_EMAIL, emailid);
                     CreateLoginUserResponse list = response.body();
 
                     Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
@@ -247,9 +238,9 @@ showAlertDialog();
                             LoginResponse successResponse = response.body();
                          //   Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
 
-                            PreferenceManager.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
-                            PreferenceManager.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
-                            PreferenceManager.setStringValue(Preferences.ACCESS_TOKEN, response.body().getAccessToken());
+                            PreferenceManagerss.setStringValue(Preferences.USER_EMAIL, response.body().getUserEmailId());
+                            PreferenceManagerss.setStringValue(Preferences.TOKEN_TYPE, response.body().getTokenType());
+                            PreferenceManagerss.setStringValue(Preferences.ACCESS_TOKEN, response.body().getAccessToken());
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -398,7 +389,7 @@ showAlertDialog();
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient().pwdsuccess( PreferenceManager.getStringValue(Preferences.USER_OTP_EMAIL), r)
+        ApiClient.getApiClient().pwdsuccess( PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL), r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {

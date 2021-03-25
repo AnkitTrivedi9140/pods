@@ -67,7 +67,7 @@ public interface NetworkInterface {
     Call<ProfileResponses>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
 
     @POST("countryRest/getCountryDetails")
-    Single<Response<List<CountryResponse>>>getcountry(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
+    Single<Response<List<CountryResponse>>>getcountry();
 
 
     @POST("loginRest/forgotPassword")
@@ -80,13 +80,13 @@ public interface NetworkInterface {
     Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
 
 
-    @GET("businessRest/homeCategory")
+    @POST("businessRest/homeCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat();
 
-    @GET("businessRest/homeSubCategory")
+    @POST("businessRest/homeSubCategory")
     Single<Response<List<SubCategoryResponce>>>getsubcategory(@Query("id") String id);
 
-    @GET("businessRest/homeSubCatInfo")
+    @POST("businessRest/homeSubCatInfo")
     Single<Response<List<SubCategoryProductResponce>>>getproductbycategory(@Query("catid") String catid, @Query("id") String id);
 
     @POST("tellUsRest/tellUsMore")

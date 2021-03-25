@@ -86,7 +86,7 @@ public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.My
     public void onBindViewHolder(BestPricedAdapter.MyViewHolder holder, int position) {
         BestSellingProductResponse movies = productResponseList.get(position);
         holder.tvAssetType.setText(movies.getProductname());
-        holder.description.setText("$_"+movies.getProductprice());
+        holder.description.setText("$ "+movies.getProductprice());
         //Toast.makeText(context,movies.getProductname(),Toast.LENGTH_SHORT).show();
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
 //        Glide.with(context)

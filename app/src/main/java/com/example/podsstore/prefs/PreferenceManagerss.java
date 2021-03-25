@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferenceManager {
+public class PreferenceManagerss {
 
 
         private static SharedPreferences preferences;
 
         private static SharedPreferences.Editor editor;
 
-        private PreferenceManager() {
+        private PreferenceManagerss() {
 
         }
 

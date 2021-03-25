@@ -14,14 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
-import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
-import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.drower.AddressesActivity;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
 
@@ -146,7 +144,7 @@ private TextView tvsubmit;
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). submitaddress(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient(). submitaddress(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {

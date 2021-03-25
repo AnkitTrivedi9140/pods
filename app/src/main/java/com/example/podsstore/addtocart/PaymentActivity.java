@@ -13,16 +13,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
-import com.example.podsstore.data.request.AddressDetailsRequest;
-import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
 
@@ -39,7 +39,7 @@ import retrofit2.Response;
 public class PaymentActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-    TextView placeorderbtn;
+    TextView placeorderbtn,placeorderbtnbuynow;
     private QuantityViewModel viewModel;
 
     @Override
@@ -47,11 +47,24 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         placeorderbtn = findViewById(R.id.placeorderbtn);
+        placeorderbtnbuynow = findViewById(R.id.placeorderbtnbuynow);
         productListAdapter = new AddtocartAdapter(PaymentActivity.this, this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Payment");
         viewModel = ViewModelProviders.of(PaymentActivity.this).get(QuantityViewModel.class);
         loadData();
+        if(getIntent().getStringExtra("userid")==null) {
+            placeorderbtn.setVisibility(View.VISIBLE);
+
+        }else {
+            placeorderbtnbuynow.setVisibility(View.VISIBLE);
+        }
+placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        singleproductdetails();
+    }
+});
     }
 
     @Override
@@ -79,9 +92,9 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManager.getStringValue(Preferences.USER_EMAIL));
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
 
-        ApiClient.getApiClient().getcartdetails(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
+        ApiClient.getApiClient().getcartdetails(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<CartResponse>>() {
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
@@ -107,6 +120,8 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
                                 }
 
                             }
+
+
                         }
                     });
                     if (list != null) {
@@ -147,7 +162,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
 
         Log.e("postData", new Gson().toJson(list));
 
-        ApiClient.getApiClient().placeOrder(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManager.getStringValue(Preferences.USER_EMAIL), list)
+        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -189,5 +204,38 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     @Override
     public void onSetValues(ArrayList<String> al) {
         Toast.makeText(getApplicationContext(), al.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @SuppressLint("CheckResult")
+    private void singleproductdetails() {
+
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
+
+        ApiClient.getApiClient().getproductsdetails(getIntent().getStringExtra("userid")).enqueue(new Callback<List<ProductResponse>>() {
+            @Override
+            public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                if (response.isSuccessful()) {
+                    List<ProductResponse> list = response.body();
+
+//                    for (int i = 0; i < list.size(); i++) {
+                        placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), "1", String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
+
+                 //   }
+                    if (list != null) {
+
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductResponse>> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
     }
 }

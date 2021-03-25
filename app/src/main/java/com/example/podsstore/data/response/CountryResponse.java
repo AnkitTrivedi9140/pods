@@ -15,6 +15,8 @@ public class CountryResponse {
     private String crdate;
     @SerializedName("countryStatus")
     private String countrystatus;
+    @SerializedName("imageUrl")
+    private String conuntryimage;
 
     public Long getCountryid() {
         return countryid;
@@ -48,6 +50,14 @@ public class CountryResponse {
         this.countrystatus = countrystatus;
     }
 
+    public String getConuntryimage() {
+        return conuntryimage;
+    }
+
+    public void setConuntryimage(String conuntryimage) {
+        this.conuntryimage = conuntryimage;
+    }
+
     @Override
     public String toString() {
         return "CountryResponse{" +
@@ -55,6 +65,7 @@ public class CountryResponse {
                 ", countryname='" + countryname + '\'' +
                 ", crdate='" + crdate + '\'' +
                 ", countrystatus='" + countrystatus + '\'' +
+                ", conuntryimage='" + conuntryimage + '\'' +
                 '}';
     }
 }

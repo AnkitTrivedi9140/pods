@@ -31,6 +31,11 @@ public class CartResponse {
     private String totalprice;
 
 
+    @SerializedName("productType")
+    private String producttype;
+
+
+
 
     @SerializedName("itemPresentIn")
     private String itempresentin;
@@ -125,6 +130,14 @@ public class CartResponse {
         this.addeddate = addeddate;
     }
 
+    public String getProducttype() {
+        return producttype;
+    }
+
+    public void setProducttype(String producttype) {
+        this.producttype = producttype;
+    }
+
     @Override
     public String toString() {
         return "CartResponse{" +
@@ -137,6 +150,7 @@ public class CartResponse {
                 ", price=" + price +
                 ", discount='" + discount + '\'' +
                 ", totalprice='" + totalprice + '\'' +
+                ", producttype='" + producttype + '\'' +
                 ", itempresentin='" + itempresentin + '\'' +
                 ", addeddate='" + addeddate + '\'' +
                 '}';

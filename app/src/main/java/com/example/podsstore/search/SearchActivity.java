@@ -18,10 +18,8 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.product.ProductListActivity;
-import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 
 import java.util.List;
@@ -59,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     private void loadData() {
         // binding.progress.setVisibility(View.VISIBLE);
-        Log.e("getProductMasterssss", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN));
+        Log.e("getProductMasterssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN));
         ApiClient.getApiClient().search(getIntent().getStringExtra("data"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

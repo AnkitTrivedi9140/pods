@@ -19,13 +19,11 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
-import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.getorder.MyOrderActivity;
-import com.example.podsstore.prefs.PreferenceManager;
+import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
-import com.example.podsstore.profile.AddressActivity;
 import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.wishlist.WishListActivity;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -84,7 +82,7 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         //Action for "Delete".
-                        PreferenceManager.logout();
+                        PreferenceManagerss.logout();
                         finish();
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
@@ -157,10 +155,10 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN)+PreferenceManager.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
 
-        ApiClient.getApiClient().profile(PreferenceManager.getStringValue(Preferences.TOKEN_TYPE)+" "+PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN),PreferenceManager.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
             @Override
             public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
 
@@ -177,7 +175,7 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
                         Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
                         GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
                                 new LazyHeaders.Builder()
-                                        .addHeader("Authorization", PreferenceManager.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN))
+                                        .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
                                         .build());
 

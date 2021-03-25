@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".category.SubCategoryProductActivity"></activity>
+        <activity android:name=".buynow.BuyNowActivity"></activity>
+        <activity android:name=".category.SubCategoryProductActivity" />
         <activity android:name=".category.SubCategoryActivity" />
         <activity android:name=".drower.ChooseCountryActivity" />
         <activity android:name=".getorder.MyOrderActivity" />
