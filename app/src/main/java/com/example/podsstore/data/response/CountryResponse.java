@@ -18,6 +18,10 @@ public class CountryResponse {
     @SerializedName("imageUrl")
     private String conuntryimage;
 
+    @SerializedName("countryCode")
+    private String countrycode;
+
+
     public Long getCountryid() {
         return countryid;
     }
@@ -66,6 +70,15 @@ public class CountryResponse {
                 ", crdate='" + crdate + '\'' +
                 ", countrystatus='" + countrystatus + '\'' +
                 ", conuntryimage='" + conuntryimage + '\'' +
+                ", countrycode='" + countrycode + '\'' +
                 '}';
+    }
+
+    public String getCountrycode() {
+        return countrycode;
+    }
+
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
     }
 }

@@ -54,7 +54,12 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
 
             tvcome = view.findViewById(R.id.tvcome);
 
+            cardView.setOnClickListener(v -> {
 
+                if (adapterListener != null) {
+                    adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                }
+            });
 
 
         }

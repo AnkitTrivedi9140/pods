@@ -17,6 +17,7 @@
         android:src="@drawable/ic_back"
         android:layout_margin="8dp"
         ></ImageView>
+
     <ImageView
         android:id="@+id/tvicon"
         android:layout_width="wrap_content"
@@ -29,8 +30,10 @@ android:layout_marginTop="8dp"
 
         android:text="Pod"
         android:layout_alignParentRight="true"></ImageView>
+
+
     <ScrollView
-android:layout_marginTop="33dp"
+android:layout_marginTop="22dp"
         android:layout_marginBottom="44dp"
        android:layout_below="@+id/tvicon"
         android:layout_width="wrap_content"
@@ -90,6 +93,45 @@ android:textStyle="bold"
             android:layout_below="@+id/usernameEt"/>
 
 
+
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/numberofemployeeEt"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/emp"
+            android:drawablePadding="8dp"
+
+            android:hint="Number of employees"
+
+            android:padding="8dp"
+
+            android:layout_below="@+id/emailEt"/>
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:id="@+id/turnoverEt"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:drawableLeft="@drawable/turn"
+            android:drawablePadding="8dp"
+
+
+            android:hint="Ternover Range"
+
+            android:padding="8dp"
+
+            android:layout_below="@+id/numberofemployeeEt"/>
+
+
+
+
+
         <EditText
             android:layout_centerHorizontal="true"
             android:id="@+id/passwordEt"
@@ -105,7 +147,7 @@ android:textStyle="bold"
 
             android:padding="8dp"
 
-            android:layout_below="@+id/emailEt"/>
+            android:layout_below="@+id/turnoverEt"/>
         <EditText
             android:layout_centerHorizontal="true"
             android:id="@+id/passwordagainEt"
@@ -135,6 +177,19 @@ android:textStyle="bold"
 <!--        >-->
 
 <!--    </TextView>-->
+        <TextView
+            android:id="@+id/tvduns"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Upload DUNS Report"
+            android:layout_below="@+id/passwordagainEt"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/term_and_conditions"
+            android:background="@drawable/rippleabout"
+            ></TextView>
         <CheckBox
             android:id="@+id/checkBoxterms"
             android:layout_width="wrap_content"
@@ -142,7 +197,10 @@ android:textStyle="bold"
 android:textColor="@color/text_color_device_found"
             android:layout_marginTop="11dp"
             android:text="By creating an account you agree to our Terms of Service and Privacy Policy."
-            android:layout_below="@+id/passwordagainEt"/>
+            android:layout_below="@+id/tvduns"/>
+
+
+
         <RelativeLayout
             android:layout_below="@+id/checkBoxterms"
             android:layout_width="match_parent"
@@ -154,7 +212,7 @@ android:textColor="@color/text_color_device_found"
                 android:id="@+id/logInBtn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="22dp"
                 android:background="@drawable/button_bg"
                 android:gravity="center"
                 android:text="Create Account"

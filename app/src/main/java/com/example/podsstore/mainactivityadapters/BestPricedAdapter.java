@@ -14,13 +14,14 @@ import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.data.response.TopBrandsProductResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.MyViewHolder> {
     private BestPricedAdapter.AdapterListener adapterListener;
-    private List<BestSellingProductResponse> productResponseList;
+    private List<TopBrandsProductResponse> productResponseList;
 
     private Context context;
 
@@ -69,7 +70,7 @@ public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.My
 
     }
 
-    public BestPricedAdapter(List<BestSellingProductResponse> moviesList) {
+    public BestPricedAdapter(List<TopBrandsProductResponse> moviesList) {
 
         this.productResponseList = moviesList;
     }
@@ -77,16 +78,16 @@ public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.My
     @Override
     public BestPricedAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.bestsellingitems, parent, false);
+                .inflate(R.layout.bestpriceditems, parent, false);
 
         return new BestPricedAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(BestPricedAdapter.MyViewHolder holder, int position) {
-        BestSellingProductResponse movies = productResponseList.get(position);
-        holder.tvAssetType.setText(movies.getProductname());
-        holder.description.setText("$ "+movies.getProductprice());
+        TopBrandsProductResponse movies = productResponseList.get(position);
+        holder.tvAssetType.setText(movies.getProdname());
+        holder.description.setText("$ "+movies.getPrice());
         //Toast.makeText(context,movies.getProductname(),Toast.LENGTH_SHORT).show();
         //Toast.makeText(context,movies.getImageurl(),Toast.LENGTH_LONG).show();
 //        Glide.with(context)
@@ -97,14 +98,14 @@ public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.My
                 .into(holder.productiv);
     }
 
-    public void addAll(List<BestSellingProductResponse> list) {
+    public void addAll(List<TopBrandsProductResponse> list) {
 
-        for (BestSellingProductResponse d : list) {
+        for (TopBrandsProductResponse d : list) {
             add(d);
         }
     }
 
-    public void add(BestSellingProductResponse data) {
+    public void add(TopBrandsProductResponse data) {
         productResponseList.add(data);
         notifyItemInserted(productResponseList.size() - 1);
     }
@@ -129,7 +130,7 @@ public class BestPricedAdapter extends RecyclerView.Adapter<BestPricedAdapter.My
     public interface AdapterListener {
 
 
-        void onItemClick(BestSellingProductResponse data);
+        void onItemClick(TopBrandsProductResponse data);
     }
 
     public interface InventoryAdapterListener {

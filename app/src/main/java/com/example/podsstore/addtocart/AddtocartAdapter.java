@@ -35,10 +35,14 @@ String qty;
     private AddtocartAdapter.AdapterListenerplus adapterListenerplus;
     private AddtocartAdapter.AdapterListenerless adapterListenerless;
 
+    private AddtocartAdapter.AdapterListenercart adapterListenercart;
+
     public void setAdapterListener(AddtocartAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
-
+    public void setAdapterListenercart(AddtocartAdapter.AdapterListenercart adapterListener) {
+        this.adapterListenercart = adapterListener;
+    }
     public void setAdapterListeners(AddtocartAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
     }
@@ -68,6 +72,15 @@ String qty;
             more = view.findViewById(R.id.more);
             prnumber = view.findViewById(R.id.prnumber);
             wishlist = view.findViewById(R.id.rlwishlist);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (adapterListenercart != null) {
+                        adapterListenercart.onItemClick(productResponseList.get(getAdapterPosition()));
+                    }
+                }
+            });
             wishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -208,6 +221,12 @@ if(lastqty==null){
     }
 
     public interface AdapterListener {
+
+
+        void onItemClick(CartResponse data);
+    }
+
+    public interface AdapterListenercart {
 
 
         void onItemClick(CartResponse data);

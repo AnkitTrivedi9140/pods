@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -39,13 +40,19 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
         public TextView countrytv, tvAssetType,tvaddress1;
         public ImageView productiv;
         public CardView cardView;
+        RelativeLayout rlcountry;
         public MyViewHolder(View view) {
             super(view);
             countrytv = (TextView) view.findViewById(R.id.tvcountry);
             productiv =  view.findViewById(R.id.countryimage);
+            rlcountry =  view.findViewById(R.id.rlcountry);
 
+            rlcountry.setOnClickListener(v -> {
 
-
+                if (adapterListener != null) {
+                    adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                }
+            });
 
 
 

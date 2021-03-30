@@ -19,6 +19,8 @@ import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.data.response.SubCategoryProductResponce;
 import com.example.podsstore.data.response.SubCategoryResponce;
+import com.example.podsstore.data.response.TopBrandsProductResponse;
+import com.example.podsstore.data.response.TopBrandsResponse;
 import com.example.podsstore.data.response.UploadImageResponse;
 
 import java.util.List;
@@ -69,6 +71,11 @@ public interface NetworkInterface {
     @POST("countryRest/getCountryDetails")
     Single<Response<List<CountryResponse>>>getcountry();
 
+    @POST("countryRest/selectCountry")
+    Call<CountryResponse>selectcountry(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Query("countryId") String countryid);
+
+
+
 
     @POST("loginRest/forgotPassword")
     Call<CreateLoginUserResponse>forgotpassword(@Query("userEmailId") String emailId);
@@ -83,8 +90,15 @@ public interface NetworkInterface {
     @POST("businessRest/homeCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat();
 
+    @POST("brandRest/getBrandDetails")
+    Single<Response<List<TopBrandsResponse>>>gettopbrands();
+
+
     @POST("businessRest/homeSubCategory")
     Single<Response<List<SubCategoryResponce>>>getsubcategory(@Query("id") String id);
+
+    @POST("productRest/getProductByBrandName")
+    Single<Response<List<TopBrandsProductResponse>>>gettopbrandproduct(@Query("brandName") String brandname);
 
     @POST("businessRest/homeSubCatInfo")
     Single<Response<List<SubCategoryProductResponce>>>getproductbycategory(@Query("catid") String catid, @Query("id") String id);
@@ -99,10 +113,10 @@ public interface NetworkInterface {
     Single<Response<CreateLoginUserResponse>> addtocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);
 
     @POST("productRest/getBestSellingProduct")
-    Single<Response<List<ProductResponse>>>getbestsellingproducts();
+    Single<Response<List<TopBrandsProductResponse>>>getbestsellingproducts();
 
     @POST("productRest/getBestPricedProduct")
-    Single<Response<List<BestSellingProductResponse>>>getbestpricedproduct();
+    Single<Response<List<TopBrandsProductResponse>>>getbestpricedproduct();
 
     @Multipart
     @POST("imageRest/uploadProfilePhoto")

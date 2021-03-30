@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
@@ -46,14 +47,7 @@ Button continuebtn;
             }
         });
 
-        continuebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), PaymentActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,7 +80,20 @@ Button continuebtn;
 
                     }
                 tvname.setText(list.getUsername());
-
+if(tvaddress.length()<5){
+    Toast.makeText(getApplicationContext(),"Add Address first!",Toast.LENGTH_SHORT).show();
+}else{
+    continuebtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(getApplicationContext(), PaymentActivity.class);
+            intent.putExtra("userid",getIntent().getStringExtra("userid"));
+            intent.putExtra("getbuynowqty",getIntent().getStringExtra("getbuynowqty"));
+            startActivity(intent);
+            finish();
+        }
+    });
+}
 
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.podsstore.buynow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,12 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.addtocart.PaymentActivity;
+import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
@@ -22,6 +25,8 @@ import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
+import com.example.podsstore.profile.AddressActivity;
+import com.example.podsstore.search.SearchActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -38,6 +43,16 @@ public class BuyNowActivity extends AppCompatActivity {
     ImageView ivproduct,ivtoggle,ivcart;
     TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
     TextView logInBtn,tvbuynow;
+
+
+
+    public TextView description, tvAssetType,tvqty,prnumber;
+    public ImageView productiv,deleteproductiv;
+    public CardView cardView,less,more;
+    RelativeLayout wishlist;
+    ArrayList<String> arrayList;
+    int counter=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +75,62 @@ public class BuyNowActivity extends AppCompatActivity {
         tvdetailtitle=findViewById(R.id.tvdetailtitle);
         tvfeaturetitle=findViewById(R.id.tvfeaturetitle);
         tvfunctiontitle=findViewById(R.id.tvfunctiontitle);
+
+
+
+
+        tvqty = findViewById(R.id.tvqty);
+        description = findViewById(R.id.description);
+        tvAssetType = findViewById(R.id.tvAssetType);
+        cardView =findViewById(R.id.cardview);
+        productiv = findViewById(R.id.productiv);
+        deleteproductiv = findViewById(R.id.deleteproductiv);
+        less = findViewById(R.id.less);
+        more = findViewById(R.id.more);
+        prnumber = findViewById(R.id.prnumber);
+        wishlist = findViewById(R.id.rlwishlist);
+
+
+        less.setOnClickListener(v -> {
+
+            counter=counter-1;
+            if(counter<=0)  {
+                prnumber.setText(String.valueOf("1"));
+            }else{
+                prnumber.setText(String.valueOf(counter));
+            }
+
+
+
+        });
+        more.setOnClickListener(v -> {
+            counter=counter+1;
+
+            if(counter<=0)  {
+                prnumber.setText(String.valueOf("1"));
+            }else{
+                prnumber.setText(String.valueOf(counter));
+            }
+            //  prnumber.setText(String.valueOf(counter));
+
+
+                for(int j=0;j<arrayList.size();j++) {
+
+/*
+                        update(arrayList.get(j),productResponseList.get(i).getProductid().toString());*/
+
+
+            }
+
+        });
+        arrayList=new ArrayList<>();
+        arrayList.add(prnumber.getText().toString());
+
+
+
+
+
+
 
 loadData();
     }
@@ -124,7 +195,7 @@ loadData();
                             public void onClick(View v) {
 
                                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                                    smallCartonbuy(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong("1"));
+                                    smallCartonbuy(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong(prnumber.getText().toString()));
                                 }else{
                                    // showAlertDialog();
                                 }
@@ -174,8 +245,9 @@ loadData();
                         CreateLoginUserResponse successResponse = response.body();
                         // binding.progressbar.setVisibility(View.GONE);
 
-                        Intent intent=new Intent(getApplicationContext(), PaymentActivity.class);
+                        Intent intent=new Intent(getApplicationContext(), SelectAddressActivity.class);
                         intent.putExtra("userid",getIntent().getStringExtra("userid"));
+                        intent.putExtra("getbuynowqty",prnumber.getText().toString());
                         startActivity(intent);
                         finish();
                         Log.e("onSuccess", String.valueOf(response.code()));

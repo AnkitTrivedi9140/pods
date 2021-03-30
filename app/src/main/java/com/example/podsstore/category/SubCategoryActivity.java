@@ -45,7 +45,7 @@ public class SubCategoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.productrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(SubCategoryActivity.this));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Sub Category");
+        getSupportActionBar().setTitle(getIntent().getStringExtra("subcategory"));
 //      recyclerView.setEmptyView(binding.emptyView);
       productListAdapter.setAdapterListener(adapterListener);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
@@ -56,11 +56,11 @@ public class SubCategoryActivity extends AppCompatActivity {
 
         loadData();
     }
-    @SuppressLint("CheckResult")
-    private void loadData() {
-        progressBar.setVisibility(View.VISIBLE);
-        progresstext.setVisibility(View.VISIBLE);
-  //Toast.makeText(getApplicationContext(),getIntent().getStringExtra("userid"),Toast.LENGTH_SHORT).show();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Log.e( "onResume: ",getIntent().getStringExtra("userid") );
         ApiClient.getApiClient().getsubcategory(getIntent().getStringExtra("userid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,6 +74,46 @@ public class SubCategoryActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             List<SubCategoryResponce> list = response.body();
                             Log.e("getProductMasters", String.valueOf(list.size()));
+                            productListAdapter.clear();
+                            productListAdapter.addAll(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
+                        Log.e( "onError: ",e.getMessage() );
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void loadData() {
+        progressBar.setVisibility(View.VISIBLE);
+        progresstext.setVisibility(View.VISIBLE);
+  //Toast.makeText(getApplicationContext(),getIntent().getStringExtra("userid"),Toast.LENGTH_SHORT).show();
+        Log.e( "loadData: ",getIntent().getStringExtra("userid") );
+        ApiClient.getApiClient().getsubcategory(getIntent().getStringExtra("userid"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<SubCategoryResponce>>>() {
+                    @Override
+                    public void onSuccess(Response<List<SubCategoryResponce>> response) {
+                        progressBar.setVisibility(View.GONE);
+                        progresstext.setVisibility(View.GONE);
+                        // binding.progress.setVisibility(View.GONE);
+                        Log.d("onSuccess: ",String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+                            List<SubCategoryResponce> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            productListAdapter.clear();
                             productListAdapter.addAll(list);
 
                         } else {
@@ -98,6 +138,9 @@ public class SubCategoryActivity extends AppCompatActivity {
         Intent i = new Intent(SubCategoryActivity.this, SubCategoryProductActivity.class);
         i.putExtra("userid", data.getId().toString());
         i.putExtra("catid",data.getCatid().toString());
+        i.putExtra("userids",getIntent().getStringExtra("userid"));
+        i.putExtra("productname",data.getProductname().toString());
+        i.putExtra("productnamess",getIntent().getStringExtra("subcategory"));
         startActivity(i);
 
 
@@ -107,9 +150,16 @@ public class SubCategoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
-                startActivity(i);
-                finish();
+                if(getIntent().getStringExtra("cat")==null){
+                    Intent i=new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
+
+                    startActivity(i);
+                    finish();
+                }
                 return true;
         }
 
@@ -118,8 +168,15 @@ public class SubCategoryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
-        startActivity(i);
-        finish();
+        if(getIntent().getStringExtra("cat")==null){
+            Intent i=new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            finish();
+        }else{
+            Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 }

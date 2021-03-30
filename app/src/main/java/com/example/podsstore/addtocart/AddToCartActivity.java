@@ -28,6 +28,7 @@ import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.example.podsstore.productdetails.ProductDetailsActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ import retrofit2.Response;
 public class AddToCartActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-    TextView tvsubtotaltxt, tvtotaltxt, tvapply,tvdiscounttxt;
+    TextView tvsubtotaltxt, tvtotaltxt, tvapply,tvdiscounttxt,tvcartempty;
     Button placeorderbtn;
     ArrayList<String> arrPackage;
     ArrayList<AddtoCartWithQty> qtylist;
@@ -64,6 +65,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
         loadData();
         arrPackage = new ArrayList<>();
         qtylist = new ArrayList<>();
+        tvcartempty = findViewById(R.id.tvcartempty);
         tvsubtotaltxt = findViewById(R.id.tvsubtotaltxt);
         tvtotaltxt = findViewById(R.id.tvtotaltxt);
         recyclerView = findViewById(R.id.productrv);
@@ -80,7 +82,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
         productListAdapter.setAdapterListeners(listener);
         productListAdapter.setAdapterListenerplus(adapterListenerpluss);
         productListAdapter.setAdapterListenersless(adapterListenerless);
-
+        productListAdapter.setAdapterListenercart(adapterListenercart);
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +92,8 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 
             }
         });
+
+
         tvapply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +118,12 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
             @Override
             public void onResponse(Call<List<CartResponse>> call, Response<List<CartResponse>> response) {
 
+                tvcartempty.setVisibility(View.VISIBLE);
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("cartaaa", String.valueOf(response.code()));
+
                 if (response.isSuccessful()) {
+
                     List<CartResponse> list = response.body();
                     productListAdapter.clear();
                     productListAdapter.addAll(list);
@@ -143,9 +150,22 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                         addtoCartWithQty.setQuantity(list.get(i).getQty().toString());
 
                     }
-                    if (list != null) {
+                    if (list.isEmpty()) {
 
+tvcartempty.setVisibility(View.VISIBLE);
+                        tvcartempty.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+                    }
+                    else {
+                        tvcartempty.setVisibility(View.GONE);
                     }
 
                 }
@@ -154,6 +174,18 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
             @Override
             public void onFailure(Call<List<CartResponse>> call, Throwable t) {
                 Log.e("onerrors", t.getMessage());
+                tvcartempty.setVisibility(View.VISIBLE);
+                tvcartempty.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+
             }
         });
     }
@@ -254,6 +286,14 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 
         deletecart(String.valueOf(data.getProductid().toString()));
 //Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
+
+    };
+    private AddtocartAdapter.AdapterListenercart adapterListenercart = data -> {
+
+  Intent i=new Intent(getApplicationContext(), ProductDetailsActivity.class);
+  i.putExtra("userid",data.getProductid().toString());
+  startActivity(i);
+  finish();
 
     };
     //    private AddtocartAdapter.AdapterListenerplus adapterListenerplus = data -> {

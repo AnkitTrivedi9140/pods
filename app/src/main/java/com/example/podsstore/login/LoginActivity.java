@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView ivshow;
 ImageView back,tvicon;
 RelativeLayout rlaccountconfirmation;
+    String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +93,13 @@ RelativeLayout rlaccountconfirmation;
                         passwordEt.setError("Password Can't Blank!");
 
                     }else{
-                        smallCarton(email,password);
+                        if (email.matches(regex)) {
+
+                            smallCarton(email,password);
+                        }else {
+                            emaiEt.setError("Email Address not correct!");
+                        }
+
                     }
 
 
@@ -176,6 +183,7 @@ showAlertDialog();
 
     @SuppressLint("CheckResult")
     private void loadData(String emailid) {
+
 
         Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
@@ -319,8 +327,14 @@ showAlertDialog();
                 if (TextUtils.isEmpty(number)) {
                     et.setError("Email Can't Blank!");
                 }else{
-                loadData(et.getText().toString().trim());
-                    alert.dismiss();
+
+                    if(et.getText().toString().matches(regex)){
+                        loadData(et.getText().toString().trim());
+                        alert.dismiss();
+                    }else {
+                        et.setError("Email Address Not Correct!");
+                    }
+
                 }
 
             }
@@ -363,13 +377,12 @@ showAlertDialog();
                 }else if(TextUtils.isEmpty(passwordagain)){
                     etagainpassword.setError("password Can't Blank!");
                 }
-                else{
+
                  //   loadData(et.getText().toString().trim());
+                   else {
 
-                    changepassword(etpassword.getText().toString(),etagainpassword.getText().toString());
-                    alert.dismiss();
+changepassword(password,passwordagain);
                 }
-
             }
         });
         alert.show();
@@ -377,69 +390,74 @@ showAlertDialog();
 
     @SuppressLint("CheckResult")
     private void changepassword( String newpwd, String confirmpwd) {
-        // binding.progressbar.setVisibility(View.VISIBLE);
-        List<AddressDetailsRequest> list = new ArrayList<>();
+        if(newpwd.equals(confirmpwd)){      List<AddressDetailsRequest> list = new ArrayList<>();
 
-        ChangePasswordRequest r = new ChangePasswordRequest();
-        r.setNewpassword(newpwd);
-        r.setConfirmpassword(confirmpwd);
-
-
-        // list.add(r);
-
-        Log.e("postData", new Gson().toJson(r));
-
-        ApiClient.getApiClient().pwdsuccess( PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL), r)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
-                    @Override
-                    public void onSuccess(Response<CreateLoginUserResponse> response) {
-
-                        // binding.progressbar.setVisibility(View.GONE);
+            ChangePasswordRequest r = new ChangePasswordRequest();
+            r.setNewpassword(newpwd);
+            r.setConfirmpassword(confirmpwd);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
-                        if (response.isSuccessful()) {
+            // list.add(r);
 
-                            CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("postData", new Gson().toJson(r));
+
+            ApiClient.getApiClient().pwdsuccess( PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL), r)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                        @Override
+                        public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                            // binding.progressbar.setVisibility(View.GONE);
+
+
+                            Log.e("onSuccess", String.valueOf(response.code()));
+                            if (response.isSuccessful()) {
+
+                                CreateLoginUserResponse successResponse = response.body();
+                                Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
 
-                            finish();
-                            overridePendingTransition( 0, 0);
-                            startActivity(getIntent());
-                            overridePendingTransition( 0, 0);
-                            if (successResponse != null) {
+                                finish();
+                                overridePendingTransition( 0, 0);
+                                startActivity(getIntent());
+                                overridePendingTransition( 0, 0);
+                                if (successResponse != null) {
 
 //                                if (successResponse.getMessage().equals("success")) {
 //                                    // mappingAdapter.clear();
 //
 //                                }
 
-                                //  Toaster.show(mContext, successResponse.getMessage());
+                                    //  Toaster.show(mContext, successResponse.getMessage());
+
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Item already in wishlist", Toast.LENGTH_SHORT).show();
 
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Item already in wishlist", Toast.LENGTH_SHORT).show();
-
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                        Log.e("onError: ", e.getMessage());
-                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                            Log.e("onError: ", e.getMessage());
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
 
-                        // binding.progressbar.setVisibility(View.GONE);
-                        // NetworkHelper.handleNetworkError(e, mContext);
-                    }
-                });
+                            // binding.progressbar.setVisibility(View.GONE);
+                            // NetworkHelper.handleNetworkError(e, mContext);
+                        }
+                    });}
+        else {
+            Toast.makeText(getApplicationContext(), "Please add same password.", Toast.LENGTH_LONG).show();
+
+        }
+        // binding.progressbar.setVisibility(View.VISIBLE);
+
     }
 
 }

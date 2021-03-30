@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/nvscan"
@@ -11,8 +12,18 @@
         app:actionViewClass="android.widget.TextView"
         android:title="Addresses"/>
     <item android:id="@+id/nvsettings"
-        android:icon="@drawable/chooselanguage"
+        android:icon="@drawable/country"
         android:title="Choose Country"/>
+    <group
+        android:id="@+id/menu_bottoms"
+        android:checkableBehavior="none">
+        <item android:id="@+id/nvcategory"
+            android:icon="@drawable/category"
+            android:title="Categories"/>
+
+
+    </group>
+
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="none">
@@ -21,8 +32,23 @@
         android:title="Contact Us"/>
     <item android:id="@+id/nvshare"
         android:icon="@drawable/help"
-        android:title="Help /FAQs"/>
+        android:title="Help / FAQs"/>
 
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bottomss"
+        android:checkableBehavior="none">
+
+        <item android:id="@+id/nvprivacy"
+            android:icon="@drawable/privacy"
+            android:title="Privacy Policy"/>
+
+        <item android:id="@+id/nvterm"
+            android:icon="@drawable/terms"
+            android:title="Terms &amp; Conditions"
+            />
     </group>
     <item android:id="@+id/nvsolution"
         android:icon="@drawable/logout"

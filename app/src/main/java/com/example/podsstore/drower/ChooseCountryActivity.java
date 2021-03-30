@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.category.SubCategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.CountryResponse;
 
+import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.CountryAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
@@ -26,6 +29,8 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChooseCountryActivity extends AppCompatActivity {
@@ -44,13 +49,18 @@ public class ChooseCountryActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(ChooseCountryActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
-        //addressAdapter.setAdapterListener(adapterListener);
+       addressAdapter.setAdapterListener(adapterListener);
 
         recyclerView.setAdapter(addressAdapter);
 
 
 loadData();
     }
+    private CountryAdapter.AdapterListener adapterListener = data -> {
+        // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
+
+changenumber( data.getCountryid().toString());
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -105,4 +115,35 @@ loadData();
         startActivity(intent);
         finish();
     }
+
+    @SuppressLint("CheckResult")
+    private void changenumber(String mobilenumber) {
+
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        );
+
+        ApiClient.getApiClient().selectcountry(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),mobilenumber).enqueue(new Callback<CountryResponse>() {
+            @Override
+            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getprofile",String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    CountryResponse list = response.body();
+                    PreferenceManagerss.setStringValue(Preferences.USER_COUNTRY_IMAGE, list.getCountryid().toString());
+                 //   Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(ChooseCountryActivity.this, MainActivity.class);
+//
+//                    // i.putExtra("subcategory", data.getProductname().toString());
+//                    startActivity(i);
+
+                }
+            }
+            @Override
+            public void onFailure(Call<CountryResponse> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
+    }
+
 }

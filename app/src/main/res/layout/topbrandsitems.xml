@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <RelativeLayout
+            android:id="@+id/rltopimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/ivtopbrand"
+                android:layout_width="111dp"
+                android:layout_height="111dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/sunpharma"
+                android:layout_marginRight="8dp"
+
+               />
+
+
+        </RelativeLayout>
+
+
+</RelativeLayout>

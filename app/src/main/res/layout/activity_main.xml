@@ -337,64 +337,18 @@ android:layout_marginTop="8dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"></TextView>
 
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/topbrandrv"
+
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/headingtopbrands"
-                            android:layout_marginBottom="22dp">
+android:layout_below="@+id/headingtopbrands"
+                            android:orientation="horizontal"
+                            android:scrollbars="horizontal">
 
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-
-                                <com.mikhaellopez.circularimageview.CircularImageView
-                                    android:id="@+id/ivtop1"
-                                    android:layout_width="111dp"
-                                    android:layout_height="111dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:src="@drawable/sunpharma"
-
-                                    app:civ_border_color="@color/white"
-                                    app:civ_shadow_color="#fff" />
-
-                                <com.mikhaellopez.circularimageview.CircularImageView
-                                    android:id="@+id/ivtop2"
-                                    android:layout_width="111dp"
-                                    android:layout_height="111dp"
-                                    android:layout_marginLeft="14dp"
-                                    android:layout_toRightOf="@+id/ivtop1"
-
-                                    android:src="@drawable/cipla"
-                                    app:civ_border_color="@color/white"
-                                    app:civ_shadow_color="#fff" />
-
-                                <com.mikhaellopez.circularimageview.CircularImageView
-                                    android:id="@+id/ivtop3"
-                                    android:layout_width="111dp"
-                                    android:layout_height="111dp"
-                                    android:layout_marginLeft="14dp"
-                                    android:layout_toRightOf="@+id/ivtop2"
-
-                                    android:src="@drawable/bharat"
-                                    app:civ_border_color="@color/white"
-                                    app:civ_shadow_color="#fff" />
-
-                                <com.mikhaellopez.circularimageview.CircularImageView
-                                    android:id="@+id/ivtop4"
-                                    android:layout_width="111dp"
-                                    android:layout_height="111dp"
-                                    android:layout_marginLeft="14dp"
-                                    android:layout_marginRight="8dp"
-
-                                    android:layout_toRightOf="@+id/ivtop3"
-                                    android:src="@drawable/pfizer"
-                                    app:civ_border_color="@color/white"
-                                    app:civ_shadow_color="#fff" />
-                            </RelativeLayout>
-                        </HorizontalScrollView>
-
+                        </androidx.recyclerview.widget.RecyclerView>
                     </RelativeLayout>
 
                     <TextView

@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -38,11 +39,13 @@ import retrofit2.Response;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Button logInBtn,btncontinue;
-TextView signintv;
+TextView signintv,tvduns;
     RelativeLayout rlaccountconfirmation;
     CheckBox checkBoxterms;
-    private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet;
+    private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet,numberofemployeeEt,turnoveret;
     ImageView back,tvicon;
+    String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,9 @@ TextView signintv;
                     String email=emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
                     String reenterpassword = reenterpasswordet.getText().toString();
+
+                    String emp = numberofemployeeEt.getText().toString();
+                    String turn = turnoveret.getText().toString();
                     //Toast.makeText(getApplicationContext(),username,Toast.LENGTH_LONG).show();
 //                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(login);
@@ -73,19 +79,53 @@ TextView signintv;
                     } else if (TextUtils.isEmpty(email)) {
                         emaiEt.setError("Email Address Can't Blank!");
 
-                    }else if (TextUtils.isEmpty(password)) {
+                    }
+
+                else if (TextUtils.isEmpty(password)) {
                         passwordEt.setError("Password Can't Blank!");
 
                     }
                     else if (TextUtils.isEmpty(reenterpassword)) {
                         reenterpasswordet.setError("Re_password Can't Blank!");
 
-                    }else{
-                    if(checkBoxterms.isChecked()){
-                        smallCarton(username,email,password,reenterpassword);
-                    }else {
-                        Toast.makeText(getApplicationContext(),"Please click on checkBox to continue.",Toast.LENGTH_LONG).show();
                     }
+
+                else if (TextUtils.isEmpty(emp)) {
+                    passwordEt.setError("Employees Can't Blank!");
+
+                }
+                else if (TextUtils.isEmpty(turn)) {
+                    reenterpasswordet.setError("Turnover Can't Blank!");
+
+                }
+                    /*else if(passwordEt.getText().toString()!=reenterpasswordet.getText().toString()){
+                    Toast.makeText(getApplicationContext(),"Please add same password.",Toast.LENGTH_LONG).show();
+                }*/else{
+                    if(checkBoxterms.isChecked()==false){
+
+                        Toast.makeText(getApplicationContext(),"Please click on checkBox to continue.",Toast.LENGTH_LONG).show();
+
+
+
+
+                    }
+                   else {
+                if(passwordEt.getText().toString().equals(reenterpasswordet.getText().toString())){
+
+                     if (email.matches(regex)) {
+
+                         smallCarton(username,email,password,reenterpassword);
+                    }else {
+                         emaiEt.setError("Email Address not correct!");
+                     }
+
+
+                                  }else {
+                    Toast.makeText(getApplicationContext(),"Please add same password.",Toast.LENGTH_LONG).show();
+
+                }
+
+                                }
 
                     }
 
@@ -97,6 +137,13 @@ TextView signintv;
                     startActivity(login);
                     finish();
 
+
+                    break;
+                case R.id.tvduns:
+
+                   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("*/*");
+                    startActivityForResult(intent, 7);
 
                     break;
 
@@ -156,6 +203,7 @@ TextView signintv;
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
+
                                   rlaccountconfirmation.setVisibility(View.VISIBLE);
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -191,6 +239,9 @@ TextView signintv;
         btncontinue = findViewById(R.id.btncontinue);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
+        numberofemployeeEt = findViewById(R.id.numberofemployeeEt);
+        turnoveret = findViewById(R.id.turnoverEt);
+        tvduns = findViewById(R.id.tvduns);
         emaiEt = findViewById(R.id.emailEt);
         signintv = findViewById(R.id.signintv);
         checkBoxterms = findViewById(R.id.checkBoxterms);
@@ -201,7 +252,7 @@ TextView signintv;
         btncontinue.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
         signintv.setOnClickListener(onClickListener);
-
+        tvduns.setOnClickListener(onClickListener);
 //        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
 //        usernameEt.setTypeface(typeface);
 //        passwordEt.setTypeface(typeface);

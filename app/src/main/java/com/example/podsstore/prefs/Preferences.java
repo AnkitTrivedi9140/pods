@@ -12,4 +12,6 @@ public class Preferences {
 
     public static String USER_OTP_EMAIL="userotpemail";
 
+    public static String USER_COUNTRY_IMAGE="usercountryimage";
+
 }

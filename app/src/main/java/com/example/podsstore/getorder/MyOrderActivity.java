@@ -20,6 +20,9 @@ import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.mainactivityadapters.MyOrderAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.example.podsstore.productdetails.ProductDetailsActivity;
+import com.example.podsstore.topbrands.TopBrandsProductActivity;
+import com.example.podsstore.topbrands.TopBrandsProductAdapter;
 
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class MyOrderActivity extends AppCompatActivity {
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
-//        productListAdapter.setAdapterListener(adapterListener);
+        productListAdapter.setAdapterListener(adapterListener);
 //        productListAdapter.setAdapterListeners(listener);
         recyclerView.setAdapter(productListAdapter);
 loadData();
@@ -118,4 +121,15 @@ loadData();
         Intent intent=new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
-    }}
+    }
+
+    private MyOrderAdapter.AdapterListener adapterListener = data -> {
+        // Toast.makeText(getApplicationContext(), data.getId().toString()+"///"+data.getCatid().toString(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MyOrderActivity.this, ProductDetailsActivity.class);
+        i.putExtra("userid", data.getProductid().toString());
+
+        startActivity(i);
+
+
+    };
+}

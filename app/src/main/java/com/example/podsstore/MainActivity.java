@@ -52,6 +52,8 @@ import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.data.response.TopBrandsProductResponse;
+import com.example.podsstore.data.response.TopBrandsResponse;
 import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.drower.ChooseCountryActivity;
 import com.example.podsstore.drower.DrowerActivity;
@@ -61,12 +63,14 @@ import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.CustomAdapter;
+import com.example.podsstore.mainactivityadapters.TopBrandAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.search.SearchActivity;
+import com.example.podsstore.topbrands.TopBrandsProductActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
     private CategoryHorigentalAdapter productListAdapter;
     private BestSellingProductAdapter bestSellingProductAdapter;
     BestPricedAdapter bestPricedAdapter;
+
+    TopBrandAdapter topBrandAdapter;
     private ImageView ivallproduct, ivcart, ivtoggle, ivgo;
     EditText search;
     ViewPager viewPager;
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     int currentPage = 0;
     Timer timer;
     final long DELAY_MS = 800;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+    final long PERIOD_MS = 4000; // time in milliseconds between successive task executions.
 
     private int dotscount;
     private ImageView[] dots;
@@ -110,7 +116,7 @@ CircleImageView profileimage;
 
 private Toolbar toolbar;
     private NavigationView nv;
-
+private RecyclerView topbrandrv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +145,7 @@ private Toolbar toolbar;
 
 
 
-
+        topbrandrv = findViewById(R.id.topbrandrv);
         tvbestpriceseeall = findViewById(R.id.tvbestpriceseeall);
         tvbestsellingseeall = findViewById(R.id.tvbestsellingseeall);
         sliderDotspanel = findViewById(R.id.SliderDots);
@@ -211,13 +217,20 @@ private Toolbar toolbar;
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManagerss
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        LinearLayoutManager layoutManagertop
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
         bestprisedproductrv = findViewById(R.id.bestprisedproductrv);
         bestsellingproductrv = findViewById(R.id.bestsellingproductrv);
+        topbrandrv = findViewById(R.id.topbrandrv);
         recyclerView = findViewById(R.id.productrv);
         bestSellingProductAdapter = new BestSellingProductAdapter(MainActivity.this);
         bestPricedAdapter = new BestPricedAdapter(MainActivity.this);
+        topBrandAdapter = new TopBrandAdapter(MainActivity.this);
         productListAdapter = new CategoryHorigentalAdapter(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
+        topbrandrv.setLayoutManager(layoutManagertop);
 
 
         bestsellingproductrv.setLayoutManager(layoutManagers);
@@ -226,16 +239,20 @@ private Toolbar toolbar;
         productListAdapter.setAdapterListener(adapterListener);
         bestSellingProductAdapter.setAdapterListener(adapterListeners);
         bestPricedAdapter.setAdapterListener(pricedlistner);
+        topBrandAdapter.setAdapterListener(adapterListenertop);
+
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 8);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(productListAdapter);
         bestsellingproductrv.setAdapter(bestSellingProductAdapter);
-        bestprisedproductrv.setAdapter(bestSellingProductAdapter);
+        bestprisedproductrv.setAdapter(bestPricedAdapter);
+        topbrandrv.setAdapter(topBrandAdapter);
         categorieslist();
         loadDatabestselling();
         loadDatabestprisedproduct();
         isStoragePermissionGranted();
+        topbrandlist();
         ivallproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -411,7 +428,23 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
                         startActivity(help);
                         dl.closeDrawers();
                         break;
+                    case R.id.nvterm:
+                        Intent term=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        startActivity(term);
+                        dl.closeDrawers();
+                        break;
 
+                    case R.id.nvprivacy:
+                        Intent privacy=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        startActivity(privacy);
+                        dl.closeDrawers();
+                        break;
+
+                    case R.id.nvcategory:
+                        Intent cat=new Intent(MainActivity.this, CategoryActivity.class);
+                        startActivity(cat);
+                        dl.closeDrawers();
+                        break;
                     case R.id.nvsolution:
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
@@ -512,6 +545,49 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
     }
 
     @SuppressLint("CheckResult")
+    private void topbrandlist() {
+        // binding.progress.setVisibility(View.VISIBLE);
+        // binding.progress.setVisibility(View.VISIBLE);
+        ApiClient.getApiClient().gettopbrands()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<TopBrandsResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<TopBrandsResponse>> response) {
+                        // binding.progress.setVisibility(View.GONE);
+
+                        if (response.isSuccessful()) {
+                            List<TopBrandsResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.size()));
+                            topBrandAdapter.addAll(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+
+                    }
+                });
+    }
+
+    private TopBrandAdapter.AdapterListener adapterListenertop = data -> {
+        // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MainActivity.this, TopBrandsProductActivity.class);
+
+i.putExtra("userid",data.getBrandname().toString());
+        startActivity(i);
+
+
+    };
+
+    @SuppressLint("CheckResult")
     private void categorieslist() {
         // binding.progress.setVisibility(View.VISIBLE);
         // binding.progress.setVisibility(View.VISIBLE);
@@ -548,7 +624,7 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, SubCategoryActivity.class);
         i.putExtra("userid", data.getId().toString());
-
+        i.putExtra("subcategory", data.getProductname().toString());
         startActivity(i);
 
 
@@ -560,13 +636,13 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
         ApiClient.getApiClient().getbestsellingproducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<List<ProductResponse>>>() {
+                .subscribeWith(new DisposableSingleObserver<Response<List<TopBrandsProductResponse>>>() {
                     @Override
-                    public void onSuccess(Response<List<ProductResponse>> response) {
+                    public void onSuccess(Response<List<TopBrandsProductResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
 
                         if (response.isSuccessful()) {
-                            List<ProductResponse> list = response.body();
+                            List<TopBrandsProductResponse> list = response.body();
                             Log.e("getbestseddd", String.valueOf(list.toString()));
                             bestSellingProductAdapter.addAll(list);
 
@@ -593,13 +669,13 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
         ApiClient.getApiClient().getbestpricedproduct()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<List<BestSellingProductResponse>>>() {
+                .subscribeWith(new DisposableSingleObserver<Response<List<TopBrandsProductResponse>>>() {
                     @Override
-                    public void onSuccess(Response<List<BestSellingProductResponse>> response) {
+                    public void onSuccess(Response<List<TopBrandsProductResponse>> response) {
                         // binding.progress.setVisibility(View.GONE);
 
                         if (response.isSuccessful()) {
-                            List<BestSellingProductResponse> list = response.body();
+                            List<TopBrandsProductResponse> list = response.body();
                             Log.e("getbestprised", String.valueOf(list.toString()));
                             bestPricedAdapter.addAll(list);
 

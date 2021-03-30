@@ -194,6 +194,8 @@ public class CategoryActivity extends AppCompatActivity {
      // Toast.makeText(getApplicationContext(), data.getId().toString(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CategoryActivity.this, SubCategoryActivity.class);
         i.putExtra("userid", data.getId().toString());
+        i.putExtra("cat","cat");
+        i.putExtra("subcategory", data.getProductname().toString());
         startActivity(i);
 
 

@@ -26,6 +26,7 @@ android:layout_margin="11dp"
         android:layout_height="55dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
+        android:inputType="number"
 
         ></EditText>
     <TextView

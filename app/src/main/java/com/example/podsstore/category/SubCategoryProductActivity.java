@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.SubCategoryProductResponce;
@@ -40,13 +41,12 @@ public class SubCategoryProductActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.progress);
         progresstext=findViewById(R.id.progresstext);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Sub Category Product");
+        getSupportActionBar().setTitle(getIntent().getStringExtra("productname"));
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new SubCategoryProductAdapter(SubCategoryProductActivity.this);
         recyclerView = findViewById(R.id.productrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(SubCategoryProductActivity.this));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Sub Category Products");
+
 //      recyclerView.setEmptyView(binding.emptyView);
         productListAdapter.setAdapterListener(adapterListener);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
@@ -56,6 +56,24 @@ public class SubCategoryProductActivity extends AppCompatActivity {
 
 
         loadData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("onResumebackid",getIntent().getStringExtra("catid")+"////"+getIntent().getStringExtra("userid"));
+
+       // Toast.makeText(getApplicationContext(),getIntent().getStringExtra("catid"),Toast.LENGTH_SHORT).show();
+
+     loadData();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+      loadData();
     }
 
     @SuppressLint("CheckResult")
@@ -76,6 +94,7 @@ public class SubCategoryProductActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             List<SubCategoryProductResponce> list = response.body();
                             Log.e("getProductMasters", String.valueOf(list.size()));
+                            productListAdapter.clear();
                             productListAdapter.addAll(list);
 
                         } else {
@@ -99,7 +118,9 @@ public class SubCategoryProductActivity extends AppCompatActivity {
      // Toast.makeText(getApplicationContext(), data.getId().toString(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(SubCategoryProductActivity.this, ProductDetailsActivity.class);
         i.putExtra("userid", data.getId().toString());
-        i.putExtra("catid",data.getCatid().toString());
+        i.putExtra("catid",getIntent().getStringExtra("catid"));
+        i.putExtra("prodid",getIntent().getStringExtra("userid"));
+        i.putExtra("productname",getIntent().getStringExtra("productname"));
         startActivity(i);
 
 
@@ -109,9 +130,18 @@ public class SubCategoryProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
-                startActivity(i);
-                finish();
+                if(getIntent().getStringExtra("userids")==null){
+                    Intent i=new Intent(getApplicationContext(), MainActivity.class);
+
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
+                    i.putExtra("userid",getIntent().getStringExtra("userids"));
+                    i.putExtra("subcategory",getIntent().getStringExtra("productnamess"));
+                    startActivity(i);
+                    finish();
+                }
                 return true;
         }
 
@@ -120,8 +150,19 @@ public class SubCategoryProductActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(getApplicationContext(), CategoryActivity.class);
-        startActivity(i);
-        finish();
+        if(getIntent().getStringExtra("userids")==null){
+            Intent i=new Intent(getApplicationContext(), MainActivity.class);
+
+            startActivity(i);
+            finish();
+        }else{
+            Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
+            i.putExtra("userid",getIntent().getStringExtra("userids"));
+            i.putExtra("subcategory",getIntent().getStringExtra("productnamess"));
+
+            startActivity(i);
+            finish();
+        }
+
     }
 }

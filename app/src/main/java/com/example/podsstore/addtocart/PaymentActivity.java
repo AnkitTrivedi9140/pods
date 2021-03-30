@@ -221,7 +221,7 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
                     List<ProductResponse> list = response.body();
 
 //                    for (int i = 0; i < list.size(); i++) {
-                        placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), "1", String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
+                        placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
 
                  //   }
                     if (list != null) {

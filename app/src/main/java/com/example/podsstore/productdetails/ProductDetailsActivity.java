@@ -22,6 +22,7 @@ import com.example.podsstore.SplashActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.addtocart.PaymentActivity;
 import com.example.podsstore.buynow.BuyNowActivity;
+import com.example.podsstore.category.SubCategoryProductActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
@@ -103,8 +104,18 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
                 }else{
 
                 }
-
-
+                if(getIntent().getStringExtra("prodid")!=null || getIntent().getStringExtra("catid")!=null )  {
+                    Intent intent = new Intent(getApplicationContext(), SubCategoryProductActivity.class);
+                    intent.putExtra("userid",getIntent().getStringExtra("prodid").toString());
+                    intent.putExtra("productname",getIntent().getStringExtra("productname"));
+                    intent.putExtra("catid",getIntent().getStringExtra("catid").toString());
+                    startActivity(intent);
+                    finish();
+                }else if(getIntent().getStringExtra("prodid")==null || getIntent().getStringExtra("catid")==null) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         ivcart.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +235,7 @@ loadDatacart();
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getImageurl().trim().toString())
                                 .into(ivproduct);
-                        tvProductname.setText(list.get(i).getProdname());
+                        tvProductname.setText(list.get(i).getProdtype());
                         tvProductprice.setText("$ "+list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
@@ -479,7 +490,18 @@ loadDatacart();
         }else{
 
         }
-
+   if(getIntent().getStringExtra("prodid")==null || getIntent().getStringExtra("catid")==null) {
+    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    startActivity(intent);
+    finish();
+}      else if(getIntent().getStringExtra("prodid")!=null || getIntent().getStringExtra("catid")!=null )  {
+       Intent intent = new Intent(getApplicationContext(), SubCategoryProductActivity.class);
+       intent.putExtra("userid",getIntent().getStringExtra("prodid").toString());
+       intent.putExtra("catid",getIntent().getStringExtra("catid").toString());
+       intent.putExtra("productname",getIntent().getStringExtra("productname"));
+       startActivity(intent);
+       finish();
+   }
 
     }
 }

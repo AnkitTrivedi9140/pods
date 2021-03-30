@@ -86,19 +86,38 @@
                 android:textSize="12dp"></TextView>
         </RelativeLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_above="@+id/scr"
+        android:layout_below="@+id/rlcartseek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
 
         android:layout_width="match_parent"
-        android:layout_height="288dp"
-        android:layout_below="@+id/rlcartseek"
-android:layout_above="@+id/scr"
+        android:layout_height="wrap_content"
+
+
 
         android:layout_margin="4dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
+        <TextView
+            android:id="@+id/tvcartempty"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Please add products to make offer"
+            android:layout_centerInParent="true"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/term_and_conditions"
+            android:background="@drawable/rippleabout"
+            ></TextView>
+    </RelativeLayout>
     <ScrollView
 
         android:id="@+id/scr"
@@ -124,6 +143,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="14dp"
                 android:text="Got Coupon? "
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="16dp"
                 android:textStyle="bold"></TextView>
 
@@ -138,6 +158,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/edittext_bg"
                 android:hint="Coupon Code"
+                android:visibility="gone"
                 android:padding="10dp"
                 android:textSize="16dp"
 
@@ -156,6 +177,7 @@ android:layout_above="@+id/scr"
                 android:layout_marginRight="16dp"
                 android:padding="10dp"
                 android:text="Apply"
+                android:visibility="gone"
                 android:textColor="@color/term_and_conditions"
                 android:textSize="14dp"
                 android:textStyle="bold"></TextView>
@@ -286,7 +308,7 @@ android:layout_above="@+id/scr"
             android:layout_marginRight="16dp"
             android:background="@drawable/button_bg"
             android:gravity="center"
-            android:text="Place Order"
+            android:text="Make Offer"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16dp" />

@@ -73,8 +73,7 @@ TextView btnsubmit;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), AboutActivity.class);
-                startActivity(intent);
+
                 finish();
                 return true;
         }
