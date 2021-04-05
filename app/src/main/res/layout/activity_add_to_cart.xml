@@ -308,7 +308,7 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/button_bg"
             android:gravity="center"
-            android:text="Make Offer"
+            android:text="Place Order"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16dp" />

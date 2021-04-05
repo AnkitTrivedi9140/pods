@@ -100,7 +100,15 @@ public class BuyNowActivity extends AppCompatActivity {
                 prnumber.setText(String.valueOf(counter));
             }
 
+            int totalPrice = 0;
+            String mynum1=prnumber.getText().toString();
 
+
+            String mynum2=tvProductprice.getText().toString();
+
+
+            totalPrice += Integer.valueOf(mynum1)*Integer.valueOf("25");
+            tvProductprice.setText(String.valueOf("$ "+totalPrice));
 
         });
         more.setOnClickListener(v -> {
@@ -113,7 +121,15 @@ public class BuyNowActivity extends AppCompatActivity {
             }
             //  prnumber.setText(String.valueOf(counter));
 
+            int totalPrice = 0;
+            String mynum1=prnumber.getText().toString();
 
+
+            String mynum2=tvProductprice.getText().toString();
+
+
+            totalPrice += Integer.valueOf(mynum1)*Integer.valueOf("25");
+            tvProductprice.setText(String.valueOf("$ "+totalPrice));
                 for(int j=0;j<arrayList.size();j++) {
 
 /*
@@ -127,7 +143,8 @@ public class BuyNowActivity extends AppCompatActivity {
         arrayList.add(prnumber.getText().toString());
 
 
-
+          //  tvtotaltxt.setText(String.valueOf(totalPrice));
+            //  Toast.makeText(getApplicationContext(),t
 
 
 
@@ -153,8 +170,11 @@ loadData();
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getImageurl().trim().toString())
                                 .into(ivproduct);
-                        tvProductname.setText(list.get(i).getProdname());
-                        tvProductprice.setText("$ "+list.get(i).getPrice());
+
+
+
+                        tvProductname.setText(list.get(i).getProdtype());
+                        tvProductprice.setText(list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
@@ -187,6 +207,7 @@ loadData();
                         }
 
 
+
                         int finalI = i;
 
 
@@ -195,6 +216,7 @@ loadData();
                             public void onClick(View v) {
 
                                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                                    Toast.makeText(getApplicationContext(),prnumber.getText().toString(),Toast.LENGTH_SHORT).show();
                                     smallCartonbuy(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong(prnumber.getText().toString()));
                                 }else{
                                    // showAlertDialog();
@@ -203,6 +225,8 @@ loadData();
 
                             }
                         });
+
+
                     }
                     if (list != null) {
 

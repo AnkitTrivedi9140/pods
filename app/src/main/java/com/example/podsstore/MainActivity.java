@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
 CircleImageView profileimage;
-
+ImageView ivcountry;
     private DrawerLayout dl;
 
 private Toolbar toolbar;
@@ -137,7 +137,7 @@ private RecyclerView topbrandrv;
         // getMenuInflater().inflate(R.menu.main_menu, menu);
 
         toolbar = findViewById(R.id.toolbar);
-
+        ivcountry = findViewById(R.id.ivcountry);
 
         nv = (NavigationView)findViewById(R.id.nv);
         dl = (DrawerLayout)findViewById(R.id.mainactivity);
@@ -456,12 +456,15 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //Action for "Delete".
                                 PreferenceManagerss.logout();
-                                finish();
+                              /*  finish();
                                 Intent intent = new Intent(Intent.ACTION_MAIN);
                                 intent.addCategory(Intent.CATEGORY_HOME);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-
+                                startActivity(intent);*/
+                                finish();
+                                overridePendingTransition( 0, 0);
+                                startActivity(getIntent());
+                                overridePendingTransition( 0, 0);
                             }
                         })
                                 .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
@@ -838,7 +841,15 @@ i.putExtra("userid",data.getBrandname().toString());
                                 .load(glideUrl)
                                 .into(profileimage);
                     }
+                    GlideUrl glideUrl = new GlideUrl(list.getCountryname().getImageurl().toString(),
+                            new LazyHeaders.Builder()
+                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
+                                    .build());
+
+                    Glide.with(getApplicationContext())
+                            .load(glideUrl)
+                            .into(ivcountry);
                     headerusername.setText(list.getUsername());
 
                     tvemail.setText(list.getUseremailid());

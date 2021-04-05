@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/ivcut"
         android:layout_alignParentEnd="true"
@@ -10,20 +10,31 @@
         android:layout_width="33dp"
         android:layout_height="33dp"
         android:layout_alignParentRight="true"
-android:layout_margin="11dp"
+        android:layout_margin="11dp"
         >
     </ImageView>
-
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/et1"
+        android:layout_width="111dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittext_bg"
+        android:gravity="center"
+        app:ccp_contentColor="@color/term_and_conditions"
+        app:ccp_textSize="14dp"
+        android:layout_marginLeft="11dp"
+  />
     <EditText
+        android:layout_toRightOf="@+id/et1"
         android:id="@+id/etmobile"
-        android:textSize="16dp"
-        android:layout_marginTop="55dp"
+        android:textSize="14dp"
+        android:layout_marginTop="50dp"
         android:hint="Enter Your Mobile No."
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="22dp"
+android:layout_marginLeft="8dp"
+        android:layout_marginRight="11dp"
         android:layout_below="@+id/tvheadingtext"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="48dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
         android:inputType="number"
@@ -32,8 +43,8 @@ android:layout_margin="11dp"
     <TextView
         android:layout_below="@+id/etmobile"
         android:background="@drawable/ripplenext"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:layout_marginTop="22dp"
 
         android:lines="1"

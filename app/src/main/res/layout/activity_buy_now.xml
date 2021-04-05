@@ -71,7 +71,7 @@ android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
-                    android:text="0"
+                    android:text="1"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:layout_centerInParent="true"
@@ -114,17 +114,18 @@ android:visibility="gone"
                 android:padding="8dp"
 
                 android:layout_marginTop="4dp"
-                android:layout_height="88dp">
+                android:layout_height="111dp">
                 <TextView
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:id="@+id/tvProductname"
                     android:layout_marginTop="4dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Procuct Details"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:layout_toLeftOf="@+id/layio"
+                    android:textSize="18dp"
                     ></TextView>
 
                 <TextView
@@ -180,7 +181,7 @@ android:layout_centerVertical="true"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:textSize="22dp"
-                        android:text="0"
+                        android:text="1"
                         android:gravity="center"
                         android:textColor="@android:color/black"
                         />

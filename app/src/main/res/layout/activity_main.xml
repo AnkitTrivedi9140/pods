@@ -284,7 +284,7 @@ android:layout_marginLeft="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/pager"
-                        android:text="Bestselling Products"
+                        android:text="Bestsellers"
                         android:textColor="@color/black"
                         android:textSize="20dp"
                         android:layout_marginTop="12dp"
@@ -424,8 +424,17 @@ android:layout_below="@+id/headingtopbrands"
                 android:layout_alignParentBottom="true"
                 android:text="@string/sample_string"
                 android:textColor="@color/term_and_conditions"
-                android:textSize="14sp" />
+                android:textSize="14sp"
 
+
+                />
+<ImageView
+    android:id="@+id/ivcountry"
+   android:layout_marginTop="202dp"
+    android:layout_alignParentEnd="true"
+    android:layout_width="40dp"
+    android:layout_height="44dp"
+    android:layout_alignParentRight="true"></ImageView>
         </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

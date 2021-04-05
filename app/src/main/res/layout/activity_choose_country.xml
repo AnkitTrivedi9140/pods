@@ -5,23 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".drower.ChooseCountryActivity">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/term_and_conditions"
+        android:layout_height="58dp"
+
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp">
+
+            <ImageView
+                android:id="@+id/ivtoggle"
+                android:layout_width="33dp"
+                android:src="@drawable/backwhite"
+                android:layout_centerVertical="true"
+                android:layout_height="33dp"></ImageView>
+
+            <TextView
+                android:id="@+id/tvicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+
+                android:layout_marginLeft="48dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="Countries"
+                ></TextView>
+            <ImageView
+                android:id="@+id/ivcart"
+                android:layout_width="44dp"
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_height="44dp"
+
+                android:layout_alignParentRight="true"></ImageView>
+
+
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/countryrv"
         android:layout_margin="12dp"
-
+android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <ListView
-        android:visibility="gone"
-        android:id="@+id/listView"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="15dp" >
 
-
-    </ListView>
 
 </RelativeLayout>

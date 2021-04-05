@@ -86,9 +86,15 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                startActivity(intent);
-                finish();
+                if(productListAdapter.getSize()==0){
+                    Toast.makeText(getApplicationContext(),"Please add some items in cart",Toast.LENGTH_SHORT).show();
+                }else
+                    {
+                    Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
 
             }
         });
@@ -466,16 +472,7 @@ tvdiscounttxt.setText("0.00");
     @Override
     public void onSetValues(ArrayList<String> al) {
         //Toast.makeText(getApplicationContext(),al.toString(),Toast.LENGTH_SHORT).show();
-        placeorderbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                intent.putExtra("QuestionListExtra", al);
-                startActivity(intent);
-                finish();
 
-            }
-        });
     }
 
     @SuppressLint("CheckResult")

@@ -35,6 +35,7 @@ import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.hbb20.CountryCodePicker;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -264,6 +265,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
 ImageView cut=customLayout.findViewById(R.id.ivcut);
         EditText et =customLayout.findViewById(R.id.etmobile);
+        CountryCodePicker  countryCodePicker=customLayout.findViewById(R.id.et1);
 
 
         AlertDialog alert = alertDialog.create();
@@ -288,7 +290,7 @@ ImageView cut=customLayout.findViewById(R.id.ivcut);
                 if (TextUtils.isEmpty(number)) {
                     et.setError("Number Can't Blank!");
                 }else {
-                    changenumber(et.getText().toString().trim());
+                  changenumber("+"+countryCodePicker.getFullNumberWithPlus().toString()+"-"+et.getText().toString().trim());
                 }
 
             }

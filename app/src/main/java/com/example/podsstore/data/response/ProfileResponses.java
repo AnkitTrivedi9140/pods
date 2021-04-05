@@ -30,6 +30,9 @@ public class ProfileResponses {
     @SerializedName("imageDetails")
     public List<Datum> data = new ArrayList<>() ;
 
+    @SerializedName("countryName")
+    public CountryName countryname  ;
+
     public Long getId() {
         return id;
     }
@@ -92,6 +95,14 @@ public class ProfileResponses {
 
     public void setData(List<Datum> data) {
         this.data = data;
+    }
+
+    public CountryName getCountryname() {
+        return countryname;
+    }
+
+    public void setCountryname(CountryName countryname) {
+        this.countryname = countryname;
     }
 
     @Override
@@ -302,7 +313,84 @@ public class ProfileResponses {
                     ", updatedat='" + updatedat + '\'' +
                     '}';
         }
+
     }
 
+    public class CountryName{
+        @SerializedName("countryId")
+        public Long countryid;
 
+        @SerializedName("countryName")
+        public String countryname;
+        @SerializedName("createdDate")
+        public String countrycrdate;
+        @SerializedName("countryStatus")
+        public String countrystatus;
+
+        @SerializedName("imageUrl")
+        public String imageurl;
+        @SerializedName("countryCode")
+        public String countrycode;
+
+
+        public Long getCountryid() {
+            return countryid;
+        }
+
+        public void setCountryid(Long countryid) {
+            this.countryid = countryid;
+        }
+
+        public String getCountryname() {
+            return countryname;
+        }
+
+        public void setCountryname(String countryname) {
+            this.countryname = countryname;
+        }
+
+        public String getCountrycrdate() {
+            return countrycrdate;
+        }
+
+        public void setCountrycrdate(String countrycrdate) {
+            this.countrycrdate = countrycrdate;
+        }
+
+        public String getCountrystatus() {
+            return countrystatus;
+        }
+
+        public void setCountrystatus(String countrystatus) {
+            this.countrystatus = countrystatus;
+        }
+
+        public String getImageurl() {
+            return imageurl;
+        }
+
+        public void setImageurl(String imageurl) {
+            this.imageurl = imageurl;
+        }
+
+        public String getCountrycode() {
+            return countrycode;
+        }
+
+        public void setCountrycode(String countrycode) {
+            this.countrycode = countrycode;
+        }
+
+        @Override
+        public String toString() {
+            return "CompanyName{" +
+                    "countryid=" + countryid +
+                    ", countryname='" + countryname + '\'' +
+                    ", countrycrdate='" + countrycrdate + '\'' +
+                    ", countrystatus='" + countrystatus + '\'' +
+                    ", imageurl='" + imageurl + '\'' +
+                    ", countrycode='" + countrycode + '\'' +
+                    '}';
+        }
+    }
 }

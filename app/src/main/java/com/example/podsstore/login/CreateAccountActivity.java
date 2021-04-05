@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
@@ -39,7 +40,7 @@ import retrofit2.Response;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Button logInBtn,btncontinue;
-TextView signintv,tvduns;
+TextView signintv,tvduns,skiptv;
     RelativeLayout rlaccountconfirmation;
     CheckBox checkBoxterms;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet,numberofemployeeEt,turnoveret;
@@ -147,6 +148,14 @@ TextView signintv,tvduns;
 
                     break;
 
+                case R.id.skiptv:
+
+                    Intent skip = new Intent(CreateAccountActivity.this, MainActivity.class);
+                    startActivity(skip);
+                    finish();
+
+                    break;
+
                 case R.id.btncontinue:
 
                     Intent logins = new Intent(CreateAccountActivity.this, LoginActivity.class);
@@ -236,6 +245,9 @@ TextView signintv,tvduns;
     private void initViews() {
         rlaccountconfirmation = findViewById(R.id.rlaccountconfirmation);
         logInBtn = findViewById(R.id.logInBtn);
+
+        skiptv = findViewById(R.id.skiptv);
+
         btncontinue = findViewById(R.id.btncontinue);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
@@ -253,6 +265,8 @@ TextView signintv,tvduns;
         back.setOnClickListener(onClickListener);
         signintv.setOnClickListener(onClickListener);
         tvduns.setOnClickListener(onClickListener);
+
+        skiptv.setOnClickListener(onClickListener);
 //        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
 //        usernameEt.setTypeface(typeface);
 //        passwordEt.setTypeface(typeface);
