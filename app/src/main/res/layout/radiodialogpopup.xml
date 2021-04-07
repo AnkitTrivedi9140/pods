@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14dp"
+    >
+
+
+
+    <TextView
+        android:id="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#F8F8F8"
+        android:layout_below="@+id/rlcartseek"
+        android:text="Please select one to continue..."
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        ></TextView>
+    <ImageView
+        android:id="@+id/ivcut"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/profilecut"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="11dp"
+        >
+    </ImageView>
+    <RadioGroup
+        android:layout_below="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="11dp"
+
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/radiosme"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  SME (small-to-medium enterprise)"
+            android:layout_marginTop="12dp"
+
+            android:textSize="16dp"
+
+            android:textColor="@color/manatee"/>
+
+        <RadioButton
+            android:id="@+id/radiocorporate"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Corporate"
+            android:layout_marginTop="12dp"
+
+            android:layout_below="@+id/radiosme"
+            android:textSize="16dp"
+            android:textColor="@color/manatee"
+
+            />
+
+        <RadioButton
+            android:id="@+id/radioincorporate"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Incorporate"
+            android:layout_marginTop="12dp"
+            android:layout_below="@+id/radiocorporate"
+
+            android:textSize="16dp"
+            android:textColor="@color/manatee"
+
+            />
+
+        <RadioButton
+            android:id="@+id/radiogov"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Government"
+            android:layout_marginTop="12dp"
+
+            android:layout_below="@+id/radioincorporate"
+            android:textSize="16dp"
+            android:textColor="@color/manatee"
+
+
+            />
+
+
+    </RadioGroup>
+
+   <!-- <RadioGroup
+        android:layout_below="@+id/tvheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abdominal"
+            android:id="@+id/Abdominal"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arm"
+            android:id="@+id/Arm"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/Back" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chest"
+            android:id="@+id/Chest"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leg"
+            android:id="@+id/Leg"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shoulder"
+            android:id="@+id/Shoulder"/>
+
+    </RadioGroup>-->
+    <TextView
+        android:background="@drawable/rippleabout"
+        android:layout_marginRight="14dp"
+        android:layout_below="@+id/radioGroup"
+        android:lines="1"
+
+        android:id="@+id/tvreg"
+        android:layout_width="266dp"
+        android:layout_height="48dp"
+        android:textSize="14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+
+        android:textColor="@color/text_color_setting"
+        android:text="Create Account"
+        android:gravity="center"
+        android:layout_marginBottom="33dp"
+      ></TextView>
+</RelativeLayout>

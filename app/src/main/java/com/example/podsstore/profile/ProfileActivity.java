@@ -263,7 +263,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         alertDialog.setView(customLayout);
         TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsave);
-ImageView cut=customLayout.findViewById(R.id.ivcut);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
         EditText et =customLayout.findViewById(R.id.etmobile);
         CountryCodePicker  countryCodePicker=customLayout.findViewById(R.id.et1);
 
@@ -331,8 +331,6 @@ ImageView cut=customLayout.findViewById(R.id.ivcut);
 
                     tvname.setText(list.getUsername());
                     tvemail.setText(list.getUseremailid());
-
-
                     tvmobile.setText(list.getMobilenumber());
                     tvemailtxt.setText(list.getUseremailid());
                     tvpassword.setText(list.getPassword());

@@ -58,7 +58,6 @@ public interface NetworkInterface {
     Single<Response<CreateLoginUserResponse>> pwdsuccess(@Query("userEmailId") String emailId,@Body ChangePasswordRequest requests);
 
 
-
     @POST("productRest/getProduct")
     Single<Response<List<ProductResponse>>>getproducts();
 
@@ -73,8 +72,6 @@ public interface NetworkInterface {
 
     @POST("countryRest/selectCountry")
     Call<CountryResponse>selectcountry(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Query("countryId") String countryid);
-
-
 
 
     @POST("loginRest/forgotPassword")

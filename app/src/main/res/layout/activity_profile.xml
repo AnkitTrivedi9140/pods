@@ -77,16 +77,14 @@ android:layout_centerVertical="true"
         android:background="@color/term_and_conditions"></RelativeLayout>
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/ivlogo"
-        android:layout_width="188dp"
-        android:layout_height="188dp"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
         android:src="@drawable/podmainicon"
         app:civ_border_color="@color/white"
-        app:civ_border_width="6dp"
+        app:civ_border_width="4dp"
         app:civ_shadow="true"
 
         app:civ_shadow_color="#fff"
-
-
         android:layout_centerHorizontal="true"/>
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/ivcamera"

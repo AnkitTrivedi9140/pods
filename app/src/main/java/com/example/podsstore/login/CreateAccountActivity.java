@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +30,9 @@ import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.profile.ProfileActivity;
 import com.google.gson.Gson;
+import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +48,11 @@ public class CreateAccountActivity extends AppCompatActivity {
 TextView signintv,tvduns,skiptv;
     RelativeLayout rlaccountconfirmation;
     CheckBox checkBoxterms;
-    private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet,numberofemployeeEt,turnoveret;
+    private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet,phoneEt,companyEt;
     ImageView back,tvicon;
     String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+
+    AlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +70,19 @@ TextView signintv,tvduns,skiptv;
 
             switch (v.getId()) {
                 case R.id.logInBtn:
-                    String username = usernameEt.getText().toString();
+                  // showAlertDialog();
+
                     String email=emaiEt.getText().toString();
                     String password = passwordEt.getText().toString();
                     String reenterpassword = reenterpasswordet.getText().toString();
-
-                    String emp = numberofemployeeEt.getText().toString();
-                    String turn = turnoveret.getText().toString();
+                    String phone = phoneEt.getText().toString();
+                    String company = companyEt.getText().toString();
                     //Toast.makeText(getApplicationContext(),username,Toast.LENGTH_LONG).show();
 //                    Intent login = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(login);
 //                    finish();
 
-                if (TextUtils.isEmpty(username)) {
-                        usernameEt.setError("Name Can't Blank!");
-                    } else if (TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(email)) {
                         emaiEt.setError("Email Address Can't Blank!");
 
                     }
@@ -86,22 +91,20 @@ TextView signintv,tvduns,skiptv;
                         passwordEt.setError("Password Can't Blank!");
 
                     }
+                else if (TextUtils.isEmpty(phone)) {
+                    phoneEt.setError("Phone Can't Blank!");
+
+                }
+
+                else if (TextUtils.isEmpty(company)) {
+                    companyEt.setError("Company Can't Blank!");
+
+                }
                     else if (TextUtils.isEmpty(reenterpassword)) {
                         reenterpasswordet.setError("Re_password Can't Blank!");
 
                     }
-
-                else if (TextUtils.isEmpty(emp)) {
-                    passwordEt.setError("Employees Can't Blank!");
-
-                }
-                else if (TextUtils.isEmpty(turn)) {
-                    reenterpasswordet.setError("Turnover Can't Blank!");
-
-                }
-                    /*else if(passwordEt.getText().toString()!=reenterpasswordet.getText().toString()){
-                    Toast.makeText(getApplicationContext(),"Please add same password.",Toast.LENGTH_LONG).show();
-                }*/else{
+                    else{
                     if(checkBoxterms.isChecked()==false){
 
                         Toast.makeText(getApplicationContext(),"Please click on checkBox to continue.",Toast.LENGTH_LONG).show();
@@ -111,11 +114,11 @@ TextView signintv,tvduns,skiptv;
 
                     }
                    else {
-                if(passwordEt.getText().toString().equals(reenterpasswordet.getText().toString())){
+                if(passwordEt.getText().toString().equals(reenterpasswordet.getText().toString())) {
 
                      if (email.matches(regex)) {
+                         showAlertDialog();
 
-                         smallCarton(username,email,password,reenterpassword);
                     }else {
                          emaiEt.setError("Email Address not correct!");
                      }
@@ -129,7 +132,6 @@ TextView signintv,tvduns,skiptv;
                                 }
 
                     }
-
                     break;
 
                 case R.id.ivback:
@@ -140,13 +142,7 @@ TextView signintv,tvduns,skiptv;
 
 
                     break;
-                case R.id.tvduns:
 
-                   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("*/*");
-                    startActivityForResult(intent, 7);
-
-                    break;
 
                 case R.id.skiptv:
 
@@ -177,14 +173,72 @@ TextView signintv,tvduns,skiptv;
         }
     };
 
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateAccountActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.radiodialogpopup, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvreg);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
+
+
+    alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                RadioButton  radioButton = (RadioButton)customLayout. findViewById(selectedId);
+               /* Toast.makeText(CreateAccountActivity.this,
+                       radioButton.getText().toString(), Toast.LENGTH_SHORT).show();*/
+
+
+
+                String email=emaiEt.getText().toString();
+                String password = passwordEt.getText().toString();
+                String reenterpassword = reenterpasswordet.getText().toString();
+                String phone = phoneEt.getText().toString();
+                String company = companyEt.getText().toString();
+                String businesstype=radioButton.getText().toString().trim();
+                if(businesstype==null){
+                    Toast.makeText(CreateAccountActivity.this,
+                            "Please select one", Toast.LENGTH_SHORT).show();
+                }else {
+                    smallCarton(email,phone,company,"buyer",businesstype,password,reenterpassword);
+
+                }
+
+
+
+
+            }
+        });
+        alert.show();
+    }
     @SuppressLint("CheckResult")
-    private void smallCarton(String username,String useremail,String password,String passwordagin) {
+    private void smallCarton(String useremail,String phone,String company,String usertype,String businesstype,String password,String passwordagin) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<CreateLoginUserRequest> list = new ArrayList<>();
 
         CreateLoginUserRequest r = new CreateLoginUserRequest();
-        r.setUsername(username);
+        //r.setUsername(username);
         r.setUseremail(useremail);
+        r.setPhoneno(phone);
+        r.setCompanyname(company);
+        r.setUsertype(usertype);
+        r.setBusinesstype(businesstype);
         r.setPassword(password);
         r.setReenterpassword(passwordagin);
         list.add(r);
@@ -212,8 +266,8 @@ TextView signintv,tvduns,skiptv;
 //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
-
-                                  rlaccountconfirmation.setVisibility(View.VISIBLE);
+                             alert.dismiss();
+                             rlaccountconfirmation.setVisibility(View.VISIBLE);
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
@@ -247,13 +301,12 @@ TextView signintv,tvduns,skiptv;
         logInBtn = findViewById(R.id.logInBtn);
 
         skiptv = findViewById(R.id.skiptv);
-
+        companyEt = findViewById(R.id.companyEt);
+        phoneEt = findViewById(R.id.phoneEt);
         btncontinue = findViewById(R.id.btncontinue);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
-        numberofemployeeEt = findViewById(R.id.numberofemployeeEt);
-        turnoveret = findViewById(R.id.turnoverEt);
-        tvduns = findViewById(R.id.tvduns);
+
         emaiEt = findViewById(R.id.emailEt);
         signintv = findViewById(R.id.signintv);
         checkBoxterms = findViewById(R.id.checkBoxterms);
@@ -264,7 +317,7 @@ TextView signintv,tvduns,skiptv;
         btncontinue.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
         signintv.setOnClickListener(onClickListener);
-        tvduns.setOnClickListener(onClickListener);
+
 
         skiptv.setOnClickListener(onClickListener);
 //        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);

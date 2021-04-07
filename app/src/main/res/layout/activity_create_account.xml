@@ -67,7 +67,7 @@ android:textStyle="bold"
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="8dp"
             android:layout_below="@+id/logtv"
-
+android:visibility="gone"
             android:hint="Your Full Name"
 
             android:inputType="textPersonName"
@@ -75,61 +75,60 @@ android:textStyle="bold"
 
             />
 
+
         <EditText
-            android:layout_centerHorizontal="true"
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="22dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="0dp"
+
+
+            android:layout_marginRight="0dp"
             android:background="@drawable/edittext_bg"
-            android:ems="10"
             android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="8dp"
-
-
-
-            android:padding="8dp"
+            android:ems="10"
             android:hint="Email ID"
-            android:layout_below="@+id/usernameEt"/>
-
+            android:padding="8dp" />
 
 
         <EditText
             android:layout_centerHorizontal="true"
-            android:id="@+id/numberofemployeeEt"
+            android:id="@+id/phoneEt"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:drawableLeft="@drawable/emp"
+            android:drawableLeft="@drawable/phonenumber"
             android:drawablePadding="8dp"
 
-            android:hint="Number of employees"
+            android:hint="Enter phone no."
 
             android:padding="8dp"
 
             android:layout_below="@+id/emailEt"/>
         <EditText
             android:layout_centerHorizontal="true"
-            android:id="@+id/turnoverEt"
+            android:id="@+id/companyEt"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:drawableLeft="@drawable/turn"
+            android:drawableLeft="@drawable/companyicon"
             android:drawablePadding="8dp"
 
 
-            android:hint="Ternover Range"
+            android:hint="Your company name"
 
             android:padding="8dp"
 
-            android:layout_below="@+id/numberofemployeeEt"/>
-
-
-
+            android:layout_below="@+id/phoneEt"/>
 
 
         <EditText
@@ -147,7 +146,7 @@ android:textStyle="bold"
 
             android:padding="8dp"
 
-            android:layout_below="@+id/turnoverEt"/>
+            android:layout_below="@+id/companyEt"/>
         <EditText
             android:layout_centerHorizontal="true"
             android:id="@+id/passwordagainEt"
@@ -177,19 +176,7 @@ android:textStyle="bold"
 <!--        >-->
 
 <!--    </TextView>-->
-        <TextView
-            android:id="@+id/tvduns"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Upload DUNS Report"
-            android:layout_below="@+id/passwordagainEt"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/term_and_conditions"
-            android:background="@drawable/rippleabout"
-            ></TextView>
+
         <CheckBox
             android:id="@+id/checkBoxterms"
             android:layout_width="wrap_content"
@@ -197,7 +184,7 @@ android:textStyle="bold"
 android:textColor="@color/text_color_device_found"
             android:layout_marginTop="11dp"
             android:text="By creating an account you agree to our Terms of Service and Privacy Policy."
-            android:layout_below="@+id/tvduns"/>
+            android:layout_below="@+id/passwordagainEt"/>
 
 
 
@@ -215,7 +202,7 @@ android:textColor="@color/text_color_device_found"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/button_bg"
                 android:gravity="center"
-                android:text="Create Account"
+                android:text="Continue..."
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16dp"
