@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "954522498933",
+    "project_id": "podsstore-b06af",
+    "storage_bucket": "podsstore-b06af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954522498933:android:0dd4e6467db71e746c453c",
+        "android_client_info": {
+          "package_name": "com.example.podsstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954522498933-os6ar41h14trn3s845afsg7ibidnmmne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.podsstore",
+            "certificate_hash": "6691f4eb9490b492153022e0c24c10e6c92543c3"
+          }
+        },
+        {
+          "client_id": "954522498933-ejcsi0ffgcvh0t52tdkk4nqbsn411vnu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBasCPpRKIP0zPV1ILr4cNVBfUmw6dtW-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954522498933-ejcsi0ffgcvh0t52tdkk4nqbsn411vnu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,9 +26,9 @@ public class ProfileResponses {
     private String joinedat;
 
     @SerializedName("addressDetails")
-    public List<Address> address = new ArrayList<>();
+    public Address address ;
     @SerializedName("imageDetails")
-    public List<Datum> data = new ArrayList<>() ;
+    public Datum data  ;
 
     @SerializedName("countryName")
     public CountryName countryname  ;
@@ -81,19 +81,19 @@ public class ProfileResponses {
         this.joinedat = joinedat;
     }
 
-    public List<Address> getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(List<Address> address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public List<Datum> getData() {
+    public Datum getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(Datum data) {
         this.data = data;
     }
 

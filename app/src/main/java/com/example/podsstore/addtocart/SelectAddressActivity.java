@@ -14,10 +14,13 @@ import android.widget.Toast;
 
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.profile.AddressActivity;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,22 +67,27 @@ Button continuebtn;
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
-        );
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
 
-        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
             @Override
-            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
+            public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
 
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                if (response.isSuccessful()) {
+                    List<ProfileResponses> list = response.body();
+
+                  for (int i = 0; i < list.size(); i++) {
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("getprofile",String.valueOf(response.code()));
                 if (response.isSuccessful()) {
-                    ProfileResponses list = response.body();
-                    for (int i=0; i<list.getAddress().size(); i++) {
-                     tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
 
-                    }
-                tvname.setText(list.getUsername());
+                   // for (int i=0; i<list.getAddress().size(); i++) {
+                     tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2().toString()+"\n"+list.get(i).getAddress().getAddressline3().toString());
+
+                    //}
+                tvname.setText(list.get(i).getUsername());
 if(tvaddress.length()<5){
     Toast.makeText(getApplicationContext(),"Add Address first!",Toast.LENGTH_SHORT).show();
 }else{
@@ -96,12 +104,57 @@ if(tvaddress.length()<5){
 }
 
                 }
+                  }
+
+
+
+
+                }
             }
+
             @Override
-            public void onFailure(Call<ProfileResponses> call, Throwable t) {
+            public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
                 Log.e("onerrors",t.getMessage());
             }
         });
+//        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+//        );
+//
+//        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+//            @Override
+//            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
+//
+//                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+//                Log.e("getprofile",String.valueOf(response.code()));
+//                if (response.isSuccessful()) {
+//                    ProfileResponses list = response.body();
+//                   // for (int i=0; i<list.getAddress().size(); i++) {
+//                     tvaddress.setText(list.getAddress().getAddressline1().toString()+", "+list.getAddress().getAddressline2().toString()+"\n"+list.getAddress().getAddressline3().toString());
+//
+//                    //}
+//                tvname.setText(list.getUsername());
+//if(tvaddress.length()<5){
+//    Toast.makeText(getApplicationContext(),"Add Address first!",Toast.LENGTH_SHORT).show();
+//}else{
+//    continuebtn.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Intent intent=new Intent(getApplicationContext(), PaymentActivity.class);
+//            intent.putExtra("userid",getIntent().getStringExtra("userid"));
+//            intent.putExtra("getbuynowqty",getIntent().getStringExtra("getbuynowqty"));
+//            startActivity(intent);
+//            finish();
+//        }
+//    });
+//}
+//
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ProfileResponses> call, Throwable t) {
+//                Log.e("onerrors",t.getMessage());
+//            }
+//        });
     }
     @Override
     public void onBackPressed() {

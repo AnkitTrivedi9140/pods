@@ -23,6 +23,7 @@ import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.CountryResponse;
 
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
 import com.example.podsstore.mainactivityadapters.CountryAdapter;
@@ -42,7 +43,8 @@ import retrofit2.Response;
 public class ChooseCountryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CountryAdapter addressAdapter;
-    ImageView ivcart,ivtoggle;
+    ImageView ivcart, ivtoggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,26 +58,27 @@ public class ChooseCountryActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(ChooseCountryActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
-       addressAdapter.setAdapterListener(adapterListener);
+        addressAdapter.setAdapterListener(adapterListener);
 
         recyclerView.setAdapter(addressAdapter);
 
 
-loadData();
-loadDataprofile();
+        loadData();
+        loadDataprofile();
         ivtoggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
+
     private CountryAdapter.AdapterListener adapterListener = data -> {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
 
-changenumber( data.getCountryid().toString());
+        changenumber(data.getCountryid().toString());
     };
 
     @Override
@@ -89,10 +92,11 @@ changenumber( data.getCountryid().toString());
 
         return super.onOptionsItemSelected(item);
     }
+
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
         ApiClient.getApiClient().getcountry()
                 .subscribeOn(Schedulers.io())
@@ -122,10 +126,11 @@ changenumber( data.getCountryid().toString());
                     }
                 });
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -133,54 +138,105 @@ changenumber( data.getCountryid().toString());
     @SuppressLint("CheckResult")
     private void changenumber(String mobilenumber) {
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
 
-        ApiClient.getApiClient().selectcountry(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),mobilenumber).enqueue(new Callback<CountryResponse>() {
+        ApiClient.getApiClient().selectcountry(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), mobilenumber).enqueue(new Callback<CountryResponse>() {
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
+                Log.e("getprofile", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     loadDataprofile();
                     CountryResponse list = response.body();
                     PreferenceManagerss.setStringValue(Preferences.USER_COUNTRY_IMAGE, list.getCountryid().toString());
-                 Toast.makeText(getApplicationContext(),"Country Selected",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Country Selected", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(ChooseCountryActivity.this, MainActivity.class);
 
                     // i.putExtra("subcategory", data.getProductname().toString());
                     startActivity(i);
-finish();
+                    finish();
                 }
             }
+
             @Override
             public void onFailure(Call<CountryResponse> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+                Log.e("onerrors", t.getMessage());
             }
         });
     }
+
     @SuppressLint("CheckResult")
     private void loadDataprofile() {
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
+            @Override
+            public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                if (response.isSuccessful()) {
+                    List<ProfileResponses> list = response.body();
+
+                   for (int i = 0; i < list.size(); i++) {
+
+                       // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                       Log.e("getprofile", String.valueOf(response.code()));
+                       if (response.isSuccessful()) {
+
+//                    for (int i = 0; i < list.getAddress().size(); i++) {
+//                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//
+//                    }
+
+
+                           if (list.get(i).getCountryname() == null) {
+                               //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
+                           } else {
+                               GlideUrl glideUrl = new GlideUrl(list.get(i).getCountryname().getImageurl().toString(),
+                                       new LazyHeaders.Builder()
+                                               .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                               .build());
+
+                               Glide.with(getApplicationContext())
+                                       .load(glideUrl)
+                                       .into(ivcart);
+                           }
+                       }
+                     }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
+      /*  Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
 
-        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
             @Override
             public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
 
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
+                Log.e("getprofile", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     ProfileResponses list = response.body();
-                    for (int i=0; i<list.getAddress().size(); i++) {
-                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//                    for (int i = 0; i < list.getAddress().size(); i++) {
+//                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//
+//                    }
 
-                    }
 
-
-                       // Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
+                    if (list.getCountryname() == null) {
+                        //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
+                    } else {
                         GlideUrl glideUrl = new GlideUrl(list.getCountryname().getImageurl().toString(),
                                 new LazyHeaders.Builder()
                                         .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
@@ -190,14 +246,14 @@ finish();
                         Glide.with(getApplicationContext())
                                 .load(glideUrl)
                                 .into(ivcart);
-
-
+                    }
                 }
             }
+
             @Override
             public void onFailure(Call<ProfileResponses> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
+                Log.e("onerrors", t.getMessage());
             }
-        });
+        });*/
     }
 }

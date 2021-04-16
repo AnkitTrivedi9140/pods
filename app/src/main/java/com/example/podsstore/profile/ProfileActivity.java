@@ -32,6 +32,7 @@ import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
@@ -42,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -300,7 +302,56 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
+
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
+            @Override
+            public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
+
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getprofile", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    List<ProfileResponses> list = response.body();
+
+                   for (int i = 0; i < list.size(); i++) {
+                       if(list.get(i).getAddress()!=null){
+
+                       }
+                    tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2());
+
+
+                    //   for (int i = 0; i < list.getData().size(); i++) {
+                    Log.e("getprofilesss", String.valueOf(list.get(i).getData().getUserimageurl()));
+                    GlideUrl glideUrl = new GlideUrl(list.get(i).getData().getUserimageurl(),
+                            new LazyHeaders.Builder()
+                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                    .build());
+
+                    Glide.with(getApplicationContext())
+                            .load(glideUrl)
+                            .into(ivuser);
+                    //   }
+
+                    tvname.setText(list.get(i).getUsername());
+                    tvemail.setText(list.get(i).getUseremailid());
+                    tvmobile.setText(list.get(i).getMobilenumber());
+                    tvemailtxt.setText(list.get(i).getUseremailid());
+                    tvpassword.setText(list.get(i).getPassword());
+                   }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
+
+
+
+       /* Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
 
         ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
@@ -312,13 +363,13 @@ public class ProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ProfileResponses list = response.body();
 
-                    for (int i = 0; i < list.getAddress().size(); i++) {
-                        tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2());
+                   // for (int i = 0; i < list.getAddress().size(); i++) {
+                        tvaddress.setText(list.getAddress().getAddressline1().toString()+", "+list.getAddress().getAddressline2());
 
-                    }
-                    for (int i = 0; i < list.getData().size(); i++) {
-                        Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
-                        GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
+                   // }
+                 //   for (int i = 0; i < list.getData().size(); i++) {
+                        Log.e("getprofilesss", String.valueOf(list.getData().getUserimageurl()));
+                        GlideUrl glideUrl = new GlideUrl(list.getData().getUserimageurl(),
                                 new LazyHeaders.Builder()
                                         .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
@@ -327,7 +378,7 @@ public class ProfileActivity extends AppCompatActivity {
                         Glide.with(getApplicationContext())
                                 .load(glideUrl)
                                 .into(ivuser);
-                    }
+                 //   }
 
                     tvname.setText(list.getUsername());
                     tvemail.setText(list.getUseremailid());
@@ -342,7 +393,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onFailure(Call<ProfileResponses> call, Throwable t) {
                 Log.e("onerrors", t.getMessage());
             }
-        });
+        });*/
     }
     @SuppressLint("CheckResult")
     private void changenumber(String mobilenumber) {

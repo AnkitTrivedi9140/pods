@@ -65,7 +65,7 @@ public interface NetworkInterface {
     Call<List<ProductResponse>>getproductsdetails(@Query("id") String userId);
 
     @POST("loginRest/users")
-    Call<ProfileResponses>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
+    Call<List<ProfileResponses>>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
 
     @POST("countryRest/getCountryDetails")
     Single<Response<List<CountryResponse>>>getcountry();

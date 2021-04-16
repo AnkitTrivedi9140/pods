@@ -28,6 +28,8 @@ import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.wishlist.WishListActivity;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -155,7 +157,58 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
     @SuppressLint("CheckResult")
     private void loadData() {
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
+
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
+            @Override
+            public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                if (response.isSuccessful()) {
+                    List<ProfileResponses> list = response.body();
+
+                    for (int i = 0; i < list.size(); i++) {
+                        // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                        Log.e("getprofile",String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+//                    for (int i=0; i<list.getAddress().size(); i++) {
+//                       // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//
+//                    }
+
+                            // for (int i = 0; i < list.getData().size(); i++) {
+                            Log.e("getprofilesss", String.valueOf(list.get(i).getData().getUserimageurl()));
+                            GlideUrl glideUrl = new GlideUrl(list.get(i).getData().getUserimageurl(),
+                                    new LazyHeaders.Builder()
+                                            .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                            .build());
+
+                            Glide.with(getApplicationContext())
+                                    .load(glideUrl)
+                                    .into(productiv);
+                            // }
+                            tvusername.setText(list.get(i).getUsername());
+                            tvemail.setText(list.get(i).getUseremailid());
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
+                Log.e("onerrors",t.getMessage());
+            }
+        });
+
+
+
+      /*  Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
         );
 
         ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
@@ -166,14 +219,14 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
                 Log.e("getprofile",String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     ProfileResponses list = response.body();
-                    for (int i=0; i<list.getAddress().size(); i++) {
-                       // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//                    for (int i=0; i<list.getAddress().size(); i++) {
+//                       // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//
+//                    }
 
-                    }
-
-                    for (int i = 0; i < list.getData().size(); i++) {
-                        Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
-                        GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
+                   // for (int i = 0; i < list.getData().size(); i++) {
+                        Log.e("getprofilesss", String.valueOf(list.getData().getUserimageurl()));
+                        GlideUrl glideUrl = new GlideUrl(list.getData().getUserimageurl(),
                                 new LazyHeaders.Builder()
                                         .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
@@ -182,7 +235,7 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
                         Glide.with(getApplicationContext())
                                 .load(glideUrl)
                                 .into(productiv);
-                    }
+                   // }
                     tvusername.setText(list.getUsername());
                     tvemail.setText(list.getUseremailid());
 
@@ -192,6 +245,6 @@ RelativeLayout rlorder,rladdress,rlwishlist,rlsettings,rlsavedcard,rlchoosecount
             public void onFailure(Call<ProfileResponses> call, Throwable t) {
                 Log.e("onerrors",t.getMessage());
             }
-        });
+        });*/
     }
 }

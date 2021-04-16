@@ -47,7 +47,7 @@ import retrofit2.Response;
 public class AddToCartActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-    TextView tvsubtotaltxt, tvtotaltxt, tvapply,tvdiscounttxt,tvcartempty;
+    TextView tvsubtotaltxt, tvtotaltxt, tvapply, tvdiscounttxt, tvcartempty;
     Button placeorderbtn;
     ArrayList<String> arrPackage;
     ArrayList<AddtoCartWithQty> qtylist;
@@ -86,10 +86,9 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
         placeorderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(productListAdapter.getSize()==0){
-                    Toast.makeText(getApplicationContext(),"Please add some items in cart",Toast.LENGTH_SHORT).show();
-                }else
-                    {
+                if (productListAdapter.getSize() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please add some items in cart", Toast.LENGTH_SHORT).show();
+                } else {
                     Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
                     startActivity(intent);
                     finish();
@@ -107,7 +106,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 
                 if (TextUtils.isEmpty(number)) {
                     etcoupon.setError("Coupon Can't Blank!");
-                }else{
+                } else {
                     getcoupon(etcoupon.getText().toString());
                 }
 
@@ -158,7 +157,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                     }
                     if (list.isEmpty()) {
 
-tvcartempty.setVisibility(View.VISIBLE);
+                        tvcartempty.setVisibility(View.VISIBLE);
                         tvcartempty.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -169,8 +168,7 @@ tvcartempty.setVisibility(View.VISIBLE);
 
                             }
                         });
-                    }
-                    else {
+                    } else {
                         tvcartempty.setVisibility(View.GONE);
                     }
 
@@ -296,10 +294,10 @@ tvcartempty.setVisibility(View.VISIBLE);
     };
     private AddtocartAdapter.AdapterListenercart adapterListenercart = data -> {
 
-  Intent i=new Intent(getApplicationContext(), ProductDetailsActivity.class);
-  i.putExtra("userid",data.getProductid().toString());
-  startActivity(i);
-  finish();
+        Intent i = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+        i.putExtra("userid", data.getProductid().toString());
+        startActivity(i);
+        finish();
 
     };
     //    private AddtocartAdapter.AdapterListenerplus adapterListenerplus = data -> {
@@ -314,12 +312,12 @@ tvcartempty.setVisibility(View.VISIBLE);
         @Override
         public void onItemClickplus(CartResponse data, String qty) {
 
-          //  Toast.makeText(getApplicationContext(), qty.toString(), Toast.LENGTH_SHORT).show();
-tvdiscounttxt.setText("0.00");
+            //  Toast.makeText(getApplicationContext(), qty.toString(), Toast.LENGTH_SHORT).show();
+            tvdiscounttxt.setText("0.00");
             String aa = viewModel.isexist(data.getProductid().toString());
 
             if (aa == null) {
-               // Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
                 insert(data.getProductid().toString(), qty, "1");
             } else {
                 //Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
@@ -337,10 +335,10 @@ tvdiscounttxt.setText("0.00");
             tvdiscounttxt.setText("0.00");
             String aa = viewModel.isexist(data.getProductid().toString());
             if (aa == null) {
-              //  Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
                 insert(data.getProductid().toString(), qty, "1");
             } else {
-               // Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
                 update(qty, data.getProductid().toString());
             }
         }
@@ -483,7 +481,7 @@ tvdiscounttxt.setText("0.00");
         ApiClient.getApiClient().getcoupon(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), code).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("onRespo ",String.valueOf(response.body()) );
+                Log.e("onRespo ", String.valueOf(response.body()));
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()) {
 
@@ -491,10 +489,10 @@ tvdiscounttxt.setText("0.00");
                     Toast.makeText(getApplicationContext(), "success coupon", Toast.LENGTH_SHORT).show();
                     Log.e("getprofile", String.valueOf(response.body()));
                     tvdiscounttxt.setText(String.valueOf(response.body()));
-                    String totalprice= tvtotaltxt.getText().toString();
-                    int totaltv=Integer.valueOf(totalprice)-Integer.valueOf(tvdiscounttxt.getText().toString());
+                    String totalprice = tvtotaltxt.getText().toString();
+                    int totaltv = Integer.valueOf(totalprice) - Integer.valueOf(tvdiscounttxt.getText().toString());
                     tvtotaltxt.setText(String.valueOf(totaltv));
-etcoupon.setText("");
+                    etcoupon.setText("");
                 } else {
                     Toast.makeText(getApplicationContext(), "Coupon code is not correct!", Toast.LENGTH_SHORT).show();
                 }

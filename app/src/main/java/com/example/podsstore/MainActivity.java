@@ -16,6 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -87,7 +89,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvcartsize,tvbestpriceseeall,tvbestsellingseeall,headerusername,tvemail;
+    private TextView tvcartsize, tvbestpriceseeall, tvbestsellingseeall, headerusername, tvemail;
     RadioGroup radioGroup1;
     RadioButton home, categories, profile, about;
     private RecyclerView recyclerView, bestsellingproductrv, bestprisedproductrv;
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     EditText search;
     ViewPager viewPager;
     Integer[] imageId = {R.drawable.catc, R.drawable.catb, R.drawable.catd, R.drawable.cata, R.drawable.cate, R.drawable.catf};
-    String[] imagesName = {"image1","image2","image3","image4"};
+    String[] imagesName = {"image1", "image2", "image3", "image4"};
 
     int currentPage = 0;
     Timer timer;
@@ -110,13 +112,14 @@ public class MainActivity extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
-CircleImageView profileimage;
-ImageView ivcountry;
+    CircleImageView profileimage;
+    ImageView ivcountry;
     private DrawerLayout dl;
 
-private Toolbar toolbar;
+    private Toolbar toolbar;
     private NavigationView nv;
-private RecyclerView topbrandrv;
+    private RecyclerView topbrandrv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,11 +142,10 @@ private RecyclerView topbrandrv;
         toolbar = findViewById(R.id.toolbar);
         ivcountry = findViewById(R.id.ivcountry);
 
-        nv = (NavigationView)findViewById(R.id.nv);
-        dl = (DrawerLayout)findViewById(R.id.mainactivity);
-      //  t = new ActionBarDrawerToggle(this, dl,toolbar,R.string.Open, R.string.Close);
-
-
+        nv = (NavigationView) findViewById(R.id.nv);
+        dl = (DrawerLayout) findViewById(R.id.mainactivity);
+        //  t = new ActionBarDrawerToggle(this, dl,toolbar,R.string.Open, R.string.Close);
+        Log.e("packagename",String.valueOf(getApplicationContext().getPackageName() ));
 
         topbrandrv = findViewById(R.id.topbrandrv);
         tvbestpriceseeall = findViewById(R.id.tvbestpriceseeall);
@@ -284,7 +286,7 @@ private RecyclerView topbrandrv;
 
 
                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                   dl.open();
+                    dl.open();
                 } else {
                     showAlertDialog();
                 }
@@ -308,14 +310,13 @@ private RecyclerView topbrandrv;
         });
 
 
-
-        PagerAdapter adapter = new CustomAdapter(MainActivity.this,imageId,imagesName);
+        PagerAdapter adapter = new CustomAdapter(MainActivity.this, imageId, imagesName);
         viewPager.setAdapter(adapter);
 
         dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
 
-        for(int i = 0; i < dotscount; i++){
+        for (int i = 0; i < dotscount; i++) {
 
             dots[i] = new ImageView(this);
             dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
@@ -339,7 +340,7 @@ private RecyclerView topbrandrv;
             @Override
             public void onPageSelected(int position) {
 
-                for(int i = 0; i< dotscount; i++){
+                for (int i = 0; i < dotscount; i++) {
                     dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
                 }
 
@@ -372,19 +373,19 @@ private RecyclerView topbrandrv;
             }
         }, DELAY_MS, PERIOD_MS);
 
-tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent priced=new Intent(getApplicationContext(),ProductListActivity.class);
-        startActivity(priced);
-        finish();
+        tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent priced = new Intent(getApplicationContext(), ProductListActivity.class);
+                startActivity(priced);
+                finish();
 
-    }
-});
+            }
+        });
         tvbestsellingseeall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selling=new Intent(getApplicationContext(),ProductListActivity.class);
+                Intent selling = new Intent(getApplicationContext(), ProductListActivity.class);
                 startActivity(selling);
                 finish();
             }
@@ -401,47 +402,46 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id)
-                {
+                switch (id) {
                     case R.id.nvscan:
-                        Intent nvscan=new Intent(MainActivity.this, MyOrderActivity.class);
+                        Intent nvscan = new Intent(MainActivity.this, MyOrderActivity.class);
                         startActivity(nvscan);
                         dl.closeDrawers();
                         break;
                     case R.id.nvsettings:
-                        Intent nvsettings=new Intent(MainActivity.this, ChooseCountryActivity.class);
+                        Intent nvsettings = new Intent(MainActivity.this, ChooseCountryActivity.class);
                         startActivity(nvsettings);
                         dl.closeDrawers();
                         break;
                     case R.id.nvhistory:
-                        Intent nvhistory=new Intent(MainActivity.this, AddressesActivity.class);
+                        Intent nvhistory = new Intent(MainActivity.this, AddressesActivity.class);
                         startActivity(nvhistory);
                         dl.closeDrawers();
                         break;
                     case R.id.nvrate:
-                        Intent connct=new Intent(MainActivity.this, ConnectwithPodActivity.class);
+                        Intent connct = new Intent(MainActivity.this, ConnectwithPodActivity.class);
                         startActivity(connct);
                         dl.closeDrawers();
                         break;
                     case R.id.nvshare:
-                        Intent help=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        Intent help = new Intent(MainActivity.this, HelpAndFAQActivity.class);
                         startActivity(help);
                         dl.closeDrawers();
                         break;
                     case R.id.nvterm:
-                        Intent term=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        Intent term = new Intent(MainActivity.this, HelpAndFAQActivity.class);
                         startActivity(term);
                         dl.closeDrawers();
                         break;
 
                     case R.id.nvprivacy:
-                        Intent privacy=new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        Intent privacy = new Intent(MainActivity.this, HelpAndFAQActivity.class);
                         startActivity(privacy);
                         dl.closeDrawers();
                         break;
 
                     case R.id.nvcategory:
-                        Intent cat=new Intent(MainActivity.this, CategoryActivity.class);
+                        Intent cat = new Intent(MainActivity.this, CategoryActivity.class);
                         startActivity(cat);
                         dl.closeDrawers();
                         break;
@@ -450,7 +450,7 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setCancelable(true);
                         dialog.setTitle("Exit from Pod!");
-                        dialog.setMessage("Are you sure you want to exit from POD?" );
+                        dialog.setMessage("Are you sure you want to exit from POD?");
                         dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
@@ -462,9 +462,9 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);*/
                                 finish();
-                                overridePendingTransition( 0, 0);
+                                overridePendingTransition(0, 0);
                                 startActivity(getIntent());
-                                overridePendingTransition( 0, 0);
+                                overridePendingTransition(0, 0);
                             }
                         })
                                 .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
@@ -486,15 +486,19 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
                 }
 
 
-
                 return true;
 
             }
         });
 
 
-       profileloadData();
+
+
+
+
+        profileloadData();
     }
+
     @SuppressLint("CheckResult")
     private void loadDatacart() {
 
@@ -584,7 +588,7 @@ tvbestpriceseeall.setOnClickListener(new View.OnClickListener() {
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, TopBrandsProductActivity.class);
 
-i.putExtra("userid",data.getBrandname().toString());
+        i.putExtra("userid", data.getBrandname().toString());
         startActivity(i);
 
 
@@ -750,25 +754,25 @@ i.putExtra("userid",data.getBrandname().toString());
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setCancelable(true);
         dialog.setTitle("Exit from Pod!");
-        dialog.setMessage("Are you sure you want to exit from application?" );
+        dialog.setMessage("Are you sure you want to exit from application?");
         dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //Action for "Delete".
-                finish();
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Action for "Delete".
+                        finish();
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
 
-            }
-        }
+                    }
+                }
         )
                 .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Action for "Cancel".
-                 dialog.cancel();
+                        dialog.cancel();
                     }
                 });
 
@@ -807,41 +811,120 @@ i.putExtra("userid",data.getBrandname().toString());
         });
         alert.show();
     }
-    @SuppressLint("CheckResult")
+
+//    @SuppressLint("CheckResult")
+//    private void profileloadData() {
+//
+//        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+//        );
+//
+//        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
+//            @Override
+//            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
+//                View headerView = nv.getHeaderView(0);
+//                headerusername = headerView.findViewById(R.id.headerusername);
+//                tvemail = headerView.findViewById(R.id.tvemail);
+//                profileimage = headerView.findViewById(R.id.profileimage);
+//                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+//                Log.e("getprofile", String.valueOf(response.code()));
+//                if (response.isSuccessful()) {
+//                    ProfileResponses list = response.body();
+////                    for (int i = 0; i < list.getAddress().size(); i++) {
+////                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+////
+////                    }
+//
+//                   // for (int i = 0; i < list.getData().size(); i++) {
+//                        Log.e("getprofilesss", String.valueOf(list.getData().getUserimageurl()));
+//                        GlideUrl glideUrl = new GlideUrl(list.getData().getUserimageurl(),
+//                                new LazyHeaders.Builder()
+//                                        .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+//
+//                                        .build());
+//
+//                        Glide.with(getApplicationContext())
+//                                .load(glideUrl)
+//                                .into(profileimage);
+//                  //  }
+//                    if(list.getCountryname()==null) {
+//                        //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
+//                    }
+//                    else{
+//                        GlideUrl glideUrls = new GlideUrl(list.getCountryname().getImageurl().toString(),
+//                                new LazyHeaders.Builder()
+//                                        .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+//
+//                                        .build());
+//
+//                        Glide.with(getApplicationContext())
+//                                .load(glideUrl)
+//                                .into(ivcountry);
+//                    }
+//
+//                    headerusername.setText(list.getUsername());
+//
+//                    tvemail.setText(list.getUseremailid());
+//                    profileimage.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
+//                    headerusername.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
+//                    tvemail.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ProfileResponses> call, Throwable t) {
+//                Log.e("onerrors", t.getMessage());
+//            }
+//        });
+
+     @SuppressLint("CheckResult")
     private void profileloadData() {
+         Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
 
-        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
-        );
+         ApiClient.getApiClient(). profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
+             @Override
+             public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
 
-        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<ProfileResponses>() {
-            @Override
-            public void onResponse(Call<ProfileResponses> call, Response<ProfileResponses> response) {
-                View headerView = nv.getHeaderView(0);
-                headerusername = headerView.findViewById(R.id.headerusername);
-                tvemail = headerView.findViewById(R.id.tvemail);
-                profileimage= headerView.findViewById(R.id.profileimage);
-                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getprofile",String.valueOf(response.code()));
-                if (response.isSuccessful()) {
-                    ProfileResponses list = response.body();
-                    for (int i=0; i<list.getAddress().size(); i++) {
-                        // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                 Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                 if (response.isSuccessful()) {
+                     List<ProfileResponses> list = response.body();
+            View headerView = nv.getHeaderView(0);
+            headerusername = headerView.findViewById(R.id.headerusername);
+            tvemail = headerView.findViewById(R.id.tvemail);
+            profileimage = headerView.findViewById(R.id.profileimage);
+            // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+            Log.e("getprofile", String.valueOf(response.code()));
+            if (response.isSuccessful()) {
 
-                    }
+//                  for (int i = 0; i < list.getAddress().size(); i++) {
+//                      // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
+//
+//                  }
 
-                    for (int i = 0; i < list.getData().size(); i++) {
-                        Log.e("getprofilesss", String.valueOf(list.getData().get(i).getUserimageurl()));
-                        GlideUrl glideUrl = new GlideUrl(list.getData().get(i).getUserimageurl(),
-                                new LazyHeaders.Builder()
-                                        .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
-
-                                        .build());
-
-                        Glide.with(getApplicationContext())
-                                .load(glideUrl)
-                                .into(profileimage);
-                    }
-                    GlideUrl glideUrl = new GlideUrl(list.getCountryname().getImageurl().toString(),
+               for (int i = 0; i < list.size(); i++) {
+                    Log.e("getprofilesss", String.valueOf(list.get(i).getData().userimageurl));
+                    GlideUrl glideUrl = new GlideUrl(list.get(i).getData().userimageurl,
                             new LazyHeaders.Builder()
                                     .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
@@ -849,41 +932,70 @@ i.putExtra("userid",data.getBrandname().toString());
 
                     Glide.with(getApplicationContext())
                             .load(glideUrl)
-                            .into(ivcountry);
-                    headerusername.setText(list.getUsername());
+                            .into(profileimage);
 
-                    tvemail.setText(list.getUseremailid());
-profileimage.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
-        startActivity(intent);
-        finish();
-    }
-});
-                    headerusername.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-                    tvemail.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
+                   headerusername.setText(list.get(i).getUsername());
+
+                   tvemail.setText(list.get(i).getUseremailid());
+
+                if(list.get(0).countryname==null) {
+                    //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
                 }
+                else{
+                    GlideUrl glideUrls = new GlideUrl(list.get(i).getCountryname().getImageurl().toString(),
+                            new LazyHeaders.Builder()
+                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+
+                                    .build());
+
+                    Glide.with(getApplicationContext())
+                            .load(glideUrls)
+                            .into(ivcountry);
+                }
+
+               }
+                profileimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                headerusername.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                tvemail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
-            @Override
-            public void onFailure(Call<ProfileResponses> call, Throwable t) {
-                Log.e("onerrors",t.getMessage());
-            }
-        });
+//                    for (int i = 0; i < list.size(); i++) {
+                 //    placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
+
+                     //   }
+                     if (list != null) {
+
+
+                     }
+
+                 }
+             }
+
+             @Override
+             public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
+                 Log.e("onerrors",t.getMessage());
+             }
+         });
     }
 
 }
