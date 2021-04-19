@@ -923,16 +923,19 @@ public class MainActivity extends AppCompatActivity {
 //                  }
 
                for (int i = 0; i < list.size(); i++) {
-                    Log.e("getprofilesss", String.valueOf(list.get(i).getData().userimageurl));
-                    GlideUrl glideUrl = new GlideUrl(list.get(i).getData().userimageurl,
-                            new LazyHeaders.Builder()
-                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+                   if(list.get(i).getData()!=null){
+                       Log.e("getprofilesss", String.valueOf(list.get(i).getData().userimageurl));
+                       GlideUrl glideUrl = new GlideUrl(list.get(i).getData().userimageurl,
+                               new LazyHeaders.Builder()
+                                       .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
-                                    .build());
+                                       .build());
 
-                    Glide.with(getApplicationContext())
-                            .load(glideUrl)
-                            .into(profileimage);
+                       Glide.with(getApplicationContext())
+                               .load(glideUrl)
+                               .into(profileimage);
+
+                   }
 
                    headerusername.setText(list.get(i).getUsername());
 

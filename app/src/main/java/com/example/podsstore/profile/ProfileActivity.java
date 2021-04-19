@@ -316,22 +316,24 @@ public class ProfileActivity extends AppCompatActivity {
 
                    for (int i = 0; i < list.size(); i++) {
                        if(list.get(i).getAddress()!=null){
+                           tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2());
 
                        }
-                    tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2());
 
+                       if(list.get(i).getData()!=null){
+                           Log.e("getprofilesss", String.valueOf(list.get(i).getData().getUserimageurl()));
+                           GlideUrl glideUrl = new GlideUrl(list.get(i).getData().getUserimageurl(),
+                                   new LazyHeaders.Builder()
+                                           .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
+                                           .build());
+
+                           Glide.with(getApplicationContext())
+                                   .load(glideUrl)
+                                   .into(ivuser);
+                       }
                     //   for (int i = 0; i < list.getData().size(); i++) {
-                    Log.e("getprofilesss", String.valueOf(list.get(i).getData().getUserimageurl()));
-                    GlideUrl glideUrl = new GlideUrl(list.get(i).getData().getUserimageurl(),
-                            new LazyHeaders.Builder()
-                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
-                                    .build());
-
-                    Glide.with(getApplicationContext())
-                            .load(glideUrl)
-                            .into(ivuser);
                     //   }
 
                     tvname.setText(list.get(i).getUsername());
