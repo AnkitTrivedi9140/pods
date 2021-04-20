@@ -6,130 +6,262 @@
     android:layout_height="match_parent"
 
     tools:context=".aboutpod.AboutActivity">
-<ScrollView
-    android:layout_marginBottom="62dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
 
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-<ImageView
-    android:layout_marginTop="16dp"
-    android:id="@+id/ivabout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/aboutpodimage"
-    android:layout_centerHorizontal="true"
-
-
-    >
-
-</ImageView>
-
-<TextView
-    android:id="@+id/tvheading"
-    android:text="Innovation you can trust"
-    android:layout_below="@+id/ivabout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-android:textColor="@color/black"
-    android:textSize="22dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    ></TextView>
-    <TextView
-        android:id="@+id/tvheadingtext"
-        android:text="Our team consists of international trade and health science experts who use over 20 years of industry experience to execute lasting solutions within today’s world of unprecedented change.\n\nAcross a wide range of medical and healthcare products, existing supply chains are no longer sufficient. To deliver, organisations must pre-empt geopolitical change and leverage upon strong local relationships. At PODS, our skill set is unique, our people are global, and integrity is our greatest asset."
-        android:layout_below="@+id/tvheading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/manatee"
-        android:textSize="16dp"
-android:layout_marginTop="4dp"
-
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        ></TextView>
-
-
-
-        <TextView
-            android:id="@+id/tvheadingpementmethod"
-            android:text="Accepting all Payment Medhods"
-            android:layout_below="@+id/tvheadingtext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:visibility="gone"
-            ></TextView>
-
+        android:layout_height="match_parent"
+        android:layout_marginBottom="62dp">
 
         <RelativeLayout
-            android:id="@+id/rlimage"
-            android:layout_marginTop="12dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tvheadingpementmethod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
 
-
-            <ImageView
-                android:src="@drawable/grpaymentmethodimage"
-                android:id="@+id/ivpement"
-                android:layout_width="66dp"
-                android:layout_height="66dp"></ImageView>
-            <ImageView
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/visaimage"
-                android:layout_toRightOf="@+id/ivpement"
-                android:id="@+id/ivvisa"
-                android:layout_width="66dp"
-                android:layout_height="66dp"></ImageView>
-            <ImageView
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/paytmimage"
-                android:layout_toRightOf="@+id/ivvisa"
-                android:id="@+id/ivpetm"
-                android:layout_width="66dp"
-                android:layout_height="66dp"></ImageView>
-            <ImageView
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/bankimage"
-                android:layout_toRightOf="@+id/ivpetm"
-                android:id="@+id/ivbank"
-                android:layout_width="66dp"
-                android:layout_height="66dp"></ImageView>
-        </RelativeLayout>
-        <TextView
-            android:layout_below="@+id/tvheadingtext"
-            android:background="@drawable/rippleabout"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="33dp"
-            android:layout_alignParentBottom="true"
-            android:lines="1"
-
-            android:id="@+id/tvreact"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textSize="18dp"
+            android:layout_height="wrap_content">
 
-         android:layout_centerHorizontal="true"
+            <ImageView
+                android:id="@+id/ivabout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/aboutpodimage"
 
-            android:textColor="@color/term_and_conditions"
-            android:text="Reach Out to US "
-            android:gravity="center"
-            ></TextView>
-    </RelativeLayout>
-</ScrollView>
+
+                >
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivabout"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
+                android:text="Innovation you can trust"
+                android:textColor="@color/black"
+
+                android:gravity="center"
+                android:textSize="22dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvheadingtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvheading"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="16dp"
+               android:text="Personal protective equipment is the first line of defense against hazardous materials and workplace environmental dangers, such as infections, bacteria, and disease transmission. These are essential resources that help keep our families safe, as well as protect our doctors and nurses and enable them to take better care of us. By providing a seamless supply of protective gear and medical equipment, Pods Health equips hospitals, clinics, and medical care foundations to tackle medical emergencies and outbreaks"
+                android:textColor="@color/manatee"
+                android:textSize="16dp"></TextView>
+
+
+            <TextView
+                android:id="@+id/tvheadingpementmethod"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+           android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tvheadingtext"
+             android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+
+                android:text="View Product"
+                android:textColor="@color/white"
+                android:background="@drawable/ripplenext"
+                android:textSize="16dp"
+android:gravity="center"
+               ></TextView>
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivdipak"
+                android:layout_width="166dp"
+                android:layout_height="166dp"
+                android:layout_below="@+id/tvheadingpementmethod"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="22dp"
+                android:src="@drawable/dipakpodarimage"></ImageView>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvheadingdipak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivdipak"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="CEO and Founder"
+                android:textColor="@color/black"
+
+                android:textSize="22dp"></TextView>
+            <TextView
+                android:id="@+id/tvaboutdipak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvheadingdipak"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+
+                android:text="Founded by Mr Deepak Poddar who studied medical Science at St Andrews University, andalongside his family, was a key supporter of India’fastest growing FMCG Company Patanjali Ayurved Ltd."
+                android:textColor="@color/manatee"
+                android:textSize="16dp"></TextView>
+            <TextView
+                android:id="@+id/tvheadingoffice"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvaboutdipak"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="Corporate Office "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="22dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvadd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvheadingoffice"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+android:textStyle="bold"
+                android:text="Suite 402, 100 Park Royal South West Vancouver,   BC V7T 1A2, Canada CA +1 604 912 0520"
+                android:textColor="@color/manatee"
+                android:textSize="16dp"></TextView>
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvheadingpartner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvadd"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="Become a Partner"
+                android:textColor="@color/black"
+
+                android:textSize="22dp"></TextView>
+
+
+            <TextView
+                android:id="@+id/tvbecome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvheadingpartner"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="11dp"
+
+                android:text="Interested in partnering with Pods Health? You can connect with our service representatives and align your medical supply requirements for a better and more definitive contract, faster restocking, and better prices with Pods, or avail our consulting services in regards to your healthcare supply chain and create a hassle-free structure."
+                android:textColor="@color/manatee"
+                android:textSize="16dp"></TextView>
+
+
+
+            <TextView
+                android:id="@+id/tvreact"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/tvbecome"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="16dp"
+
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/rippleabout"
+                android:gravity="center"
+
+                android:lines="1"
+
+                android:text="Find Out More"
+                android:textColor="@color/term_and_conditions"
+                android:textSize="18dp"></TextView>
+
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvheadingfollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvreact"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
+                android:text="FOLLOW US"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="22dp"></TextView>
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tvheadingfollow"
+                android:id="@+id/rlsocial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivinsta"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/instagram"
+                    >
+
+                </ImageView>
+                <ImageView
+                    android:id="@+id/ivtwiter"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/twitter"
+                    android:layout_marginLeft="22dp"
+                    android:layout_toRightOf="@+id/ivinsta"
+                    >
+
+                </ImageView>
+                <ImageView
+                    android:layout_marginLeft="22dp"
+                    android:layout_toRightOf="@+id/ivtwiter"
+                    android:id="@+id/ivfacebook"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/facebook"
+                    >
+
+                </ImageView>
+                <ImageView
+                    android:layout_marginLeft="22dp"
+                    android:id="@+id/ivyoutube"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/youtube"
+                    android:layout_toRightOf="@+id/ivfacebook"
+                    >
+
+                </ImageView>
+                <ImageView
+                    android:layout_marginLeft="22dp"
+                    android:id="@+id/ivlinked"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/linkedin"
+                    android:layout_toRightOf="@+id/ivyoutube"
+                    >
+
+                </ImageView>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
     <include
         layout="@layout/item_bottom_navigation"
         android:layout_width="match_parent"

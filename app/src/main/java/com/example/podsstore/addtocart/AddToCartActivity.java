@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +26,17 @@ import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.drower.AddressesActivity;
+import com.example.podsstore.login.LoginActivity;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
+import com.example.podsstore.profile.ProfileActivity;
 import com.google.gson.Gson;
+import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -296,6 +303,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 
         Intent i = new Intent(getApplicationContext(), ProductDetailsActivity.class);
         i.putExtra("userid", data.getProductid().toString());
+        i.putExtra("cart", "cart");
         startActivity(i);
         finish();
 
@@ -462,10 +470,259 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 
     private AddtocartAdapter.InventoryAdapterListener listener = data -> {
 
-        addtowishlist(data.getProductid(), data.getProductname(), data.getPrice(), data.getQty());
-
+        //addtowishlist(data.getProductid(), data.getProductname(), data.getPrice(), data.getQty());
+showAlertDialog(data.getProductid().toString(),data.getProducttype().toString());
 
     };
+    private void showAlertDialog(String prodtype,String prodid) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddToCartActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.makeoffer_dialoge, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsavepwd);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        EditText etprodid =customLayout.findViewById(R.id.etpassword);
+        EditText etqty =customLayout.findViewById(R.id.etqty);
+        EditText etofferamount =customLayout.findViewById(R.id.etofferammount);
+        EditText ettotalamount =customLayout.findViewById(R.id.ettotalammount);
+        EditText etactualamountperunit =customLayout.findViewById(R.id.etactualamountperunit);
+        EditText etremarka =customLayout.findViewById(R.id.etremarks);
+
+        etprodid.setText(prodid);
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String prodid = etprodid.getText().toString().trim();
+                String qty = etqty.getText().toString().trim();
+
+
+                String offer = etofferamount.getText().toString().trim();
+                String total = ettotalamount.getText().toString().trim();
+                String actual = etactualamountperunit.getText().toString().trim();
+                String remarks = etremarka.getText().toString().trim();
+/*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
+ettotalamount.setText(aaa.toString());*/
+                if (TextUtils.isEmpty(prodid)) {
+                    etprodid.setError("product name Can't Blank!");
+                }else if(TextUtils.isEmpty(qty)){
+                    etqty.setError("Quantity Can't Blank!");
+                }else if(TextUtils.isEmpty(offer)){
+                    etofferamount.setError("offer amount Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(total)){
+                    ettotalamount.setError("total amount Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(actual)){
+                    etactualamountperunit.setError("actual amount Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(remarks)){
+                    etremarka.setError("remarks Can't Blank!");
+                }
+
+                //   loadData(et.getText().toString().trim());
+                else {
+makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.getText().toString(),etactualamountperunit.getText().toString(),etqty.getText().toString(),etremarka.getText().toString());
+
+               alert.dismiss();
+                }
+            }
+        });
+        alert.show();
+    }
+
+    @SuppressLint("CheckResult")
+    private void makeoffer(String prodid,String actualammount,String offeramount,String amountperunit,String quantitydetails,String remarks) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+        List<MakeOfferRequest> list = new ArrayList<>();
+
+        MakeOfferRequest r = new MakeOfferRequest();
+        r.setProductid(Long.valueOf(prodid));
+        r.setActualamount(Integer.valueOf(actualammount));
+        r.setOfferamount(Integer.valueOf(offeramount));
+        r.setAmountperunit(Integer.valueOf(amountperunit));
+        r.setQuantitydetails(Integer.valueOf(quantitydetails));
+        r.setRemarks(remarks);
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClient.getApiClient(). makeoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
+
+                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+                            if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+
+                            if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }else{
+
+                            }
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void updateoffer(String prodid,String actualammount,String offeramount,String amountperunit,String quantitydetails,String remarks) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+        List<MakeOfferRequest> list = new ArrayList<>();
+
+        MakeOfferRequest r = new MakeOfferRequest();
+        r.setProductid(Long.valueOf(prodid));
+        r.setActualamount(Integer.valueOf(actualammount));
+        r.setOfferamount(Integer.valueOf(offeramount));
+        r.setAmountperunit(Integer.valueOf(amountperunit));
+        r.setQuantitydetails(Integer.valueOf(quantitydetails));
+        r.setRemarks(remarks);
+        list.add(r);
+
+
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClient.getApiClient(). updateoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
+
+                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+                            if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                            }
+
+                            if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
+
+                                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }else{
+
+                            }
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
 
     @Override
     public void onSetValues(ArrayList<String> al) {

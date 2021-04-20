@@ -5,6 +5,7 @@ import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
+import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.AddressResponse;
@@ -105,6 +106,17 @@ public interface NetworkInterface {
 
     @POST("addressRest/changeAddressDetails")
     Single<Response<CreateLoginUserResponse>> submitaddress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddressDetailsRequest requests);
+
+
+    @POST("makerOfferRest/makerOffer")
+    Single<Response<CreateLoginUserResponse>> makeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body MakeOfferRequest requests);
+
+
+
+    @POST("makerOfferRest/makerOffer")
+    Single<Response<CreateLoginUserResponse>> updateoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body MakeOfferRequest requests);
+
+
 
     @POST("cartRest/addToCart")
     Single<Response<CreateLoginUserResponse>> addtocart(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddtocartRequest requests);

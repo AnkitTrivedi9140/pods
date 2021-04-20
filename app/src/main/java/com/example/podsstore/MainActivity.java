@@ -499,6 +499,18 @@ public class MainActivity extends AppCompatActivity {
         profileloadData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDatacart();
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
+
     @SuppressLint("CheckResult")
     private void loadDatacart() {
 
@@ -806,7 +818,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
                 startActivity(intent);
                 finish();
-
+alert.dismiss();
             }
         });
         alert.show();

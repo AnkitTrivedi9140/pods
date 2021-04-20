@@ -84,10 +84,16 @@ Button continuebtn;
                 if (response.isSuccessful()) {
 
                    // for (int i=0; i<list.getAddress().size(); i++) {
-                     tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2().toString()+"\n"+list.get(i).getAddress().getAddressline3().toString());
+                    if(list.get(i).getAddress()!=null){
+                        tvaddress.setText(list.get(i).getAddress().getAddressline1().toString()+", "+list.get(i).getAddress().getAddressline2().toString()+"\n"+list.get(i).getAddress().getAddressline3().toString());
+
+                    }
 
                     //}
-                tvname.setText(list.get(i).getUsername());
+                    if(list.get(i).getUsername()!=null){
+                        tvname.setText(list.get(i).getUsername());
+                    }
+
 if(tvaddress.length()<5){
     Toast.makeText(getApplicationContext(),"Add Address first!",Toast.LENGTH_SHORT).show();
 }else{

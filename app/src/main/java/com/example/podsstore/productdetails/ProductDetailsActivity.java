@@ -77,7 +77,9 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
         ivtoggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onBackPressed();
 
+/*
                 if(getIntent().getStringExtra("main")==null && getIntent().getStringExtra("search")==null ){
 
                     Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
@@ -115,7 +117,7 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
-                }
+                }*/
             }
         });
         ivcart.setOnClickListener(new View.OnClickListener() {
@@ -464,15 +466,16 @@ loadDatacart();
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getIntent().getStringExtra("main")==null && getIntent().getStringExtra("search")==null ){
 
-            Intent intent=new Intent(getApplicationContext(), ProductListActivity.class);
+      if(getIntent().getStringExtra("cart")!=null ){
+
+            Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
             startActivity(intent);
             finish();
         }else{
-
+          finish();
         }
-        if(getIntent().getStringExtra("productlist")==null &&getIntent().getStringExtra("search")==null) {
+         /* if(getIntent().getStringExtra("productlist")==null &&getIntent().getStringExtra("search")==null) {
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
@@ -501,7 +504,7 @@ loadDatacart();
        intent.putExtra("productname",getIntent().getStringExtra("productname"));
        startActivity(intent);
        finish();
-   }
+   }*/
 
     }
 }

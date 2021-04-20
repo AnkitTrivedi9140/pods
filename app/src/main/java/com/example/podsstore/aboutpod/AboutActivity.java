@@ -3,8 +3,10 @@ package com.example.podsstore.aboutpod;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +26,8 @@ import com.example.podsstore.profile.ProfileActivity;
 public class AboutActivity extends AppCompatActivity {
     RadioGroup radioGroup1;
     RadioButton home,categories,profile,about;
-    TextView tvreact;
+    TextView tvreact,tvheadingpementmethod;
+    ImageView ivinsta,ivtwiter,ivfacebook,ivyoutube,ivlinked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,13 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("About POD");
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         tvreact=findViewById(R.id.tvreact);
+        ivinsta=findViewById(R.id.ivinsta);
+        ivtwiter=findViewById(R.id.ivtwiter);
+        ivfacebook=findViewById(R.id.ivfacebook);
+        ivyoutube=findViewById(R.id.ivyoutube);
+        ivlinked=findViewById(R.id.ivlinked);
+
+        tvheadingpementmethod=findViewById(R.id.tvheadingpementmethod);
         about = (RadioButton)findViewById(R.id.about);
         home = (RadioButton)findViewById(R.id.homes);
         categories = (RadioButton)findViewById(R.id.categories);
@@ -100,6 +110,71 @@ public class AboutActivity extends AppCompatActivity {
 
             }
         });
+        tvheadingpementmethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent    in = new Intent(getBaseContext(), CategoryActivity.class);
+                startActivity(in);
+                finish();
+            }
+        });
+
+        ivinsta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Uri uri = Uri.parse("https://www.instagram.com/podshealth/");
+                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(likeIng);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.instagram.com/podshealth/")));
+                }
+            }
+        });
+        ivtwiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://mobile.twitter.com/LtdPods")));
+            }
+        });
+        ivfacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    getPackageManager().getPackageInfo("com.facebook.katana", 0);
+                    startActivity( new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/podshealth/")));
+                } catch (Exception e) {
+                    startActivity( new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/podshealth/")));
+                }
+            }
+        });
+        ivyoutube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/channel/UCijKjwEbM0SFX7wCnmog14Q"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+            }
+        });
+        ivlinked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://www.linkedin.com/company/pods-group-ltd";
+                Intent linkedInAppIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                linkedInAppIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                startActivity(linkedInAppIntent);
+
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {

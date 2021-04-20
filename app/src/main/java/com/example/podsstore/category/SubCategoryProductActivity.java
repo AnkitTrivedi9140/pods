@@ -130,7 +130,8 @@ public class SubCategoryProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(getIntent().getStringExtra("userids")==null){
+                finish();
+               /* if(getIntent().getStringExtra("userids")==null){
                     Intent i=new Intent(getApplicationContext(), MainActivity.class);
 
                     startActivity(i);
@@ -141,7 +142,7 @@ public class SubCategoryProductActivity extends AppCompatActivity {
                     i.putExtra("subcategory",getIntent().getStringExtra("productnamess"));
                     startActivity(i);
                     finish();
-                }
+                }*/
                 return true;
         }
 
@@ -150,9 +151,16 @@ public class SubCategoryProductActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getIntent().getStringExtra("userids")==null){
+        finish();
+       /* if(getIntent().getStringExtra("userids")==null){
             Intent i=new Intent(getApplicationContext(), MainActivity.class);
 
+            startActivity(i);
+            finish();
+        }
+        else if(getIntent().getStringExtra("catid")!=null){
+            Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
+i.putExtra("userid",getIntent().getStringExtra("catid"));
             startActivity(i);
             finish();
         }else{
@@ -163,6 +171,6 @@ public class SubCategoryProductActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-
+*/
     }
 }
