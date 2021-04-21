@@ -9,7 +9,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -486,7 +488,7 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
         EditText etqty =customLayout.findViewById(R.id.etqty);
         EditText etofferamount =customLayout.findViewById(R.id.etofferammount);
         EditText ettotalamount =customLayout.findViewById(R.id.ettotalammount);
-        EditText etactualamountperunit =customLayout.findViewById(R.id.etactualamountperunit);
+
         EditText etremarka =customLayout.findViewById(R.id.etremarks);
 
         etprodid.setText(prodid);
@@ -499,6 +501,59 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
                 alert.dismiss();
             }
         });
+
+
+
+        etqty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Double v1 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
+                        etqty.getText().toString() : "0");
+                Double v2 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
+                        etofferamount.getText().toString() : "0");
+                Double value = v1 * v2;
+                ettotalamount.setText(value.toString());
+            }
+        });
+
+
+        etofferamount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Double v1 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
+                        etofferamount.getText().toString() : "0");
+
+                Double v2 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
+                        etqty.getText().toString() : "0");
+                Double value = v1 * v2;
+                ettotalamount.setText(value.toString());
+            }
+        });
+
+
+
+
+
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -510,10 +565,25 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
 
                 String offer = etofferamount.getText().toString().trim();
                 String total = ettotalamount.getText().toString().trim();
-                String actual = etactualamountperunit.getText().toString().trim();
+
                 String remarks = etremarka.getText().toString().trim();
 /*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
 ettotalamount.setText(aaa.toString());*/
+
+/*
+
+                String mynum1=etqty.getText().toString();
+                float mnum1= Float.parseFloat(mynum1);
+
+                String mynum2=etofferamount.getText().toString();
+                float mnum2= Float.parseFloat(mynum2);
+
+                float res=mnum1*mnum2;
+                etremarka.setText(String.valueOf(res));
+*/
+
+
+
                 if (TextUtils.isEmpty(prodid)) {
                     etprodid.setError("product name Can't Blank!");
                 }else if(TextUtils.isEmpty(qty)){
@@ -524,16 +594,14 @@ ettotalamount.setText(aaa.toString());*/
                 else if(TextUtils.isEmpty(total)){
                     ettotalamount.setError("total amount Can't Blank!");
                 }
-                else if(TextUtils.isEmpty(actual)){
-                    etactualamountperunit.setError("actual amount Can't Blank!");
-                }
+
                 else if(TextUtils.isEmpty(remarks)){
                     etremarka.setError("remarks Can't Blank!");
                 }
 
                 //   loadData(et.getText().toString().trim());
                 else {
-makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.getText().toString(),etactualamountperunit.getText().toString(),etqty.getText().toString(),etremarka.getText().toString());
+makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.getText().toString(),"288",etqty.getText().toString(),etremarka.getText().toString());
 
                alert.dismiss();
                 }
@@ -549,9 +617,9 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
         MakeOfferRequest r = new MakeOfferRequest();
         r.setProductid(Long.valueOf(prodid));
-        r.setActualamount(Integer.valueOf(actualammount));
-        r.setOfferamount(Integer.valueOf(offeramount));
-        r.setAmountperunit(Integer.valueOf(amountperunit));
+        r.setActualamount(Double.valueOf(actualammount));
+        r.setOfferamount(Double.valueOf(offeramount));
+        r.setAmountperunit(Integer.parseInt( amountperunit));
         r.setQuantitydetails(Integer.valueOf(quantitydetails));
         r.setRemarks(remarks);
         list.add(r);
@@ -559,7 +627,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
 
 
-        Log.e("postData", new Gson().toJson(r));
+        Log.e("postdata", new Gson().toJson(r));
 
         ApiClient.getApiClient(). makeoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
                 .subscribeOn(Schedulers.io())
@@ -576,32 +644,6 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            if(getIntent().getStringExtra("add")==null && getIntent().getStringExtra("at")==null ){
-
-                                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }else{
-
-                            }
-                            if(getIntent().getStringExtra("at")==null &&getIntent().getStringExtra("profile")==null) {
-
-                                Intent intent = new Intent(getApplicationContext(), AddressesActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }else{
-
-                            }
-
-                            if (getIntent().getStringExtra("add")==null&&getIntent().getStringExtra("profile")==null) {
-
-                                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                            }else{
-
-                            }
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -639,8 +681,8 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
         MakeOfferRequest r = new MakeOfferRequest();
         r.setProductid(Long.valueOf(prodid));
-        r.setActualamount(Integer.valueOf(actualammount));
-        r.setOfferamount(Integer.valueOf(offeramount));
+        r.setActualamount(Double.valueOf(actualammount));
+        r.setOfferamount(Double.valueOf(offeramount));
         r.setAmountperunit(Integer.valueOf(amountperunit));
         r.setQuantitydetails(Integer.valueOf(quantitydetails));
         r.setRemarks(remarks);

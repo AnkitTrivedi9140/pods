@@ -15,6 +15,8 @@
     </ImageView>
 
     <EditText
+        android:editable="false"
+        android:clickable="false"
         android:lines="1"
         android:id="@+id/etpassword"
         android:textSize="16dp"
@@ -42,6 +44,7 @@
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
 
+        android:inputType="number"
         ></EditText>
 
 
@@ -49,7 +52,7 @@
         android:id="@+id/etofferammount"
         android:textSize="16dp"
         android:layout_marginTop="12dp"
-        android:hint="Enter offer ammount"
+        android:hint="Enter offer amount"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_below="@+id/etqty"
@@ -57,13 +60,13 @@
         android:layout_height="44dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
-
+android:inputType="numberDecimal"
         ></EditText>
     <EditText
         android:id="@+id/ettotalammount"
         android:textSize="16dp"
         android:layout_marginTop="12dp"
-        android:hint="Enter total ammount"
+        android:hint="Enter total amount"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_below="@+id/etofferammount"
@@ -71,22 +74,10 @@
         android:layout_height="44dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
-
+        android:editable="false"
+        android:clickable="false"
         ></EditText>
-    <EditText
-        android:id="@+id/etactualamountperunit"
-        android:textSize="16dp"
-        android:layout_marginTop="12dp"
-        android:hint="Enter actual amount per unit"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_below="@+id/ettotalammount"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@drawable/edittext_bg"
-        android:padding="10dp"
 
-        ></EditText>
     <EditText
         android:id="@+id/etremarks"
         android:textSize="16dp"
@@ -94,7 +85,7 @@
         android:hint="Your Remarks"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_below="@+id/etactualamountperunit"
+        android:layout_below="@+id/ettotalammount"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@drawable/edittext_bg"

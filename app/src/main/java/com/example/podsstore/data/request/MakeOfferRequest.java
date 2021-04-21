@@ -7,10 +7,10 @@ public class MakeOfferRequest {
     private Long productid;
 
     @SerializedName("actualAmount")
-    private Integer actualamount;
+    private Double actualamount;
 
     @SerializedName("offerAmount")
-    private Integer offeramount;
+    private Double offeramount;
 
     @SerializedName("amountPerUnit")
     private Integer amountperunit;
@@ -27,19 +27,19 @@ public class MakeOfferRequest {
         this.productid = productid;
     }
 
-    public Integer getActualamount() {
+    public Double getActualamount() {
         return actualamount;
     }
 
-    public void setActualamount(Integer actualamount) {
+    public void setActualamount(Double actualamount) {
         this.actualamount = actualamount;
     }
 
-    public Integer getOfferamount() {
+    public Double getOfferamount() {
         return offeramount;
     }
 
-    public void setOfferamount(Integer offeramount) {
+    public void setOfferamount(Double offeramount) {
         this.offeramount = offeramount;
     }
 

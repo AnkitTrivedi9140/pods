@@ -20,6 +20,7 @@
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/sunpharma"
                 android:layout_marginRight="8dp"
+       
 
                />
 
