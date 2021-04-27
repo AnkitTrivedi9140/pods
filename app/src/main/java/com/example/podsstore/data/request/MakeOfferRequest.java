@@ -3,6 +3,7 @@ package com.example.podsstore.data.request;
 import com.google.gson.annotations.SerializedName;
 
 public class MakeOfferRequest {
+
     @SerializedName("productId")
     private Long productid;
 

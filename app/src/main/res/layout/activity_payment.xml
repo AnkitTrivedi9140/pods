@@ -86,164 +86,217 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <TextView
+   <TextView
         android:id="@+id/tvheading"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="#F8F8F8"
         android:layout_below="@+id/rlcartseek"
-        android:text="SAVED CARDS"
+        android:text="Select payment method"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:gravity="center_vertical"
         android:paddingLeft="12dp"
         ></TextView>
-
-    <RadioGroup
-        android:layout_below="@+id/tvheading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:id="@+id/radioGroup">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/radioMale"
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:text="  SBI Credit Card"
-            android:layout_marginTop="10dp"
-            android:checked="false"
-            android:textSize="18dp" />
-
-    <ImageView
-    android:layout_alignParentEnd="true"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:src="@drawable/mastercard"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentRight="true"></ImageView>
-        <TextView
-            android:id="@+id/tvcardno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="**** **** **** 2523"
-android:layout_below="@+id/radioMale"
-            android:textSize="16dp"
-android:layout_marginLeft="33dp"
-       ></TextView>
-        <RadioButton
-            android:id="@+id/radioFemale"
-            android:layout_width="fill_parent"
-            android:layout_height="33dp"
-            android:text="   HDFC Debit Card"
-            android:layout_marginTop="12dp"
-            android:checked="false"
-android:layout_below="@+id/tvcardno"
-            android:textSize="18dp" />
-
-    <ImageView
-        android:layout_below="@+id/tvcardno"
-        android:layout_alignParentEnd="true"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:src="@drawable/visad"
-   android:layout_marginTop="22dp"
-        android:layout_alignParentRight="true"></ImageView>
-    <TextView
-        android:id="@+id/tvcardno2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="**** **** **** 5969"
-        android:layout_below="@+id/radioFemale"
-        android:textSize="16dp"
-        android:layout_marginLeft="33dp"
-        ></TextView>
-</RelativeLayout>
-    </RadioGroup>
-    <TextView
-        android:layout_marginTop="12dp"
-        android:id="@+id/tvheadings"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="#F8F8F8"
-        android:layout_below="@+id/radioGroup"
-        android:text="OTHER PAMENT OPTIONS"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="12dp"
-        ></TextView>
-
-    <RadioGroup
-        android:layout_below="@+id/tvheadings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:id="@+id/radioGroup2">
-        <RelativeLayout
+    <!--
+        <RadioGroup
+            android:layout_below="@+id/tvheading"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/radioGroup">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
             <RadioButton
-                android:id="@+id/radiowallets"
+                android:id="@+id/radioMale"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
-                android:text="  Wallets"
+                android:text="  SBI Credit Card"
                 android:layout_marginTop="10dp"
                 android:checked="false"
                 android:textSize="18dp" />
 
-            <ImageView
-                android:layout_alignParentEnd="true"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:src="@drawable/paytmd"
-                android:layout_marginTop="22dp"
-                android:layout_alignParentRight="true"></ImageView>
-
+        <ImageView
+        android:layout_alignParentEnd="true"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:src="@drawable/mastercard"
+            android:layout_marginTop="22dp"
+            android:layout_alignParentRight="true"></ImageView>
+            <TextView
+                android:id="@+id/tvcardno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="**** **** **** 2523"
+    android:layout_below="@+id/radioMale"
+                android:textSize="16dp"
+    android:layout_marginLeft="33dp"
+           ></TextView>
             <RadioButton
-                android:id="@+id/radioUPI"
+                android:id="@+id/radioFemale"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
-                android:text="   UPI"
+                android:text="   HDFC Debit Card"
                 android:layout_marginTop="12dp"
                 android:checked="false"
-                android:layout_below="@+id/radiowallets"
+    android:layout_below="@+id/tvcardno"
                 android:textSize="18dp" />
 
-            <RadioButton
-                android:id="@+id/radioatm"
-                android:layout_width="fill_parent"
-                android:layout_height="33dp"
-                android:text="   Credit/Debit/ATM Card"
-                android:layout_marginTop="12dp"
-                android:checked="false"
-                android:layout_below="@+id/radioUPI"
-                android:textSize="18dp" />
-            <RadioButton
-                android:id="@+id/radionetbanking"
-                android:layout_width="fill_parent"
-                android:layout_height="33dp"
-                android:text="   Net Banking"
-                android:layout_marginTop="12dp"
-                android:checked="false"
-                android:layout_below="@+id/radioatm"
-                android:textSize="18dp" />
-            <RadioButton
-                android:id="@+id/radiocod"
-                android:layout_width="fill_parent"
-                android:layout_height="33dp"
-                android:text="   Cash on Delivery"
-                android:layout_marginTop="12dp"
-                android:checked="false"
-                android:layout_below="@+id/radionetbanking"
-                android:textSize="18dp" />
+        <ImageView
+            android:layout_below="@+id/tvcardno"
+            android:layout_alignParentEnd="true"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:src="@drawable/visad"
+       android:layout_marginTop="22dp"
+            android:layout_alignParentRight="true"></ImageView>
+        <TextView
+            android:id="@+id/tvcardno2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="**** **** **** 5969"
+            android:layout_below="@+id/radioFemale"
+            android:textSize="16dp"
+            android:layout_marginLeft="33dp"
+            ></TextView>
+    </RelativeLayout>
+        </RadioGroup>
+        <TextView
+            android:layout_marginTop="12dp"
+            android:id="@+id/tvheadings"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#F8F8F8"
+            android:layout_below="@+id/radioGroup"
+            android:text="OTHER PAMENT OPTIONS"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            ></TextView>
 
-        </RelativeLayout>
+        <RadioGroup
+            android:layout_below="@+id/tvheadings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/radioGroup2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radiowallets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="  Wallets"
+                    android:layout_marginTop="10dp"
+                    android:checked="false"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:src="@drawable/paytmd"
+                    android:layout_marginTop="22dp"
+                    android:layout_alignParentRight="true"></ImageView>
+
+                <RadioButton
+                    android:id="@+id/radioUPI"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:text="   UPI"
+                    android:layout_marginTop="12dp"
+                    android:checked="false"
+                    android:layout_below="@+id/radiowallets"
+                    android:textSize="18dp" />
+
+                <RadioButton
+                    android:id="@+id/radioatm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:text="   Credit/Debit/ATM Card"
+                    android:layout_marginTop="12dp"
+                    android:checked="false"
+                    android:layout_below="@+id/radioUPI"
+                    android:textSize="18dp" />
+                <RadioButton
+                    android:id="@+id/radionetbanking"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:text="   Net Banking"
+                    android:layout_marginTop="12dp"
+                    android:checked="false"
+                    android:layout_below="@+id/radioatm"
+                    android:textSize="18dp" />
+                <RadioButton
+                    android:id="@+id/radiocod"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:text="   Cash on Delivery"
+                    android:layout_marginTop="12dp"
+                    android:checked="false"
+                    android:layout_below="@+id/radionetbanking"
+                    android:textSize="18dp" />
+
+            </RelativeLayout>
+        </RadioGroup>-->
+
+
+    <RadioGroup
+    android:layout_below="@+id/tvheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="11dp"
+
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/radiosme"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Pay to Online"
+            android:layout_marginTop="12dp"
+android:checked="true"
+            android:textSize="16dp"
+
+            android:textColor="@color/manatee"/>
+
+        <RadioButton
+            android:id="@+id/radiocorporate"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Bank Transfer"
+            android:layout_marginTop="12dp"
+
+            android:layout_below="@+id/radiosme"
+            android:textSize="16dp"
+            android:textColor="@color/manatee"
+
+            />
+
+        <RadioButton
+            android:id="@+id/radioincorporate"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:text="  Pay Later"
+            android:layout_marginTop="12dp"
+            android:layout_below="@+id/radiocorporate"
+
+            android:textSize="16dp"
+            android:textColor="@color/manatee"
+
+            />
+
+
     </RadioGroup>
+
+
     <RelativeLayout
 
         android:layout_alignParentBottom="true"

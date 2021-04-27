@@ -56,9 +56,7 @@ Button continuebtn;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-                startActivity(intent);
-                finish();
+
                 return true;
         }
 
@@ -162,11 +160,10 @@ if(tvaddress.length()<5){
 //            }
 //        });
     }
-    @Override
+ /*   @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(getApplicationContext(), AddToCartActivity.class);
-        startActivity(intent);
+
         finish();
-    }
+    }*/
 }

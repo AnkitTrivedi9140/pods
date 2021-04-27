@@ -111,6 +111,12 @@ public class BuyNowActivity extends AppCompatActivity {
             tvProductprice.setText(String.valueOf("$ "+totalPrice));
 
         });
+        ivtoggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         more.setOnClickListener(v -> {
             counter=counter+1;
 
@@ -151,6 +157,13 @@ public class BuyNowActivity extends AppCompatActivity {
 
 loadData();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     @SuppressLint("CheckResult")
     private void loadData() {
 

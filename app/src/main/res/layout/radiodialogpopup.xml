@@ -41,6 +41,7 @@
         android:id="@+id/radioGroup">
 
         <RadioButton
+            android:checked="true"
             android:id="@+id/radiosme"
             android:layout_width="wrap_content"
             android:layout_height="33dp"

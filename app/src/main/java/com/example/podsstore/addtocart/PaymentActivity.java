@@ -5,11 +5,21 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +36,11 @@ import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -41,12 +54,16 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     private AddtocartAdapter productListAdapter;
     TextView placeorderbtn,placeorderbtnbuynow;
     private QuantityViewModel viewModel;
-
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    final Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         placeorderbtn = findViewById(R.id.placeorderbtn);
+        radioGroup = findViewById(R.id.radioGroup);
+
         placeorderbtnbuynow = findViewById(R.id.placeorderbtnbuynow);
         productListAdapter = new AddtocartAdapter(PaymentActivity.this, this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,6 +82,27 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
         singleproductdetails();
     }
 });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = (RadioButton) group.findViewById(checkedId);
+//                if (null != rb ) {
+//
+//                }else {
+//                    fromdaterl.setVisibility(View.GONE);
+//                    todaterl.setVisibility(View.GONE);
+//                }
+                switch (checkedId) {
+                    case R.id.radiocorporate:
+                       showAlertDialog();   break;
+                    case R.id.radioincorporate:
+showAlertDialog();
+                        break;
+
+                }
+            }
+        });
     }
 
     @Override
@@ -109,15 +147,28 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (int i = 0; i < list.size(); i++) {
+                                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                                // find the radiobutton by returned id
+                                  radioButton =(RadioButton) findViewById(selectedId);
+
                                 Log.d("onClickgg ", list.get(i).getProductid().toString());
-                                String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
-                                if(lastqty==null) {
-                                    placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "1", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
 
-                                }else {
-                                    placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), lastqty, String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+                                String businesstype=  radioButton.getText().toString().trim();
+                                Toast.makeText(getApplicationContext(),businesstype,Toast.LENGTH_LONG).show();
 
-                                }
+
+                                    String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
+                                    if(lastqty==null) {
+                                        placeorder(
+                                                "1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "1", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+
+                                    }else {
+                                        placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), lastqty, String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+
+                                    }
+
+
 
                             }
 
@@ -137,6 +188,92 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
                 Log.e("onerrors", t.getMessage());
             }
         });
+    }
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PaymentActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.paymentmethoddialog, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsavepwd);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+EditText date=customLayout.findViewById(R.id.etdate);
+
+        EditText etremarka =customLayout.findViewById(R.id.etremarks);
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        DatePickerDialog.OnDateSetListener dates = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                date.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        date.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        new DatePickerDialog(PaymentActivity.this, dates, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+});
+
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+
+
+
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String remarks = etremarka.getText().toString().trim();
+/*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
+ettotalamount.setText(aaa.toString());*/
+
+/*
+
+                String mynum1=etqty.getText().toString();
+                float mnum1= Float.parseFloat(mynum1);
+
+                String mynum2=etofferamount.getText().toString();
+                float mnum2= Float.parseFloat(mynum2);
+
+                float res=mnum1*mnum2;
+                etremarka.setText(String.valueOf(res));
+*/
+
+
+
+                 if(TextUtils.isEmpty(remarks)){
+                    etremarka.setError("remarks Can't Blank!");
+                }
+
+                //   loadData(et.getText().toString().trim());
+                else {
+                   alert.dismiss();
+                }
+            }
+        });
+        alert.show();
     }
 
     @SuppressLint("CheckResult")
