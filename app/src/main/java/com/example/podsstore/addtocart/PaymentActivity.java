@@ -86,13 +86,7 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = (RadioButton) group.findViewById(checkedId);
-//                if (null != rb ) {
-//
-//                }else {
-//                    fromdaterl.setVisibility(View.GONE);
-//                    todaterl.setVisibility(View.GONE);
-//                }
+
                 switch (checkedId) {
                     case R.id.radiocorporate:
                        showAlertDialog();   break;

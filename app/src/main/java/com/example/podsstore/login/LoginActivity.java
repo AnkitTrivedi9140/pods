@@ -253,7 +253,7 @@ showAlertDialog();
                             startActivity(intent);
                             finish();
                         } else {
-                     Toast.makeText(getApplicationContext(), "Please check your email id or password.", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
 
                         }
                      }

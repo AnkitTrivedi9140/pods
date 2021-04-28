@@ -639,7 +639,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+                        Log.e("onSuccess", String.valueOf(response.message()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
@@ -657,7 +657,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Please complete you documentation process to login..!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
