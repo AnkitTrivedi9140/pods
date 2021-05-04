@@ -51,7 +51,7 @@ TextView signintv,tvduns,skiptv;
     private EditText usernameEt, passwordEt, emaiEt,reenterpasswordet,phoneEt,companyEt;
     ImageView back,tvicon;
     String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
-
+    String regexphone ="\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
     AlertDialog alert;
 
     @Override
@@ -116,13 +116,18 @@ TextView signintv,tvduns,skiptv;
                    else {
                 if(passwordEt.getText().toString().equals(reenterpasswordet.getText().toString())) {
 
-                     if (email.matches(regex)) {
-                         showAlertDialog();
 
-                    }else {
-                         emaiEt.setError("Email Address not correct!");
-                     }
+                    if (phone.toString().trim().length()<6) {
+                        phoneEt.setError("Phone number is not correct!");
 
+                    }else{
+                        if (email.matches(regex)) {
+                            showAlertDialog();
+
+                        }else {
+                            emaiEt.setError("Email Address not correct!");
+                        }
+                    }
 
                                   }else {
                     Toast.makeText(getApplicationContext(),"Please add same password.",Toast.LENGTH_LONG).show();
@@ -280,7 +285,7 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
 
                             }
                         } else {
-                         Toast.makeText(getApplicationContext(), "server error!", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(), "Please check your email id to create account", Toast.LENGTH_SHORT).show();
 
                         }
                     }

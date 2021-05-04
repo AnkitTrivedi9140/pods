@@ -18,6 +18,7 @@ public class CartResponse {
 
     @SerializedName("imageUrl")
     private String imageUrl;
+
     @SerializedName("quantity")
     private Long qty;
 

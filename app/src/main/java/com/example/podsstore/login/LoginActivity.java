@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button logInBtn,btncontinue;
     private EditText usernameEt, passwordEt, emaiEt,otpEt;
     private TextView createtv,forgettv;
-    private ImageView ivshow;
+    private ImageView ivshow,ivhide;
 ImageView back,tvicon;
 RelativeLayout rlaccountconfirmation;
     String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
@@ -141,8 +142,15 @@ showAlertDialog();
                     break;
                 case R.id.ivshow:
 
-                    passwordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    passwordEt.setTransformationMethod(null);
+ivhide.setVisibility(View.VISIBLE);
+ivshow.setVisibility(View.GONE);
+                    break;
+                case R.id.ivhide:
 
+                    passwordEt.setTransformationMethod(new PasswordTransformationMethod());
+ivhide.setVisibility(View.GONE);
+ivshow.setVisibility(View.VISIBLE);
                     break;
             }
 
@@ -240,7 +248,7 @@ showAlertDialog();
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+                        Log.e("onSuccesslogin", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
                             LoginResponse successResponse = response.body();
@@ -253,7 +261,7 @@ showAlertDialog();
                             startActivity(intent);
                             finish();
                         } else {
-                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getApplicationContext(), "Please complete you documentation process to login..!",Toast.LENGTH_SHORT).show();
 
                         }
                      }
@@ -273,6 +281,7 @@ showAlertDialog();
     private void initViews() {
         tvicon = findViewById(R.id.tvicon);
         ivshow = findViewById(R.id.ivshow);
+        ivhide = findViewById(R.id.ivhide);
         logInBtn = findViewById(R.id.logInBtn);
         btncontinue = findViewById(R.id.btncontinue);
         usernameEt = findViewById(R.id.usernameEt);
@@ -289,6 +298,7 @@ showAlertDialog();
         createtv.setOnClickListener(onClickListener);
         back.setOnClickListener(onClickListener);
         ivshow.setOnClickListener(onClickListener);
+        ivhide.setOnClickListener(onClickListener);
 //        Typeface typeface = ResourcesCompat.getFont(getBaseContext(), R.font.acme);
 //        usernameEt.setTypeface(typeface);
 //        passwordEt.setTypeface(typeface);

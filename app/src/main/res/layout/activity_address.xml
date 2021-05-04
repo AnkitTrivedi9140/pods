@@ -90,10 +90,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/edittext_bg"
-                android:hint="Zipcode"
+                android:hint="Pipcode"
                 android:padding="10dp"
                 android:textSize="16dp"
-
+android:inputType="phone"
                 ></EditText>
 
             <EditText

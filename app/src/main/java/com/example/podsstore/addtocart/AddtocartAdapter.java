@@ -34,6 +34,7 @@ String qty;
     private AddtocartAdapter.InventoryAdapterListener openListener;
     private AddtocartAdapter.AdapterListenerplus adapterListenerplus;
     private AddtocartAdapter.AdapterListenerless adapterListenerless;
+    private AddtocartAdapter.QtyAdapterListener qtyAdapterListener;
 
     private AddtocartAdapter.AdapterListenercart adapterListenercart;
 
@@ -42,6 +43,9 @@ String qty;
     }
     public void setAdapterListenercart(AddtocartAdapter.AdapterListenercart adapterListener) {
         this.adapterListenercart = adapterListener;
+    }
+    public void setAdapterListenerqty(AddtocartAdapter.QtyAdapterListener adapterListener) {
+        this.qtyAdapterListener = adapterListener;
     }
     public void setAdapterListeners(AddtocartAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
@@ -54,7 +58,7 @@ String qty;
         this.adapterListenerless = adapterListener;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView description, tvAssetType,tvqty,prnumber;
+        public TextView description, tvAssetType,tvqty,prnumber,tvqtybtn;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
@@ -63,6 +67,7 @@ String qty;
         public MyViewHolder(View view) {
             super(view);
             tvqty = (TextView) view.findViewById(R.id.tvqty);
+            tvqtybtn = (TextView) view.findViewById(R.id.tvqtybtn);
             description = (TextView) view.findViewById(R.id.description);
             tvAssetType = (TextView) view.findViewById(R.id.tvAssetType);
             cardView = view.findViewById(R.id.cardview);
@@ -95,6 +100,13 @@ String qty;
                     adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
                 }
             }
+            );
+            tvqtybtn.setOnClickListener( v -> {
+
+                        if (qtyAdapterListener != null) {
+                            qtyAdapterListener.onAdapterItemClickedqty(productResponseList.get(getAdapterPosition()));
+                        }
+                    }
             );
 
             less.setOnClickListener(v -> {
@@ -174,7 +186,7 @@ String qty;
         CartResponse cartResponse = productResponseList.get(position);
         holder.tvAssetType.setText(cartResponse.getProducttype());
         holder.description.setText("$ "+cartResponse.getPrice());
-        holder.tvqty.setText("Qty_"+cartResponse.getQty());
+        holder.tvqtybtn.setText("Qty: "+cartResponse.getQty());
         viewModel = ViewModelProviders.of((FragmentActivity) context).get(QuantityViewModel.class);
         String lastqty = viewModel.getqty(cartResponse.getProductid().toString());
 
@@ -234,6 +246,9 @@ if(lastqty==null){
 
     public interface InventoryAdapterListener {
         void onAdapterItemClicked(CartResponse data);
+    }
+    public interface QtyAdapterListener {
+        void onAdapterItemClickedqty(CartResponse data);
     }
     public interface DataTransferInterface {
         public void onSetValues(ArrayList<String> al);

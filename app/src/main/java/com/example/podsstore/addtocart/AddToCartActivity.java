@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,9 +29,12 @@ import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
+import com.example.podsstore.data.request.QtyRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.QtyResponse;
 import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.login.LoginActivity;
 import com.example.podsstore.prefs.PreferenceManagerss;
@@ -60,7 +64,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
     Button placeorderbtn;
     ArrayList<String> arrPackage;
     ArrayList<AddtoCartWithQty> qtylist;
-
+String prodid;
     EditText etcoupon;
     private QuantityViewModel viewModel;
 
@@ -88,6 +92,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
 //      recyclerView.setEmptyView(binding.emptyView);
         recyclerView.setAdapter(productListAdapter);
         productListAdapter.setAdapterListener(adapterListener);
+        productListAdapter.setAdapterListenerqty(adapterListenerqty);
         productListAdapter.setAdapterListeners(listener);
         productListAdapter.setAdapterListenerplus(adapterListenerpluss);
         productListAdapter.setAdapterListenersless(adapterListenerless);
@@ -151,7 +156,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                             totalPrice += (list.get(i).getPrice() * Integer.valueOf(lastqty));
                         }
 
-                        //Log.e("onResponses", list.get(i).getPrice().toString());
+                        Log.e("onResponses", list.get(i).getQty().toString());
                         tvsubtotaltxt.setText(String.valueOf(totalPrice));
                         tvtotaltxt.setText(String.valueOf(totalPrice));
                         //  Toast.makeText(getApplicationContext(),totalPrice,Toast.LENGTH_SHORT).show();
@@ -298,6 +303,14 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
     private AddtocartAdapter.AdapterListener adapterListener = data -> {
 
         deletecart(String.valueOf(data.getProductid().toString()));
+//Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
+
+    };
+    private AddtocartAdapter.QtyAdapterListener adapterListenerqty = data -> {
+        prodid=data.getProductid().toString();
+showAlertDialogqty(data.getProductid().toString());
+
+
 //Toast.makeText(getApplicationContext(),data.getProductid().toString(),Toast.LENGTH_SHORT).show();
 
     };
@@ -469,6 +482,227 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
                     }
                 });
     }
+
+
+
+
+    private void showAlertDialogqty(String productid) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddToCartActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.qtydialoglayout, null);
+
+prodid=productid;
+        alertDialog.setView(customLayout);
+        MyListDataQty[] myListData = new MyListDataQty[] {
+                new MyListDataQty("1"),
+                new MyListDataQty("2"),
+                new MyListDataQty("3"),
+                new MyListDataQty("4"),
+                new MyListDataQty("5"),
+                new MyListDataQty("6"),
+                new MyListDataQty("7"),
+                new MyListDataQty("8"),
+                new MyListDataQty("9"),
+                new MyListDataQty("10"),
+                new MyListDataQty("11"),
+                new MyListDataQty("12"),
+
+                new MyListDataQty("13"),
+                new MyListDataQty("14"),
+                new MyListDataQty("15"),
+                new MyListDataQty("16"),
+                new MyListDataQty("17"),
+                new MyListDataQty("18"),
+                new MyListDataQty("19"),
+                new MyListDataQty("20"),
+                new MyListDataQty("21"),
+                new MyListDataQty("22"),
+
+                new MyListDataQty("23"),
+                new MyListDataQty("24"),
+                new MyListDataQty("25"),
+                new MyListDataQty("26"),
+                new MyListDataQty("27"),
+                new MyListDataQty("28"),
+                new MyListDataQty("29"),
+                new MyListDataQty("30"),
+
+
+                new MyListDataQty("31"),
+                new MyListDataQty("32"),
+
+                new MyListDataQty("33"),
+                new MyListDataQty("34"),
+                new MyListDataQty("35"),
+                new MyListDataQty("36"),
+                new MyListDataQty("37"),
+                new MyListDataQty("38"),
+                new MyListDataQty("39"),
+                new MyListDataQty("40"),
+
+
+
+
+                new MyListDataQty("41"),
+                new MyListDataQty("42"),
+
+                new MyListDataQty("43"),
+                new MyListDataQty("44"),
+                new MyListDataQty("45"),
+                new MyListDataQty("46"),
+                new MyListDataQty("47"),
+                new MyListDataQty("48"),
+                new MyListDataQty("49"),
+                new MyListDataQty("50"),
+
+
+
+                new MyListDataQty("51"),
+                new MyListDataQty("52"),
+
+                new MyListDataQty("53"),
+                new MyListDataQty("54"),
+                new MyListDataQty("55"),
+                new MyListDataQty("56"),
+                new MyListDataQty("57"),
+                new MyListDataQty("58"),
+                new MyListDataQty("59"),
+                new MyListDataQty("60"),
+                new MyListDataQty("61"),
+                new MyListDataQty("62"),
+
+                new MyListDataQty("63"),
+                new MyListDataQty("64"),
+                new MyListDataQty("65"),
+                new MyListDataQty("66"),
+                new MyListDataQty("67"),
+                new MyListDataQty("68"),
+                new MyListDataQty("69"),
+                new MyListDataQty("70"),
+
+
+                new MyListDataQty("71"),
+                new MyListDataQty("72"),
+
+                new MyListDataQty("73"),
+                new MyListDataQty("74"),
+                new MyListDataQty("75"),
+                new MyListDataQty("76"),
+                new MyListDataQty("77"),
+                new MyListDataQty("78"),
+                new MyListDataQty("79"),
+                new MyListDataQty("80"),
+                new MyListDataQty("100"),
+                new MyListDataQty("110"),
+                new MyListDataQty("120"),
+                new MyListDataQty("130"),
+                new MyListDataQty("140"),
+                new MyListDataQty("150"),
+
+        };
+
+        RecyclerView recyclerView = customLayout. findViewById(R.id.rvqty);
+        ImageView ivcut=customLayout.findViewById(R.id.ivcut);
+        QtyListAdapter adapter = new QtyListAdapter(myListData);
+        adapter.setAdapterListenerqty(listenerqty);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+ivcut.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        alert.dismiss();
+    }
+});
+
+        alert.show();
+        alert.getWindow().setLayout(500, 888);
+    }
+
+
+
+    private QtyListAdapter.QtyAdapterListenertxt listenerqty = data -> {
+
+//Toast.makeText(getApplicationContext(),data.toString()+prodid,Toast.LENGTH_LONG).show();
+addqty(data.toString(),prodid);
+    };
+
+
+
+
+    @SuppressLint("CheckResult")
+    private void addqty( String qty, String prodid) {
+
+
+            QtyRequest r = new QtyRequest();
+            r.setQuantity(qty);
+            r.setProductid(prodid);
+
+
+            // list.add(r);
+
+            Log.e("postData", new Gson().toJson(r));
+
+            ApiClient.getApiClient().addqty(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), r)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<Response<QtyResponse>>() {
+                        @Override
+                        public void onSuccess(Response<QtyResponse> response) {
+
+                            // binding.progressbar.setVisibility(View.GONE);
+
+
+                            Log.e("onSuccess", String.valueOf(response.code()));
+                            if (response.isSuccessful()) {
+
+                                QtyResponse successResponse = response.body();
+                                Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Intent login = new Intent(AddToCartActivity.this, AddToCartActivity.class);
+                            startActivity(login);
+                            finish();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+
+
+                                if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                    //  Toaster.show(mContext, successResponse.getMessage());
+
+                                }
+                            } else {
+                                //Toast.makeText(getApplicationContext(), "Item already in wishlist", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                            Log.e("onError: ", e.getMessage());
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                            // binding.progressbar.setVisibility(View.GONE);
+                            // NetworkHelper.handleNetworkError(e, mContext);
+                        }
+                    });
+        // binding.progressbar.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+
+
+
+
+
 
     private AddtocartAdapter.InventoryAdapterListener listener = data -> {
 

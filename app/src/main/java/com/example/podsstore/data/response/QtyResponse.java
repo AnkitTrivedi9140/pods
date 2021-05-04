@@ -2,22 +2,16 @@ package com.example.podsstore.data.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CreateLoginUserResponse {
-    @SerializedName("status")
-    private String status;
+public class QtyResponse {
+
     @SerializedName("statusCode")
     private String statuscode;
 
+    @SerializedName("status")
+    private String status;
+
     @SerializedName("message")
     private String message;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getStatuscode() {
         return statuscode;
@@ -25,6 +19,14 @@ public class CreateLoginUserResponse {
 
     public void setStatuscode(String statuscode) {
         this.statuscode = statuscode;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getMessage() {
@@ -37,9 +39,9 @@ public class CreateLoginUserResponse {
 
     @Override
     public String toString() {
-        return "CreateLoginUserResponse{" +
-                "status='" + status + '\'' +
-                ", statuscode='" + statuscode + '\'' +
+        return "QtyResponse{" +
+                "statuscode='" + statuscode + '\'' +
+                ", status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 '}';
     }

@@ -108,7 +108,7 @@ android:visibility="gone"
             android:drawablePadding="8dp"
 
             android:hint="Enter phone no."
-
+android:inputType="phone"
             android:padding="8dp"
 
             android:layout_below="@+id/emailEt"/>

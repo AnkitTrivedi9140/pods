@@ -113,7 +113,7 @@ android:textStyle="bold"
             android:drawablePadding="8dp"
 
             android:ems="10"
-            android:fontFamily="sans-serif-medium"
+
 
             android:hint="@string/hint_password"
             android:inputType="textPassword"
@@ -125,10 +125,21 @@ android:textStyle="bold"
             android:src="@drawable/show"
             android:layout_below="@+id/forgettv"
             android:layout_alignParentRight="true"
+            android:id="@+id/ivhide"
+            android:layout_width="33dp"
+android:layout_marginRight="8dp"
+            android:visibility="gone"
+            android:layout_height="33dp"></ImageView>
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:src="@drawable/showpwd"
+            android:layout_below="@+id/forgettv"
+            android:layout_alignParentRight="true"
             android:id="@+id/ivshow"
-            android:layout_width="28dp"
-android:layout_marginRight="4dp"
-            android:layout_height="28dp"></ImageView>
+            android:layout_width="33dp"
+            android:layout_marginRight="8dp"
+            android:layout_height="33dp"></ImageView>
 
         <RelativeLayout
             android:layout_width="match_parent"

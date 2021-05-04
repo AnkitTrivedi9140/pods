@@ -152,15 +152,15 @@ showAlertDialog();
                                 Toast.makeText(getApplicationContext(),businesstype,Toast.LENGTH_LONG).show();
 
 
-                                    String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
-                                    if(lastqty==null) {
+                                 /*   String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
+                                    if(lastqty==null) {*/
                                         placeorder(
-                                                "1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), "1", String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+                                                "1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
 
-                                    }else {
-                                        placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), lastqty, String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+                                   /* }else {
+                                        placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
 
-                                    }
+                                    }*/
 
 
 
@@ -193,6 +193,8 @@ showAlertDialog();
         ImageView cut=customLayout.findViewById(R.id.ivcut);
 EditText date=customLayout.findViewById(R.id.etdate);
 
+        EditText ettransactionid =customLayout.findViewById(R.id.ettransationid);
+        EditText etproof =customLayout.findViewById(R.id.etproof);
         EditText etremarka =customLayout.findViewById(R.id.etremarks);
 
 
@@ -240,24 +242,21 @@ EditText date=customLayout.findViewById(R.id.etdate);
 
 
                 String remarks = etremarka.getText().toString().trim();
-/*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
-ettotalamount.setText(aaa.toString());*/
-
-/*
-
-                String mynum1=etqty.getText().toString();
-                float mnum1= Float.parseFloat(mynum1);
-
-                String mynum2=etofferamount.getText().toString();
-                float mnum2= Float.parseFloat(mynum2);
-
-                float res=mnum1*mnum2;
-                etremarka.setText(String.valueOf(res));
-*/
+                String dates = date.getText().toString().trim();
+                String transaction = ettransactionid.getText().toString().trim();
+                String proof = etproof.getText().toString().trim();
 
 
-
-                 if(TextUtils.isEmpty(remarks)){
+                if(TextUtils.isEmpty(dates)){
+                    date.setError("date Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(transaction)){
+                    ettransactionid.setError("transaction id Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(proof)){
+                    etproof.setError("proof Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(remarks)){
                     etremarka.setError("remarks Can't Blank!");
                 }
 

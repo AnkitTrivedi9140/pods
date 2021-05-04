@@ -229,7 +229,7 @@ loadData();
                             public void onClick(View v) {
 
                                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                                    Toast.makeText(getApplicationContext(),prnumber.getText().toString(),Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(getApplicationContext(),prnumber.getText().toString(),Toast.LENGTH_SHORT).show();
                                     smallCartonbuy(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong(prnumber.getText().toString()));
                                 }else{
                                    // showAlertDialog();

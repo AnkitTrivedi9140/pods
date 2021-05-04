@@ -7,6 +7,7 @@ import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
+import com.example.podsstore.data.request.QtyRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.BestSellingProductResponse;
@@ -18,6 +19,7 @@ import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.data.response.QtyResponse;
 import com.example.podsstore.data.response.SubCategoryProductResponce;
 import com.example.podsstore.data.response.SubCategoryResponce;
 import com.example.podsstore.data.response.TopBrandsProductResponse;
@@ -53,6 +55,11 @@ public interface NetworkInterface {
 
     @POST("loginRest/login")
     Single<Response<LoginResponse>> userlogin(@Body LoginUserRequest requests);
+
+
+    @POST("cartRest/addquantity")
+    Single<Response<QtyResponse>> addqty(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Body QtyRequest requests);
+
 
 
     @POST("loginRest/passwordChange")
