@@ -1,6 +1,8 @@
 package com.example.podsstore.productdetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -26,9 +28,17 @@ import com.example.podsstore.category.SubCategoryProductActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.LoginUserRequest;
+import com.example.podsstore.data.request.ProductReviewRequest;
+import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.data.response.ReviewResponse;
+import com.example.podsstore.getorder.MyOrderActivity;
+import com.example.podsstore.login.LoginActivity;
+import com.example.podsstore.mainactivityadapters.MyOrderAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
@@ -48,13 +58,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
 ImageView ivproduct,ivtoggle,ivcart;
 TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
     TextView logInBtn,tvbuynow;
+    RecyclerView recyclerView;
+    ReviewAdapter productListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         getSupportActionBar().hide();
         PreferenceManagerss.init(ProductDetailsActivity.this);
+
+        productListAdapter = new ReviewAdapter(ProductDetailsActivity.this);
         ivproduct=findViewById(R.id.ivproduct);
+        recyclerView=findViewById(R.id.rvreview);
         ivtoggle=findViewById(R.id.ivtoggle);
         ivcart=findViewById(R.id.ivcart);
         tvcartsize=findViewById(R.id.tvcartsize);
@@ -70,8 +85,8 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
         tvdetailtitle=findViewById(R.id.tvdetailtitle);
         tvfeaturetitle=findViewById(R.id.tvfeaturetitle);
         tvfunctiontitle=findViewById(R.id.tvfunctiontitle);
-
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this));
+        recyclerView.setAdapter(productListAdapter);
 
         loadData();
         ivtoggle.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +257,7 @@ loadDatacart();
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
-
+getreview(list.get(i).getId().toString());
                         if(tvfunction.getText().toString().length()>4){
                             tvfunctiontitle.setVisibility(View.VISIBLE);
                             tvfunction.setVisibility(View.VISIBLE);
@@ -505,6 +520,55 @@ loadDatacart();
        startActivity(intent);
        finish();
    }*/
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void getreview(String productid) {
+
+        List<ProductReviewRequest> list = new ArrayList<>();
+
+        ProductReviewRequest r = new ProductReviewRequest();
+//        r.setUsername(username);
+        r.setProductid(productid);
+
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)
+        );
+        ApiClient.getApiClient().getproductReview(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<ReviewResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<ReviewResponse>> response) {
+                        // binding.progress.setVisibility(View.GONE);
+
+                        if (response.isSuccessful()) {
+                            List<ReviewResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.toString()));
+                            productListAdapter.addAll(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+
+                    }
+                });
 
     }
 }

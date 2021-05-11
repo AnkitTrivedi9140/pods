@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+
                 android:layout_marginTop="22dp"
                 android:layout_marginBottom="4dp"
                 android:layout_toRightOf="@+id/productiv">
@@ -88,6 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
+                    android:singleLine="true"
                     android:text="Asset Type"
                     android:textColor="@color/text_color_setting"
                     android:textSize="20dp" />
@@ -112,29 +113,59 @@
                     android:layout_below="@+id/description"
                     android:layout_marginTop="8dp"
                     android:lines="1"
-                    android:text="Laptop"
+                    android:text="qty:"
                     android:textColor="@color/black"
                     android:textSize="14dp"
                     android:textStyle="normal"
                     android:visibility="gone" />
-
                 <TextView
+                    android:id="@+id/tvqtytext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/description"
+                    android:layout_marginTop="22dp"
+                    android:lines="1"
+                    android:text="Qty:"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="normal"
+
+                   />
+
+                <EditText
+                    android:layout_toRightOf="@+id/tvqtytext"
                     android:id="@+id/tvqtybtn"
-                    android:layout_width="99dp"
+                    android:layout_width="77dp"
+                    android:layout_marginLeft="4dp"
                     android:layout_height="33dp"
                     android:layout_below="@+id/description"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="33dp"
                     android:background="@drawable/rippleqty"
                     android:drawableEnd="@drawable/qtydropdown"
                     android:drawableRight="@drawable/qtydropdown"
                     android:gravity="center_vertical"
                     android:lines="1"
-                    android:padding="6dp"
-                    android:text="Qty:"
-                    android:textColor="@color/text_color_setting"
-                    android:textSize="14dp"></TextView>
+                    android:singleLine="true"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true"
+                    android:padding="2dp"
 
+                    android:inputType="number"
+                    android:focusable="auto"
+                    android:textColor="@color/text_color_setting"
+                    android:textSize="14dp"></EditText>
+                <ImageView
+                    android:id="@+id/ivgo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+android:layout_below="@+id/description"
+               android:layout_toRightOf="@+id/tvqtybtn"
+android:layout_marginLeft="8dp"
+                    android:layout_marginTop="18dp"
+
+                    android:src="@drawable/gobtngrn">
+
+                </ImageView>
                 <LinearLayout
                     android:id="@+id/layio"
                     android:layout_width="wrap_content"
@@ -199,14 +230,14 @@
 
                 <ImageView
                     android:id="@+id/deleteproductiv"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_below="@+id/description"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_below="@+id/tvAssetType"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="11dp"
+                  android:layout_marginRight="6dp"
 
-
+android:layout_marginTop="4dp"
                     android:src="@drawable/bin"></ImageView>
             </RelativeLayout>
 

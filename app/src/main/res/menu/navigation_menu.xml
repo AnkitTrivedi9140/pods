@@ -13,7 +13,9 @@
         android:title="Addresses"/>
     <item android:id="@+id/nvsettings"
         android:icon="@drawable/country"
-        android:title="Choose Country"/>
+        android:title="Advertise with us"
+
+        />
     <group
         android:id="@+id/menu_bottoms"
         android:checkableBehavior="none">

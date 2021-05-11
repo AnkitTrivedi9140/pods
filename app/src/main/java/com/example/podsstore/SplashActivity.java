@@ -54,7 +54,7 @@ ImageView ivlogo,tvicon;
                 finish();
             }
         });
-        Glide.with(this).load(R.drawable.gif).into(tvicon);
+      //  Glide.with(this).load(R.drawable.gif).into(tvicon);
 
     }
 

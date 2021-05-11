@@ -97,20 +97,7 @@ String prodid;
         productListAdapter.setAdapterListenerplus(adapterListenerpluss);
         productListAdapter.setAdapterListenersless(adapterListenerless);
         productListAdapter.setAdapterListenercart(adapterListenercart);
-        placeorderbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (productListAdapter.getSize() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please add some items in cart", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
 
-
-            }
-        });
 
 
         tvapply.setOnClickListener(new View.OnClickListener() {
@@ -149,12 +136,11 @@ String prodid;
                     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
                     int totalPrice = 0;
                     for (int i = 0; i < list.size(); i++) {
-                        String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
-                        if (lastqty == null) {
-                            totalPrice += (list.get(i).getPrice());
-                        } else {
-                            totalPrice += (list.get(i).getPrice() * Integer.valueOf(lastqty));
-                        }
+                        totalPrice += (list.get(i).getPrice() * Integer.valueOf(list.get(i).getQty().toString()));
+
+
+                           // totalPrice += (list.get(i).getPrice());
+
 
                         Log.e("onResponses", list.get(i).getQty().toString());
                         tvsubtotaltxt.setText(String.valueOf(totalPrice));
@@ -167,6 +153,27 @@ String prodid;
                         addtoCartWithQty.setProductimage(list.get(i).getProductname());
                         addtoCartWithQty.setProductimage(list.get(i).getImageUrl());
                         addtoCartWithQty.setQuantity(list.get(i).getQty().toString());
+
+
+                        int finalI = i;
+                        placeorderbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (productListAdapter.getSize() == 0) {
+                                    Toast.makeText(getApplicationContext(), "Please add some items in cart", Toast.LENGTH_SHORT).show();
+                                }else if(Integer.valueOf(list.get(finalI).getQty().toString())<Integer.valueOf(list.get(finalI).getMinqty().toString())){
+                                   Toast.makeText(getApplicationContext(),"Please add  minimum Quantity more than 10 for place order.",Toast.LENGTH_LONG).show();
+                                } else {
+                                    Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                                    intent.putExtra("addtocart","addtocart");
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+
+                            }
+                        });
+
 
                     }
                     if (list.isEmpty()) {
@@ -259,6 +266,10 @@ String prodid;
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+//                for(int i=0;i<qtylist.size();i++){
+//                    addqty(qtylist.get(i).getQuantity().toString(),qtylist.get(i).getProductid());
+//                }
+
             } else {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
@@ -659,6 +670,7 @@ addqty(data.toString(),prodid);
 
                                 QtyResponse successResponse = response.body();
                                 Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
                             Intent login = new Intent(AddToCartActivity.this, AddToCartActivity.class);
                             startActivity(login);
                             finish();
@@ -873,7 +885,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.message()));
+                        Log.e("onSuccess", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
@@ -891,7 +903,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Please complete you documentation process to login..!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Some problems getting from server", Toast.LENGTH_SHORT).show();
 
                         }
                     }

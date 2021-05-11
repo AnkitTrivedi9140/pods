@@ -260,6 +260,12 @@ ivshow.setVisibility(View.VISIBLE);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }else if(String.valueOf(response.code()).contains("401")){
+                            Toast.makeText(getApplicationContext(), "Please check your email id or password!",Toast.LENGTH_SHORT).show();
+
+                        }else if(String.valueOf(response.code()).contains("400")){
+                            Toast.makeText(getApplicationContext(), "User is seller...!",Toast.LENGTH_SHORT).show();
+
                         } else {
                      Toast.makeText(getApplicationContext(), "Please complete you documentation process to login..!",Toast.LENGTH_SHORT).show();
 

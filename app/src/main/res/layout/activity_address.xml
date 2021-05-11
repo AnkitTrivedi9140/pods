@@ -82,7 +82,8 @@
                 android:textSize="16dp"></EditText>
 
             <EditText
-                android:id="@+id/etzipcode"
+
+                android:id="@+id/etphone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/etaddress3"
@@ -90,14 +91,67 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/edittext_bg"
-                android:hint="Pipcode"
+                android:hint="Phone No"
                 android:padding="10dp"
                 android:textSize="16dp"
-android:inputType="phone"
+                android:inputType="phone"
                 ></EditText>
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/et1"
+                android:layout_width="44dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                app:ccp_contentColor="@color/term_and_conditions"
+                app:ccp_textSize="14dp"
+                android:layout_marginLeft="16dp"
+
+                android:layout_below="@+id/etphone"
+                >
+
+            </com.hbb20.CountryCodePicker>
+
+
 
             <EditText
                 android:id="@+id/etcountry"
+                android:layout_toRightOf="@+id/et1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/etphone"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_bg"
+                android:hint="Country"
+                android:padding="10dp"
+                android:textSize="16dp"
+              android:clickable="false"
+                android:editable="false"
+                android:focusable="false"
+                ></EditText>
+            <EditText
+
+                android:id="@+id/etzipcode"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/etcountry"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_bg"
+                android:hint="Pin Code"
+                android:padding="10dp"
+                android:textSize="16dp"
+                android:inputType="phone"
+                ></EditText>
+
+
+            <EditText
+
+                android:id="@+id/etstate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/etzipcode"
@@ -105,7 +159,7 @@ android:inputType="phone"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/edittext_bg"
-                android:hint="Country"
+                android:hint="State"
                 android:padding="10dp"
                 android:textSize="16dp"
 
@@ -115,7 +169,7 @@ android:inputType="phone"
                 android:id="@+id/tvsubmit"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_below="@+id/etcountry"
+                android:layout_below="@+id/etstate"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="28dp"

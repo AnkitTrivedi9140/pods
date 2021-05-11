@@ -285,7 +285,7 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
 
                             }
                         } else {
-                         Toast.makeText(getApplicationContext(), "Please check your email id to create account", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
 
                         }
                     }

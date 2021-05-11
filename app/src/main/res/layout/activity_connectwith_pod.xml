@@ -54,7 +54,7 @@ android:hint="Your Full Name"
     <EditText
         android:id="@+id/etphone"
         android:textSize="16dp"
-
+android:inputType="phone"
         android:hint="Phone Number"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

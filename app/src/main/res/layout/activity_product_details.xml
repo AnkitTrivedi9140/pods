@@ -137,12 +137,16 @@ android:layout_below="@+id/tvProductname"
         ></TextView>
 </RelativeLayout>
 
-
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_below="@+id/rlprice"
+    android:id="@+id/rvreview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
     <RelativeLayout
         android:id="@+id/rldetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlprice"
+        android:layout_below="@+id/rvreview"
 
         android:layout_marginTop="8dp"
 
@@ -207,7 +211,9 @@ android:layout_below="@+id/tvProductname"
             android:layout_marginTop="22dp"
             android:text="Functions"
             android:textColor="@color/black"
-            android:textSize="18dp"></TextView>
+            android:textSize="18dp">
+
+        </TextView>
 
         <TextView
             android:id="@+id/tvfunction"
@@ -223,9 +229,6 @@ android:layout_below="@+id/tvProductname"
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>
-
-
-
 
     <TextView
         android:background="@drawable/rippleabout"

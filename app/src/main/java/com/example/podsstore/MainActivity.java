@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -74,6 +75,7 @@ import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.search.SearchActivity;
 import com.example.podsstore.topbrands.TopBrandsProductActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
@@ -139,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().setLogo(R.drawable.toggle);
         // getMenuInflater().inflate(R.menu.main_menu, menu);
 
+    String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        Log.e( "deviceid", FirebaseInstanceId.getInstance().getToken());
         toolbar = findViewById(R.id.toolbar);
         ivcountry = findViewById(R.id.ivcountry);
 
@@ -409,8 +415,9 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawers();
                         break;
                     case R.id.nvsettings:
-                        Intent nvsettings = new Intent(MainActivity.this, ChooseCountryActivity.class);
-                        startActivity(nvsettings);
+//                        Intent nvsettings = new Intent(MainActivity.this, ChooseCountryActivity.class);
+//                        startActivity(nvsettings);
+
                         dl.closeDrawers();
                         break;
                     case R.id.nvhistory:

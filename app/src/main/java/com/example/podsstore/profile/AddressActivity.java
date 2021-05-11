@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,11 +44,11 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class AddressActivity extends AppCompatActivity {
-private EditText etaddress1,etaddress2,etaddress3,etzipcode,etcountry;
+private EditText etaddress1,etaddress2,etaddress3,etzipcode,etcountry,etphone,etstate;
 private TextView tvsubmit;
 
     String pinCode;
-
+    CountryCodePicker  countryCodePicker;
     // creating a variable for request queue.
 
     private RequestQueue mRequestQueue;
@@ -57,12 +59,23 @@ private TextView tvsubmit;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Address Details");
         mRequestQueue = Volley.newRequestQueue(AddressActivity.this);
+        countryCodePicker=findViewById(R.id.et1);
         etaddress1=findViewById(R.id.etaddress1);
         etaddress2=findViewById(R.id.etaddress2);
+
         etaddress3=findViewById(R.id.etaddress3);
+        etphone=findViewById(R.id.etphone);
+        etstate=findViewById(R.id.etstate);
         etzipcode=findViewById(R.id.etzipcode);
         etcountry=findViewById(R.id.etcountry);
         tvsubmit=findViewById(R.id.tvsubmit);
+
+        countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                etcountry.setText(countryCodePicker.getSelectedCountryName().toString());
+            }
+        });
         tvsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +85,9 @@ private TextView tvsubmit;
                 String address3 = etaddress3.getText().toString();
                 String zipcode = etzipcode.getText().toString();
                 String country = etcountry.getText().toString();
+                String phone = etphone.getText().toString();
+                String state = etstate.getText().toString();
+
 
                 if (TextUtils.isEmpty(address1)) {
                     etaddress1.setError("Address Can't Blank!");
@@ -83,12 +99,19 @@ private TextView tvsubmit;
                 else if (TextUtils.isEmpty(address3)) {
                     etaddress3.setError("Address Can't Blank!");
 
+                } else if (TextUtils.isEmpty(phone)) {
+                    etphone.setError("Phone number Can't Blank!");
+
                 }
                 else if (TextUtils.isEmpty(zipcode)) {
                     etzipcode.setError("zipcode Can't Blank!");
 
                 } else if (TextUtils.isEmpty(country)) {
-                    etcountry.setError("country Can't Blank!");
+                    etcountry.setError("please choose country Dropdown!");
+
+                }
+                else if (TextUtils.isEmpty(state)) {
+                    etstate.setError("state can't blank!");
 
                 }else{
                     smallCarton(etaddress1.getText().toString(),etaddress2.getText().toString(),etaddress3.getText().toString(),etzipcode.getText().toString(),etcountry.getText().toString());

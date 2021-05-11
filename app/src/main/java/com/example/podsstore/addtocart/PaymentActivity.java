@@ -1,5 +1,6 @@
 package com.example.podsstore.addtocart;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +58,8 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     RadioGroup radioGroup;
     RadioButton radioButton;
     final Calendar myCalendar = Calendar.getInstance();
+
+    String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,9 +92,9 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
 
                 switch (checkedId) {
                     case R.id.radiocorporate:
-                       showAlertDialog();   break;
+                       showAlertDialog(path);   break;
                     case R.id.radioincorporate:
-showAlertDialog();
+showAlertDialog(path);
                         break;
 
                 }
@@ -136,11 +139,14 @@ showAlertDialog();
                     List<CartResponse> list = response.body();
                     Log.e("list", String.valueOf(list));
                     //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
-
+                    List<CartResponse> listone=new ArrayList<>();
                     placeorderbtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Toast.makeText(getApplicationContext(),"Order placed successfully",Toast.LENGTH_SHORT).show();
                             for (int i = 0; i < list.size(); i++) {
+                                CartResponse cartResponse=list.get(i);
+
                                 int selectedId = radioGroup.getCheckedRadioButtonId();
 
                                 // find the radiobutton by returned id
@@ -149,22 +155,16 @@ showAlertDialog();
                                 Log.d("onClickgg ", list.get(i).getProductid().toString());
 
                                 String businesstype=  radioButton.getText().toString().trim();
-                                Toast.makeText(getApplicationContext(),businesstype,Toast.LENGTH_LONG).show();
 
 
-                                 /*   String lastqty = viewModel.getqty(list.get(i).getProductid().toString());
-                                    if(lastqty==null) {*/
-                                        placeorder(
-                                                "1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+              placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
 
-                                   /* }else {
-                                        placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
-
-                                    }*/
 
 
 
                             }
+
+                          //  placeholder(listone);
 
 
                         }
@@ -183,7 +183,7 @@ showAlertDialog();
             }
         });
     }
-    private void showAlertDialog() {
+    private void showAlertDialog(String paths) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(PaymentActivity.this);
         final View customLayout = getLayoutInflater().inflate(R.layout.paymentmethoddialog, null);
 
@@ -200,6 +200,15 @@ EditText date=customLayout.findViewById(R.id.etdate);
 
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(true);
+        etproof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent  intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(intent, 7);
+            }
+        });
+
         DatePickerDialog.OnDateSetListener dates = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -234,7 +243,7 @@ EditText date=customLayout.findViewById(R.id.etdate);
             }
         });
 
-
+        etproof.setText(paths);
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,25 +262,56 @@ EditText date=customLayout.findViewById(R.id.etdate);
                 else if(TextUtils.isEmpty(transaction)){
                     ettransactionid.setError("transaction id Can't Blank!");
                 }
-                else if(TextUtils.isEmpty(proof)){
-                    etproof.setError("proof Can't Blank!");
-                }
+//                else if(TextUtils.isEmpty(proof)){
+//                    etproof.setError("proof Can't Blank!");
+//                }
                 else if(TextUtils.isEmpty(remarks)){
                     etremarka.setError("remarks Can't Blank!");
                 }
 
                 //   loadData(et.getText().toString().trim());
                 else {
-                   alert.dismiss();
+                    //alert.dismiss();
+                    Intent i=new Intent(getApplicationContext(),PaymentActivity.class);
+                    startActivity(i);
+                    finish();
                 }
+
             }
         });
+
         alert.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+
+            case 7:
+
+                if(resultCode==RESULT_OK){
+
+                    String PathHolder = data.getData().getPath();
+
+                    Toast.makeText(PaymentActivity.this, PathHolder , Toast.LENGTH_LONG).show();
+path=PathHolder;
+showAlertDialog(PathHolder);
+                }
+                break;
+
+        }
+    }
+
+//    private void placeholder(List<CartResponse> list){
+//        for(CartResponse response : list){
+//
+//        }
+//    }
+
     @SuppressLint("CheckResult")
     private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal) {
-
+//Toast.makeText(getApplicationContext(),"mila nhi",Toast.LENGTH_SHORT).show();
         List<PlaceOrderRequest> list = new ArrayList<>();
 
         PlaceOrderRequest r = new PlaceOrderRequest();
@@ -302,11 +342,13 @@ EditText date=customLayout.findViewById(R.id.etdate);
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+                        Log.e("postData", String.valueOf(response.body()));
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                           // if(successResponse.getMessage().equalsIgnoreCase()){}
+                            Log.e("onSuccesseeee",successResponse.getMessage() );
+                          Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent main = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(main);
                             finish();

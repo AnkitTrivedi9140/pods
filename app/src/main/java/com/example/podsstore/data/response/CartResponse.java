@@ -37,11 +37,36 @@ public class CartResponse {
 
 
 
-
+    @SerializedName("min_quantity")
+    private String minqty;
     @SerializedName("itemPresentIn")
     private String itempresentin;
     @SerializedName("addedDate")
     private String addeddate;
+
+    public CartResponse(Long cartid, Long userid, Long productid, String productname, String imageUrl, Long qty, Long price, String discount, String totalprice, String producttype, String minqty, String itempresentin, String addeddate) {
+        this.cartid = cartid;
+        this.userid = userid;
+        this.productid = productid;
+        this.productname = productname;
+        this.imageUrl = imageUrl;
+        this.qty = qty;
+        this.price = price;
+        this.discount = discount;
+        this.totalprice = totalprice;
+        this.producttype = producttype;
+        this.minqty = minqty;
+        this.itempresentin = itempresentin;
+        this.addeddate = addeddate;
+    }
+
+    public String getMinqty() {
+        return minqty;
+    }
+
+    public void setMinqty(String minqty) {
+        this.minqty = minqty;
+    }
 
     public Long getCartid() {
         return cartid;
@@ -152,6 +177,7 @@ public class CartResponse {
                 ", discount='" + discount + '\'' +
                 ", totalprice='" + totalprice + '\'' +
                 ", producttype='" + producttype + '\'' +
+                ", minqty='" + minqty + '\'' +
                 ", itempresentin='" + itempresentin + '\'' +
                 ", addeddate='" + addeddate + '\'' +
                 '}';

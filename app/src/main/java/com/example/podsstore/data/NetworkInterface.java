@@ -7,7 +7,10 @@ import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
+import com.example.podsstore.data.request.ProductReviewRequest;
 import com.example.podsstore.data.request.QtyRequest;
+import com.example.podsstore.data.request.ReturnRequest;
+import com.example.podsstore.data.request.ReviewRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.BestSellingProductResponse;
@@ -20,6 +23,7 @@ import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.data.response.QtyResponse;
+import com.example.podsstore.data.response.ReviewResponse;
 import com.example.podsstore.data.response.SubCategoryProductResponce;
 import com.example.podsstore.data.response.SubCategoryResponce;
 import com.example.podsstore.data.response.TopBrandsProductResponse;
@@ -53,8 +57,13 @@ public interface NetworkInterface {
     Single<Response<CreateLoginUserResponse>> createuserregister(@Body CreateLoginUserRequest requests);
 
 
-    @POST("loginRest/login")
+    @POST("loginRest/loginapp")
     Single<Response<LoginResponse>> userlogin(@Body LoginUserRequest requests);
+
+
+    @POST("imageRest/getReview")
+    Single<Response<List<ReviewResponse>> >getproductReview(@Body ProductReviewRequest requests);
+
 
 
     @POST("cartRest/addquantity")
@@ -186,6 +195,19 @@ public interface NetworkInterface {
 
     @POST("loginRest/confirmReset")
     Call<CreateLoginUserResponse>confirmotp(@Query("userEmailId") String emailId, @Query("otp") String otp);
+
+
+    @POST("reviewRest/addReview")
+    Single<Response<CreateLoginUserResponse>> addreview(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body ReviewRequest requests);
+
+
+
+
+    @POST("imageRest/getReview")
+    Single<Response<List<ReviewResponse>>>getallReview(@Body ProductReviewRequest requests);
+
+    @POST("orderRest/returninit")
+    Single<Response<CreateLoginUserResponse>> prodreturn(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body ReturnRequest requests);
 
 
 }

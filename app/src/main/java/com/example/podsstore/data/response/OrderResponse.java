@@ -35,6 +35,29 @@ public class OrderResponse {
     @SerializedName("orderDate")
     private String itempresentin;
 
+    @SerializedName("current_order_status")
+    private String currentorderstatus;
+
+    @SerializedName("sellerid")
+    private String sellerid;
+
+
+    public String getCurrentorderstatus() {
+        return currentorderstatus;
+    }
+
+    public void setCurrentorderstatus(String currentorderstatus) {
+        this.currentorderstatus = currentorderstatus;
+    }
+
+    public String getSellerid() {
+        return sellerid;
+    }
+
+    public void setSellerid(String sellerid) {
+        this.sellerid = sellerid;
+    }
+
     public Long getId() {
         return id;
     }
@@ -128,6 +151,8 @@ public class OrderResponse {
                 ", price=" + price +
                 ", totalprice='" + totalprice + '\'' +
                 ", itempresentin='" + itempresentin + '\'' +
+                ", currentorderstatus='" + currentorderstatus + '\'' +
+                ", sellerid='" + sellerid + '\'' +
                 '}';
     }
 }

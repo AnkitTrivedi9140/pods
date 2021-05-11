@@ -166,6 +166,10 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPhoto, 1);
+
+
+
+
                 //              Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 //             startActivityForResult(i, 100);
 
@@ -190,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         loadData();
         String aa=decryptAndGetPassword();
-        Glide.with(this).load(R.drawable.gif).into(tvicons);
+        //Glide.with(this).load(R.drawable.gif).into(tvicons);
        // Toast.makeText(getApplicationContext(),aa,Toast.LENGTH_LONG).show();
     }
     private String decryptAndGetPassword() {
@@ -291,6 +295,8 @@ public class ProfileActivity extends AppCompatActivity {
 //                    finish();
                 if (TextUtils.isEmpty(number)) {
                     et.setError("Number Can't Blank!");
+                }else if(number.length() < 6 || number.length() > 20){
+                    et.setError("Number is not correct!");
                 }else {
                   changenumber("+"+countryCodePicker.getFullNumberWithPlus().toString()+"-"+et.getText().toString().trim());
                 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.ProductResponse;
@@ -66,7 +67,27 @@ onBackPressed();
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        if(getIntent().getStringExtra("addtocart")!=null){
+            if(getIntent().getStringExtra("addtocart").equalsIgnoreCase("addtocart")){
+                Intent intent = new Intent(getApplicationContext(), AddToCartActivity.class);
+
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                startActivity(intent);
+                finish();
+            }
+        }else{
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+            startActivity(intent);
+            finish();
+        }
+
+
+
     }
 
     @SuppressLint("CheckResult")

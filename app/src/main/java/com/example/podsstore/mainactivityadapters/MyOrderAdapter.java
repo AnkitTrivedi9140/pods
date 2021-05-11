@@ -26,19 +26,23 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
     private Context context;
 
     String qty;
-    private MyOrderAdapter.InventoryAdapterListener openListener;
+    private MyOrderAdapter.InventoryAdapterListenerreview openListener;
+    private MyOrderAdapter.InventoryAdapterListenerreturn openListenerreturn;
 
 
     public void setAdapterListener(MyOrderAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
 
-    public void setAdapterListeners(MyOrderAdapter.InventoryAdapterListener adapterListener) {
+    public void setAdapterListenerreview(MyOrderAdapter.InventoryAdapterListenerreview adapterListener) {
         this.openListener = adapterListener;
+    }
+    public void setAdapterListenerreturn(MyOrderAdapter.InventoryAdapterListenerreturn adapterListener) {
+        this.openListenerreturn = adapterListener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView description, tvAssetType,tvqty,tvcome;
+        public TextView description, tvAssetType,tvqty,tvcome,tvreview,tvreturn;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
@@ -47,6 +51,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         public MyViewHolder(View view) {
             super(view);
             tvqty = (TextView) view.findViewById(R.id.tvqty);
+            tvreview = (TextView) view.findViewById(R.id.tvreview);
+            tvreturn = (TextView) view.findViewById(R.id.tvreturn);
             description = (TextView) view.findViewById(R.id.description);
             tvAssetType = (TextView) view.findViewById(R.id.tvAssetType);
             cardView = view.findViewById(R.id.cardview);
@@ -58,6 +64,18 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
 
                 if (adapterListener != null) {
                     adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvreview.setOnClickListener(v -> {
+
+                if (openListener != null) {
+                    openListener.onAdapterItemClickedreview(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvreturn.setOnClickListener(v -> {
+
+                if (openListenerreturn != null) {
+                    openListenerreturn.onAdapterItemClickedreturn(productResponseList.get(getAdapterPosition()));
                 }
             });
 
@@ -98,7 +116,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         holder.tvAssetType.setText(cartResponse.getProductname());
         holder.description.setText("$_"+cartResponse.getPrice());
         holder.tvqty.setText("Qty: "+cartResponse.getQty());
-        holder.tvcome.setText("Ordered on- "+cartResponse.getItempresentin());
+        holder.tvcome.setText("Order Status- "+cartResponse.getCurrentorderstatus());
         // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(cartResponse.getProductimage())
@@ -141,9 +159,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         void onItemClick(OrderResponse data);
     }
 
-    public interface InventoryAdapterListener {
-        void onAdapterItemClicked(OrderResponse data);
+    public interface InventoryAdapterListenerreview {
+        void onAdapterItemClickedreview(OrderResponse data);
     }
 
-
+    public interface InventoryAdapterListenerreturn {
+        void onAdapterItemClickedreturn(OrderResponse data);
+    }
 }
