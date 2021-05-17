@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
-        Log.e( "deviceid", FirebaseInstanceId.getInstance().getToken());
+  //      Log.e( "deviceid", String.valueOf(FirebaseInstanceId.getInstance().getToken()));
         toolbar = findViewById(R.id.toolbar);
         ivcountry = findViewById(R.id.ivcountry);
 

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
@@ -26,7 +27,7 @@ import com.example.podsstore.profile.ProfileActivity;
 public class AboutActivity extends AppCompatActivity {
     RadioGroup radioGroup1;
     RadioButton home,categories,profile,about;
-    TextView tvreact,tvheadingpementmethod;
+    TextView tvreact,tvheadingpementmethod,tvaddnumber;
     ImageView ivinsta,ivtwiter,ivfacebook,ivyoutube,ivlinked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class AboutActivity extends AppCompatActivity {
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         tvreact=findViewById(R.id.tvreact);
         ivinsta=findViewById(R.id.ivinsta);
+        tvaddnumber=findViewById(R.id.tvaddnumber);
         ivtwiter=findViewById(R.id.ivtwiter);
         ivfacebook=findViewById(R.id.ivfacebook);
         ivyoutube=findViewById(R.id.ivyoutube);
@@ -49,7 +51,35 @@ public class AboutActivity extends AppCompatActivity {
         profile = (RadioButton)findViewById(R.id.profile);
         about.setCompoundDrawablesWithIntrinsicBounds( 0,R.drawable.blueabout, 0,0);
         about.setTextColor(Color.parseColor("#007eff"));
+        tvaddnumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(getApplicationContext(),"ssdfsdfsdfsdf",Toast.LENGTH_SHORT).show();
 
+                // Use format with "tel:" and phoneNumber created is
+                // stored in u.
+                Uri u = Uri.parse("tel:" + "+1 604 912 0520");
+
+                // Create the intent and set the data for the
+                // intent as the phone number.
+                Intent i = new Intent(Intent.ACTION_DIAL, u);
+
+                try
+                {
+                    // Launch the Phone app's dialer with a phone
+                    // number to dial a call.
+                    startActivity(i);
+                }
+                catch (SecurityException s)
+                {
+                    // show() method display the toast with
+                    // exception message.
+                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_LONG)
+                            .show();
+                }
+
+            }
+        });
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -157,11 +187,18 @@ public class AboutActivity extends AppCompatActivity {
         ivyoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/channel/UCijKjwEbM0SFX7wCnmog14Q"));
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setPackage("com.google.android.youtube");
+//                startActivity(intent);
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/channel/UCijKjwEbM0SFX7wCnmog14Q"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.google.android.youtube");
-                startActivity(intent);
+                Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.youtube.com/channel/UCijKjwEbM0SFX7wCnmog14Q"));
+                try {
+                    AboutActivity.this.startActivity(webIntent);
+                } catch (ActivityNotFoundException ex) {
+                }
             }
         });
         ivlinked.setOnClickListener(new View.OnClickListener() {

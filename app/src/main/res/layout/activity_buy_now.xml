@@ -123,6 +123,7 @@ android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Procuct Details"
+
                     android:textColor="@color/black"
                     android:layout_toLeftOf="@+id/layio"
                     android:textSize="18dp"
@@ -137,10 +138,66 @@ android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:text="Procuct"
                     android:textSize="22dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="@color/term_and_conditions"
                     ></TextView>
+                <RelativeLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true">
+                <TextView
+                    android:id="@+id/tvqtytext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/description"
+                    android:layout_marginTop="22dp"
+                    android:lines="1"
+android:visibility="gone"
+                    android:text="Qty:"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="normal"
 
+                    />
+
+                    <EditText
+                        android:id="@+id/tvqtybtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="33dp"
+                      android:layout_below="@+id/tvProductname"
+                        android:layout_marginLeft="4dp"
+android:layout_centerVertical="true"
+                   android:layout_marginTop="8dp"
+                        android:background="@drawable/rippleqty"
+                        android:clickable="false"
+
+                        android:hint="Enter your Qty"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:padding="4dp"
+
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:singleLine="true"
+                        android:textColor="@color/text_color_setting"
+                        android:textSize="14dp"
+                        tools:ignore="NotSibling"></EditText>
+                <ImageView
+                    android:id="@+id/ivgo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/description"
+                    android:layout_toRightOf="@+id/tvqtybtn"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="18dp"
+android:visibility="gone"
+                    android:src="@drawable/gobtngrn">
+
+                </ImageView>
+                </RelativeLayout>
                 <LinearLayout
+                    android:visibility="gone"
                   android:layout_alignParentEnd="true"
                     android:layout_marginTop="8dp"
                     android:id="@+id/layio"

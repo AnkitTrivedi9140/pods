@@ -72,7 +72,7 @@ RelativeLayout rlaccountconfirmation;
         getSupportActionBar().hide();
         initViews();
 
-        Glide.with(this).load(R.drawable.podgif).into(tvicon);
+       // Glide.with(this).load(R.drawable.podgif).into(tvicon);
         //   binding.url.setOnClickListener(onClickListener);
     }
 

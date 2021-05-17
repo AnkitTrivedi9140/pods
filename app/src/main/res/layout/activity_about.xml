@@ -133,15 +133,30 @@ android:gravity="center"
                 android:layout_marginRight="16dp"
                 android:gravity="center"
 android:textStyle="bold"
-                android:text="Suite 402, 100 Park Royal South West Vancouver,   BC V7T 1A2, Canada CA +1 604 912 0520"
+                android:text="Suite 402, 100 Park Royal South West Vancouver,   BC V7T 1A2, Canada CA"
                 android:textColor="@color/manatee"
+                android:textSize="16dp"></TextView>
+            <TextView
+
+
+                android:id="@+id/tvaddnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvadd"
+                android:layout_marginLeft="16dp"
+
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="+1 604 912 0520"
+                android:textColor="@color/colorGreen"
                 android:textSize="16dp"></TextView>
             <TextView
                 android:layout_centerHorizontal="true"
                 android:id="@+id/tvheadingpartner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvadd"
+                android:layout_below="@+id/tvaddnumber"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"

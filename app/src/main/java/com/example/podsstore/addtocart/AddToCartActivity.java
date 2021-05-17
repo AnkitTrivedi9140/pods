@@ -66,8 +66,9 @@ public class AddToCartActivity extends AppCompatActivity implements AddtocartAda
     ArrayList<AddtoCartWithQty> qtylist;
 String prodid;
     EditText etcoupon;
+    String qtyclick="aa";
     private QuantityViewModel viewModel;
-
+    int finalI= 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +136,7 @@ String prodid;
                     productListAdapter.addAll(list);
                     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
                     int totalPrice = 0;
+
                     for (int i = 0; i < list.size(); i++) {
                         totalPrice += (list.get(i).getPrice() * Integer.valueOf(list.get(i).getQty().toString()));
 
@@ -155,27 +157,49 @@ String prodid;
                         addtoCartWithQty.setQuantity(list.get(i).getQty().toString());
 
 
-                        int finalI = i;
-                        placeorderbtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (productListAdapter.getSize() == 0) {
-                                    Toast.makeText(getApplicationContext(), "Please add some items in cart", Toast.LENGTH_SHORT).show();
-                                }else if(Integer.valueOf(list.get(finalI).getQty().toString())<Integer.valueOf(list.get(finalI).getMinqty().toString())){
-                                   Toast.makeText(getApplicationContext(),"Please add  minimum Quantity more than 10 for place order.",Toast.LENGTH_LONG).show();
-                                } else {
-                                    Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                                    intent.putExtra("addtocart","addtocart");
-                                    startActivity(intent);
-                                    finish();
-                                }
+                         finalI = i;
 
 
-                            }
-                        });
 
 
                     }
+                    placeorderbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (productListAdapter.getSize() == 0) {
+                                Toast.makeText(getApplicationContext(), "Please add some items in cart", Toast.LENGTH_SHORT).show();
+                            }else{
+
+                                for(int j=0;j<list.size();j++){
+                                 int aa=   Integer.valueOf(list.get(j).getQty().toString());
+                                    int bb=  Integer.valueOf(list.get(j).getMinqty());
+                                //    Log.e("onClick: ", list.get(j).getQty().toString());
+                                    if(aa<bb){
+                                        qtyclick="bb";
+                                       // Log.e("onClick: ", list.get(j).getQty().toString());
+                                        Intent intent = new Intent(getApplicationContext(), AddToCartActivity.class);
+
+                                    startActivity(intent);
+                                    finish();
+                                        Toast.makeText(getApplicationContext(),list.get(j).getProducttype()+" and Qty will be "+list.get(j).getMinqty().toString(),Toast.LENGTH_LONG).show();
+                                    } else if(qtyclick.equalsIgnoreCase("aa")){
+                                        Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+                                        intent.putExtra("addtocart","addtocart");
+                                        startActivity(intent);
+                                        finish();
+                                    }else {
+
+                                        Toast.makeText(getApplicationContext(),list.get(j).getProducttype()+" and Qty will be "+list.get(j).getMinqty().toString(),Toast.LENGTH_LONG).show();
+
+
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                    });
                     if (list.isEmpty()) {
 
                         tvcartempty.setVisibility(View.VISIBLE);
@@ -834,7 +858,14 @@ ettotalamount.setText(aaa.toString());*/
                     etprodid.setError("product name Can't Blank!");
                 }else if(TextUtils.isEmpty(qty)){
                     etqty.setError("Quantity Can't Blank!");
-                }else if(TextUtils.isEmpty(offer)){
+                }
+                else if(qty.equalsIgnoreCase("0")){
+                    etqty.setError("Quantity is not correct!");
+                }
+                else if(offer.equalsIgnoreCase("0")){
+                    etofferamount.setError("Amount is not correct!");
+                }
+                else if(TextUtils.isEmpty(offer)){
                     etofferamount.setError("offer amount Can't Blank!");
                 }
                 else if(TextUtils.isEmpty(total)){

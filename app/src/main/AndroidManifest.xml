@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".topbrands.TopBrandsProductActivity"></activity>
+        <activity android:name=".getorder.OrderDetailsActivity"></activity>
+        <activity android:name=".topbrands.TopBrandsProductActivity" />
         <activity android:name=".buynow.BuyNowActivity" />
         <activity android:name=".category.SubCategoryProductActivity" />
         <activity android:name=".category.SubCategoryActivity" />
@@ -62,19 +63,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Firebase Notifications -->
-<!--        <service android:name="MyFirebaseMessagingService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
-<!--        <service android:name="MyFirebaseInstanceIDService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        </activity> <!-- Firebase Notifications -->
+        <!-- <service android:name="MyFirebaseMessagingService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <!-- <service android:name="MyFirebaseInstanceIDService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <service
             android:name=".BioFuelFirebaseService"
             android:exported="false">

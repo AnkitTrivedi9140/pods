@@ -61,7 +61,7 @@ TextView signintv,tvduns,skiptv;
         getSupportActionBar().hide();
 
         initViews();
-        Glide.with(this).load(R.drawable.podgif).into(tvicon);
+       // Glide.with(this).load(R.drawable.podgif).into(tvicon);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

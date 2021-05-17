@@ -42,11 +42,11 @@
 
                 <ImageView
                     android:id="@+id/tvicon"
-                    android:layout_width="66dp"
+                    android:layout_width="88dp"
                     android:layout_height="40dp"
 
-                    android:layout_marginLeft="66dp"
-                    android:src="@drawable/removebgpodicon"
+                    android:layout_marginLeft="50dp"
+                    android:src="@drawable/whitelogo"
                     android:text="Pod"
                     android:textSize="55dp"
                     android:textStyle="bold"></ImageView>

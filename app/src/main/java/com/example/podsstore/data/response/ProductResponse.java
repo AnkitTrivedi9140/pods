@@ -57,6 +57,17 @@ public class ProductResponse {
     @SerializedName("price")
     private String price;
 
+    @SerializedName("min_quantity")
+    private String minqty;
+
+    public String getMinqty() {
+        return minqty;
+    }
+
+    public void setMinqty(String minqty) {
+        this.minqty = minqty;
+    }
+
     public Long getId() {
         return id;
     }
@@ -204,7 +215,7 @@ public class ProductResponse {
     @Override
     public String toString() {
         return "ProductResponse{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", prodname='" + prodname + '\'' +
                 ", prodtype='" + prodtype + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
@@ -222,6 +233,7 @@ public class ProductResponse {
                 ", status='" + status + '\'' +
                 ", discount='" + discount + '\'' +
                 ", price='" + price + '\'' +
+                ", minqty='" + minqty + '\'' +
                 '}';
     }
 }

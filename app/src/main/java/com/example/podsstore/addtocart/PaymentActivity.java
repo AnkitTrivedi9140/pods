@@ -82,6 +82,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
 placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+
         singleproductdetails();
     }
 });
@@ -348,7 +349,7 @@ showAlertDialog(PathHolder);
                             CreateLoginUserResponse successResponse = response.body();
                            // if(successResponse.getMessage().equalsIgnoreCase()){}
                             Log.e("onSuccesseeee",successResponse.getMessage() );
-                          Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                      //    Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent main = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(main);
                             finish();
@@ -391,6 +392,7 @@ showAlertDialog(PathHolder);
                 Log.e("getMaterialMasters",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
                     List<ProductResponse> list = response.body();
+                    Toast.makeText(getApplicationContext(),"Order placed successfully",Toast.LENGTH_SHORT).show();
 
 //                    for (int i = 0; i < list.size(); i++) {
                         placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));

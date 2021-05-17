@@ -85,6 +85,7 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
         tvdetailtitle=findViewById(R.id.tvdetailtitle);
         tvfeaturetitle=findViewById(R.id.tvfeaturetitle);
         tvfunctiontitle=findViewById(R.id.tvfunctiontitle);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this));
         recyclerView.setAdapter(productListAdapter);
 
@@ -158,7 +159,7 @@ loadDatacart();
     @Override
     protected void onResume() {
         super.onResume();
-        loadData();
+        //loadData();
     }
 
     @SuppressLint("CheckResult")
@@ -257,7 +258,9 @@ loadDatacart();
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
-getreview(list.get(i).getId().toString());
+
+                        getreview(list.get(i).getId().toString());
+
                         if(tvfunction.getText().toString().length()>4){
                             tvfunctiontitle.setVisibility(View.VISIBLE);
                             tvfunction.setVisibility(View.VISIBLE);

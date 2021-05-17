@@ -74,6 +74,7 @@ public class MyOrderActivity extends AppCompatActivity {
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
         productListAdapter.setAdapterListener(adapterListener);
+        productListAdapter.setAdapterListenerviewdetails(adapterListenerviewdetails);
         productListAdapter.setAdapterListenerreview(adapterListenerreview);
         productListAdapter.setAdapterListenerreturn(adapterListenerreturn);
 //        productListAdapter.setAdapterListeners(listener);
@@ -149,6 +150,15 @@ loadData();
         // Toast.makeText(getApplicationContext(), data.getId().toString()+"///"+data.getCatid().toString(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MyOrderActivity.this, ProductDetailsActivity.class);
         i.putExtra("userid", data.getProductid().toString());
+
+        startActivity(i);
+
+
+    };
+    private MyOrderAdapter.AdapterListenerviewdetails adapterListenerviewdetails = data -> {
+        // Toast.makeText(getApplicationContext(), data.getId().toString()+"///"+data.getCatid().toString(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MyOrderActivity.this, OrderDetailsActivity.class);
+        i.putExtra("userid", data.getOrderid().toString());
 
         startActivity(i);
 

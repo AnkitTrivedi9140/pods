@@ -6,6 +6,7 @@ import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
+import com.example.podsstore.data.request.OrderInfoRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.request.ProductReviewRequest;
 import com.example.podsstore.data.request.QtyRequest;
@@ -19,6 +20,7 @@ import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CountryResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
+import com.example.podsstore.data.response.OrderInfoResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
@@ -78,14 +80,18 @@ public interface NetworkInterface {
     @POST("productRest/getProduct")
     Single<Response<List<ProductResponse>>>getproducts();
 
+
     @POST("productRest/getProd")
     Call<List<ProductResponse>>getproductsdetails(@Query("id") String userId);
+
 
     @POST("loginRest/users")
     Call<List<ProfileResponses>>profile(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
 
+
     @POST("countryRest/getCountryDetails")
     Single<Response<List<CountryResponse>>>getcountry();
+
 
     @POST("countryRest/selectCountry")
     Call<CountryResponse>selectcountry(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Query("countryId") String countryid);
@@ -94,8 +100,10 @@ public interface NetworkInterface {
     @POST("loginRest/forgotPassword")
     Call<CreateLoginUserResponse>forgotpassword(@Query("userEmailId") String emailId);
 
+
     @POST("addressRest/getAddressDetails")
     Single<Response<List<AddressResponse>>>getalladdress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId);
+
 
     @POST("loginRest/changePhoneNumber")
     Call<CreateLoginUserResponse>changeno(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("phoneNumber") String mobileno);
@@ -103,6 +111,7 @@ public interface NetworkInterface {
 
     @POST("businessRest/homeCategory")
     Single<Response<List<BusinessCatResponse>>>getbusinesscat();
+
 
     @POST("brandRest/getBrandDetails")
     Single<Response<List<TopBrandsResponse>>>gettopbrands();
@@ -157,6 +166,12 @@ public interface NetworkInterface {
     Call<List<OrderResponse>>getplaceorder(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
 
 
+    @POST("orderRest/getOrderInfo")
+    Call<List<OrderInfoResponse>>getplaceorderinfo(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body OrderInfoRequest requests);
+
+
+
+
     @POST("orderRest/placeOrder")
     Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body List<PlaceOrderRequest> requests  );
 
@@ -200,11 +215,6 @@ public interface NetworkInterface {
     @POST("reviewRest/addReview")
     Single<Response<CreateLoginUserResponse>> addreview(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body ReviewRequest requests);
 
-
-
-
-    @POST("imageRest/getReview")
-    Single<Response<List<ReviewResponse>>>getallReview(@Body ProductReviewRequest requests);
 
     @POST("orderRest/returninit")
     Single<Response<CreateLoginUserResponse>> prodreturn(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body ReturnRequest requests);
