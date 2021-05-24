@@ -47,6 +47,7 @@
                 android:id="@+id/rlwishlist"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
+
                 android:layout_below="@+id/productiv"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="11dp">
@@ -56,22 +57,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/platinum"></TextView>
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
                 <TextView
                     android:id="@+id/tvaddwishlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+
                     android:layout_marginTop="11dp"
 
                     android:layout_marginBottom="11dp"
                     android:lines="1"
                     android:text="Negotiate price of the product"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
-                    android:textStyle="normal" />
-            </RelativeLayout>
+                    android:textSize="16dp"
 
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvaddwish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp"
+android:layout_toRightOf="@+id/tvaddwishlist"
+                    android:layout_marginBottom="11dp"
+                    android:lines="1"
+                    android:text=" Make Offer"
+                    android:textColor="#13B3A7"
+                    android:textSize="16dp"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/relative"
                 android:layout_width="wrap_content"
@@ -102,9 +121,9 @@
                     android:layout_below="@+id/tvAssetType"
                     android:lines="1"
                     android:text="Laptop"
-                    android:textColor="@color/term_and_conditions"
+                    android:textColor="#13B3A7"
                     android:textSize="18dp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvqty"

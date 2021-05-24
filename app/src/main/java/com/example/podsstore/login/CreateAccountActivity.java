@@ -23,16 +23,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.NotificationRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.profile.ProfileActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.hbb20.CountryCodePicker;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +71,7 @@ TextView signintv,tvduns,skiptv;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         getSupportActionBar().hide();
-
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         initViews();
        // Glide.with(this).load(R.drawable.podgif).into(tvicon);
     }
@@ -267,11 +279,14 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
+
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+regNoti();
+                            //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();
                              alert.dismiss();
+
                              rlaccountconfirmation.setVisibility(View.VISIBLE);
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
@@ -300,6 +315,98 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
                     }
                 });
     }
+    @SuppressLint("CheckResult")
+    private void regNoti() {
+
+                List<NotificationRequest> list = new ArrayList<>();
+
+        NotificationRequest r = new NotificationRequest();
+
+            r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+
+            list.add(r);
+
+
+
+
+            Log.e("postData", new Gson().toJson(r));
+
+            ApiClientNoti.getApiClients().createuserregisternotification(r)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                        @Override
+                        public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                            // binding.progressbar.setVisibility(View.GONE);
+
+
+                            Log.e("onSuccess", String.valueOf(response.code()));
+                            if (response.isSuccessful()) {
+
+                                CreateLoginUserResponse successResponse = response.body();
+                                Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                                if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                    //  Toaster.show(mContext, successResponse.getMessage());
+
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                            Log.e("onError: " , e.getMessage());
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    });
+
+
+    }
+
+
+
+//    public void postData() {
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        JSONObject object = new JSONObject();
+//        try {
+//            //input your API parameters
+//            object.put("parameter","value");
+//            object.put("parameter","value");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        // Enter the correct url for your api service site
+//        String url = "getResources().getString(R.string.url)";
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                       // resultTextView.setText("String Response : "+ response.toString());
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //resultTextView.setText("Error getting response");
+//            }
+//        });
+//        requestQueue.add(jsonObjectRequest);
+//    }
 
     private void initViews() {
         rlaccountconfirmation = findViewById(R.id.rlaccountconfirmation);

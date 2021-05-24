@@ -20,6 +20,7 @@ import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CountryResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
+import com.example.podsstore.data.response.MakeOfferResponse;
 import com.example.podsstore.data.response.OrderInfoResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -134,7 +135,7 @@ public interface NetworkInterface {
 
 
     @POST("makerOfferRest/makerOffer")
-    Single<Response<CreateLoginUserResponse>> makeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body MakeOfferRequest requests);
+    Single<Response<CreateLoginUserResponse>> makeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid,@Body MakeOfferRequest requests);
 
 
 
@@ -173,7 +174,7 @@ public interface NetworkInterface {
 
 
     @POST("orderRest/placeOrder")
-    Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body List<PlaceOrderRequest> requests  );
+    Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid,@Body List<PlaceOrderRequest> requests  );
 
 
     @POST("cartRest/deleteCart")
@@ -186,6 +187,11 @@ public interface NetworkInterface {
 
     @POST("wishListRest/getWishList")
     Call<List<CartResponse>>getwishlist(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
+
+
+    @POST("makerOfferRest/getOfferDetailsByBuyer")
+    Call<List<MakeOfferResponse>>getalloffers(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
+
 
 
     @POST("wishListRest/deleteWishList")

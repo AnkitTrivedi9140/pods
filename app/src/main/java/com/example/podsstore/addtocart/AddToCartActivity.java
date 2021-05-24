@@ -32,11 +32,13 @@ import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.QtyRequest;
+import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.QtyResponse;
 import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.login.LoginActivity;
+import com.example.podsstore.mainactivityadapters.AddressAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
@@ -69,6 +71,9 @@ String prodid;
     String qtyclick="aa";
     private QuantityViewModel viewModel;
     int finalI= 0;
+    AlertDialog alertsss;
+    EditText etaddress;
+    String addressid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -757,7 +762,9 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
         EditText etprodid =customLayout.findViewById(R.id.etpassword);
         EditText etqty =customLayout.findViewById(R.id.etqty);
         EditText etofferamount =customLayout.findViewById(R.id.etofferammount);
+
         EditText ettotalamount =customLayout.findViewById(R.id.ettotalammount);
+       etaddress =customLayout.findViewById(R.id.etaddress);
 
         EditText etremarka =customLayout.findViewById(R.id.etremarks);
 
@@ -772,7 +779,12 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
             }
         });
 
-
+etaddress.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        showAlertDialogaddress();
+    }
+});
 
         etqty.addTextChangedListener(new TextWatcher() {
             @Override
@@ -837,6 +849,9 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
                 String total = ettotalamount.getText().toString().trim();
 
                 String remarks = etremarka.getText().toString().trim();
+
+
+                String address = etaddress.getText().toString().trim();
 /*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
 ettotalamount.setText(aaa.toString());*/
 
@@ -871,7 +886,9 @@ ettotalamount.setText(aaa.toString());*/
                 else if(TextUtils.isEmpty(total)){
                     ettotalamount.setError("total amount Can't Blank!");
                 }
-
+                else if(TextUtils.isEmpty(address)){
+                    etaddress.setError("Please choose address!");
+                }
                 else if(TextUtils.isEmpty(remarks)){
                     etremarka.setError("remarks Can't Blank!");
                 }
@@ -886,10 +903,76 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
         });
         alert.show();
     }
+    private void showAlertDialogaddress() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddToCartActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.makeofferaddressdialog, null);
+        AddressPopupAdapter addressAdapter;
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        RecyclerView addressrv=customLayout.findViewById(R.id.addressrv);
+        alertDialog.setView(customLayout);
+        alertsss = alertDialog.create();
+        alertsss.setCanceledOnTouchOutside(true);
+
+
+        addressAdapter = new AddressPopupAdapter(AddToCartActivity.this);
+
+        addressrv.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
+//      recyclerView.setEmptyView(binding.emptyView);
+        addressAdapter.setAdapterListener(adapterListeneraddress);
+
+        addressrv.setAdapter(addressAdapter);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              alertsss.dismiss();
+          }
+      });
+
+        ApiClient.getApiClient().getalladdress(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<AddressResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<AddressResponse>> response) {
+                        // binding.progress.setVisibility(View.GONE);
+
+                        if (response.isSuccessful()) {
+                            List<AddressResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.toString()));
+                            addressAdapter.addAll(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+
+                    }
+                });
+
+
+        alertsss.show();
+    }
+    private AddressPopupAdapter.AdapterListener adapterListeneraddress = data -> {
+
+        //deletecart(String.valueOf(data.getAddressid().toString()));
+//Toast.makeText(getApplicationContext(),data.getAddressid().toString(),Toast.LENGTH_SHORT).show();
+etaddress.setText(data.getUseraddressline1()+","+data.getUseraddressline1()+"("+data.getUserzipcode()+")");
+addressid=data.getAddressid().toString();
+        alertsss.dismiss();
+    };
 
     @SuppressLint("CheckResult")
     private void makeoffer(String prodid,String actualammount,String offeramount,String amountperunit,String quantitydetails,String remarks) {
         // binding.progressbar.setVisibility(View.VISIBLE);
+        //Toast.makeText(getApplicationContext(),">>>>>"+addressid,Toast.LENGTH_SHORT).show();
         List<MakeOfferRequest> list = new ArrayList<>();
 
         MakeOfferRequest r = new MakeOfferRequest();
@@ -906,7 +989,7 @@ makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.g
 
         Log.e("postdata", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). makeoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient(). makeoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),addressid,r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {

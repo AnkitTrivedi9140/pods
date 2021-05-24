@@ -66,9 +66,9 @@
                 android:lines="1"
                 android:layout_below="@+id/tvAssetType"
                 android:text="Laptop"
-                android:textColor="@color/term_and_conditions"
-
-                android:textStyle="normal" />
+                android:textColor="#13B3A7"
+android:textSize="16dp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

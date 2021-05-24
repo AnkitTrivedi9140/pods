@@ -60,7 +60,15 @@ public class OrderInfoResponse {
     @SerializedName("totalprice")
     private String totalprice;
     @SerializedName("addressDetails")
-    private String orderaddress;
+    public Address orderaddress  ;
+
+    public Address getOrderaddress() {
+        return orderaddress;
+    }
+
+    public void setOrderaddress(Address orderaddress) {
+        this.orderaddress = orderaddress;
+    }
 
     public Long getId() {
         return id;
@@ -214,14 +222,6 @@ public class OrderInfoResponse {
         this.totalprice = totalprice;
     }
 
-    public String getOrderaddress() {
-        return orderaddress;
-    }
-
-    public void setOrderaddress(String orderaddress) {
-        this.orderaddress = orderaddress;
-    }
-
     @Override
     public String toString() {
         return "OrderInfoResponse{" +
@@ -244,7 +244,140 @@ public class OrderInfoResponse {
                 ", returndate='" + returndate + '\'' +
                 ", cancledate='" + cancledate + '\'' +
                 ", totalprice='" + totalprice + '\'' +
-                ", orderaddress='" + orderaddress + '\'' +
+
                 '}';
     }
+    public class Address {
+        @SerializedName("addressId")
+        public Long addressid;
+        @SerializedName("userAddressId")
+        public Long useraddressid;
+
+
+        @SerializedName("userName")
+        public String username;
+        @SerializedName("userAddressLine1")
+        public String addressline1;
+        @SerializedName("userAddressLine2")
+        public String addressline2;
+        @SerializedName("userAddressLine3")
+        public String addressline3;
+
+        @SerializedName("userZipCode")
+        public String zipcode;
+        @SerializedName("userCountry")
+        public String usercountry;
+        @SerializedName("updatedAt")
+        public String updatedat;
+        @SerializedName("mobile")
+        public String mobile;
+        @SerializedName("state")
+        public String state;
+
+        public Long getAddressid() {
+            return addressid;
+        }
+
+        public void setAddressid(Long addressid) {
+            this.addressid = addressid;
+        }
+
+        public Long getUseraddressid() {
+            return useraddressid;
+        }
+
+        public void setUseraddressid(Long useraddressid) {
+            this.useraddressid = useraddressid;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getAddressline1() {
+            return addressline1;
+        }
+
+        public void setAddressline1(String addressline1) {
+            this.addressline1 = addressline1;
+        }
+
+        public String getAddressline2() {
+            return addressline2;
+        }
+
+        public void setAddressline2(String addressline2) {
+            this.addressline2 = addressline2;
+        }
+
+        public String getAddressline3() {
+            return addressline3;
+        }
+
+        public void setAddressline3(String addressline3) {
+            this.addressline3 = addressline3;
+        }
+
+        public String getZipcode() {
+            return zipcode;
+        }
+
+        public void setZipcode(String zipcode) {
+            this.zipcode = zipcode;
+        }
+
+        public String getUsercountry() {
+            return usercountry;
+        }
+
+        public void setUsercountry(String usercountry) {
+            this.usercountry = usercountry;
+        }
+
+        public String getUpdatedat() {
+            return updatedat;
+        }
+
+        public void setUpdatedat(String updatedat) {
+            this.updatedat = updatedat;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        @Override
+        public String toString() {
+            return "Address{" +
+                    "addressid=" + addressid +
+                    ", useraddressid=" + useraddressid +
+                    ", username='" + username + '\'' +
+                    ", addressline1='" + addressline1 + '\'' +
+                    ", addressline2='" + addressline2 + '\'' +
+                    ", addressline3='" + addressline3 + '\'' +
+                    ", zipcode='" + zipcode + '\'' +
+                    ", usercountry='" + usercountry + '\'' +
+                    ", updatedat='" + updatedat + '\'' +
+                    ", mobile='" + mobile + '\'' +
+                    ", state='" + state + '\'' +
+                    '}';
+        }
+    }
+
 }

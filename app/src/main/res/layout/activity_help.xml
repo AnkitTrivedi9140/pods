@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".drower.HelpActivity"
     android:layout_margin="14dp">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <TextView
         android:id="@+id/tvhelpheading"
@@ -86,4 +94,6 @@ android:layout_below="@+id/tvhelpheading"
         android:drawableEnd="@drawable/ic_email"
         android:drawableRight="@drawable/ic_email"
         ></TextView>
+    </RelativeLayout>
+</ScrollView>
 </RelativeLayout>

@@ -61,6 +61,7 @@ import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.drower.ChooseCountryActivity;
 import com.example.podsstore.drower.DrowerActivity;
 import com.example.podsstore.drower.HelpAndFAQActivity;
+import com.example.podsstore.drower.ShowMakeofferActivity;
 import com.example.podsstore.getorder.MyOrderActivity;
 import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
@@ -415,8 +416,8 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawers();
                         break;
                     case R.id.nvsettings:
-//                        Intent nvsettings = new Intent(MainActivity.this, ChooseCountryActivity.class);
-//                        startActivity(nvsettings);
+                        Intent nvsettings = new Intent(MainActivity.this, ShowMakeofferActivity.class);
+                        startActivity(nvsettings);
 
                         dl.closeDrawers();
                         break;

@@ -42,10 +42,6 @@ android:layout_marginTop="4dp"
             android:layout_height="wrap_content">
 
 
-
-
-
-
                 <TextView
                     android:id="@+id/tvAssetType"
                     android:layout_width="wrap_content"
@@ -69,9 +65,9 @@ android:layout_marginTop="4dp"
                         android:lines="1"
                         android:layout_below="@+id/tvAssetType"
                         android:text="Laptop"
-                        android:textColor="@color/term_and_conditions"
-                        android:textSize="14dp"
-                        android:textStyle="normal" />
+                        android:textColor="#13B3A7"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

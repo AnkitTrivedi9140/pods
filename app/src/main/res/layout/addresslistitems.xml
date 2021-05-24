@@ -34,8 +34,8 @@ android:layout_marginLeft="14dp"
 <ImageView
     android:id="@+id/deleteadd"
     android:src="@drawable/deleteadd"
-    android:layout_width="55dp"
-    android:layout_height="55dp"
+    android:layout_width="33dp"
+    android:layout_height="33dp"
     android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true">
 

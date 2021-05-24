@@ -10,6 +10,11 @@ public class ProductResponse {
     @SerializedName("prodname")
     private String prodname;
 
+
+    @SerializedName("serialno")
+    private String serialno;
+
+
     @SerializedName("prodtype")
     private String prodtype;
 
@@ -60,6 +65,49 @@ public class ProductResponse {
     @SerializedName("min_quantity")
     private String minqty;
 
+    @SerializedName("imageurl1")
+    private String imageurl1;
+
+    @SerializedName("imageurl2")
+    private String imageurl2;
+    @SerializedName("imageurl3")
+    private String imageurl3;
+
+    @SerializedName("imageurl4")
+    private String imageurl4;
+
+    public String getImageurl1() {
+        return imageurl1;
+    }
+
+    public void setImageurl1(String imageurl1) {
+        this.imageurl1 = imageurl1;
+    }
+
+    public String getImageurl2() {
+        return imageurl2;
+    }
+
+    public void setImageurl2(String imageurl2) {
+        this.imageurl2 = imageurl2;
+    }
+
+    public String getImageurl3() {
+        return imageurl3;
+    }
+
+    public void setImageurl3(String imageurl3) {
+        this.imageurl3 = imageurl3;
+    }
+
+    public String getImageurl4() {
+        return imageurl4;
+    }
+
+    public void setImageurl4(String imageurl4) {
+        this.imageurl4 = imageurl4;
+    }
+
     public String getMinqty() {
         return minqty;
     }
@@ -98,6 +146,14 @@ public class ProductResponse {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public String getSerialno() {
+        return serialno;
+    }
+
+    public void setSerialno(String serialno) {
+        this.serialno = serialno;
     }
 
     public String getBrand() {
@@ -217,6 +273,7 @@ public class ProductResponse {
         return "ProductResponse{" +
                 "id=" + id +
                 ", prodname='" + prodname + '\'' +
+                ", serialno='" + serialno + '\'' +
                 ", prodtype='" + prodtype + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", brand='" + brand + '\'' +
@@ -234,6 +291,10 @@ public class ProductResponse {
                 ", discount='" + discount + '\'' +
                 ", price='" + price + '\'' +
                 ", minqty='" + minqty + '\'' +
+                ", imageurl1='" + imageurl1 + '\'' +
+                ", imageurl2='" + imageurl2 + '\'' +
+                ", imageurl3='" + imageurl3 + '\'' +
+                ", imageurl4='" + imageurl4 + '\'' +
                 '}';
     }
 }

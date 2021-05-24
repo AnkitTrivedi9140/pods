@@ -232,11 +232,13 @@
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="14dp"
-                android:text="Discount Amount"
+
+android:visibility="gone"                android:text="Discount Amount"
                 android:textColor="@color/text_color_setting"
                 android:textSize="14dp"></TextView>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tvdiscounttxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -257,7 +259,7 @@
                 android:id="@+id/tvtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvdiscount"
+                android:layout_below="@+id/tvsubtotal"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="14dp"
@@ -271,7 +273,7 @@
                 android:id="@+id/tvtotaltxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvdiscount"
+                android:layout_below="@+id/tvsubtotal"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="14dp"

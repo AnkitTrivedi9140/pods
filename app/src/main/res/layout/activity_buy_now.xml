@@ -85,7 +85,7 @@ android:visibility="gone"
     <ScrollView
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="66dp"
         >
         <RelativeLayout
@@ -114,7 +114,7 @@ android:visibility="gone"
                 android:padding="8dp"
 
                 android:layout_marginTop="4dp"
-                android:layout_height="111dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
@@ -141,10 +141,87 @@ android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/term_and_conditions"
                     ></TextView>
-                <RelativeLayout
-                    android:layout_alignParentEnd="true"
+                <TextView
+
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:id="@+id/tvheadingProductpricetotal"
+                    android:layout_below="@+id/tvProductprice"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/text_color_setting"
+                    ></TextView>
+                <TextView
+                   android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:background="@drawable/rippleqty"
+                    android:layout_toRightOf="@+id/tvheadingProductpricetotal"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="12dp"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:id="@+id/tvProductpricetotal"
+                    android:layout_below="@+id/tvProductprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25.00"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="4dp"
+android:layout_toLeftOf="@+id/tvqtybtn"
+                    android:layout_marginTop="12dp"
+                    android:textColor="#13B3A7"
+                    ></TextView>
+                <EditText
+                      android:id="@+id/tvqtybtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvProductprice"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rippleqty"
+                    android:clickable="false"
+                       android:hint="Enter your Qty"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:padding="4dp"
+android:layout_toLeftOf="@+id/ivgos"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color_setting"
+                    android:textSize="14dp"
+                    tools:ignore="NotSibling"
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_alignParentRight="true"></EditText>
+
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/ivgos"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="18dp"
+android:layout_alignParentEnd="true"
+                       android:layout_below="@+id/tvProductname"
+                    android:src="@drawable/gobtngrn"
+                    android:layout_alignParentRight="true">
+                </ImageView>
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:background="@drawable/rippleqty"
+android:id="@+id/tvmakeoffer"
+                    android:layout_below="@+id/tvProductpricetotal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
                 android:layout_centerVertical="true"
                     android:layout_alignParentRight="true">
                 <TextView
@@ -162,33 +239,49 @@ android:visibility="gone"
 
                     />
 
-                    <EditText
-                        android:id="@+id/tvqtybtn"
+
+                    <RelativeLayout
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                      android:layout_below="@+id/tvProductname"
-                        android:layout_marginLeft="4dp"
-android:layout_centerVertical="true"
-                   android:layout_marginTop="8dp"
-                        android:background="@drawable/rippleqty"
-                        android:clickable="false"
+                        android:layout_height="wrap_content"
 
-                        android:hint="Enter your Qty"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:padding="4dp"
+                        >
+                        <TextView
+                            android:id="@+id/tvaddwishlist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                        android:scrollbarAlwaysDrawHorizontalTrack="true"
-                        android:singleLine="true"
-                        android:textColor="@color/text_color_setting"
-                        android:textSize="14dp"
-                        tools:ignore="NotSibling"></EditText>
+                            android:layout_marginTop="11dp"
+
+                            android:layout_marginBottom="11dp"
+                            android:lines="1"
+                            android:text="Negotiate price of the product"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvaddwish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="11dp"
+                            android:layout_toRightOf="@+id/tvaddwishlist"
+                            android:layout_marginBottom="11dp"
+                            android:lines="1"
+                            android:text=" Make Offer"
+                            android:textColor="#13B3A7"
+                            android:textSize="16dp"
+                            android:textStyle="italic" />
+                    </RelativeLayout>
+
                 <ImageView
                     android:id="@+id/ivgo"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_below="@+id/description"
-                    android:layout_toRightOf="@+id/tvqtybtn"
+
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="18dp"
 android:visibility="gone"

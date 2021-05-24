@@ -74,9 +74,10 @@ public class BioFuelFirebaseService extends FirebaseMessagingService {
                         getApplicationContext(), "222")
                         .setContentTitle(title)
                         .setAutoCancel(true)
-                      //  .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.ic_back)).getBitmap())
-                        .setSmallIcon(R.drawable.ic_email)
-                        //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
+
+                    //  .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.ic_back)).getBitmap())
+                        .setSmallIcon(R.drawable.bluelogo)
+                     //   .setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
                         .setContentText(body)
                         .setContentIntent(pi)
                 ;

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 <TextView
     android:id="@+id/tvfaq1"
-    android:text="Who is Pods Health, is Pods Health new to the industry?"
+    android:text="How does Pods.Market work?"
     android:layout_width="match_parent"
     android:layout_toLeftOf="@+id/ivgofaq1"
     android:layout_marginRight="11dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq1"
         android:id="@+id/tvfaq2"
-        android:text="Are the products sold by Pods Health certified?"
+        android:text="How to register?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:layout_marginRight="11dp"
@@ -73,7 +73,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq2"
         android:id="@+id/tvfaq3"
-        android:text="I want to become a partner of Pods Health, who should I contact?"
+        android:text="What is Pods.Market APP?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -103,7 +103,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq3"
         android:id="@+id/tvfaq4"
-        android:text="Is Pods Health a manufacture?"
+        android:text="How I can get Pods.Market APP on my phone?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -135,7 +135,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq4"
         android:id="@+id/tvfaq5"
-        android:text="Does Pods Health provide other services other than products listed on the website?"
+        android:text="How to contact Pods.Market?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -165,7 +165,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq5"
         android:id="@+id/tvfaq6"
-        android:text="Who are Pods Health customers?"
+        android:text="How can you be sure that the Seller is trustworthy?"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -213,6 +213,430 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="58dp"
         ></ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq7"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq7"
+                android:id="@+id/tvfaq8"
+                android:text="I want to buy a product. How can I do it?
+ "
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq7"
+                android:id="@+id/ivgofaq8"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq8"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq8"
+                android:id="@+id/tvfaq9"
+                android:text="When will my order be processed?"
+
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq7"
+                android:id="@+id/ivgofaq9"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq9"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq9"
+                android:id="@+id/tvfaq10"
+                android:text="What advertising opportunities are there for my company? "
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq9"
+                android:id="@+id/ivgofaq10"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq10"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq10"
+                android:id="@+id/tvfaq11"
+                android:text="How can I track my order?
+ "
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq10"
+                android:id="@+id/ivgofaq11"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq11"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq11"
+                android:id="@+id/tvfaq12"
+                android:text="What are verification documents?
+ "
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq11"
+                android:id="@+id/ivgofaq12"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq12"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq12"
+                android:id="@+id/tvfaq13"
+                android:text="What should I do if the company refuses to exchange/return goods?
+ "
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq12"
+                android:id="@+id/ivgofaq13"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq13"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq13"
+                android:id="@+id/tvfaq14"
+                android:text="I am not satisfied with your service. How do I submit an improvement suggestion or complaint about a service?"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq13"
+                android:id="@+id/ivgofaq14"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq14"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq14"
+                android:id="@+id/tvfaq15"
+                android:text="Why do we ask for a lot of documents when registering?"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq14"
+                android:id="@+id/ivgofaq15"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq15"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq15"
+                android:id="@+id/tvfaq16"
+                android:text="Is it safe to store information about orders on Pods.Market?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq15"
+                android:id="@+id/ivgofaq16"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq16"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq16"
+                android:id="@+id/tvfaq17"
+                android:text="How buyers will find my products?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq16"
+                android:id="@+id/ivgofaq17"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq17"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq17"
+                android:id="@+id/tvfaq18"
+                android:text="I cannot enter the platform. What to do?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq17"
+                android:id="@+id/ivgofaq18"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq18"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq18"
+                android:id="@+id/tvfaq19"
+                android:text="I do not remember the login and password to enter the site/APP. What to do?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq18"
+                android:id="@+id/ivgofaq19"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq19"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq19"
+                android:id="@+id/tvfaq20"
+                android:text="I don't understand anything. What to do?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+                android:layout_below="@+id/tvfaq19"
+                android:id="@+id/ivgofaq20"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
         </RelativeLayout>
     </ScrollView>
 

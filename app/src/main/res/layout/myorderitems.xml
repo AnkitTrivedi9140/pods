@@ -96,9 +96,9 @@ android:textStyle="bold"
                     android:lines="1"
                     android:layout_below="@+id/tvAssetType"
                     android:text="price"
-                    android:textColor="@color/term_and_conditions"
+                    android:textColor="#13B3A7"
                     android:textSize="18dp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvqty"
@@ -170,7 +170,8 @@ android:layout_marginRight="14dp"
 android:drawableEnd="@drawable/goo"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                android:textColor="@color/black"
+                android:textColor="#13B3A7"
+                android:textStyle="bold"
                 android:text="View order Details"
                 android:gravity="start|center_vertical"
                 android:drawableRight="@drawable/goo"></TextView>

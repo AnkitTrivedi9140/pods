@@ -69,7 +69,7 @@ private TextView tvsubmit;
         etzipcode=findViewById(R.id.etzipcode);
         etcountry=findViewById(R.id.etcountry);
         tvsubmit=findViewById(R.id.tvsubmit);
-
+        etcountry.setText(countryCodePicker.getSelectedCountryName().toString());
         countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
             @Override
             public void onCountrySelected() {

@@ -31,6 +31,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     ImageView ivproduct;
     TextView tvorderstatus,tvorderdate,tvorderid,tvordertotal,tvdelieverydate,tvproductname,tvproductqty,tvproductprise,tvproductaddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +72,12 @@ getSupportActionBar().setTitle("Order Summary");
                         tvorderdate.setText(list.get(i).getOrderdate().toString());
                         tvorderid.setText("#"+list.get(i).getOrderid().toString());
                         tvordertotal.setText("$ "+list.get(i).getTotalprice().toString());
-                        tvdelieverydate.setText("coming soon");
+                        tvdelieverydate.setText("Wednesday 5 June 2021");
                         tvorderstatus.setText("Order Status: "+list.get(i).getOrderstatus().toString());
                         tvproductqty.setText("Qty: "+list.get(i).getQty().toString());
                         tvproductname.setText(list.get(i).getProducttype()+"("+list.get(i).getProductname().toString()+")");
                         tvproductprise.setText("Price: "+"$"+list.get(i).getPrice().toString());
-                        tvproductaddress.setText(list.get(i).getOrderaddress().toString());
+                        tvproductaddress.setText(list.get(i).getOrderaddress().getAddressline1()+list.get(i).getOrderaddress().getAddressline2()+list.get(i).getOrderaddress().getAddressline3());
 
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getProductimage())

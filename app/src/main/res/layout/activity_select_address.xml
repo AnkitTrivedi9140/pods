@@ -99,26 +99,40 @@
             android:id="@+id/tvname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAYMENT"
+            android:text="Please choose your address"
         android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18dp"
 android:layout_marginTop="20dp"
             android:layout_marginLeft="22dp"
             ></TextView>
-        <TextView
-            android:id="@+id/tvaddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
 
+        <EditText
+
+            android:id="@+id/etaddress"
             android:textSize="16dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="22dp"
+            android:layout_marginTop="12dp"
+            android:hint="Please choose address"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_below="@+id/tvname"
-            ></TextView>
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:background="@drawable/edittext_bg"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:editable="false"
+            android:focusable="false"
+            android:drawableEnd="@drawable/qtydropdown"
+            android:clickable="true"
+
+            tools:ignore="RtlCompat"></EditText>
+
         <TextView
-            android:background="@drawable/rippleconfirmaddress"
+            android:background="@drawable/rippleabout"
          android:layout_marginLeft="22dp"
             android:lines="1"
 
@@ -126,14 +140,14 @@ android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:textSize="18dp"
-
+android:textColor="@color/term_and_conditions"
             android:gravity="center"
-
+android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp"
-            android:layout_below="@+id/tvaddress"
+            android:layout_below="@+id/etaddress"
 
-            android:text="Change or Add Address"
+            android:text="Add Address"
             ></TextView>
     </RelativeLayout>
     <RelativeLayout

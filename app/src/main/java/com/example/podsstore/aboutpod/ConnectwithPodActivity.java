@@ -32,6 +32,7 @@ import retrofit2.Response;
 public class ConnectwithPodActivity extends AppCompatActivity {
 EditText etusername,etphone,etemail,etquery;
 TextView btnsubmit;
+    String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,10 @@ TextView btnsubmit;
 
                 }else if (TextUtils.isEmpty(etemail.getText().toString())) {
                     etemail.setError("Email Address Can't Blank!");
+
+                }
+                else if (!etemail.getText().toString().matches(regex)) {
+                    etemail.setError("Email Address is not valid!");
 
                 }
                 else if (TextUtils.isEmpty(etquery.getText().toString())) {

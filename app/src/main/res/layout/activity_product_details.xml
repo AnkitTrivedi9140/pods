@@ -101,17 +101,49 @@ android:layout_centerVertical="true"
         android:layout_height="266dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
+        android:visibility="gone"
         ></ImageView>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlslider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:padding="11dp"
+        android:layout_height="322dp">
+
+        <TextView
+
+            android:id="@+id/tvrating"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_toLeftOf="@id/tvname"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/star"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@drawable/star">
+
+        </TextView>
+    </com.daimajia.slider.library.SliderLayout>>
     </RelativeLayout>
 <RelativeLayout
     android:id="@+id/rlprice"
-    android:layout_below="@+id/rlimage"
+    android:layout_below="@+id/rlslider"
     android:layout_width="match_parent"
 android:background="@color/white"
 android:padding="8dp"
 
-    android:layout_marginTop="4dp"
-    android:layout_height="106dp">
+    android:layout_marginTop="8dp"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
@@ -133,20 +165,16 @@ android:layout_below="@+id/tvProductname"
         android:layout_height="wrap_content"
         android:text="Procuct"
         android:textSize="22dp"
-        android:textColor="@color/term_and_conditions"
+        android:textColor="#13B3A7"
+        android:textStyle="bold"
         ></TextView>
 </RelativeLayout>
 
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_below="@+id/rlprice"
-    android:id="@+id/rvreview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
     <RelativeLayout
         android:id="@+id/rldetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rvreview"
+        android:layout_below="@+id/rlprice"
 
         android:layout_marginTop="8dp"
 
@@ -225,6 +253,188 @@ android:layout_below="@+id/tvProductname"
             android:layout_marginTop="4dp"
             android:textColor="#505A63"
             android:textSize="14dp"></TextView>
+
+
+
+        <TextView
+            android:layout_below="@+id/tvfunction"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvcountrytitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Origin Country"
+            android:textColor="@color/black"
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvcountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvcountrytitle"
+
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvbrandtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvcountry"
+            android:layout_marginTop="22dp"
+            android:text="Brand"
+            android:textColor="@color/black"
+
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:id="@+id/tvbrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvbrandtitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvstanderdtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvbrand"
+            android:layout_marginTop="22dp"
+            android:text="Standards"
+            android:textColor="@color/black"
+            android:textSize="18dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvstanderd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvstanderdtitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+
+
+
+
+        <TextView
+            android:layout_below="@+id/tvstanderd"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvmanufacturetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Manufacturer"
+            android:textColor="@color/black"
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvmanufacture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvmanufacturetitle"
+
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvcertificationtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvmanufacture"
+            android:layout_marginTop="22dp"
+            android:text="Certifications"
+            android:textColor="@color/black"
+
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:id="@+id/tvcertification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvcertificationtitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvserialnotitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvcertification"
+            android:layout_marginTop="22dp"
+            android:text="Serial Number"
+            android:textColor="@color/black"
+            android:textSize="18dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvserialno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvserialnotitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+
+
+
+
+
+        <TextView
+            android:layout_below="@+id/tvserialno"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvreviewhead"
+            android:layout_marginTop="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reviews"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@color/platinum"
+            android:textSize="18dp"
+
+            android:textStyle="bold"
+            ></TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/tvreviewhead"
+            android:id="@+id/rvreview"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 </RelativeLayout>

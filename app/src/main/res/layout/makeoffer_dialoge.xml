@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/ivcut"
@@ -79,13 +81,35 @@ android:inputType="numberDecimal"
         ></EditText>
 
     <EditText
+        android:id="@+id/etaddress"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Please choose address"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/ettotalammount"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/edittext_bg"
+       android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:editable="false"
+        android:focusable="false"
+        android:drawableEnd="@drawable/qtydropdown"
+        android:clickable="true"
+
+        tools:ignore="RtlCompat"></EditText>
+
+    <EditText
         android:id="@+id/etremarks"
         android:textSize="16dp"
         android:layout_marginTop="16dp"
         android:hint="Your Remarks"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_below="@+id/ettotalammount"
+        android:layout_below="@+id/etaddress"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@drawable/edittext_bg"

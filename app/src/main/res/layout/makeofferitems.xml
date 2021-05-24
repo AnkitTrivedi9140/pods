@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="11dp"
+    app:cardCornerRadius="12dp"
+    android:layout_margin="16dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_margin="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/tvremarks"
+    android:textSize="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/tvproductnamehead"
+        android:textSize="16dp"
+        android:text="Product Name"
+        android:textStyle="bold"
+        android:layout_below="@+id/tvremarks"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_below="@+id/tvproductnamehead"
+        android:id="@+id/tvproductname"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:id="@+id/tvtotalqtyhead"
+        android:text="Total Quantity"
+       android:layout_below="@+id/tvproductname"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+
+        android:layout_below="@+id/tvtotalqtyhead"
+        android:id="@+id/tvtotalqty"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvtotalqty"
+        android:id="@+id/tvtotalamounthead"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Total Amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:id="@+id/tvtotalamount"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvtotalamounthead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tvofferstatushead"
+        android:textSize="16dp"
+        android:text="Status"
+        android:textStyle="bold"
+        android:layout_below="@+id/tvtotalamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:id="@+id/tvofferstatus"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvofferstatushead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvofferstatus"
+        android:id="@+id/tvofferdatehead"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:id="@+id/tvdate"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvofferdatehead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvdate"
+        android:id="@+id/tvaddresshead"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:id="@+id/tvaddress"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvaddresshead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

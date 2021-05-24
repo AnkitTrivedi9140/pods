@@ -29,12 +29,16 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.local.viewmodel.QuantityViewModel;
+import com.example.podsstore.data.request.NotificationRequest;
+import com.example.podsstore.data.request.PlaceOrderNotificationRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -316,6 +320,7 @@ showAlertDialog(PathHolder);
         List<PlaceOrderRequest> list = new ArrayList<>();
 
         PlaceOrderRequest r = new PlaceOrderRequest();
+       // r.setAddress(getIntent().getStringExtra("addressid").toString());
         r.setOrderid(orderid);
         r.setProductid(productid);
         r.setProductname(productname);
@@ -333,7 +338,7 @@ showAlertDialog(PathHolder);
 
         Log.e("postData", new Gson().toJson(list));
 
-        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), list)
+        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),getIntent().getStringExtra("addressid").toString(), list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -349,6 +354,7 @@ showAlertDialog(PathHolder);
                             CreateLoginUserResponse successResponse = response.body();
                            // if(successResponse.getMessage().equalsIgnoreCase()){}
                             Log.e("onSuccesseeee",successResponse.getMessage() );
+                            regNoti(orderid.toString());
                       //    Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent main = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(main);
@@ -373,7 +379,70 @@ showAlertDialog(PathHolder);
                 });
     }
 
+    @SuppressLint("CheckResult")
+    private void regNoti(String orderid) {
 
+        List<PlaceOrderNotificationRequest> list = new ArrayList<>();
+
+        PlaceOrderNotificationRequest r = new PlaceOrderNotificationRequest();
+
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+r.setOrderid("");
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().ordernoti(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                       //     Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+//                            finish();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
     @Override
     public void onSetValues(ArrayList<String> al) {
         Toast.makeText(getApplicationContext(), al.toString(), Toast.LENGTH_SHORT).show();

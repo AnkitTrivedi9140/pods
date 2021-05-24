@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
@@ -45,6 +49,7 @@ import com.example.podsstore.product.ProductListActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -56,10 +61,14 @@ import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 ImageView ivproduct,ivtoggle,ivcart;
-TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
-    TextView logInBtn,tvbuynow;
+TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanufacture,
+        tvmanufacturetitle,tvstanderd,tvstanderdtitle,tvbrand,tvbrandtitle,tvcountry,
+        tvcountrytitle,tvreviewhead,tvProductname,tvProductprice,tvdetails,tvfeature
+        ,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
+    TextView logInBtn,tvbuynow,tvrating;
     RecyclerView recyclerView;
     ReviewAdapter productListAdapter;
+    SliderLayout slider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,37 @@ TextView tvProductname,tvProductprice,tvdetails,tvfeature,tvfunction,tvcartsize,
         PreferenceManagerss.init(ProductDetailsActivity.this);
 
         productListAdapter = new ReviewAdapter(ProductDetailsActivity.this);
+
+        slider=findViewById(R.id.slider);
+
+
+        tvserialno=findViewById(R.id.tvserialno);
+
+        tvserialnotitle=findViewById(R.id.tvserialnotitle);
+
+        tvcertificationtitle=findViewById(R.id.tvcertificationtitle);
+
+        tvcertification=findViewById(R.id.tvcertification);
+
+
+        tvmanufacture=findViewById(R.id.tvmanufacture);
+
+        tvmanufacturetitle=findViewById(R.id.tvmanufacturetitle);
+
+        tvstanderd=findViewById(R.id.tvstanderd);
+
+        tvstanderdtitle=findViewById(R.id.tvstanderdtitle);
+
+        tvbrand=findViewById(R.id.tvbrand);
+
+        tvbrandtitle=findViewById(R.id.tvbrandtitle);
+
+        tvcountry=findViewById(R.id.tvcountry);
+        tvcountrytitle=findViewById(R.id.tvcountrytitle);
+
+
+        tvrating=findViewById(R.id.tvrating);
+        tvreviewhead=findViewById(R.id.tvreviewhead);
         ivproduct=findViewById(R.id.ivproduct);
         recyclerView=findViewById(R.id.rvreview);
         ivtoggle=findViewById(R.id.ivtoggle);
@@ -159,7 +199,9 @@ loadDatacart();
     @Override
     protected void onResume() {
         super.onResume();
-        //loadData();
+        if (slider != null){
+            slider.startAutoCycle();
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -247,19 +289,98 @@ loadDatacart();
                 Log.e("getMaterialMasters",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
                     List<ProductResponse> list = response.body();
-
+                    uploadbanner(list);
                     for (int i = 0; i < list.size(); i++) {
                         Log.e("onResponses", list.get(i).getImageurl());
-                        Glide.with(getApplicationContext())
-                                .load(list.get(i).getImageurl().trim().toString())
-                                .into(ivproduct);
+
+
+//                        Glide.with(getApplicationContext())
+//                                .load(list.get(i).getImageurl().trim().toString())
+//                                .into(ivproduct);
+
                         tvProductname.setText(list.get(i).getProdtype());
                         tvProductprice.setText("$ "+list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
 
+                        tvcertification.setText(list.get(i).getCertifications().toString());
+                        tvcountry.setText(list.get(i).getCountry().toString());
+                        tvstanderd.setText(list.get(i).getStandards().toString());
+                        tvserialno.setText(list.get(i).getSerialno().toString());
+                        tvmanufacture.setText(list.get(i).getManufacturer().toString());
+                        tvbrand.setText(list.get(i).getBrand().toString());
+
+
+
                         getreview(list.get(i).getId().toString());
+
+
+                        if(tvcountry.getText().toString().length()>2){
+                            tvcountrytitle.setVisibility(View.VISIBLE);
+                            tvcountry.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvcountrytitle.setVisibility(View.GONE);
+                            tvcountry.setVisibility(View.GONE);
+                        }
+
+
+                        if(tvbrand.getText().toString().length()>2){
+                            tvbrandtitle.setVisibility(View.VISIBLE);
+                            tvbrand.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvbrandtitle.setVisibility(View.GONE);
+                            tvbrand.setVisibility(View.GONE);
+                        }
+
+
+                        if(tvstanderd.getText().toString().length()>2){
+                            tvstanderdtitle.setVisibility(View.VISIBLE);
+                            tvstanderd.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvstanderd.setVisibility(View.GONE);
+                            tvstanderdtitle.setVisibility(View.GONE);
+                        }
+
+
+                        if(tvmanufacture.getText().toString().length()>2){
+                            tvmanufacturetitle.setVisibility(View.VISIBLE);
+                            tvmanufacture.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvmanufacture.setVisibility(View.GONE);
+                            tvmanufacturetitle.setVisibility(View.GONE);
+                        }
+
+
+
+                        if(tvcertification.getText().toString().length()>2){
+                            tvcertificationtitle.setVisibility(View.VISIBLE);
+                            tvcertification.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvcertification.setVisibility(View.GONE);
+                            tvcertificationtitle.setVisibility(View.GONE);
+                        }
+
+                        if(tvserialno.getText().toString().length()>2){
+                            tvserialno.setVisibility(View.VISIBLE);
+                            tvserialnotitle.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvserialno.setVisibility(View.GONE);
+                            tvserialnotitle.setVisibility(View.GONE);
+                        }
+
+
+
+
+
+
+
 
                         if(tvfunction.getText().toString().length()>4){
                             tvfunctiontitle.setVisibility(View.VISIBLE);
@@ -335,6 +456,51 @@ loadDatacart();
             }
         });
     }
+
+    public void uploadbanner(List<ProductResponse> list)
+    {
+       //  Hash_file_maps = new HashMap<String, String>();
+       // Hash_file_maps=Helper.bannermap;
+        ArrayList<String> sliderImages = new ArrayList<>();
+
+        for (ProductResponse name : list){
+
+            sliderImages.add(name.getImageurl());
+            sliderImages.add(name.getImageurl1());
+            sliderImages.add(name.getImageurl2());
+            sliderImages.add(name.getImageurl3());
+            sliderImages.add(name.getImageurl4());
+        }
+
+
+        for (String s : sliderImages) {
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+            sliderView.image(s);
+            slider.addSlider(sliderView);
+        }
+
+        slider.movePrevPosition(false);
+        slider.moveNextPosition(false);
+        slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        slider.setCustomAnimation(new DescriptionAnimation());
+
+
+
+        slider.getPagerIndicator().setDefaultIndicatorColor(Color.parseColor("#01309A"), Color.parseColor("#cecdcd"));
+       // slider.setPresetTransformer(SliderLayout.Transformer.Default);
+        //slider.setPresetIndicator(com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom);
+        slider.setDuration(6000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (slider != null){
+            slider.startAutoCycle();
+        }
+    }
+
     @SuppressLint("CheckResult")
     private void smallCarton(Long prodid,String prodname,Long price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
@@ -557,6 +723,22 @@ loadDatacart();
                             List<ReviewResponse> list = response.body();
                             Log.e("getProductMasters", String.valueOf(list.toString()));
                             productListAdapter.addAll(list);
+                            Double totalrating=0.0;
+                            Double averate=0.0;
+                            for(int i=0;i<list.size();i++){
+                                totalrating=totalrating+Double.valueOf(list.get(i).getRating().toString());
+                            }
+                            averate=totalrating/list.size();
+                            tvrating.setText(averate.toString());
+
+                            if(list.isEmpty()){
+                                tvrating.setVisibility(View.GONE);
+                                tvreviewhead.setVisibility(View.GONE);
+                            }else {
+                                tvreviewhead.setVisibility(View.VISIBLE);
+                                tvrating.setVisibility(View.VISIBLE);
+                            }
+
 
                         } else {
 

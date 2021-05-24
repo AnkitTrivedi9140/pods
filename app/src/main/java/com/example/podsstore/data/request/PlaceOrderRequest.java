@@ -7,6 +7,9 @@ public class PlaceOrderRequest {
     @SerializedName("orderId")
     private String orderid;
 
+    @SerializedName("addressId")
+    private String address;
+
     @SerializedName("productId")
     private String productid;
 
@@ -24,6 +27,14 @@ public class PlaceOrderRequest {
 
     @SerializedName("subTotal")
     private String subtotal;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getOrderid() {
         return orderid;
@@ -85,6 +96,7 @@ public class PlaceOrderRequest {
     public String toString() {
         return "PlaceOrderRequest{" +
                 "orderid='" + orderid + '\'' +
+                ", address='" + address + '\'' +
                 ", productid='" + productid + '\'' +
                 ", productname='" + productname + '\'' +
                 ", productimage='" + productimage + '\'' +

@@ -9,6 +9,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.addtocart.AddToCartActivity;
+import com.example.podsstore.addtocart.AddressPopupAdapter;
 import com.example.podsstore.addtocart.MyListDataQty;
 import com.example.podsstore.addtocart.PaymentActivity;
 import com.example.podsstore.addtocart.QtyListAdapter;
@@ -29,7 +33,9 @@ import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtoCartWithQty;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.QtyRequest;
+import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -52,8 +58,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BuyNowActivity extends AppCompatActivity {
-    ImageView ivproduct, ivtoggle, ivcart, ivgo;
-    TextView tvProductname, tvProductprice, tvdetails, tvfeature, tvfunction, tvcartsize, tvdetailtitle, tvfeaturetitle, tvfunctiontitle;
+    ImageView ivproduct, ivtoggle, ivcart, ivgo,ivgos;
+    TextView tvProductpricetotal,tvProductname, tvProductprice, tvdetails, tvfeature, tvfunction, tvcartsize, tvdetailtitle, tvfeaturetitle, tvfunctiontitle;
     TextView logInBtn, tvbuynow;
 
     EditText tvqtybtn;
@@ -65,7 +71,11 @@ public class BuyNowActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     int counter = 1;
     String prodid;
-
+    AlertDialog alertsss;
+    EditText etaddress;
+    String addressid;
+    String productorice;
+    RelativeLayout tvmakeoffer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +83,16 @@ public class BuyNowActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         PreferenceManagerss.init(BuyNowActivity.this);
         ivproduct = findViewById(R.id.ivproduct);
+        tvmakeoffer = findViewById(R.id.tvmakeoffer);
         ivgo = findViewById(R.id.ivgo);
+        ivgos = findViewById(R.id.ivgos);
         tvqtybtn = findViewById(R.id.tvqtybtn);
         ivtoggle = findViewById(R.id.ivtoggle);
         ivcart = findViewById(R.id.ivcart);
         tvcartsize = findViewById(R.id.tvcartsize);
         tvProductname = findViewById(R.id.tvProductname);
         logInBtn = findViewById(R.id.logInBtn);
-
+        tvProductpricetotal=findViewById(R.id.tvProductpricetotal);
         tvbuynow = findViewById(R.id.tvsignin);
         tvProductprice = findViewById(R.id.tvProductprice);
         tvdetails = findViewById(R.id.tvdetails);
@@ -132,6 +144,7 @@ public class BuyNowActivity extends AppCompatActivity {
             }
         });
 
+
         more.setOnClickListener(v -> {
             counter = counter + 1;
 
@@ -166,7 +179,28 @@ public class BuyNowActivity extends AppCompatActivity {
 
         //  tvtotaltxt.setText(String.valueOf(totalPrice));
         //  Toast.makeText(getApplicationContext(),t
+        tvqtybtn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Double v1 = Double.parseDouble(!tvqtybtn.getText().toString().isEmpty() ?
+                        tvqtybtn.getText().toString() : "0");
+                Double v2 = Double.parseDouble(!productorice.isEmpty() ?
+                       productorice : "0");
+                Double value = v1 * v2;
+                //ettotalamount.setText(value.toString());
+                tvProductpricetotal.setText(value.toString());
+            }
+        });
 
         loadData();
     }
@@ -176,6 +210,289 @@ public class BuyNowActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+    private void showAlertDialog(String prodtype,String prodid) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(BuyNowActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.makeoffer_dialoge, null);
+
+
+        alertDialog.setView(customLayout);
+        TextView  btnsave = (TextView) customLayout.findViewById(R.id.tvsavepwd);
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        EditText etprodid =customLayout.findViewById(R.id.etpassword);
+        EditText etqty =customLayout.findViewById(R.id.etqty);
+        EditText etofferamount =customLayout.findViewById(R.id.etofferammount);
+        EditText ettotalamount =customLayout.findViewById(R.id.ettotalammount);
+        etaddress =customLayout.findViewById(R.id.etaddress);
+        EditText etremarka =customLayout.findViewById(R.id.etremarks);
+
+        etprodid.setText(prodid);
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        etaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialogaddress();
+            }
+        });
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+
+
+
+        etqty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Double v1 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
+                        etqty.getText().toString() : "0");
+                Double v2 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
+                        etofferamount.getText().toString() : "0");
+                Double value = v1 * v2;
+                ettotalamount.setText(value.toString());
+            }
+        });
+
+
+        etofferamount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Double v1 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
+                        etofferamount.getText().toString() : "0");
+
+                Double v2 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
+                        etqty.getText().toString() : "0");
+                Double value = v1 * v2;
+                ettotalamount.setText(value.toString());
+            }
+        });
+
+
+
+
+
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String prodid = etprodid.getText().toString().trim();
+                String qty = etqty.getText().toString().trim();
+
+
+                String offer = etofferamount.getText().toString().trim();
+                String total = ettotalamount.getText().toString().trim();
+
+                String remarks = etremarka.getText().toString().trim();
+                String address = etaddress.getText().toString().trim();
+/*Integer aaa=Integer.valueOf(qty)*Integer.valueOf(offer);
+ettotalamount.setText(aaa.toString());*/
+
+/*
+
+                String mynum1=etqty.getText().toString();
+                float mnum1= Float.parseFloat(mynum1);
+
+                String mynum2=etofferamount.getText().toString();
+                float mnum2= Float.parseFloat(mynum2);
+
+                float res=mnum1*mnum2;
+                etremarka.setText(String.valueOf(res));
+*/
+
+
+
+                if (TextUtils.isEmpty(prodid)) {
+                    etprodid.setError("product name Can't Blank!");
+                }else if(TextUtils.isEmpty(qty)){
+                    etqty.setError("Quantity Can't Blank!");
+                }
+                else if(qty.equalsIgnoreCase("0")){
+                    etqty.setError("Quantity is not correct!");
+                }
+                else if(offer.equalsIgnoreCase("0")){
+                    etofferamount.setError("Amount is not correct!");
+                }
+                else if(TextUtils.isEmpty(offer)){
+                    etofferamount.setError("offer amount Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(total)){
+                    ettotalamount.setError("total amount Can't Blank!");
+                }
+                else if(TextUtils.isEmpty(address)){
+                    etaddress.setError("Please choose address!");
+                }
+                else if(TextUtils.isEmpty(remarks)){
+                    etremarka.setError("remarks Can't Blank!");
+                }
+
+                //   loadData(et.getText().toString().trim());
+                else {
+                    makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.getText().toString(),"288",etqty.getText().toString(),etremarka.getText().toString());
+
+                    alert.dismiss();
+                }
+            }
+        });
+        alert.show();
+    }
+    @SuppressLint("CheckResult")
+    private void makeoffer(String prodid,String actualammount,String offeramount,String amountperunit,String quantitydetails,String remarks) {
+        // binding.progressbar.setVisibility(View.VISIBLE);
+        List<MakeOfferRequest> list = new ArrayList<>();
+
+        MakeOfferRequest r = new MakeOfferRequest();
+
+        r.setProductid(Long.valueOf(prodid));
+        r.setActualamount(Double.valueOf(actualammount));
+        r.setOfferamount(Double.valueOf(offeramount));
+        r.setAmountperunit(Integer.parseInt( amountperunit));
+        r.setQuantitydetails(Integer.valueOf(quantitydetails));
+        r.setRemarks(remarks);
+        list.add(r);
+
+
+
+
+        Log.e("postdata", new Gson().toJson(r));
+
+        ApiClient.getApiClient(). makeoffer(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),addressid,r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Some problems getting from server", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        // binding.progressbar.setVisibility(View.GONE);
+                        // NetworkHelper.handleNetworkError(e, mContext);
+                    }
+                });
+    }
+
+
+    private void showAlertDialogaddress() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(BuyNowActivity.this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.makeofferaddressdialog, null);
+        AddressPopupAdapter addressAdapter;
+        ImageView cut=customLayout.findViewById(R.id.ivcut);
+        RecyclerView addressrv=customLayout.findViewById(R.id.addressrv);
+        alertDialog.setView(customLayout);
+        alertsss = alertDialog.create();
+        alertsss.setCanceledOnTouchOutside(true);
+
+
+        addressAdapter = new AddressPopupAdapter(BuyNowActivity.this);
+
+        addressrv.setLayoutManager(new LinearLayoutManager(BuyNowActivity.this));
+//      recyclerView.setEmptyView(binding.emptyView);
+        addressAdapter.setAdapterListener(adapterListeneraddress);
+
+        addressrv.setAdapter(addressAdapter);
+
+        cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertsss.dismiss();
+            }
+        });
+
+        ApiClient.getApiClient().getalladdress(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<AddressResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<AddressResponse>> response) {
+                        // binding.progress.setVisibility(View.GONE);
+
+                        if (response.isSuccessful()) {
+                            List<AddressResponse> list = response.body();
+                            Log.e("getProductMasters", String.valueOf(list.toString()));
+                            addressAdapter.addAll(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+
+                    }
+                });
+
+
+        alertsss.show();
+    }
+    private AddressPopupAdapter.AdapterListener adapterListeneraddress = data -> {
+
+        //deletecart(String.valueOf(data.getAddressid().toString()));
+//Toast.makeText(getApplicationContext(),data.getAddressid().toString(),Toast.LENGTH_SHORT).show();
+        etaddress.setText(data.getUseraddressline1()+","+data.getUseraddressline1()+"("+data.getUserzipcode()+")");
+        addressid=data.getAddressid().toString();
+        alertsss.dismiss();
+    };
+
+
+
+
 
     private void showAlertDialogqty(String productid) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(BuyNowActivity.this);
@@ -344,8 +661,8 @@ public class BuyNowActivity extends AppCompatActivity {
 
                             QtyResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//Intent i=new Intent(BuyNowActivity.this,BuyNowActivity.class);
-//startActivity(i);
+Intent i=new Intent(BuyNowActivity.this,BuyNowActivity.class);
+startActivity(i);
 
 
                             tvqtybtn.setCursorVisible(false);
@@ -406,11 +723,19 @@ public class BuyNowActivity extends AppCompatActivity {
                         prodid = list.get(i).getId().toString();
 
                         tvProductname.setText(list.get(i).getProdtype());
-                        tvProductprice.setText(list.get(i).getPrice());
+                        tvProductprice.setText("$ "+list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
-
+                       // tvqtybtn.setText(list.get(i).getq);
+                        productorice=list.get(i).getPrice();
+                        int finalI1 = i;
+                        tvmakeoffer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showAlertDialog(String.valueOf(list.get(finalI1).getId().toString()),list.get(finalI1).getProdtype().toString());
+                            }
+                        });
                         if (tvfunction.getText().toString().length() > 4) {
                             tvfunctiontitle.setVisibility(View.VISIBLE);
                             tvfunction.setVisibility(View.VISIBLE);
@@ -466,10 +791,10 @@ public class BuyNowActivity extends AppCompatActivity {
 
                             }
                         });
-                        ivgo.setOnClickListener(new View.OnClickListener() {
+                        ivgos.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
                             }
                         });
                         tvqtybtn.setOnClickListener(new View.OnClickListener() {
@@ -530,7 +855,7 @@ public class BuyNowActivity extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             // loadDatacart();
-                            addqty(tvqtybtn.getText().toString(), String.valueOf(prodid));
+                         //   addqty(tvqtybtn.getText().toString(), String.valueOf(prodid));
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
