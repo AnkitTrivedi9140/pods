@@ -60,13 +60,13 @@ public class OrderInfoResponse {
     @SerializedName("totalprice")
     private String totalprice;
     @SerializedName("addressDetails")
-    public Address orderaddress  ;
+    private String orderaddress  ;
 
-    public Address getOrderaddress() {
+    public String getOrderaddress() {
         return orderaddress;
     }
 
-    public void setOrderaddress(Address orderaddress) {
+    public void setOrderaddress(String orderaddress) {
         this.orderaddress = orderaddress;
     }
 

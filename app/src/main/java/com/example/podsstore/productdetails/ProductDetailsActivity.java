@@ -307,7 +307,12 @@ loadDatacart();
                         tvcertification.setText(list.get(i).getCertifications().toString());
                         tvcountry.setText(list.get(i).getCountry().toString());
                         tvstanderd.setText(list.get(i).getStandards().toString());
-                        tvserialno.setText(list.get(i).getSerialno().toString());
+                        if(list.get(i).getSerialno()==null){
+                                }else{
+                            tvserialno.setText(list.get(i).getSerialno().toString());
+
+                        }
+
                         tvmanufacture.setText(list.get(i).getManufacturer().toString());
                         tvbrand.setText(list.get(i).getBrand().toString());
 

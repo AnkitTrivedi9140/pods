@@ -9,6 +9,17 @@ public class ReturnRequest {
 
     @SerializedName("orderId")
     private String orderid;
+    @SerializedName("remark")
+    private String remarks;
+
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getOrderstatus() {
         return orderstatus;
@@ -31,6 +42,7 @@ public class ReturnRequest {
         return "ReturnRequest{" +
                 "orderstatus='" + orderstatus + '\'' +
                 ", orderid='" + orderid + '\'' +
+                ", remarks='" + remarks + '\'' +
                 '}';
     }
 }

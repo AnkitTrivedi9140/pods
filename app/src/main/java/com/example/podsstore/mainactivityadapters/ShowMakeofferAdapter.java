@@ -15,13 +15,15 @@ import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.MakeOfferResponse;
+import com.example.podsstore.product.ProductListAdapter;
 import com.example.podsstore.wishlist.WishListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdapter.MyViewHolder> {
-    private AdapterListener adapterListener;
+
+    private ShowMakeofferAdapter. AdapterListener adapterListener;
     private List<MakeOfferResponse> productResponseList;
     private Context context;
 
@@ -37,7 +39,7 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
+        public TextView tvviewofferdetails,tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
@@ -45,6 +47,7 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
         public MyViewHolder(View view) {
             super(view);
             tvremarks = (TextView) view.findViewById(R.id.tvremarks);
+            tvviewofferdetails = (TextView) view.findViewById(R.id.tvviewofferdetails);
             tvproductname = (TextView) view.findViewById(R.id.tvproductname);
             tvtotalqty = (TextView) view.findViewById(R.id.tvtotalqty);
 
@@ -53,7 +56,12 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
             tvdate = view.findViewById(R.id.tvdate);
             tvaddress = view.findViewById(R.id.tvaddress);
 
+            tvviewofferdetails.setOnClickListener(v -> {
 
+                if (adapterListener != null) {
+                    adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                }
+            });
         }
     }
 
@@ -85,13 +93,19 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     @Override
     public void onBindViewHolder(ShowMakeofferAdapter.MyViewHolder holder, int position) {
         MakeOfferResponse cartResponse = productResponseList.get(position);
-        holder.tvproductname.setText(cartResponse.getProductname());
-        holder.tvdate.setText(cartResponse.getOffercreatedat());
-        holder.tvaddress.setText(cartResponse.getOfferaddress().getAddressline1()+cartResponse.getOfferaddress().getAddressline2()+"\n"+cartResponse.getOfferaddress().getUsercountry()+"("+cartResponse.getOfferaddress().getZipcode()+")");
-        holder.tvofferstatus.setText("pending");
-        holder.tvremarks.setText(cartResponse.getRemarks());
-        holder.tvtotalqty.setText(cartResponse.getQuantitydetails());
-        holder.tvtotalamount.setText(cartResponse.getActualamount());
+        if(cartResponse!=null){
+            holder.tvproductname.setText(cartResponse.getProductname());
+            holder.tvdate.setText(cartResponse.getOffercreatedat());
+
+              //  holder.tvaddress.setText(cartResponse.getOfferaddress().toString());
+
+
+            holder.tvofferstatus.setText("pending");
+            holder.tvremarks.setText(cartResponse.getRemarks());
+            holder.tvtotalqty.setText(cartResponse.getQuantitydetails());
+            holder.tvtotalamount.setText(cartResponse.getActualamount());
+
+        }
 
 
         // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();

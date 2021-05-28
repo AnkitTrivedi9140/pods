@@ -158,6 +158,18 @@ public interface NetworkInterface {
     Call<CreateLoginUserResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
                                           @Part("userEmailId") RequestBody  userEmailId );
 
+    //http://216.10.243.60:4067/PodsStoreAPI/orderRest/uploadProofOfReturn?userEmailId=ankittrivedi9140@gmail.com&orderId=
+
+    @Multipart
+    @POST("imageRest/uploadProfilePhoto")
+    Call<CreateLoginUserResponse> uploadImageproofoffunds(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
+                                              @Part("userEmailId") RequestBody  userEmailId );
+
+    @Multipart
+    @POST("orderRest/uploadProofOfReturn")
+    Call<CreateLoginUserResponse> uploadImagereturn(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("orderId") String orderId, @Part MultipartBody.Part file
+                                            );
+
 
     @POST("cartRest/getCartDetails")
     Call<List<CartResponse>>getcartdetails(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);

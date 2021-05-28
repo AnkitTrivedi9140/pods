@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".drower.TermsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Pods Health Global Privacy Policy"
+                android:textColor="@color/black"
+                android:textSize="20dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health respects your right to privacy. This policy summarizes what personal information we may collect, how we may use this information, and other important topics relating to your privacy and data protection.
+It is Pods Health policy to comply with all applicable privacy and data protection laws. This commitment reflects the value we place on earning and keeping the trust of our customers, business partners and others who share their personal information with us.
+This Policy applies to all Internet sites and mobile applications operated by or on behalf of Pods Health and includes Pods Health entities worldwide (each a “Pods Health Internet Site or App”). It also applies to personal information Pods Health may otherwise collect: (i) through our products and services; (ii) when you interact with us by means other than a Pods Health Internet Site or App, for example, in person, by telephone, or at a trade show or training; and (iii) from our customers, distributors, suppliers, vendors, and other business partners (collectively “Business Partners”).
+However, different Pods Health Internet Sites, Apps, products, and services have different purposes and features. If additional or different disclosures are required for a specific Pods Health Internet Site, App, product, or service, then we provide those disclosures separately on, or with, the relevant Internet Site, App, product, or service. Each such specific privacy disclosure, policy, or statement (“Specific Privacy Statement”) supplements and amends this Policy
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="General Principles of Pods Health’s Collection, Use and Disclosure of Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="To the extent required by applicable law, whenever Pods Health collects personal information, Pods Health will:
+
+\n •	provide timely and appropriate notice to you about our data practices;
+\n •	collect your personal information only for specified and legitimate purposes. The information we collect will be relevant, adequate and not excessive for the purposes for which it is collected;
+\n •	process your personal information in a manner consistent with the purposes for which it was originally collected or to which you have subsequently consented;
+\n •	take commercially reasonable steps to ensure that your personal information is reliable for its intended use, accurate, complete, and, where necessary, kept up-to-date;
+\n •	not use your personal information for direct marketing purposes without giving you an opportunity to “opt-out”; and
+\n •	take appropriate measures, by contract or otherwise, to provide adequate protection for personal information that is disclosed to a third party or transferred to another country, including transfers within Pods Health.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Personal Information Pods Health Collects"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health collects the following types of personal information:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="
+•	Information You Provide
+"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health collects personal information you provide us, which may include: (i) contact information, such as your name, company name, job title, address, e-mail address, and phone number; (ii) additional information about you to help us get to know you better, such as your gender, age, date of birth, nationality, professional associations and registration numbers, information about how you use our products, and demographic information; (iii) comments, questions, requests and orders you may make; (iv) financial information needed to process payments if you make purchases, such as credit card or account information or tax identification number; (v) log-in information, including, if applicable, social media account information for login purposes; and (vi) information about your preferences, such as your preferred methods of communication and product types in which you are interested."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="•	Information Automatically Gathered from Your Device"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Device and browser information. Pods Health may collect technical information about your device, such as device type, browser type, IP address, operating system, and device identifier. Pods Health collects this information automatically from your device and web browser through cookies and similar technologies.
+Information about how you interact with us. Pods Health may collect technical data about your usage of Pods Health Internet Sites and Apps and how you interact with our digital advertisements and promotions, such as content viewed or downloaded, features used, links clicked, Pods Health promotional emails opened, and dates and times of interactions. Pods Health collects this information using cookies and similar technologies.
+Location information. Pods Health may collect location information, including precise real-time location information from your device and imprecise location information derived from, for example, your IP address or postal code. Pods Health Apps will NOT access precise-real time location information from your device unless you grant permission to do so.
+"    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="•	Cookies and Similar Technologies:"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="A cookie is a file of information placed on your device when you visit a website. Cookies and similar technologies can enhance your user experience by saving your preferences, personalizing your online experience, holding items in your shopping cart, and sometimes providing you with advertising, which is tailored, to your interests.
+Pods Health Internet Sites use session cookies. A session cookie does not identify you personally and expires after you close your browser. For example, when you use the Pods Health Product Catalog, we place a session cookie to note what pages you have viewed. We can use this information to provide you recommendations of other products that may be of interest.
+Pods Health Internet Sites also use persistent cookies. These cookies do not expire when you close your browser. Persistent cookies stay on your computer until you delete them or they expire. By assigning your computer a unique identifier, we are able to create a database of your previous choices and preferences which can be provided by us automatically, saving you time and effort on future visits. For example, after you make a purchase, if you decide to make another purchase, your shipping address may have been retained and will only need to be confirmed.
+Certain countries require your consent to the use of cookies when you visit Pods Health Internet Sites. If you access a Pods Health Internet Site for one of these countries, you will be presented with information regarding your options, including the option to accept or reject certain categories of cookies. You will be able to change these settings on subsequent visits. Please note that you will not be able to opt out of receiving certain cookies that are strictly necessary for the delivery of a service requested by you.
+At any time when visiting a Pods Health Internet Site for one of these countries, clicking on the Cookie Preferences link at the bottom of each page allows you to access information on cookies and change your settings.
+Although you are not required to accept cookies when you visit a Pods Health Internet Site, you may be unable to use all of the functionality of the site if you reject certain cookies.
+In addition, your browser may allow you to adjust settings to accept or reject cookies, or to alert you when a cookie is placed on your computer.
+Analytics and Advertising. Pods Health uses third-party analytics services to better understand how users engage with Pods Health Internet Sites and Apps, including services provided by Google and Adobe. Please use the following links for more information about how Google and Adobe collect and use data when you visit their partners' websites or apps:
+www.google.com/policies/privacy/partners/
+
+Pods Health also uses third-party advertising services to provide advertisements for Pods Health products or services that may be of interest to you when you visit websites or other online services.
+Pods Health allows selected third parties, including these analytics and advertising services, to place cookies on our Internet Sites. These third parties may collect information about your online activities over time and across third-party websites.
+These third parties may be members of industry self-regulatory groups such as the Network Advertising Initiative (NAI) and Digital Advertising Alliance (DAA). The websites for these groups provide more information on interest-based online advertising and how to opt out of receiving interest-based online ads from participating companies.
+Do Not Track Browser Settings. Some browsers may transmit Do Not Track (DNT) signals to the websites you visit. Because there is not common agreement about how to interpret DNT signals, Pods Health currently does not take action in response to them.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="•	Information from Business Partners and other Third Parties"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health collects personal information through our Business Partners. This information may include contact information, such as name, company name, job title, address, e-mail address, and phone number.
+Pods Health may also obtain personal information from other third-party sources, including publicly and commercially available sources. We may combine the information we receive from our Business Partners and other third-party sources with information that we collect from you or your device, as described above.
+You have choices about the personal information you provide Pods Health. You may choose not to provide information that we request, but if you do so, we may not be able to provide you a relevant service or a particular feature for a Pods Health Internet Site, App, or product.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="How Pods Health Uses Your Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health may use your personal information to:
+Develop and manage our relationships with you and our Business Partners. This may include: (i) delivering services or carrying out transactions that you or our Business Partners have requested; (ii) providing information about Pods Health products, services, and transactions, and advertisements, that may be of interest to you; (iii) providing you and our Business Partners a more consistent experience in interacting with Pods Health, including by learning more about you and how you use and interact with Pods Health Internet Sites, Apps, products, and services; and (iv) planning, managing, and performing under our contractual relationships with our Business Partners.
+Communicate with you or your company. This may include: (i) informing you of Pods Health products, services, and promotional activities that may be of interest to you or your company; (ii) providing information about relevant Pods Health products, services, and transactions, including, for example, pricing information, technical data, invoice, shipping, or production information, warranty or recall information, or information about product or service improvements; (iii) responding to questions or inquiries that you make, including customer service requests; and (iv) inviting you to participate in, or informing you of the results of, customer satisfaction or market research surveys.
+Provide and improve our Internet Sites, Apps, products, and services. This may include: (i) customizing them to your preferences or interests, making them more compatible with your technology, or otherwise making them easier to use; (ii) maintaining the security of and otherwise protecting them; and (iii) and developing new Pods Health Internet Sites, Apps, products and services.
+Address legal issues. This may include: (i) complying with our obligations to retain certain business records for minimum retention periods; (ii) establishing, exercising, or defending legal claims; (iii) complying with laws, regulations, court orders, or other legal process; (iv) detecting, preventing, and responding to fraud, intellectual property infringement, violation of our contracts or agreements, violations of law, or other misuse of Pods Health Internet Sites, Apps, products or services; and (v) protecting Pods Health’s rights or property, or yours or others’ health, safety, welfare, rights, or property.
+Pods Health may also use your personal information for other uses consistent with the context in which the information was collected or with your consent.
+Pods Health may anonymize or aggregate any of the information we collect and use it for any purpose, including for research and product-development purposes. Such information will not identify you individually.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="When Pods Health May Share Your Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health will not disclose your personal information except as described here:
+
+\n•	Pods Health may share your personal information with other Pods Health entities, including those in different countries. When we do so, these other Pods Health entities will use your information in a manner consistent with this Policy, any applicable Specific Privacy Statements, and all applicable privacy and data protection laws.
+\n•	Pods Health may also share your personal information with third parties we hire to perform support services for us. These third parties are required to use the personal information we share with them only to perform services on our behalf and to treat your personal information in compliance with all applicable privacy and data protection laws.
+\n•	In some cases, Pods Health may share your personal information with third parties who partner with us to provide products and services to our customers, such as distributors. If so, we will require our Business Partners to use that information in a manner consistent with this Policy, any applicable Specific Privacy Statements, and all applicable privacy and data protection laws.
+\n•	Pods Health may share your personal information with third parties when we have a good faith belief that disclosure is necessary: (i) to comply with a law, regulation, court order, or other legal process; (ii) to detect, prevent, and respond to fraud, intellectual property infringement, violation of our contracts or agreements, violation of law, or other misuse of Pods Health Internet Sites, Apps, products or services; (iii) to protect Pods Health rights or property or yours or others’ health, safety, welfare, rights, or property; or (iv) under similar circumstances. If such an event occurs, we will take appropriate steps to protect your personal information.
+\n•	Pods Health may share your personal information with third parties in connection with the sale, purchase, merger, reorganization, liquidation or dissolution of Pods Health or a Pods Health business unit, or under similar circumstances. If such an event occurs, we will take appropriate steps to protect your personal information.
+\n•	Pods Health may share your information with your permission or at your request
+Pods Health may share anonymized or aggregated information internally and with third parties for any purpose. Such information will not identify you individually.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Security of Your Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Your personal information will generally be stored in Pods Health databases or databases maintained by our service providers. Many of these databases are stored on servers located in the United States. Pods Health takes appropriate measures, by contract or otherwise, to provide adequate protection for personal information that is disclosed to a third party or transferred to another country, including transfers within Pods Health.
+Pods Health maintains reasonable safeguards to protect the confidentiality, security and integrity of your personal information. Although we use security measures to help protect your personal information against unauthorized disclosure, misuse, or alteration, as is the case with all computer networks linked to the Internet, we cannot guarantee the security of information provided over the Internet and will not be responsible for breaches of security beyond our reasonable control.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Links to Third Party Internet Sites and Plugins"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health Internet Sites and Apps may contain links to websites or mobile apps that are not operated by Pods Health and plugins from social media platforms and other third parties. An example of a social media plugin is the Facebook “Like” button. We provide these links and plugins as a service and do not imply any endorsement of the activities or content of the related websites, apps, or social media platforms, nor any association with their operators. To learn about the information collected by these third-party websites, apps, and plugins, please visit their privacy policies. We encourage you to review the privacy policies for the websites, apps, and social media platforms you visit before using them or providing personal information."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Access to Your Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="You may review, correct and update personal information you provide to us by using the feedback mechanisms provided at a particular Pods Health Internet Site or App, by clicking on ………………….. or by writing to us at:
+Pods Health
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Retention of Your Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="How long we keep your personal information will vary and will depend on the purpose and use of information collected. There are legal requirements that we keep some types of data for specific periods. Otherwise, we will retain it for no longer than is necessary for the purposes for which the data was collected."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Children"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Most Pods Health Internet Sites and Apps are not intended for children under 13 years of age. Pods Health will not knowingly solicit or collect personal information from or about children under 13, or the relevant minimum age under applicable local legal requirements, except as permitted under applicable law."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Pods Health B2B Services"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Some Pods Health products, services, Internet Sites, and Apps are intended for use by our Business Partners, including our business customers (“Pods Health B2B Services”), and your use of them is administered by your company. In such cases, authorized personnel at your company may have access to your personal information collected by these Pods Health B2B Services, and your company may have policies applicable to your use of them. Pods Health is not responsible for our Business Partners’ policies and practices related to data privacy and security, which may be different from this Privacy Policy and any applicable Specific Privacy Statements. If your company is administering your use of a Pods Health B2B Service, please contact your company with any privacy questions related to your use of that Pods Health B2B Service. If there is a conflict between this Policy and an agreement between Pods Health and its Business Partner for a Pods Health B2B Service, then the agreement between Pods Health and its Business Partner will control.
+
+
+
+Additional Information for EU Residents
+Data controller and contact information
+\n •	The controller for personal data collected under this Privacy Policy is the relevant Pods Health entity in your country, and, as applicable, Pods Health , Compliance and Business Conduct, Pods address
+\n •	If you are using Pods Health B2B Services administered by your company, your company may be the controller for personal data collected by those Pods Health B2B Services. Please contact your company for more information.
+\n •	You can reach Pods Health’s European data protection officer at: Attn.  Contact Person, Address, Contact number and Email ID You can find the contact details of the Pods Health entity in your country in the Pods Health Help Center.
+Pods Health’s lawful basis for processing your personal data
+\n •	The lawful basis for Pods Health’s processing of your personal data will depend on the purposes of the processing. For most personal data processing activities covered by this Privacy Policy, the lawful basis is that the processing is necessary for Pods Health’s legitimate business interests. Where we process personal data in relation to a contract, or a potential contract, with you, the lawful basis is that the processing is necessary for the performance of our contract with you or to take steps at your request prior to entering into a contract. When we are required to share personal data with law enforcement agencies or other governmental bodies, we do so on the basis that we are under a legal obligation to do so. We will also use consent as the legal basis where we deem appropriate or to the extent required by applicable law, for example, before we collect precise location data from your mobile device.
+\n •	More Information
+\n •	Processing on the basis of legitimate business interests. When we process personal information on the basis that the processing is necessary for our legitimate business interests, such interests include:  providing, improving, and promoting Pods Health Internet Sites, Apps, products, and services; (ii) communicating with current and potential customers, other Business Partners, and their individual points of contact; (iii) managing our relationships with our customers and other Business Partners, and their individual points of contact; (iv) other business development purposes; (v) sharing information within the Pods Health group, as well as with service providers and other third parties; and (vi) maintaining the safety and security of our products, services and employees, including fraud protection.
+\n •	Processing on the basis of performance of a contract. Examples of situations in which we process personal information as necessary for performance of a contract include e-commerce transactions in which you purchase a product or service from Pods Health, on your own behalf, through a Pods Health Internet Site or App.
+\n •	Processing on the basis of consent. Examples of processing activities for which Pods Health uses consent as its legal basis include:  collecting and processing precise location information from your mobile device; (ii) sending promotional emails when consent is required under applicable law; and (iii) processing personal data on Pods Health Internet Sites or Apps through cookies and similar technologies when consent is required by applicable law.
+\n •	Processing because Pods Health is under a legal obligation to do so. Examples of situations in which Pods Health must processes personal data to comply with its legal obligations include:  payment of taxes and other government levies; (ii) providing your personal data to law enforcement agencies and other governmental bodies when required by applicable laws; (iii) retaining business records required to be retained by applicable laws; and (iv) complying with court orders or other legal process.
+Additional information about the retention of your personal data
+\n •	To determine the period for which your personal data will be retained in accordance with this Policy, Pods Health considers criteria such as:  any applicable legal requirements to retain data for a certain period of time; (ii) any retention obligations related to actual or potential litigation or government investigations; (iii) any retention requirements in relevant agreements with our Business Partners; (iv) the date of your last interaction with Pods Health (including with Pods Health Internet Sites, Apps, communications, etc.); (v) the length of time between your interactions with Pods Health; (vi) the sensitivity of the data; and (vii) the purposes for which the data was collected.
+Your individual rights
+\n •	In accordance with the applicable laws in the European Union, you have the following rights with respect to your personal data, which apply differently in different circumstances: right of access, right to rectification, right to erasure, right to restriction of processing, right to data portability and right to object to processing. Most of these rights are not absolute. Below we describe these rights in more detail and provide information on how you can exercise them. If you make a request to exercise your rights, we will respond within one month, but have the right to extend this period by two additional months, where necessary. If we extend the response period, we will let you know within one month from your request. You can exercise your rights by completing this Form Link and sending it to us at Email ID.
+\n •	More Information
+\n •	Right of Access. You have the right to ask Pods Health to confirm whether we process your personal data. If we do, you have the right to request access to your personal data that we process and the following information:  the purposes of the processing; (ii) the categories of personal data we process; (iii) the recipients or categories of recipients of your personal data; (iv) the envisaged retention period of the data where possible, or the criteria we use to determine the retention period; (v) your right to request rectification or erasure of your personal data, or restriction of the processing of such data; (vi) your right to file a complaint with a supervisory authority; (vii) if we have not collected the data from you, any information we have available about the source of the data; and (viii) whether we use your personal data to make any automated decisions that have legal or other similar significant effects on you.
+\n •	Right to rectification. You have the right to have Pods Health correct your personal data if they are inaccurate. Taking into account the purposes of the processing, you may also have the right to have incomplete personal data about you completed, including by providing a supplementary statement to Pods Health.
+\n •	Right to object to processing for Pods Health’s legitimate business interests. You have the right to object to Pods Health processing your personal data when that data is processed on the basis of Pods Health’s legitimate business interests. Pods Health will honor your objection and stop processing the relevant personal data unless:  we have compelling legitimate grounds for the processing that override your interests, rights, and freedoms; or (ii) we need to continue processing your personal data to establish, exercise, or defend a legal claim.
+\n •	Right to object to processing for direct marketing. If Pods Health processes your personal data for direct marketing purposes, you have the right to object to this processing. If you exercise this right, Pods Health will stop processing your personal data for direct marketing purposes.
+\n •	Right to restrict processing. You have the right to request that Pods Health restrict the processing our your personal data in the following circumstances:  for the period of time Pods Health needs to verify the accuracy of your personal data when you contest its accuracy; (ii) when the processing of your personal data is unlawful and you oppose the erasure of the data, and instead request that Pods Health restrict the use of the data; (iii) when Pods Health no longer needs your personal data for the purposes of processing, but you need the data to establish, exercise, or defend a legal claim; or (iv) for the period of time Pods Health needs to verify if it has compelling legitimate grounds for processing that override your interests, rights, and freedoms when you object to the processing of your personal data for Pods Health’s legitimate business interests.
+\n •	If following your request Pods Health restricts the processing of your personal data, Pods Health will store your data, and otherwise process it only with:  your consent; (ii) to establish, exercise, or defend a legal claim; (iii) to protect the rights of another natural or legal person; or (iv) for reasons of important public interest of the European Union or a Member State. Pods Health will also inform you before lifting the restriction of processing.
+\n •	Right to erasure. The right to erasure is also called the “right to be forgotten.” You may ask Pods Health to delete your personal data. This right not absolute. Pods Health is required to delete your personal data upon your request only in the following circumstances:  your personal data is no longer necessary for the purposes for which Pods Health collected or processed them; (ii) if Pods Health processes your personal data on the basis of consent, you withdraw your consent, and no other legal ground exists for Pods Health to continue processing your personal data; (iii) if Pods Health processes your personal data for its legitimate business interests, you object to the processing, and there are no overriding legitimate grounds for Pods Health to continue processing your personal data; (iv) if Pods Health has processed your personal data unlawfully; or (v) the personal data must be erased to comply with a legal obligation under European Union or Member State law to which Pods Health is subject.
+\n •	Pods Health is not required to erase your personal data to the extent that Pods Health needs to process them to:  exercise its right of freedom of expression and information; (ii) comply with a legal obligation under European Union or Member State law to which Pods Health is subject; or (iii) to establish, exercise, or defend a legal claim.
+\n •	Right to data portability: You have the right to receive personal data you provided to Pods Health when:  the processing of the data is based on your consent or is necessary for the performance of a contract between you and Pods Health; (ii) Pods Health’s processing of your personal data is carried out by automated means; and (iii) complying with your request will not adversely affect the rights and freedoms of others.
+\n •	If you have the right to receive such personal data and request that Pods Health provide it, Pods Health will provide it to you in a structured, commonly used, and machine-readable format.
+\n •	Right to lodge a complaint with a supervisory authority. Pods Health will use its best efforts to address and settle any requests or complaints brought to its attention. In addition, you have the right to approach the competent data protection authority with requests or complaints. This can be the supervisory authority in the country or federal state where you live. The overall competent supervisory authority for Pods Health in Europe is:
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Questions about this Policy or our Privacy Statements"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="If you have any questions about this Policy or a Specific Privacy Statement or our use of your personal information, please contact us by clicking on (Need to share feedback link) or by writing to us at:
+\n Pods Health
+(Pls fill address)
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Changes to this Policy and our Privacy Statements"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Changes to this Privacy Policy will be posted on this site, along with information on any material changes. Pods Health reserves the right to update or modify this Policy and any Specific Privacy Statements at any time and without prior notice. Any modifications will apply only to the personal information we collect after the posting.
+This Policy was last revised in Mar 2021.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

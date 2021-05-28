@@ -24,7 +24,7 @@
         android:layout_alignParentEnd="true"
 android:layout_marginRight="8dp"
         android:text="Pod"
-        android:src="@drawable/bluelogo"
+        android:src="@drawable/gogo"
         android:layout_alignParentRight="true"></ImageView>
 
     <ScrollView

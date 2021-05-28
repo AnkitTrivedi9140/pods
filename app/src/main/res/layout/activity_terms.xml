@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".drower.TermsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+             android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Terms and Conditions"
+                android:textColor="@color/black"
+                android:textSize="20dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+            android:text="By using Pods Health Services, you agree to these conditions. Please read them carefully."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PRIVACY"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Please review out Our Privacy Policy, which also governs your use of Pods Health Services, to understand our practices."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="ELECTRONIC COMMUNICATIONS"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="When you use Pods Health Services, or send e-mails, text messages, and other communications from your desktop or mobile device to us, you may be communicating with us electronically. You consent to receive communications from us electronically, such as e-mails, texts, mobile push notices, or notices and messages on this site or through the other Pods Health Services, such as our Message Center, and you can retain copies of these communications for your records. You agree that all agreements, notices, disclosures, and other communications that we provide to you electronically satisfy any legal requirement that such communications be in writing."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="COPYRIGHT"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+               android:text="All content included in or made available through any Pods Health Service, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software is the property of Pods Health or its content suppliers and protected by international copyright laws. The compilation of all content included in or made available through any Pods Health Service is the exclusive property of Pods Health and protected by international copyright laws."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="TRADEMARKS"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+               android:text="In addition, graphics, logos, page headers, button icons, scripts, and service names included in or made available through any Pods Health Service are trademarks or trade dress of Pods Health. Pods Health's trademarks and trade dress may not be used in connection with any product or service that is not Pods Health’s Pods Health’s, in any manner that is likely to cause confusion among customers, or in any manner that disparages or discredits Pods Health. All other trademarks not owned by Pods Health that appear in any Pods Health Service are the property of their respective owners, who may or may not be affiliated with, connected to, or sponsored by Pods Health."    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PATENTS"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="One or more patents owned by Pods Health apply to the Pods Health Services and to the features and services accessible via the Pods Health Services. Portions of the Pods Health Services operate under license of one or more patents"    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="LICENSE AND ACCESS"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Subject to your compliance with these Conditions of Use and any Service Terms, and your payment of any applicable fees, Pods Health or its content providers grant you a limited, non-exclusive, non-transferable, non-sub licensable license to access and make personal and non-commercial use of the Pods Health Services. This license does not include any resale or commercial use of any Pods Health Service, or its contents; any collection and use of any product listings, descriptions, or prices; any derivative use of any Pods Health Service or its contents; any downloading, copying, or other use of account information for the benefit of any third party; or any use of data mining, robots, or similar data gathering and extraction tools. All rights not expressly granted to you in these Conditions of Use or any Service Terms are reserved and retained by Pods Health or its licensors, suppliers, publishers, rights-holders, or other content providers. No Pods Health Service, nor any part of any Pods Health Service, may be reproduced, duplicated, copied, sold, resold, visited, or otherwise exploited for any commercial purpose without express written consent of Pods Health. You may not frame or utilize framing techniques to enclose any trademark, logo, or other proprietary information (including images, text, page layout, or form) of Pods Health without express written consent. You may not use any meta tags or any other utilizing Pods Health’s name or trademarks without the express written consent of Pods Health. You may not misuse the Pods Health Services. You may use the Pods Health Services only as permitted by law. The licenses granted by Pods Health terminate if you do not comply with these Conditions of Use or any Service Terms."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="YOUR ACCOUNT"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="You may need your own Pods Health account to use certain Pods Health Services, and you may be required to be logged in to the account and have a valid payment method associated with it. If there is a problem charging your selected payment method, we may charge any other valid payment method associated with your account. Visit https://www.podshealth.com and to manage your payment options. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account, and you agree to accept responsibility for all activities that occur under your account or password. "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="REVIEWS, COMMENTS, COMMUNICATIONS, AND OTHER CONTENT"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="You may post reviews, comments, photos, videos, and other content; send e-cards and other communications; and submit suggestions, ideas, comments, questions, or other information, so long as the content is not illegal, obscene, threatening, defamatory, invasive of privacy, infringing of intellectual property rights (including publicity rights), or otherwise injurious to third parties or objectionable, and does not consist of or contain software viruses, political campaigning, commercial solicitation, chain letters, mass mailings, or any form of or unsolicited commercial electronic messages. You may not use a false e-mail address, impersonate any person or entity, or otherwise mislead as to the origin of a card or other content. Pods Health reserves the right (but not the obligation) to remove or edit such content, but does not regularly review posted content.
+If you do post content or submit material, and unless we indicate otherwise, you grant Pods Health a nonexclusive, royalty-free, perpetual, irrevocable, and fully sublicense-able right to use, reproduce, modify, adapt, publish, perform, translate, create derivative works from, distribute, and display such content throughout the world in any media. You grant Pods Health and sub-licensees the right to use the name that you submit in connection with such content, if they choose. You represent and warrant that you own or otherwise control all of the rights to the content that you post; that the content is accurate; that use of the content you supply does not violate this policy and will not cause injury to any person or entity; and that you will indemnify Pods Health for all claims resulting from content you supply. Pods Health has the right but not the obligation to monitor and edit or remove any activity or content. Pods Health takes no responsibility and assumes no liability for any content posted by you or any third party.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="RETURNS, REFUNDS AND TITLE"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health does not take title to returned items until the item arrives at fulfillments center. At our discretion, a refund may be issued without requiring a return. In this situation, Pods Health does not take title to the refunded item. For more information about our returns and refunds, please see our return policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PRODUCT DESCRIPTIONS"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="Pods Health attempts to be as accurate as possible. However, Pods Health does not warrant that product descriptions or other content of any Pods Health Service is accurate, complete, reliable, current, or error-free. If a product offered by Pods Health itself is not as described, your sole remedy is to return it in unused condition."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+
+
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PRICING"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="List Price means the suggested retail price of a product as provided by a manufacturer, supplier, or seller. We regularly check List Prices against prices recently found on Pods Health and other merchants.
+With respect to items sold by Pods Health, we cannot confirm the price of an item until you order. Despite our best efforts, a small number of the items in our catalog may be mispriced. If the correct price of an item sold by Pods Health is higher than our stated price, we will, at our discretion, either contact you for instructions before shipping or cancel your order and notify you of such cancellation. Other merchants may follow different policies in the event of a mispriced item.
+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+                android:textColor="#505A63"
+                android:textSize="14dp"></TextView>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

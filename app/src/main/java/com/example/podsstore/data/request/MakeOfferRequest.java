@@ -15,8 +15,10 @@ public class MakeOfferRequest {
 
     @SerializedName("amountPerUnit")
     private Integer amountperunit;
+
     @SerializedName("quantityDetails")
     private Integer quantitydetails;
+
     @SerializedName("remark")
     private String remarks;
 

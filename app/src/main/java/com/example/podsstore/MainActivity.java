@@ -61,7 +61,9 @@ import com.example.podsstore.drower.AddressesActivity;
 import com.example.podsstore.drower.ChooseCountryActivity;
 import com.example.podsstore.drower.DrowerActivity;
 import com.example.podsstore.drower.HelpAndFAQActivity;
+import com.example.podsstore.drower.PrivacyActivity;
 import com.example.podsstore.drower.ShowMakeofferActivity;
+import com.example.podsstore.drower.TermsActivity;
 import com.example.podsstore.getorder.MyOrderActivity;
 import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
@@ -437,13 +439,13 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawers();
                         break;
                     case R.id.nvterm:
-                        Intent term = new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        Intent term = new Intent(MainActivity.this, TermsActivity.class);
                         startActivity(term);
                         dl.closeDrawers();
                         break;
 
                     case R.id.nvprivacy:
-                        Intent privacy = new Intent(MainActivity.this, HelpAndFAQActivity.class);
+                        Intent privacy = new Intent(MainActivity.this, PrivacyActivity.class);
                         startActivity(privacy);
                         dl.closeDrawers();
                         break;

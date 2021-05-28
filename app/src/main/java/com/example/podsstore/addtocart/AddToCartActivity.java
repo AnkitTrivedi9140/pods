@@ -1003,9 +1003,13 @@ addressid=data.getAddressid().toString();
                         if (response.isSuccessful()) {
 
                             CreateLoginUserResponse successResponse = response.body();
-                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+Intent mainactivity=new Intent(getApplicationContext(),MainActivity.class);
+startActivity(mainactivity);
+finish();
+
+                            //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
 //                                if (successResponse.getMessage().equals("success")) {

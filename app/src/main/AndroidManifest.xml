@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drower.ShowMakeofferActivity"></activity>
+        <activity android:name=".drower.PrivacyActivity"></activity>
+        <activity android:name=".drower.TermsActivity" />
+        <activity android:name=".drower.ShowMakeofferActivity" />
         <activity android:name=".getorder.OrderDetailsActivity" />
         <activity android:name=".topbrands.TopBrandsProductActivity" />
         <activity android:name=".buynow.BuyNowActivity" />

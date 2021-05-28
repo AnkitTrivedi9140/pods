@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
@@ -65,14 +66,13 @@ public class ShowMakeofferActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         progresstext.setVisibility(View.VISIBLE);
         Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"///"+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
-
         ApiClient.getApiClient().getalloffers(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<MakeOfferResponse>>() {
             @Override
             public void onResponse(Call<List<MakeOfferResponse>> call, Response<List<MakeOfferResponse>> response) {
                 progressBar.setVisibility(View.GONE);
                 progresstext.setVisibility(View.GONE);
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("cartaaa",String.valueOf(response.code()) );
+                Log.e("cartaaamake",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
                     List<MakeOfferResponse> list = response.body();
                     productListAdapter.addAll(list);

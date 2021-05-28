@@ -6,11 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.LoginUserRequest;
@@ -39,7 +41,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         tvorderdate=findViewById(R.id.tvorderdate);
         tvorderstatus=findViewById(R.id.tvorderstatus);
         ivproduct=findViewById(R.id.ivproduct);
-
+        getSupportActionBar().setTitle("Order Summary");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvorderid=findViewById(R.id.tvorderid);
         tvordertotal=findViewById(R.id.tvordertotal);
         tvdelieverydate=findViewById(R.id.tvdelieverydate);
@@ -68,16 +71,21 @@ loadData(getIntent().getStringExtra("userid"));
 
                     int totalPrice = 0;
                     for (int i = 0; i < list.size(); i++) {
-getSupportActionBar().setTitle("Order Summary");
+
                         tvorderdate.setText(list.get(i).getOrderdate().toString());
                         tvorderid.setText("#"+list.get(i).getOrderid().toString());
                         tvordertotal.setText("$ "+list.get(i).getTotalprice().toString());
                         tvdelieverydate.setText("Wednesday 5 June 2021");
-                        tvorderstatus.setText("Order Status: "+list.get(i).getOrderstatus().toString());
+                        tvorderstatus.setText("Order Status: "+list.get(i).getCurrentorderstatus().toString());
                         tvproductqty.setText("Qty: "+list.get(i).getQty().toString());
                         tvproductname.setText(list.get(i).getProducttype()+"("+list.get(i).getProductname().toString()+")");
                         tvproductprise.setText("Price: "+"$"+list.get(i).getPrice().toString());
-                        tvproductaddress.setText(list.get(i).getOrderaddress().getAddressline1()+list.get(i).getOrderaddress().getAddressline2()+list.get(i).getOrderaddress().getAddressline3());
+                        if(list.get(i).getOrderaddress()==null){
+
+                        }else{
+                            tvproductaddress.setText(""+list.get(i).getOrderaddress());
+
+                        }
 
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getProductimage())
@@ -102,5 +110,26 @@ getSupportActionBar().setTitle("Order Summary");
 
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent=new Intent(getApplicationContext(), MyOrderActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(), MyOrderActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

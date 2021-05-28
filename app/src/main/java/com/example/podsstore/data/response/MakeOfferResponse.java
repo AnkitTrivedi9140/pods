@@ -61,7 +61,7 @@ public class MakeOfferResponse {
     @SerializedName("productname")
     private String productname;
     @SerializedName("addressDetails")
-    public Address offeraddress  ;
+    public String offeraddress  ;
 
     public Long getMakeofferis() {
         return makeofferis;
@@ -215,11 +215,11 @@ public class MakeOfferResponse {
         this.productname = productname;
     }
 
-    public Address getOfferaddress() {
+    public String getOfferaddress() {
         return offeraddress;
     }
 
-    public void setOfferaddress(Address offeraddress) {
+    public void setOfferaddress(String offeraddress) {
         this.offeraddress = offeraddress;
     }
 

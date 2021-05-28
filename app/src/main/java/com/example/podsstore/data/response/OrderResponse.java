@@ -48,15 +48,9 @@ public class OrderResponse {
 
 
     @SerializedName("addressDetails")
-    public Address orderaddress  ;
+    private String orderaddress  ;
 
-    public Address getOrderaddress() {
-        return orderaddress;
-    }
 
-    public void setOrderaddress(Address orderaddress) {
-        this.orderaddress = orderaddress;
-    }
 
     public String getCurrentorderstatus() {
         return currentorderstatus;
@@ -160,6 +154,14 @@ public class OrderResponse {
 
     public void setProducttype(String producttype) {
         this.producttype = producttype;
+    }
+
+    public String getOrderaddress() {
+        return orderaddress;
+    }
+
+    public void setOrderaddress(String orderaddress) {
+        this.orderaddress = orderaddress;
     }
 
     @Override
