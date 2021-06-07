@@ -46,7 +46,7 @@
                     android:layout_height="40dp"
 
                     android:layout_marginLeft="50dp"
-                    android:src="@drawable/whitelogo"
+                    android:src="@drawable/gogoww"
                     android:text="Pod"
                     android:textSize="55dp"
                     android:textStyle="bold"></ImageView>

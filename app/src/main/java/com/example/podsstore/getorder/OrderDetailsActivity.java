@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class OrderDetailsActivity extends AppCompatActivity {
 
     ImageView ivproduct;
-    TextView tvorderstatus,tvorderdate,tvorderid,tvordertotal,tvdelieverydate,tvproductname,tvproductqty,tvproductprise,tvproductaddress;
+    TextView tvdelieverestimate,tvorderstatus,tvorderdate,tvorderid,tvordertotal,tvdelieverydate,tvproductname,tvproductqty,tvproductprise,tvproductaddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         tvorderdate=findViewById(R.id.tvorderdate);
         tvorderstatus=findViewById(R.id.tvorderstatus);
         ivproduct=findViewById(R.id.ivproduct);
+        tvdelieverestimate=findViewById(R.id.tvdelieverestimate);
         getSupportActionBar().setTitle("Order Summary");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvorderid=findViewById(R.id.tvorderid);
@@ -73,6 +74,7 @@ loadData(getIntent().getStringExtra("userid"));
                     for (int i = 0; i < list.size(); i++) {
 
                         tvorderdate.setText(list.get(i).getOrderdate().toString());
+                        tvdelieverestimate.setText("Payment Method-"+list.get(i).getMode().toString());
                         tvorderid.setText("#"+list.get(i).getOrderid().toString());
                         tvordertotal.setText("$ "+list.get(i).getTotalprice().toString());
                         tvdelieverydate.setText("Wednesday 5 June 2021");

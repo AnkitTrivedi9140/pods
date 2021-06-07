@@ -133,6 +133,16 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         holder.tvqty.setText("Qty: "+cartResponse.getQty());
         holder.tvorderdate.setText(cartResponse.getItempresentin().toString());
         holder.tvcome.setText("Order Status- "+cartResponse.getCurrentorderstatus());
+        if(cartResponse.getCurrentorderstatus().toString().equalsIgnoreCase("delivered")){
+
+            holder.tvreturn.setVisibility(View.VISIBLE);
+            holder.tvreview.setVisibility(View.VISIBLE);
+
+
+        }else {
+            holder.tvreturn.setVisibility(View.GONE);
+            holder.tvreview.setVisibility(View.GONE);
+        }
         // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(cartResponse.getProductimage())

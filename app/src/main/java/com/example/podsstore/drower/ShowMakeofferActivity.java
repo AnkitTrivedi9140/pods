@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
+import com.example.podsstore.addtocart.AddtocartAdapter;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.MakeOfferResponse;
@@ -51,7 +52,7 @@ public class ShowMakeofferActivity extends AppCompatActivity {
         progresstext=findViewById(R.id.progresstext);
         recyclerView.setLayoutManager(new LinearLayoutManager(ShowMakeofferActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
-        //  productListAdapter.setAdapterListener(adapterListener);
+       productListAdapter.setAdapterListener(adapterListener);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
@@ -61,6 +62,15 @@ public class ShowMakeofferActivity extends AppCompatActivity {
         loadData();
     }
 
+    private ShowMakeofferAdapter.AdapterListener adapterListener = data -> {
+
+       // deletecart(String.valueOf(data.getProductid().toString()));
+//Toast.makeText(getApplicationContext(),data.getOfferid().toString(),Toast.LENGTH_SHORT).show();
+Intent intent=new Intent(getApplicationContext(),ShowMakeofferdetailsActivity.class);
+intent.putExtra("offerid",data.getOfferid().toString());
+startActivity(intent);
+
+    };
     @SuppressLint("CheckResult")
     private void loadData() {
         progressBar.setVisibility(View.VISIBLE);

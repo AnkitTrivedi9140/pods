@@ -52,6 +52,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="16dp"
+                android:justificationMode="inter_word"
                android:text="Personal protective equipment is the first line of defense against hazardous materials and workplace environmental dangers, such as infections, bacteria, and disease transmission. These are essential resources that help keep our families safe, as well as protect our doctors and nurses and enable them to take better care of us. By providing a seamless supply of protective gear and medical equipment, Pods Health equips hospitals, clinics, and medical care foundations to tackle medical emergencies and outbreaks"
                 android:textColor="@color/manatee"
                 android:textSize="16dp"></TextView>
@@ -105,7 +106,7 @@ android:gravity="center"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-
+                android:justificationMode="inter_word"
                 android:text="Founded by Mr Deepak Poddar who studied medical Science at St Andrews University, andalongside his family, was a key supporter of India’fastest growing FMCG Company Patanjali Ayurved Ltd."
                 android:textColor="@color/manatee"
                 android:textSize="16dp"></TextView>
@@ -133,6 +134,7 @@ android:gravity="center"
                 android:layout_marginRight="16dp"
                 android:gravity="center"
 android:textStyle="bold"
+                android:justificationMode="inter_word"
                 android:text="Suite 402, 100 Park Royal South West Vancouver,   BC V7T 1A2, Canada CA"
                 android:textColor="@color/manatee"
                 android:textSize="16dp"></TextView>
@@ -174,7 +176,7 @@ android:textStyle="bold"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="11dp"
-
+                android:justificationMode="inter_word"
                 android:text="Interested in partnering with Pods Health? You can connect with our service representatives and align your medical supply requirements for a better and more definitive contract, faster restocking, and better prices with Pods, or avail our consulting services in regards to your healthcare supply chain and create a hassle-free structure."
                 android:textColor="@color/manatee"
                 android:textSize="16dp"></TextView>

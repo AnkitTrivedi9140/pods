@@ -9,7 +9,12 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -41,6 +46,7 @@ import com.example.podsstore.prefs.Preferences;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +56,9 @@ import java.util.Locale;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,8 +71,12 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     RadioGroup radioGroup;
     RadioButton radioButton;
     final Calendar myCalendar = Calendar.getInstance();
-
+String mode;
     String path;
+    String txnid;
+    Uri fileUrifund;
+    EditText etproof;
+    DatePickerDialog datePicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +84,13 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
         placeorderbtn = findViewById(R.id.placeorderbtn);
         radioGroup = findViewById(R.id.radioGroup);
 
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+        // find the radiobutton by returned id
+        radioButton =(RadioButton) findViewById(selectedId);
+        List<CartResponse> listone=new ArrayList<>();
+        String businesstype=  radioButton.getText().toString().trim();
+        mode=businesstype;
         placeorderbtnbuynow = findViewById(R.id.placeorderbtnbuynow);
         productListAdapter = new AddtocartAdapter(PaymentActivity.this, this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -96,8 +116,14 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 switch (checkedId) {
+                    case R.id.radiosme:
+
+                        //showAlertDialog(path);
+                        break;
                     case R.id.radiocorporate:
-                       showAlertDialog(path);   break;
+
+                       showAlertDialog(path);
+                       break;
                     case R.id.radioincorporate:
 showAlertDialog(path);
                         break;
@@ -144,7 +170,7 @@ showAlertDialog(path);
                     List<CartResponse> list = response.body();
                     Log.e("list", String.valueOf(list));
                     //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
-                    List<CartResponse> listone=new ArrayList<>();
+
                     placeorderbtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -152,17 +178,20 @@ showAlertDialog(path);
                             for (int i = 0; i < list.size(); i++) {
                                 CartResponse cartResponse=list.get(i);
 
-                                int selectedId = radioGroup.getCheckedRadioButtonId();
 
-                                // find the radiobutton by returned id
-                                  radioButton =(RadioButton) findViewById(selectedId);
 
                                 Log.d("onClickgg ", list.get(i).getProductid().toString());
+                                int selectedId = radioGroup .getCheckedRadioButtonId();
 
-                                String businesstype=  radioButton.getText().toString().trim();
+                                // find the radio button by returned id
+                                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+//                                Toast.makeText(MainActivity.this,
+//                                        radioButton.getText(), Toast.LENGTH_SHORT).show();
 
 
-              placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()));
+//Toast.makeText(getApplicationContext(),radioButton.getText().toString(),Toast.LENGTH_SHORT).show();
+              placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()),radioButton.getText().toString());
 
 
 
@@ -188,6 +217,7 @@ showAlertDialog(path);
             }
         });
     }
+    @SuppressLint("NewApi")
     private void showAlertDialog(String paths) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(PaymentActivity.this);
         final View customLayout = getLayoutInflater().inflate(R.layout.paymentmethoddialog, null);
@@ -199,7 +229,7 @@ showAlertDialog(path);
 EditText date=customLayout.findViewById(R.id.etdate);
 
         EditText ettransactionid =customLayout.findViewById(R.id.ettransationid);
-        EditText etproof =customLayout.findViewById(R.id.etproof);
+        etproof =customLayout.findViewById(R.id.etproof);
         EditText etremarka =customLayout.findViewById(R.id.etremarks);
 
 
@@ -208,35 +238,41 @@ EditText date=customLayout.findViewById(R.id.etdate);
         etproof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent  intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(intent, 7);
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, 1);
             }
         });
 
-        DatePickerDialog.OnDateSetListener dates = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        final Calendar calendar = Calendar.getInstance();
 
-                date.setText(sdf.format(myCalendar.getTime()));
-            }
+        // initialising the layout
 
-        };
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+
+
+            datePicker = new DatePickerDialog(PaymentActivity.this);
+
 
         date.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        new DatePickerDialog(PaymentActivity.this, dates, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        datePicker = new DatePickerDialog(PaymentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                // adding the selected date in the edittext
+                date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+            }
+        }, year, month, day);
+
+        // set maximum date to be selected as today
+        datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+        // show the dialog
+        datePicker.show();
     }
 });
 
@@ -247,8 +283,8 @@ EditText date=customLayout.findViewById(R.id.etdate);
                 alert.dismiss();
             }
         });
-
-        etproof.setText(paths);
+//        etproof.setText(fileUrifund.getEncodedPath());
+     //   etproof.setText(paths);
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,26 +296,29 @@ EditText date=customLayout.findViewById(R.id.etdate);
                 String transaction = ettransactionid.getText().toString().trim();
                 String proof = etproof.getText().toString().trim();
 
-
+                txnid=transaction;
                 if(TextUtils.isEmpty(dates)){
                     date.setError("date Can't Blank!");
                 }
                 else if(TextUtils.isEmpty(transaction)){
                     ettransactionid.setError("transaction id Can't Blank!");
                 }
-//                else if(TextUtils.isEmpty(proof)){
-//                    etproof.setError("proof Can't Blank!");
-//                }
+                else if(TextUtils.isEmpty(proof)){
+                    etproof.setError("proof Can't Blank!");
+                }
                 else if(TextUtils.isEmpty(remarks)){
                     etremarka.setError("remarks Can't Blank!");
                 }
 
                 //   loadData(et.getText().toString().trim());
                 else {
-                    //alert.dismiss();
-                    Intent i=new Intent(getApplicationContext(),PaymentActivity.class);
-                    startActivity(i);
-                    finish();
+
+                    uploadDatarerurn(fileUrifund,transaction,proof,remarks);
+                  //  placeorder("","","","","","","","");
+                    alert.dismiss();
+//                    Intent i=new Intent(getApplicationContext(),PaymentActivity.class);
+//                    startActivity(i);
+//                    finish();
                 }
 
             }
@@ -288,25 +327,25 @@ EditText date=customLayout.findViewById(R.id.etdate);
         alert.show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-
-            case 7:
-
-                if(resultCode==RESULT_OK){
-
-                    String PathHolder = data.getData().getPath();
-
-                    Toast.makeText(PaymentActivity.this, PathHolder , Toast.LENGTH_LONG).show();
-path=PathHolder;
-showAlertDialog(PathHolder);
-                }
-                break;
-
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch(requestCode){
+//
+//            case 7:
+//
+//                if(resultCode==RESULT_OK){
+//
+//                    String PathHolder = data.getData().getPath();
+//
+//                    Toast.makeText(PaymentActivity.this, PathHolder , Toast.LENGTH_LONG).show();
+//path=PathHolder;
+//showAlertDialog(PathHolder);
+//                }
+//                break;
+//
+//        }
+//    }
 
 //    private void placeholder(List<CartResponse> list){
 //        for(CartResponse response : list){
@@ -314,8 +353,85 @@ showAlertDialog(PathHolder);
 //        }
 //    }
 
+    public String convertMediaUriToPath(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String path = cursor.getString(column_index);
+        cursor.close();
+        return path;
+
+    }
+
     @SuppressLint("CheckResult")
-    private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal) {
+    private void uploadDatarerurn(Uri fileUri,String transactionid,String emails,String remarkss) {
+     //   progressBar.setVisibility(View.VISIBLE);
+
+        File file = new File(convertMediaUriToPath(fileUri));
+        // RequestBody requestUserEmailId = RequestBody.create(MediaType.parse("multipart/form-data"), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
+        MultipartBody.Part requesestImage = null;
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        requesestImage = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        RequestBody txnid = RequestBody.create(MediaType.parse("multipart/form-data"),transactionid );
+        RequestBody email = RequestBody.create(MediaType.parse("multipart/form-data"),emails );
+        RequestBody remarks = RequestBody.create(MediaType.parse("multipart/form-data"),remarkss );
+
+        ApiClient.getApiClient().uploadImageproofoffunds(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), requesestImage,txnid,email,remarks).enqueue(new Callback<CreateLoginUserResponse>() {
+            @Override
+            public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getimage", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    CreateLoginUserResponse list = response.body();
+
+                    Log.e("getimageurl", String.valueOf(list.toString()));
+                    Toast.makeText(getApplicationContext(), list.getMessage(), Toast.LENGTH_SHORT).show();
+                  //  progressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
+                Log.e("onerrors", t.getMessage());
+                //progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Bundle extras = imageReturnedIntent.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                    // ivuser.setImageBitmap(imageBitmap);
+                }
+
+                break;
+            case 1:
+                if (resultCode == RESULT_OK) {
+
+                    Uri selectedImage = imageReturnedIntent.getData();
+
+
+                    File file = new File(selectedImage.getPath());
+                    fileUrifund=selectedImage;
+                   // uploadDatarerurn(selectedImage);
+                  etproof.setText(selectedImage.getPath());
+                    // ivuser.setImageURI(selectedImage);
+                }
+                break;
+
+        }
+    }
+    @SuppressLint("CheckResult")
+    private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal, String mode) {
 //Toast.makeText(getApplicationContext(),"mila nhi",Toast.LENGTH_SHORT).show();
         List<PlaceOrderRequest> list = new ArrayList<>();
 
@@ -333,12 +449,12 @@ showAlertDialog(PathHolder);
         list.add(r);
 
 
-        Log.e("postDatalist", list.toString());
+       // Log.e("postDatalist", txnid);
 
 
         Log.e("postData", new Gson().toJson(list));
 
-        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),getIntent().getStringExtra("addressid").toString(), list)
+        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),getIntent().getStringExtra("addressid").toString(),mode,txnid, list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -462,9 +578,18 @@ r.setOrderid("");
                 if (response.isSuccessful()) {
                     List<ProductResponse> list = response.body();
                     Toast.makeText(getApplicationContext(),"Order placed successfully",Toast.LENGTH_SHORT).show();
+                    int selectedId = radioGroup .getCheckedRadioButtonId();
 
+                    // find the radio button by returned id
+                    RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+//                                Toast.makeText(MainActivity.this,
+//                                        radioButton.getText(), Toast.LENGTH_SHORT).show();
+
+
+                    Toast.makeText(getApplicationContext(),radioButton.getText().toString(),Toast.LENGTH_SHORT).show();
 //                    for (int i = 0; i < list.size(); i++) {
-                        placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
+                        placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()),radioButton.getText().toString());
 
                  //   }
                     if (list != null) {

@@ -18,7 +18,7 @@
         android:id="@+id/etproof"
         android:textSize="16dp"
         android:layout_marginTop="12dp"
-        android:hint="proof of product"
+        android:hint="Proof to return product"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_below="@+id/ivcut"

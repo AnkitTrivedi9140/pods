@@ -7,8 +7,12 @@ public class MakeOfferResponse {
     @SerializedName("makeOfferId")
     private Long makeofferis;
 
+
     @SerializedName("sellerId")
     private String selleris;
+
+    @SerializedName("offerId")
+    private String offerid;
 
     @SerializedName("buyerId")
     private String buyerid;
@@ -63,8 +67,50 @@ public class MakeOfferResponse {
     @SerializedName("addressDetails")
     public String offeraddress  ;
 
+
+    @SerializedName("offerStatus")
+    public String offerstatus  ;
+
+
+    @SerializedName("imgurl")
+    private String offerimage;
+    @SerializedName("selleremark")
+    public String sellerremark  ;
+
+    public String getOfferimage() {
+        return offerimage;
+    }
+
+    public void setOfferimage(String offerimage) {
+        this.offerimage = offerimage;
+    }
+
+    public String getSellerremark() {
+        return sellerremark;
+    }
+
+    public void setSellerremark(String sellerremark) {
+        this.sellerremark = sellerremark;
+    }
+
     public Long getMakeofferis() {
         return makeofferis;
+    }
+
+    public String getOfferid() {
+        return offerid;
+    }
+
+    public String getOfferstatus() {
+        return offerstatus;
+    }
+
+    public void setOfferstatus(String offerstatus) {
+        this.offerstatus = offerstatus;
+    }
+
+    public void setOfferid(String offerid) {
+        this.offerid = offerid;
     }
 
     public void setMakeofferis(Long makeofferis) {
@@ -228,6 +274,7 @@ public class MakeOfferResponse {
         return "MakeOfferResponse{" +
                 "makeofferis=" + makeofferis +
                 ", selleris='" + selleris + '\'' +
+                ", offerid='" + offerid + '\'' +
                 ", buyerid='" + buyerid + '\'' +
                 ", productid='" + productid + '\'' +
                 ", usertype='" + usertype + '\'' +
@@ -245,7 +292,10 @@ public class MakeOfferResponse {
                 ", remarks='" + remarks + '\'' +
                 ", offercreatedat='" + offercreatedat + '\'' +
                 ", productname='" + productname + '\'' +
-                ", offerdetails=" + offeraddress +
+                ", offeraddress='" + offeraddress + '\'' +
+                ", offerstatus='" + offerstatus + '\'' +
+                ", offerimage='" + offerimage + '\'' +
+                ", sellerremark='" + sellerremark + '\'' +
                 '}';
     }
 

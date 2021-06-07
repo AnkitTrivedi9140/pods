@@ -62,6 +62,59 @@ public class OrderInfoResponse {
     @SerializedName("addressDetails")
     private String orderaddress  ;
 
+
+    @SerializedName("returnRemark")
+    private String returnRemark;
+    @SerializedName("mode")
+    private String mode;
+    @SerializedName("dispatchremark")
+    private String dispatchremark;
+    @SerializedName("trackingid")
+    private String trackingid;
+    @SerializedName("disatchproof")
+    private String disatchproof  ;
+
+
+    public String getReturnRemark() {
+        return returnRemark;
+    }
+
+    public void setReturnRemark(String returnRemark) {
+        this.returnRemark = returnRemark;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getDispatchremark() {
+        return dispatchremark;
+    }
+
+    public void setDispatchremark(String dispatchremark) {
+        this.dispatchremark = dispatchremark;
+    }
+
+    public String getTrackingid() {
+        return trackingid;
+    }
+
+    public void setTrackingid(String trackingid) {
+        this.trackingid = trackingid;
+    }
+
+    public String getDisatchproof() {
+        return disatchproof;
+    }
+
+    public void setDisatchproof(String disatchproof) {
+        this.disatchproof = disatchproof;
+    }
+
     public String getOrderaddress() {
         return orderaddress;
     }
@@ -222,6 +275,7 @@ public class OrderInfoResponse {
         this.totalprice = totalprice;
     }
 
+
     @Override
     public String toString() {
         return "OrderInfoResponse{" +
@@ -244,9 +298,15 @@ public class OrderInfoResponse {
                 ", returndate='" + returndate + '\'' +
                 ", cancledate='" + cancledate + '\'' +
                 ", totalprice='" + totalprice + '\'' +
-
+                ", orderaddress='" + orderaddress + '\'' +
+                ", returnRemark='" + returnRemark + '\'' +
+                ", mode='" + mode + '\'' +
+                ", dispatchremark='" + dispatchremark + '\'' +
+                ", trackingid='" + trackingid + '\'' +
+                ", disatchproof='" + disatchproof + '\'' +
                 '}';
     }
+
     public class Address {
         @SerializedName("addressId")
         public Long addressid;

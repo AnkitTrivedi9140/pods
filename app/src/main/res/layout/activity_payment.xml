@@ -262,10 +262,11 @@
             android:layout_height="33dp"
             android:text="  Pay to Online"
             android:layout_marginTop="12dp"
-android:checked="true"
             android:textSize="16dp"
+            android:checked="true"
+            android:textColor="@color/manatee"
 
-            android:textColor="@color/manatee"/>
+            />
 
         <RadioButton
             android:id="@+id/radiocorporate"
@@ -281,6 +282,7 @@ android:checked="true"
             />
 
         <RadioButton
+
             android:id="@+id/radioincorporate"
             android:layout_width="wrap_content"
             android:layout_height="33dp"

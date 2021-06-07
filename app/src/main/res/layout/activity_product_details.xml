@@ -193,6 +193,7 @@ android:layout_below="@+id/tvProductname"
             android:textSize="18dp"></TextView>
 
         <TextView
+            android:justificationMode="inter_word"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:id="@+id/tvdetails"
@@ -219,6 +220,7 @@ android:layout_below="@+id/tvProductname"
             android:textSize="18dp"></TextView>
 
         <TextView
+            android:justificationMode="inter_word"
             android:id="@+id/tvfeature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -252,6 +254,7 @@ android:layout_below="@+id/tvProductname"
             android:layout_marginRight="12dp"
             android:layout_marginTop="4dp"
             android:textColor="#505A63"
+            android:justificationMode="inter_word"
             android:textSize="14dp"></TextView>
 
 

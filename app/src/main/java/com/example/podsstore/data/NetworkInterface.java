@@ -134,7 +134,7 @@ public interface NetworkInterface {
     Single<Response<CreateLoginUserResponse>> submitaddress(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body AddressDetailsRequest requests);
 
 
-    @POST("makerOfferRest/makerOffer")
+    @POST("makerOfferRest/makerOfferBuyer")
     Single<Response<CreateLoginUserResponse>> makeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid,@Body MakeOfferRequest requests);
 
 
@@ -161,9 +161,9 @@ public interface NetworkInterface {
     //http://216.10.243.60:4067/PodsStoreAPI/orderRest/uploadProofOfReturn?userEmailId=ankittrivedi9140@gmail.com&orderId=
 
     @Multipart
-    @POST("imageRest/uploadProfilePhoto")
-    Call<CreateLoginUserResponse> uploadImageproofoffunds(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
-                                              @Part("userEmailId") RequestBody  userEmailId );
+    @POST("productRest/uploadProofOfFund")
+    Call<CreateLoginUserResponse> uploadImageproofoffunds(@Header("Authorization") String authHeader, @Part MultipartBody.Part file, @Part("txnId") RequestBody texnid, @Part("userEmailId") RequestBody email, @Part("remark") RequestBody remarks
+                                               );
 
     @Multipart
     @POST("orderRest/uploadProofOfReturn")
@@ -186,7 +186,7 @@ public interface NetworkInterface {
 
 
     @POST("orderRest/placeOrder")
-    Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid,@Body List<PlaceOrderRequest> requests  );
+    Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid, @Query("mode") String mode, @Query("txid") String txnid,@Body List<PlaceOrderRequest> requests  );
 
 
     @POST("cartRest/deleteCart")
@@ -204,6 +204,9 @@ public interface NetworkInterface {
     @POST("makerOfferRest/getOfferDetailsByBuyer")
     Call<List<MakeOfferResponse>>getalloffers(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId);
 
+
+    @POST("makerOfferRest/getBuyerOffer")
+    Call<List<MakeOfferResponse>>getofferdetails(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("makeofferid") String makeofferid);
 
 
     @POST("wishListRest/deleteWishList")
@@ -236,6 +239,13 @@ public interface NetworkInterface {
 
     @POST("orderRest/returninit")
     Single<Response<CreateLoginUserResponse>> prodreturn(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body ReturnRequest requests);
+
+
+    @POST("makerOfferRest/offerDeclineByBuyer")
+    Call<CreateLoginUserResponse>makeofferdeclined(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
+
+    @POST("makerOfferRest/offerAceptByBuyer")
+    Call<CreateLoginUserResponse>makeofferaccept(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
 
 
 }

@@ -59,7 +59,7 @@ android:layout_centerVertical="true"
              android:layout_alignParentEnd="true"
 android:layout_centerVertical="true"
                 android:text="Pod"
-                android:src="@drawable/whitelogo"
+                android:src="@drawable/gogoww"
                 android:layout_alignParentRight="true"></ImageView>
 
         </RelativeLayout>
