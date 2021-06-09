@@ -35,7 +35,8 @@ public class CartResponse {
     @SerializedName("productType")
     private String producttype;
 
-
+    @SerializedName("offerflag")
+    private String offerflag;
 
     @SerializedName("min_quantity")
     private String minqty;
@@ -58,6 +59,14 @@ public class CartResponse {
         this.minqty = minqty;
         this.itempresentin = itempresentin;
         this.addeddate = addeddate;
+    }
+
+    public String getOfferflag() {
+        return offerflag;
+    }
+
+    public void setOfferflag(String offerflag) {
+        this.offerflag = offerflag;
     }
 
     public String getMinqty() {
@@ -177,6 +186,7 @@ public class CartResponse {
                 ", discount='" + discount + '\'' +
                 ", totalprice='" + totalprice + '\'' +
                 ", producttype='" + producttype + '\'' +
+                ", offerflag='" + offerflag + '\'' +
                 ", minqty='" + minqty + '\'' +
                 ", itempresentin='" + itempresentin + '\'' +
                 ", addeddate='" + addeddate + '\'' +

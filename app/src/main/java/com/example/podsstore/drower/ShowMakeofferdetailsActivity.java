@@ -94,7 +94,10 @@ public class ShowMakeofferdetailsActivity extends AppCompatActivity {
         ivedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+Intent intent=new Intent(getApplicationContext(),SellerRevertActivity.class);
+intent.putExtra("offerid",getIntent().getStringExtra("offerid"));
+startActivity(intent);
+finish();
             }
         });
         ivaccept.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +160,7 @@ public class ShowMakeofferdetailsActivity extends AppCompatActivity {
                       tvorderstatus.setText("Offer Status "+list.get(i).getOfferstatus());
 tvdelieverestimate.setText(list.get(i).getOfferaddress());
                       tvproductprise.setText(list.get(i).getRemarks());
-                      if(list.get(i).getSellerremark()==null){
+                      if(list.get(i).getSellerremark()==null) {
                           tvproductaddress.setText("Wait for Response ");
                       }else{
                           tvproductaddress.setText(list.get(i).getSellerremark());
@@ -170,10 +173,10 @@ tvdelieverestimate.setText(list.get(i).getOfferaddress());
                           @Override
                           public void onClick(View v) {
 
-                              Intent intent=new Intent(getApplicationContext(), ProductDetailsActivity.class);
-                              intent.putExtra("userid",list.get(0).getProductid().toString());
-                              startActivity(intent);
-                              finish();
+//                              Intent intent=new Intent(getApplicationContext(), ProductDetailsActivity.class);
+//                              intent.putExtra("userid",list.get(0).getProductid().toString());
+//                              startActivity(intent);
+//                              finish();
                           }
                       });
                   }

@@ -53,6 +53,7 @@ public class ShowMakeofferActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(ShowMakeofferActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
        productListAdapter.setAdapterListener(adapterListener);
+        productListAdapter.setAdapterListeners(adapterListeners);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
@@ -69,6 +70,15 @@ public class ShowMakeofferActivity extends AppCompatActivity {
 Intent intent=new Intent(getApplicationContext(),ShowMakeofferdetailsActivity.class);
 intent.putExtra("offerid",data.getOfferid().toString());
 startActivity(intent);
+
+    };
+    private ShowMakeofferAdapter.InventoryAdapterListener adapterListeners = data -> {
+
+        // deletecart(String.valueOf(data.getProductid().toString()));
+//Toast.makeText(getApplicationContext(),data.getOfferid().toString(),Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getApplicationContext(),SellerRevertActivity.class);
+        intent.putExtra("offerid",data.getOfferid().toString());
+        startActivity(intent);
 
     };
     @SuppressLint("CheckResult")

@@ -214,7 +214,11 @@ String qty;
         holder.tvAssetType.setText(cartResponse.getProducttype());
         holder.description.setText("$ "+cartResponse.getPrice());
 
-
+if(cartResponse.getOfferflag()==null){
+    holder.wishlist.setVisibility(View.VISIBLE);
+}else{
+    holder.wishlist.setVisibility(View.GONE);
+}
 if(cartResponse.getQty().toString().equalsIgnoreCase("0")){
     holder.tvqtybtn.setText("1");
 }else{

@@ -4,6 +4,7 @@ import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.EditMakeOfferRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
 import com.example.podsstore.data.request.OrderInfoRequest;
@@ -21,6 +22,7 @@ import com.example.podsstore.data.response.CountryResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.MakeOfferResponse;
+import com.example.podsstore.data.response.MakeofferhistoryResponse;
 import com.example.podsstore.data.response.OrderInfoResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.data.response.ProductResponse;
@@ -246,6 +248,14 @@ public interface NetworkInterface {
 
     @POST("makerOfferRest/offerAceptByBuyer")
     Call<CreateLoginUserResponse>makeofferaccept(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
+
+    @POST("makerOfferRest/getOfferHistory")
+    Call<List<MakeofferhistoryResponse>>makeofferhistory(@Header("Authorization") String authHeader, @Query("offerid") String offerid);
+
+
+
+    @POST("makerOfferRest/updateOfferByBuyer")
+    Single<Response<CreateLoginUserResponse>> editmakeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Body EditMakeOfferRequest requests);
 
 
 }

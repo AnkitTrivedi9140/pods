@@ -8,10 +8,10 @@ public class MakeOfferRequest {
     private Long productid;
 
     @SerializedName("actualAmount")
-    private Double actualamount;
+    private String actualamount;
 
     @SerializedName("offerAmount")
-    private Double offeramount;
+    private String offeramount;
 
     @SerializedName("amountPerUnit")
     private Integer amountperunit;
@@ -30,19 +30,19 @@ public class MakeOfferRequest {
         this.productid = productid;
     }
 
-    public Double getActualamount() {
+    public String getActualamount() {
         return actualamount;
     }
 
-    public void setActualamount(Double actualamount) {
+    public void setActualamount(String actualamount) {
         this.actualamount = actualamount;
     }
 
-    public Double getOfferamount() {
+    public String getOfferamount() {
         return offeramount;
     }
 
-    public void setOfferamount(Double offeramount) {
+    public void setOfferamount(String offeramount) {
         this.offeramount = offeramount;
     }
 

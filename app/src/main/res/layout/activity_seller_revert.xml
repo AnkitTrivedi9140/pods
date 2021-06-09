@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".drower.ShowMakeofferActivity">
+<RelativeLayout
+    android:id="@+id/rlimage"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/ivproduct"
+        android:src="@drawable/kkkkk"
+        android:layout_width="111dp"
+        android:layout_height="111dp">
+
+    </ImageView>
+    <TextView
+        android:gravity="center"
+        android:text="pods product market"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginRight="22dp"
+        android:layout_marginLeft="22dp"
+        android:id="@+id/tvproductname"
+        android:layout_below="@+id/ivproduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/tvproductname"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/platinum"
+        android:layout_marginBottom="2dp"></TextView>
+</RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:tooltipText="djsadjkahdskjdsah"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:visibility="gone"
+        android:text="Loading..."
+        android:id="@+id/progresstext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/progress"
+        ></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productrv"
+        android:layout_margin="4dp"
+        android:layout_below="@+id/rlimage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:id="@+id/tvnodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="33dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="No data Found!"></TextView>
+
+</RelativeLayout>

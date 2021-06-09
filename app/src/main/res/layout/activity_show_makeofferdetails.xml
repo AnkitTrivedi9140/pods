@@ -371,6 +371,7 @@
             </RelativeLayout>
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivaccept"
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/rladdress"
@@ -379,14 +380,18 @@
                 android:layout_marginLeft="22dp"
                 android:layout_height="55dp"></ImageView>
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivedit"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="26dp"
                 android:layout_below="@+id/rladdress"
-                android:src="@drawable/edit"
+                android:src="@drawable/chat"
                 android:layout_width="55dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="55dp"></ImageView>
+                android:layout_alignParentEnd="true"
+                android:layout_height="55dp"
+               android:layout_marginRight="22dp"
+                android:layout_alignParentRight="true"></ImageView>
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivdeclined"
                 android:layout_marginRight="22dp"
                 android:layout_marginTop="16dp"

@@ -39,13 +39,14 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvviewofferdetails,tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
+        public TextView tvviewofferhistory, tvviewofferdetails,tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
         public ImageView productiv,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
         int counter=0;
         public MyViewHolder(View view) {
             super(view);
+            tvviewofferhistory = (TextView) view.findViewById(R.id.tvviewofferhistory);
             tvremarks = (TextView) view.findViewById(R.id.tvremarks);
             tvviewofferdetails = (TextView) view.findViewById(R.id.tvviewofferdetails);
             tvproductname = (TextView) view.findViewById(R.id.tvproductname);
@@ -60,6 +61,12 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
 
                 if (adapterListener != null) {
                     adapterListener.onItemClick(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvviewofferhistory.setOnClickListener(v -> {
+
+                if (openListener != null) {
+                    openListener.onAdapterItemClicked(productResponseList.get(getAdapterPosition()));
                 }
             });
         }

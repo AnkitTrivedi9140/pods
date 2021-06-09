@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ivcut"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/profilecut"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="11dp"
+        >
+    </ImageView>
+
+    <EditText
+        android:id="@+id/etofferid"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Offerid"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/ivcut"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        android:lines="2"
+        android:editable="false"
+        android:focusable="false"
+        android:clickable="true"
+ ></EditText>
+
+
+
+
+
+    <EditText
+        android:id="@+id/etofferamount"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Enter offer amount"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/etofferid"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+        android:inputType="numberDecimal"
+        ></EditText>
+
+    <EditText
+        android:id="@+id/etofferqty"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Enter quantity"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/etofferamount"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+
+
+        ></EditText>
+    <EditText
+        android:id="@+id/etremarks"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Your Remarks"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/etofferqty"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+        android:gravity="start"
+        ></EditText>
+    <TextView
+        android:layout_below="@+id/etremarks"
+        android:background="@drawable/ripplenext"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="22dp"
+        android:lines="1"
+        android:id="@+id/tvsavepwd"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="22dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:text="SUBMIT"
+        android:gravity="center"
+        ></TextView>
+
+</RelativeLayout>

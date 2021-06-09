@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+
+app:cardUseCompatPadding="true"
+app:cardCornerRadius="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:layout_margin="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/productimage"
+        app:civ_border_width="2dp"
+android:src="@color/black"
+android:visibility="gone"
+        app:civ_border_color="@color/platinum"
+        android:layout_width="111dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="111dp"/>
+    <TextView
+        android:layout_below="@+id/productimage"
+        android:id="@+id/tvproductname"
+        android:layout_width="wrap_content"
+        android:text="productname"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:layout_height="wrap_content"></TextView>
+
+
+   <RelativeLayout
+                android:id="@+id/rlorderid"
+                android:layout_marginTop="6dp"
+                android:layout_below="@+id/tvproductname"
+                android:layout_width="match_parent"
+                android:layout_height="111dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/platinum"
+                    ></TextView>
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/platinum"
+                    ></TextView>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/platinum"
+                    ></TextView>
+                <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/platinum"
+                    android:layout_alignParentRight="true">
+
+
+                </TextView>
+
+                <RelativeLayout
+                    android:layout_marginLeft="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvorderdatetxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer date"
+
+                        ></TextView>
+                    <TextView
+                        android:id="@+id/tvorderidtxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer Id"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/tvorderdatetxt"
+                        ></TextView>
+
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvordertotaltxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer total"
+                        android:layout_below="@+id/tvorderidtxt"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvorderqtytxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quantity"
+                        android:layout_below="@+id/tvordertotaltxt"
+                        ></TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+                    <TextView
+                        android:id="@+id/tvorderdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order date"
+                        android:textColor="@color/black"
+                        ></TextView>
+                    <TextView
+                        android:id="@+id/tvorderid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Id"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/tvorderdate"
+                        android:textColor="@color/black"
+                        ></TextView>
+
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvordertotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order total"
+                        android:layout_below="@+id/tvorderid"
+                        android:textColor="@color/black"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvorderqty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order total"
+                        android:layout_below="@+id/tvordertotal"
+                        android:textColor="@color/black"
+                        ></TextView>
+                </RelativeLayout>
+   </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/rlbuyerprice"
+                android:background="@drawable/edittext_bg"
+                android:layout_below="@+id/rlorderid"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+
+                >
+                <TextView
+                    android:layout_marginLeft="22dp"
+                    android:text="Buyer Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tvbuyerofferprice"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="22dp"
+                    android:text="Buyer Price"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true">
+
+                </TextView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlbuyerremarks"
+                android:background="@drawable/edittext_bg"
+                android:layout_below="@+id/rlbuyerprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                >
+                <TextView
+                    android:id="@+id/tvbuyerheadremarks"
+                    android:layout_marginLeft="14dp"
+                    android:text="Buyer Remarks"
+
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                            >
+
+                </TextView>
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="14dp"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="8dp"
+                    android:id="@+id/tvbuyerofferremarks"
+                    android:layout_below="@+id/tvbuyerheadremarks"
+                    android:text="Buyer Remarks"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  >
+                </TextView>
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/rlsellerprice"
+                android:background="@drawable/edittext_bg"
+                android:layout_below="@+id/rlbuyerremarks"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+
+                >
+                <TextView
+                    android:layout_marginLeft="22dp"
+                    android:text="Seller Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tvsellerofferprice"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="22dp"
+                    android:text="Buyer Price"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true">
+
+                </TextView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlsellerremarks"
+                android:background="@drawable/edittext_bg"
+                android:layout_below="@+id/rlsellerprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                >
+                <TextView
+                    android:id="@+id/tvsellerheadremarks"
+                    android:layout_marginLeft="14dp"
+                    android:text="Seller Remarks"
+
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                </TextView>
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="14dp"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="8dp"
+                    android:id="@+id/tvsellerofferremarks"
+                    android:layout_below="@+id/tvsellerheadremarks"
+                    android:text="seller Remarks"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/ivaccept"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/rlsellerremarks"
+                android:src="@drawable/correction"
+                android:layout_width="44dp"
+                android:layout_marginLeft="22dp"
+                android:layout_height="44dp"></ImageView>
+            <ImageView
+                android:id="@+id/ivedit"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/rlsellerremarks"
+                android:src="@drawable/edit"
+                android:layout_width="44dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="44dp"></ImageView>
+            <ImageView
+                android:id="@+id/ivdeclined"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/rlsellerremarks"
+                android:src="@drawable/prohibition"
+                android:layout_width="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true"></ImageView>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

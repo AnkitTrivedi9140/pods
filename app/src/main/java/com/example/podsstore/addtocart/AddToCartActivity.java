@@ -804,7 +804,7 @@ etaddress.setOnClickListener(new View.OnClickListener() {
                 Double v2 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
                         etofferamount.getText().toString() : "0");
                 Double value = v1 * v2;
-                ettotalamount.setText(value.toString());
+                ettotalamount.setText(String.valueOf(value.toString()));
             }
         });
 
@@ -828,7 +828,7 @@ etaddress.setOnClickListener(new View.OnClickListener() {
                 Double v2 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
                         etqty.getText().toString() : "0");
                 Double value = v1 * v2;
-                ettotalamount.setText(value.toString());
+                ettotalamount.setText(String.valueOf(value.toString()));
             }
         });
 
@@ -895,7 +895,7 @@ ettotalamount.setText(aaa.toString());*/
 
                 //   loadData(et.getText().toString().trim());
                 else {
-makeoffer(prodtype.toString(),ettotalamount.getText().toString(),etofferamount.getText().toString(),"288",etqty.getText().toString(),etremarka.getText().toString());
+makeoffer(prodtype.toString(),String.valueOf(ettotalamount.getText().toString()),etofferamount.getText().toString(),"288",etqty.getText().toString(),etremarka.getText().toString());
 
                alert.dismiss();
                 }
@@ -977,8 +977,8 @@ addressid=data.getAddressid().toString();
 
         MakeOfferRequest r = new MakeOfferRequest();
         r.setProductid(Long.valueOf(prodid));
-        r.setActualamount(Double.valueOf(actualammount));
-        r.setOfferamount(Double.valueOf(offeramount));
+        r.setActualamount(String.valueOf(actualammount));
+        r.setOfferamount(String.valueOf(offeramount));
         r.setAmountperunit(Integer.parseInt( amountperunit));
         r.setQuantitydetails(Integer.valueOf(quantitydetails));
         r.setRemarks(remarks);
@@ -1045,8 +1045,8 @@ finish();
 
         MakeOfferRequest r = new MakeOfferRequest();
         r.setProductid(Long.valueOf(prodid));
-        r.setActualamount(Double.valueOf(actualammount));
-        r.setOfferamount(Double.valueOf(offeramount));
+//        r.setActualamount(Double.valueOf(actualammount));
+//        r.setOfferamount(Double.valueOf(offeramount));
         r.setAmountperunit(Integer.valueOf(amountperunit));
         r.setQuantitydetails(Integer.valueOf(quantitydetails));
         r.setRemarks(remarks);

@@ -366,8 +366,8 @@ ettotalamount.setText(aaa.toString());*/
         MakeOfferRequest r = new MakeOfferRequest();
 
         r.setProductid(Long.valueOf(prodid));
-        r.setActualamount(Double.valueOf(actualammount));
-        r.setOfferamount(Double.valueOf(offeramount));
+        r.setActualamount(String.valueOf(actualammount));
+        r.setOfferamount(String.valueOf(offeramount));
         r.setAmountperunit(Integer.parseInt( amountperunit));
         r.setQuantitydetails(Integer.valueOf(quantitydetails));
         r.setRemarks(remarks);
