@@ -1,7 +1,6 @@
 package com.example.podsstore;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +16,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,10 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.SpannableString;
-import android.text.style.TextAppearanceSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,22 +39,25 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.aboutpod.ConnectwithPodActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
+import com.example.podsstore.banner.SellerBannerproductActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.category.SubCategoryActivity;
 import com.example.podsstore.data.ApiClient;
-import com.example.podsstore.data.response.BestSellingProductResponse;
+import com.example.podsstore.data.response.BannerResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
-import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.data.response.TopBrandsProductResponse;
 import com.example.podsstore.data.response.TopBrandsResponse;
 import com.example.podsstore.drower.AddressesActivity;
-import com.example.podsstore.drower.ChooseCountryActivity;
-import com.example.podsstore.drower.DrowerActivity;
 import com.example.podsstore.drower.HelpAndFAQActivity;
 import com.example.podsstore.drower.PrivacyActivity;
 import com.example.podsstore.drower.ShowMakeofferActivity;
@@ -78,8 +76,6 @@ import com.example.podsstore.profile.ProfileActivity;
 import com.example.podsstore.search.SearchActivity;
 import com.example.podsstore.topbrands.TopBrandsProductActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 import java.util.Timer;
@@ -108,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     Integer[] imageId = {R.drawable.catc, R.drawable.catb, R.drawable.catd, R.drawable.cata, R.drawable.cate, R.drawable.catf};
     String[] imagesName = {"image1", "image2", "image3", "image4"};
-
+    SliderLayout slider;
     int currentPage = 0;
     Timer timer;
     final long DELAY_MS = 800;//delay in milliseconds before task is to be executed
@@ -133,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManagerss.init(MainActivity.this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         getSupportActionBar().hide();
+        slider=findViewById(R.id.slider);
+
+
 
 //        getSupportActionBar().setTitle("  Pod");
 //        getSupportActionBar().setElevation(0);
@@ -401,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
         });
         loadDatacart();
 
-
+        loadDatabanner();
     /*    dl.addDrawerListener(t);
 
         t.syncState();*/
@@ -512,6 +511,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (slider != null){
+            slider.startAutoCycle();
+        }
         loadDatacart();
     }
 
@@ -1021,6 +1023,98 @@ alert.dismiss();
                  Log.e("onerrors",t.getMessage());
              }
          });
+    }
+    @SuppressLint("CheckResult")
+    private void loadDatabanner() {
+
+        // binding.progress.setVisibility(View.VISIBLE);
+        Log.e("getProductMasterssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN));
+        ApiClient.getApiClient().getbanners()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<List<BannerResponse>>>() {
+                    @Override
+                    public void onSuccess(Response<List<BannerResponse>> response) {
+
+                        Log.d("onSuccess: ",String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+                            List<BannerResponse> list = response.body();
+                            Log.e("getProduct", String.valueOf(list.size()));
+
+uploadbanner(list);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_network_msg), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("geterre", String.valueOf(e.getMessage()));
+
+                    }
+                });
+    }
+
+    public void uploadbanner(List<BannerResponse> list)
+    {
+        for (BannerResponse s : list) {
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+            sliderView.image(s.getBannerimgurl()).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(BaseSliderView slider) {
+                    Log.d("dddddddsss",String.valueOf(s.getId()+" "+s.getBannername()));
+                    if(s.getAndroidmove().equalsIgnoreCase("bestseller")){
+                        Intent i=new Intent(getApplicationContext(), SellerBannerproductActivity.class);
+                        startActivity(i);
+                    }
+                }
+            });
+            slider.addSlider(sliderView);
+        }
+
+        slider.movePrevPosition(false);
+        slider.moveNextPosition(false);
+        slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        slider.setCustomAnimation(new DescriptionAnimation());
+        slider.setClickable(true);
+        slider.setFocusableInTouchMode(false);
+        slider.setFocusable(false);
+        slider.addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+    Log.d("ddddddd",String.valueOf(position));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
+
+        slider.getPagerIndicator().setDefaultIndicatorColor(Color.parseColor("#01309A"), Color.parseColor("#cecdcd"));
+        // slider.setPresetTransformer(SliderLayout.Transformer.Default);
+        //slider.setPresetIndicator(com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom);
+        slider.setDuration(8000);
+    }
+    protected void onStop() {
+
+        slider.stopAutoCycle();
+
+        super.onStop();
     }
 
 }

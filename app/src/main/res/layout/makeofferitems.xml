@@ -4,48 +4,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="11dp"
     app:cardCornerRadius="12dp"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_margin="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    <ImageView
+   android:src="@color/platinum"
+        android:id="@+id/ivproduct"
+        android:layout_width="111dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginLeft="6dp"
+        android:visibility="gone"
+        android:layout_height="222dp"></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_toRightOf="@+id/ivproduct"
+     android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvmargin"
+            android:layout_marginLeft="33dp"
+            android:layout_toRightOf="@+id/tvtotalqtyhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:id="@+id/tvproductnameremarkhead"
+            android:textSize="16dp"
+            android:text="List Price"
+            android:textStyle="bold"
+
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"></TextView>
 <TextView
+    android:layout_toRightOf="@+id/tvmargin"
+    android:layout_marginRight="12dp"
+    android:textStyle="bold"
+    android:textColor="@color/black"
     android:id="@+id/tvremarks"
     android:textSize="16dp"
-    android:layout_width="match_parent"
+    android:layout_marginTop="8dp"
+    android:layout_alignParentRight="true"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"></TextView>
 
     <TextView
         android:id="@+id/tvproductnamehead"
         android:textSize="16dp"
-        android:text="Product Name"
+        android:text="Offer Price"
         android:textStyle="bold"
         android:layout_below="@+id/tvremarks"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content"></TextView>
     <TextView
-        android:layout_below="@+id/tvproductnamehead"
+        android:layout_toRightOf="@+id/tvmargin"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvremarks"
         android:id="@+id/tvproductname"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16dp"
-        android:layout_width="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
+
         android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:id="@+id/tvtotalqtyhead"
         android:text="Total Quantity"
        android:layout_below="@+id/tvproductname"
         android:textSize="16dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
-
-        android:layout_below="@+id/tvtotalqtyhead"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/tvmargin"
+        android:layout_below="@+id/tvproductname"
         android:id="@+id/tvtotalqty"
         android:textSize="16dp"
-        android:layout_width="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
@@ -54,14 +102,20 @@
         android:id="@+id/tvtotalamounthead"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:text="Total Amount"
-        android:layout_width="match_parent"
+        android:text="Offer total"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
+        android:layout_marginTop="8dp"
+       android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:id="@+id/tvtotalamount"
+        android:layout_toRightOf="@+id/tvmargin"
         android:textSize="16dp"
-        android:layout_below="@+id/tvtotalamounthead"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/tvtotalqty"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
@@ -69,63 +123,107 @@
         android:layout_marginTop="8dp"
         android:id="@+id/tvofferstatushead"
         android:textSize="16dp"
-        android:text="Status"
+        android:text="Offer Address"
         android:textStyle="bold"
         android:layout_below="@+id/tvtotalamount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/tvofferstatus"
-        android:textSize="16dp"
-        android:layout_below="@+id/tvofferstatushead"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
         android:layout_marginTop="8dp"
-        android:layout_below="@+id/tvofferstatus"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/tvmargin"
+        android:id="@+id/tvofferstatus"
+        android:textSize="16dp"
+        android:layout_below="@+id/tvtotalamount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/tvofferstatus"
+            android:id="@+id/tvofferdateheadss"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="Offer Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:layout_toRightOf="@+id/tvmargin"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/tvdatess"
+            android:textSize="16dp"
+            android:layout_below="@+id/tvofferstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/tvdatess"
+            android:id="@+id/tvofferdateheadddd"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="Offer Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:layout_toRightOf="@+id/tvmargin"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/tvdateddd"
+            android:textSize="16dp"
+            android:layout_below="@+id/tvdatess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvdateddd"
         android:id="@+id/tvofferdatehead"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:text="Date"
-        android:layout_width="match_parent"
+        android:text="Remarks"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
+        android:layout_toRightOf="@+id/tvmargin"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:id="@+id/tvdate"
         android:textSize="16dp"
-        android:layout_below="@+id/tvofferdatehead"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/tvdateddd"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
 
-    <TextView
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/tvdate"
-        android:id="@+id/tvaddresshead"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:text="Address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/tvaddress"
-        android:textSize="16dp"
-        android:layout_below="@+id/tvaddresshead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </TextView>
 
+
+
+    </RelativeLayout>
         <TextView
             android:background="@drawable/rippleqty"
 
-            android:layout_below="@+id/tvaddress"
+            android:layout_below="@+id/rl"
 
             android:id="@+id/tvviewofferdetails"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:textSize="14dp"
-
+android:visibility="gone"
 
             android:layout_marginTop="0dp"
             android:drawableEnd="@drawable/goo"
@@ -142,6 +240,9 @@
 
 
         <TextView
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:background="@drawable/rippleqty"
 
             android:layout_below="@+id/tvviewofferdetails"
@@ -157,10 +258,9 @@
             android:paddingRight="14dp"
             android:textColor="#13B3A7"
             android:textStyle="bold"
-            android:text="Check Seller Remarks"
+            android:text="View Your Offer Details"
             android:gravity="start|center_vertical"
             android:drawableRight="@drawable/goo"></TextView>
-
 
 
     </RelativeLayout>

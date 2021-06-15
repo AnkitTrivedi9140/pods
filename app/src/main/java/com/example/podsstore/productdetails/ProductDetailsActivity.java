@@ -553,7 +553,7 @@ loadDatacart();
 
                             }
                         } else {
-                          Toast.makeText(getApplicationContext(),"Item already in cart.", Toast.LENGTH_SHORT).show();
+                          Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     }

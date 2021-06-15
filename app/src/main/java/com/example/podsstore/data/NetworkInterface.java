@@ -15,6 +15,7 @@ import com.example.podsstore.data.request.ReturnRequest;
 import com.example.podsstore.data.request.ReviewRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.AddressResponse;
+import com.example.podsstore.data.response.BannerResponse;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
@@ -82,6 +83,10 @@ public interface NetworkInterface {
 
     @POST("productRest/getProduct")
     Single<Response<List<ProductResponse>>>getproducts();
+
+
+    @POST("bannerRest/getBannerList")
+    Single<Response<List<BannerResponse>>>getbanners();
 
 
     @POST("productRest/getProd")
@@ -159,8 +164,6 @@ public interface NetworkInterface {
     @POST("imageRest/uploadProfilePhoto")
     Call<CreateLoginUserResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
                                           @Part("userEmailId") RequestBody  userEmailId );
-
-    //http://216.10.243.60:4067/PodsStoreAPI/orderRest/uploadProofOfReturn?userEmailId=ankittrivedi9140@gmail.com&orderId=
 
     @Multipart
     @POST("productRest/uploadProofOfFund")
@@ -246,16 +249,23 @@ public interface NetworkInterface {
     @POST("makerOfferRest/offerDeclineByBuyer")
     Call<CreateLoginUserResponse>makeofferdeclined(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
 
+
     @POST("makerOfferRest/offerAceptByBuyer")
     Call<CreateLoginUserResponse>makeofferaccept(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
+
 
     @POST("makerOfferRest/getOfferHistory")
     Call<List<MakeofferhistoryResponse>>makeofferhistory(@Header("Authorization") String authHeader, @Query("offerid") String offerid);
 
 
-
     @POST("makerOfferRest/updateOfferByBuyer")
     Single<Response<CreateLoginUserResponse>> editmakeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Body EditMakeOfferRequest requests);
+
+
+
+    @POST("makerOfferRest/placeOfferOrder")
+    Call<CreateLoginUserResponse>makeofferplaceorder(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("mode") String mode, @Query("txid") String txid);
+
 
 
 }

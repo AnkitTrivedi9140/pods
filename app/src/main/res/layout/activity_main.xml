@@ -183,8 +183,18 @@
                         </androidx.recyclerview.widget.RecyclerView>
                     </RelativeLayout>
 
-                    <RelativeLayout
 
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="133dp"
+                        android:layout_below="@+id/rlcategory">
+
+                    </com.daimajia.slider.library.SliderLayout>>
+
+                    <RelativeLayout
+android:visibility="gone"
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -283,7 +293,7 @@
                         android:id="@+id/tvbestselling"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pager"
+                        android:layout_below="@+id/slider"
                         android:layout_marginTop="12dp"
                         android:text="Bestsellers"
                         android:textStyle="bold"
@@ -298,7 +308,7 @@
                         android:id="@+id/tvbestsellingseeall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pager"
+                        android:layout_below="@+id/slider"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="18dp"

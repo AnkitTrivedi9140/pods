@@ -74,8 +74,7 @@ loadData(getIntent().getStringExtra("userid"));
                     for (int i = 0; i < list.size(); i++) {
 
                         tvorderdate.setText(list.get(i).getOrderdate().toString());
-                        tvdelieverestimate.setText("Payment Method-"+list.get(i).getMode().toString());
-                        tvorderid.setText("#"+list.get(i).getOrderid().toString());
+                          tvorderid.setText("#"+list.get(i).getOrderid().toString());
                         tvordertotal.setText("$ "+list.get(i).getTotalprice().toString());
                         tvdelieverydate.setText("Wednesday 5 June 2021");
                         tvorderstatus.setText("Order Status: "+list.get(i).getCurrentorderstatus().toString());
@@ -86,6 +85,13 @@ loadData(getIntent().getStringExtra("userid"));
 
                         }else{
                             tvproductaddress.setText(""+list.get(i).getOrderaddress());
+
+                        }
+                        if(list.get(i).getMode()==null){
+
+                        }else{
+                            tvdelieverestimate.setText("Payment Method-"+list.get(i).getMode().toString());
+
 
                         }
 

@@ -32,14 +32,14 @@ import retrofit2.Response;
 
 public class ShowMakeofferdetailsActivity extends AppCompatActivity {
     ImageView ivproduct,ivdeclined,ivedit,ivaccept;
-    TextView tvdelieverestimate,tvorderstatus,tvorderdate,tvorderid,tvordertotal,tvdelieverydate,tvproductname,tvproductqty,tvproductprise,tvproductaddress;
+    TextView tvofferprice, tvdelieverestimate,tvorderstatus,tvorderdate,tvorderid,tvordertotal,tvdelieverydate,tvproductname,tvproductqty,tvproductprise,tvproductaddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_makeofferdetails);
 
-
+        tvofferprice=findViewById(R.id.tvofferprice);
         tvorderdate=findViewById(R.id.tvorderdate);
         tvorderstatus=findViewById(R.id.tvorderstatus);
         ivproduct=findViewById(R.id.ivproduct);
@@ -154,16 +154,16 @@ finish();
                       tvorderdate.setText(list.get(i).getOffercreatedat());
                       tvorderid.setText(list.get(i).getOfferid().toString());
                       tvordertotal.setText(list.get(i).getActualamount());
-
+                      tvofferprice.setText(list.get(i).getFirstbidamount());
                       tvproductname.setText(list.get(i).getProductname());
-                      tvproductqty.setText("Qty "+list.get(i).getQuantitydetails());
-                      tvorderstatus.setText("Offer Status "+list.get(i).getOfferstatus());
-tvdelieverestimate.setText(list.get(i).getOfferaddress());
+                      tvproductqty.setText("Qty: "+list.get(i).getQuantitydetails());
+                      tvorderstatus.setText("Offer Status: "+list.get(i).getOfferstatus());
+//tvdelieverestimate.setText(list.get(i).getOfferaddress());
                       tvproductprise.setText(list.get(i).getRemarks());
                       if(list.get(i).getSellerremark()==null) {
-                          tvproductaddress.setText("Wait for Response ");
+                          tvproductaddress.setText("");
                       }else{
-                          tvproductaddress.setText(list.get(i).getSellerremark());
+                          tvproductaddress.setText(list.get(i).getOfferaddress());
                       }
 
                       Glide.with(getApplicationContext())

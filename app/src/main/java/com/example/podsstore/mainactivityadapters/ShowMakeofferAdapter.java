@@ -39,14 +39,17 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvviewofferhistory, tvviewofferdetails,tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
-        public ImageView productiv,deleteproductiv;
+        public TextView tvdateddd,tvdatess,tvviewofferhistory, tvviewofferdetails,tvaddress,tvdate,tvremarks, tvproductname,tvtotalqty,tvqtyperunit,tvtotalamount,tvofferstatus;
+        public ImageView ivproduct,deleteproductiv;
         public CardView cardView,less,more;
         RelativeLayout wishlist;
         int counter=0;
         public MyViewHolder(View view) {
             super(view);
             tvviewofferhistory = (TextView) view.findViewById(R.id.tvviewofferhistory);
+            tvdateddd =view.findViewById(R.id.tvdateddd);
+            tvdatess =view.findViewById(R.id.tvdatess);
+            ivproduct =view.findViewById(R.id.ivproduct);
             tvremarks = (TextView) view.findViewById(R.id.tvremarks);
             tvviewofferdetails = (TextView) view.findViewById(R.id.tvviewofferdetails);
             tvproductname = (TextView) view.findViewById(R.id.tvproductname);
@@ -101,16 +104,20 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     public void onBindViewHolder(ShowMakeofferAdapter.MyViewHolder holder, int position) {
         MakeOfferResponse cartResponse = productResponseList.get(position);
         if(cartResponse!=null){
-            holder.tvproductname.setText(cartResponse.getProductname());
-            holder.tvdate.setText(cartResponse.getOffercreatedat());
+            holder.tvproductname.setText(cartResponse.getFirstbidamount());
+            holder.tvdate.setText(cartResponse.getRemarks());
 
-              //  holder.tvaddress.setText(cartResponse.getOfferaddress().toString());
+               holder.tvdateddd.setText(cartResponse.getOffercreatedat());
 
-
-            holder.tvofferstatus.setText("pending");
-            holder.tvremarks.setText(cartResponse.getRemarks());
+            holder. tvdatess.setText(cartResponse.getOfferstatus());
+            holder.tvofferstatus.setText(cartResponse.getOfferaddress());
+            holder.tvremarks.setText(cartResponse.getActualamount());
             holder.tvtotalqty.setText(cartResponse.getQuantitydetails());
-            holder.tvtotalamount.setText(cartResponse.getActualamount());
+           Double aa=Double.valueOf(cartResponse.getQuantitydetails())*Double.valueOf(cartResponse.getFirstbidamount());
+            holder.tvtotalamount.setText(String.valueOf(aa));
+            Glide.with(context)
+                    .load(cartResponse.getOfferimage())
+                    .into(holder.ivproduct);
 
         }
 

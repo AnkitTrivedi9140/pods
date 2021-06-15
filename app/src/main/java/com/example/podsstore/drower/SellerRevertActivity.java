@@ -53,7 +53,7 @@ public class SellerRevertActivity extends AppCompatActivity {
     MakeOfferHistoryAdapter productListAdapter;
     TextView tvnodata,tvproductname;
     ProgressBar progressBar;
-    TextView progresstext;
+    TextView tvproductofferstatus,tvproductofferadd,progresstext,tvproductlistedamount,tvproductofferamount;
     ImageView ivproduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,10 @@ public class SellerRevertActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seller_revert);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Your Offers");
+        tvproductofferstatus = findViewById(R.id.tvproductofferstatus);
+        tvproductofferadd = findViewById(R.id.tvproductofferadd);
+        tvproductofferamount = findViewById(R.id.tvproductofferamount);
+        tvproductlistedamount = findViewById(R.id.tvproductlistedamount);
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new MakeOfferHistoryAdapter(SellerRevertActivity.this);
         tvnodata = findViewById(R.id.tvnodata);
@@ -73,6 +77,7 @@ public class SellerRevertActivity extends AppCompatActivity {
      productListAdapter.setAdapterListener(adapterListener);
         productListAdapter.setAdapterListeners(adapterListeners);
         productListAdapter.setAdapterListenersedit(adapterListenersedit);
+        productListAdapter.setAdapterListenerplaceorder(adapterListenerplaceorder);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
 //        recyclerView.setLayoutManager(gridLayoutManager);
@@ -99,11 +104,15 @@ loadDataimage();
                     for(int i=0;i<list.size();i++){
 
                         tvproductname.setText(list.get(i).getProductname());
-
-
+                        tvproductlistedamount.setText("List Price: "+list.get(i).getActualamount());
+                           tvproductofferadd.setText(list.get(i).getOfferaddress());
+                        tvproductofferamount.setText("Offer Price: "+list.get(i).getFirstbidamount());
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getOfferimage())
                                 .into(ivproduct);
+                        Double aa=Double.valueOf(list.get(i).getQuantitydetails())*Double.valueOf(list.get(i).getFirstbidamount());
+                        tvproductofferstatus.setText("Offer Total: "+String.valueOf(aa));
+
                         ivproduct.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -170,7 +179,12 @@ loadDataimage();
 showAlertDialog(data.getOfferid());
 
     };
+    private MakeOfferHistoryAdapter.PlaceorderAdapterListener adapterListenerplaceorder = data -> {
+     Intent intent=new Intent(SellerRevertActivity.this,PaymentActivity.class);
+     intent.putExtra("offerid",data.getOfferid());
+     startActivity(intent);
 
+    };
 
     @SuppressLint("NewApi")
     private void showAlertDialog(String offerid) {

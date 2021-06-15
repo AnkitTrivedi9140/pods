@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -66,7 +67,7 @@ import retrofit2.Response;
 public class PaymentActivity extends AppCompatActivity implements AddtocartAdapter.DataTransferInterface {
     private RecyclerView recyclerView;
     private AddtocartAdapter productListAdapter;
-    TextView placeorderbtn,placeorderbtnbuynow;
+    TextView placeorderbtn,placeorderbtnbuynow,placeordermakeoffer;
     private QuantityViewModel viewModel;
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -82,8 +83,8 @@ String mode;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         placeorderbtn = findViewById(R.id.placeorderbtn);
+        placeordermakeoffer = findViewById(R.id.placeordermakeoffer);
         radioGroup = findViewById(R.id.radioGroup);
-
         int selectedId = radioGroup.getCheckedRadioButtonId();
 
         // find the radiobutton by returned id
@@ -103,6 +104,12 @@ String mode;
         }else {
             placeorderbtnbuynow.setVisibility(View.VISIBLE);
         }
+        if(getIntent().getStringExtra("offerid")==null) {
+            placeordermakeoffer.setVisibility(View.GONE);
+
+        }else {
+            placeordermakeoffer.setVisibility(View.VISIBLE);
+        }
 placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -110,6 +117,13 @@ placeorderbtnbuynow.setOnClickListener(new View.OnClickListener() {
         singleproductdetails();
     }
 });
+        placeordermakeoffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              makeofferplaceorder();
+            }
+        });
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -153,6 +167,7 @@ showAlertDialog(path);
         Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
         startActivity(intent);
         finish();
+
     }
 
     @SuppressLint("CheckResult")
@@ -197,9 +212,6 @@ showAlertDialog(path);
 
 
                             }
-
-                          //  placeholder(listone);
-
 
                         }
                     });
@@ -606,4 +618,43 @@ r.setOrderid("");
             }
         });
     }
+
+
+    @SuppressLint("CheckResult")
+    private void makeofferplaceorder() {
+        // Toast.makeText(getApplicationContext(), PreferenceManagerss.getStringValue(Preferences.USER_OTP_EMAIL) ,Toast.LENGTH_SHORT).show();
+        Log.e("getfdfd", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)+getIntent().getStringExtra("offerid")
+                +mode+txnid  );
+        //  if (!PreferenceManager.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+        ApiClient.getApiClient().makeofferplaceorder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),getIntent().getStringExtra("offerid"),mode,txnid).enqueue(new Callback<CreateLoginUserResponse>() {
+            //ApiClient.getApiClient().confirmotp("fff", otp).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
+
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("onResp ",String.valueOf(response.code() ));
+
+
+                if (response.isSuccessful()) {
+
+                    CreateLoginUserResponse list = response.body();
+
+                    Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
+                  Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                  startActivity(intent);
+                  finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Offer Accepted for current offerid", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateLoginUserResponse> call, Throwable t) {
+
+                Log.e("onerrors", t.getMessage());
+            }
+        });
+    }
+
+
 }

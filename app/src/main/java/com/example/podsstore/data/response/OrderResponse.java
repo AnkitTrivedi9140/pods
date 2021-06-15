@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class OrderResponse {
 
     @SerializedName("id")
-    private Long id;
+    private String id;
 
     @SerializedName("orderId")
     private String orderid;
 
     @SerializedName("userId")
-    private Long userid;
+    private String userid;
 
     @SerializedName("productId")
-    private Long productid;
+    private String productid;
 
     @SerializedName("productName")
     private String productname;
@@ -28,7 +28,7 @@ public class OrderResponse {
     @SerializedName("quantity")
     private Long qty;
     @SerializedName("price")
-    private Long price;
+    private String price;
 
     @SerializedName("orderStatus")
     private String totalprice;
@@ -68,11 +68,11 @@ public class OrderResponse {
         this.sellerid = sellerid;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -84,19 +84,19 @@ public class OrderResponse {
         this.orderid = orderid;
     }
 
-    public Long getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Long userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 
-    public Long getProductid() {
+    public String getProductid() {
         return productid;
     }
 
-    public void setProductid(Long productid) {
+    public void setProductid(String productid) {
         this.productid = productid;
     }
 
@@ -124,11 +124,11 @@ public class OrderResponse {
         this.qty = qty;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

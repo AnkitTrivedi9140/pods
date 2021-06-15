@@ -113,6 +113,7 @@ loadData();
                 Log.e("cartaaa",String.valueOf(response.code()) );
                 if (response.isSuccessful()) {
                     List<OrderResponse> list = response.body();
+                    Log.e("cartsize",String.valueOf(list.size()) );
                     productListAdapter.addAll(list);
                     getSupportActionBar().setTitle("Your Order List"+" ("+list.size()+")");
                     int totalPrice = 0;

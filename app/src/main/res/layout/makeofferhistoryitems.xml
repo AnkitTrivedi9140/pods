@@ -44,7 +44,7 @@ android:visibility="gone"
                 android:layout_marginTop="6dp"
                 android:layout_below="@+id/tvproductname"
                 android:layout_width="match_parent"
-                android:layout_height="111dp">
+                android:layout_height="133dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -99,7 +99,7 @@ android:visibility="gone"
                         android:id="@+id/tvordertotaltxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Offer total"
+                        android:text="List Price"
                         android:layout_below="@+id/tvorderidtxt"
                         ></TextView>
                     <TextView
@@ -109,6 +109,14 @@ android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:text="Quantity"
                         android:layout_below="@+id/tvordertotaltxt"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvordertotalall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer total"
+                        android:layout_below="@+id/tvorderqtytxt"
                         ></TextView>
                 </RelativeLayout>
                 <RelativeLayout
@@ -152,6 +160,15 @@ android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:text="Order total"
                         android:layout_below="@+id/tvordertotal"
+                        android:textColor="@color/black"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvorderqtytotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order total"
+                        android:layout_below="@+id/tvorderqty"
                         android:textColor="@color/black"
                         ></TextView>
                 </RelativeLayout>
@@ -267,6 +284,7 @@ android:visibility="gone"
                 </TextView>
             </RelativeLayout>
             <RelativeLayout
+
                 android:id="@+id/rlsellerremarks"
                 android:background="@drawable/edittext_bg"
                 android:layout_below="@+id/rlsellerprice"
@@ -330,6 +348,25 @@ android:visibility="gone"
                 android:layout_alignParentEnd="true"
                 android:layout_height="44dp"
                 android:layout_alignParentRight="true"></ImageView>
+
+            <TextView
+                android:background="@drawable/ripplenext"
+android:layout_marginTop="8dp"
+                android:layout_below="@+id/ivdeclined"
+                android:lines="1"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/tvplaceordermakeoffer"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:textSize="14dp"
+
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Place Order"
+                android:gravity="center"
+               ></TextView>
 
 
         </RelativeLayout>

@@ -29,7 +29,7 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
 
     private MakeOfferHistoryAdapter.InventoryAdapterListener openListener;
     private MakeOfferHistoryAdapter.EditAdapterListener editListener;
-
+    private MakeOfferHistoryAdapter.PlaceorderAdapterListener placeListener;
     public void setAdapterListener(MakeOfferHistoryAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
@@ -40,15 +40,25 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
     public void setAdapterListenersedit(MakeOfferHistoryAdapter.EditAdapterListener adapterListener) {
         this.editListener = adapterListener;
     }
+    public void setAdapterListenerplaceorder(MakeOfferHistoryAdapter.PlaceorderAdapterListener adapterListener) {
+        this.placeListener = adapterListener;
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvproductname,tvorderdate,tvorderid ,tvordertotal,tvorderqty,tvbuyerofferprice,tvbuyerofferremarks,tvsellerofferprice,tvsellerofferremarks;
+        public TextView tvorderqtytotal,tvplaceordermakeoffer,tvproductname,tvorderdate,tvorderid ,tvordertotal,tvorderqty,tvbuyerofferprice,tvbuyerofferremarks,tvsellerofferprice,tvsellerofferremarks;
         public ImageView ivaccept,ivedit,ivdeclined;
         public CardView cardView;
         CircleImageView productimage;
+        RelativeLayout rlsellerremarks,rlsellerprice,rlbuyerprice,rlbuyerremaks;
         RelativeLayout wishlist;
         int counter=0;
         public MyViewHolder(View view) {
             super(view);
+            tvorderqtytotal = view.findViewById(R.id.tvorderqtytotal);
+            rlbuyerprice = view.findViewById(R.id.rlbuyerprice);
+            rlbuyerremaks = view.findViewById(R.id.rlbuyerremarks);
+            rlsellerremarks = view.findViewById(R.id.rlsellerremarks);
+            rlsellerprice = view.findViewById(R.id.rlsellerprice);
+            tvplaceordermakeoffer = view.findViewById(R.id.tvplaceordermakeoffer);
             productimage = view.findViewById(R.id.productimage);
             tvproductname = (TextView) view.findViewById(R.id.tvproductname);
             tvorderdate = (TextView) view.findViewById(R.id.tvorderdate);
@@ -81,6 +91,12 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
 
                 if ( editListener!= null) {
                     editListener.onAdapterItemClickededit(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvplaceordermakeoffer.setOnClickListener(v -> {
+
+                if ( placeListener!= null) {
+                    placeListener.onAdapterItemClickplaceorder(productResponseList.get(getAdapterPosition()));
                 }
             });
         }
@@ -124,32 +140,121 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
           holder.tvordertotal.setText(cartResponse.getActualprice().toString());
 
 
-            holder.tvorderid.setText(cartResponse.getOfferid().toString());
+            holder.tvorderid.setText(cartResponse.getOfferid().toString()+"("+cartResponse.getStatus()+")");
             holder.tvorderqty.setText(cartResponse.getQuantity());
-            holder.tvbuyerofferprice.setText(cartResponse.getBuyerbidbrprice().toString());
+
             holder.tvbuyerofferremarks.setText(cartResponse.getBuyerremark().toString());
 //            holder.tvsellerofferprice.setText(cartResponse.getSellerprice().toString());
-//            holder.tvsellerofferremarks.setText(cartResponse.getSellerremark().toString());
+            holder.tvsellerofferremarks.setText(cartResponse.getBuyerremark().toString());
 
+
+
+
+            if(cartResponse.getBuyerbidbrprice()==null) {
+
+            }else{
+                Double aa=Double.valueOf(cartResponse.getQuantity())*Double.valueOf(cartResponse.getBuyerbidbrprice());
+                holder.tvorderqtytotal.setText(String.valueOf(aa));
+
+            }
             if(cartResponse.getSellerprice()==null){
-                holder.tvsellerofferprice.setText("Wait for Response ");
+
             }else{
-                holder.tvsellerofferprice.setText(cartResponse.getSellerprice().toString());
+                Double aa=Double.valueOf(cartResponse.getQuantity())*Double.valueOf(cartResponse.getSellerprice());
+                holder.tvorderqtytotal.setText(String.valueOf(aa));
+
             }
 
-            if(cartResponse.getSellerremark()==null){
-                holder.tvsellerofferremarks.setText("Wait for Response ");
+            if(cartResponse.getUsertype().equalsIgnoreCase("Buyer")){
+                holder.rlsellerprice.setVisibility(View.GONE);
+                holder.rlsellerremarks.setVisibility(View.GONE);
+
+
             }else{
-                holder.tvsellerofferremarks.setText(cartResponse.getSellerremark().toString());
+                holder.rlsellerprice.setVisibility(View.VISIBLE);
+                holder.rlsellerremarks.setVisibility(View.VISIBLE);
             }
+
             if(cartResponse.getStatus()==null){
                 holder.ivdeclined.setVisibility(View.GONE);
                 holder.ivedit.setVisibility(View.GONE);
                 holder.ivaccept.setVisibility(View.GONE);
+                holder.tvplaceordermakeoffer.setVisibility(View.GONE);
             }else{
+                if(cartResponse.getUsertype().equalsIgnoreCase("Seller") && cartResponse.getStatus().equalsIgnoreCase("New") ){
+                    holder.rlbuyerprice.setVisibility(View.GONE);
+                    holder.rlbuyerremaks.setVisibility(View.GONE);
+
+                    holder.ivdeclined.setVisibility(View.VISIBLE);
+                    holder.ivedit.setVisibility(View.VISIBLE);
+                    holder.ivaccept.setVisibility(View.VISIBLE);
+                    //holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+                }else{
+                    holder.ivdeclined.setVisibility(View.GONE);
+                    holder.ivedit.setVisibility(View.GONE);
+                    holder.ivaccept.setVisibility(View.GONE);
+                    holder.rlbuyerprice.setVisibility(View.VISIBLE);
+                    holder.rlbuyerremaks.setVisibility(View.VISIBLE);
+                }
+            }
+
+            if(cartResponse.getUsertype().equalsIgnoreCase("Seller")){
+                holder.rlbuyerprice.setVisibility(View.GONE);
+                holder.rlbuyerremaks.setVisibility(View.GONE);
+
+            }else{
+
+                holder.rlbuyerprice.setVisibility(View.VISIBLE);
+                holder.rlbuyerremaks.setVisibility(View.VISIBLE);
+            }
+
+            if(cartResponse.getBuyerbidbrprice()==null){
+                holder.tvbuyerofferprice.setText("");
+            }else{
+                holder.tvbuyerofferprice.setText(cartResponse.getBuyerbidbrprice().toString());
+
+            }
+
+            if(cartResponse.getSellerprice()==null){
+                holder.tvsellerofferprice.setText("");
+                holder.ivdeclined.setVisibility(View.GONE);
+                holder.ivedit.setVisibility(View.GONE);
+                holder.ivaccept.setVisibility(View.GONE);
+            }else{
+                holder.tvsellerofferprice.setText(cartResponse.getSellerprice().toString());
                 holder.ivdeclined.setVisibility(View.VISIBLE);
                 holder.ivedit.setVisibility(View.VISIBLE);
                 holder.ivaccept.setVisibility(View.VISIBLE);
+            }
+
+            if(cartResponse.getStatus()==null){
+                holder.ivdeclined.setVisibility(View.GONE);
+                holder.ivedit.setVisibility(View.GONE);
+                holder.ivaccept.setVisibility(View.GONE);
+                holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+            }
+           else if(cartResponse.getStatus().equalsIgnoreCase("Processed")){
+                holder.ivdeclined.setVisibility(View.GONE);
+                holder.ivedit.setVisibility(View.GONE);
+                holder.ivaccept.setVisibility(View.GONE);
+                holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+            }
+            else if(cartResponse.getStatus().equalsIgnoreCase("Declined")){
+                holder.ivdeclined.setVisibility(View.GONE);
+                holder.ivedit.setVisibility(View.GONE);
+                holder.ivaccept.setVisibility(View.GONE);
+                holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+            }
+            else if(cartResponse.getStatus().equalsIgnoreCase("Accepted")){
+                holder.ivdeclined.setVisibility(View.GONE);
+                holder.ivedit.setVisibility(View.GONE);
+                holder.ivaccept.setVisibility(View.GONE);
+                holder.tvplaceordermakeoffer.setVisibility(View.VISIBLE);
+            }else if(cartResponse.getStatus().equalsIgnoreCase("New")){
+//                holder.ivdeclined.setVisibility(View.VISIBLE);
+//                holder.ivedit.setVisibility(View.VISIBLE);
+//                holder.ivaccept.setVisibility(View.VISIBLE);
+//                holder.tvplaceordermakeoffer.setVisibility(View.GONE);
             }
         }
 
@@ -190,14 +295,21 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
 
     public interface AdapterListener {
 
-
         void onItemClick(MakeofferhistoryResponse data);
     }
 
     public interface InventoryAdapterListener {
         void onAdapterItemClicked(MakeofferhistoryResponse data);
+
     }
+
     public interface EditAdapterListener {
         void onAdapterItemClickededit(MakeofferhistoryResponse data);
+
+    }
+
+    public interface PlaceorderAdapterListener {
+        void onAdapterItemClickplaceorder(MakeofferhistoryResponse data);
+
     }
 }

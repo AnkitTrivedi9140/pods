@@ -10,10 +10,10 @@ public class OrderInfoResponse {
     private String orderid;
 
     @SerializedName("userId")
-    private Long userid;
+    private String userid;
 
     @SerializedName("productId")
-    private Long productid;
+    private String productid;
 
     @SerializedName("productName")
     private String productname;
@@ -30,9 +30,9 @@ public class OrderInfoResponse {
     private String productimage;
 
     @SerializedName("quantity")
-    private Long qty;
+    private String qty;
     @SerializedName("price")
-    private Long price;
+    private String price;
 
     @SerializedName("orderStatus")
     private String orderstatus;
@@ -139,21 +139,7 @@ public class OrderInfoResponse {
         this.orderid = orderid;
     }
 
-    public Long getUserid() {
-        return userid;
-    }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
-
-    public Long getProductid() {
-        return productid;
-    }
-
-    public void setProductid(Long productid) {
-        this.productid = productid;
-    }
 
     public String getProductname() {
         return productname;
@@ -187,19 +173,35 @@ public class OrderInfoResponse {
         this.productimage = productimage;
     }
 
-    public Long getQty() {
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getProductid() {
+        return productid;
+    }
+
+    public void setProductid(String productid) {
+        this.productid = productid;
+    }
+
+    public String getQty() {
         return qty;
     }
 
-    public void setQty(Long qty) {
+    public void setQty(String qty) {
         this.qty = qty;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

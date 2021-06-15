@@ -16,32 +16,88 @@
 
 
     <ImageView
-        android:layout_centerHorizontal="true"
+android:layout_marginLeft="8dp"
         android:id="@+id/ivproduct"
         android:src="@drawable/kkkkk"
         android:layout_width="111dp"
+        android:layout_marginTop="8dp"
         android:layout_height="111dp">
 
     </ImageView>
     <TextView
-        android:gravity="center"
+        android:layout_toRightOf="@+id/ivproduct"
+        android:layout_marginTop="8dp"
+
         android:text="pods product market"
-        android:textSize="18dp"
+        android:textSize="14dp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginRight="22dp"
-        android:layout_marginLeft="22dp"
+
         android:id="@+id/tvproductname"
-        android:layout_below="@+id/ivproduct"
+        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_toRightOf="@+id/ivproduct"
+        android:text="pods product market"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/tvproductlistedamount"
+        android:layout_below="@+id/tvproductname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+  <TextView
+      android:layout_toRightOf="@+id/ivproduct"
+    android:text="pods product market"
+    android:textSize="14dp"
+    android:textStyle="bold"
+    android:textColor="@color/black"
+      android:layout_marginLeft="8dp"
+    android:id="@+id/tvproductofferamount"
+    android:layout_below="@+id/tvproductlistedamount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></TextView>
+
+
+
+
+
+    <TextView
+        android:layout_toRightOf="@+id/ivproduct"
+        android:text="pods product market"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/tvproductofferstatus"
+        android:layout_below="@+id/tvproductofferamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:layout_toRightOf="@+id/ivproduct"
+        android:text="pods product market"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/manatee"
+android:layout_marginLeft="8dp"
+        android:id="@+id/tvproductofferadd"
+        android:layout_below="@+id/tvproductofferstatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
     <TextView
         android:layout_marginTop="4dp"
-        android:layout_below="@+id/tvproductname"
+        android:layout_below="@+id/tvproductofferadd"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/platinum"
         android:layout_marginBottom="2dp"></TextView>
+
+
+
+
 </RelativeLayout>
     <ProgressBar
         android:id="@+id/progress"
@@ -62,7 +118,9 @@
         ></TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
-        android:layout_margin="4dp"
+       android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+
         android:layout_below="@+id/rlimage"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -85,7 +85,7 @@ startActivity(intent);
     private void loadData() {
         progressBar.setVisibility(View.VISIBLE);
         progresstext.setVisibility(View.VISIBLE);
-        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"///"+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
+        //Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"///"+ PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
         ApiClient.getApiClient().getalloffers(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<MakeOfferResponse>>() {
             @Override
             public void onResponse(Call<List<MakeOfferResponse>> call, Response<List<MakeOfferResponse>> response) {

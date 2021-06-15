@@ -82,8 +82,16 @@
                         android:id="@+id/tvordertotaltxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Offer total"
+                        android:text="List Price"
                         android:layout_below="@+id/tvorderidtxt"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvofferpricetxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer Price"
+                        android:layout_below="@+id/tvordertotaltxt"
                         ></TextView>
                 </RelativeLayout>
                 <RelativeLayout
@@ -118,6 +126,15 @@
                         android:layout_height="wrap_content"
                         android:text="Order total"
                         android:layout_below="@+id/tvorderid"
+                        android:textColor="@color/black"
+                        ></TextView>
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:id="@+id/tvofferprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order total"
+                        android:layout_below="@+id/tvordertotal"
                         android:textColor="@color/black"
                         ></TextView>
                 </RelativeLayout>
@@ -230,8 +247,8 @@
                     android:id="@+id/tvdelieverestimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Payment Method- Online"
-                    android:layout_marginTop="8dp"
+                    android:text=""
+
                     android:textStyle="bold"
                     android:layout_marginLeft="22dp"
                     android:lines="1"
@@ -260,6 +277,7 @@
                     android:layout_below="@+id/tvdelieverydate"
                     android:layout_width="77dp"
                     android:layout_height="77dp"
+                    android:layout_marginBottom="8dp"
                     ></ImageView>
                 <TextView
                     android:layout_below="@+id/tvdelieverydate"
@@ -308,7 +326,7 @@
                 android:id="@+id/tvaddresstxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seller Remark"
+                android:text="Offer Address"
                 android:textStyle="bold"
                 android:textSize="18dp"
 

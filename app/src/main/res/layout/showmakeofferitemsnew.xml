@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rlorderid"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/tvordertxt"
+        android:layout_width="match_parent"
+        android:layout_height="111dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/platinum"
+            ></TextView>
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/platinum"
+            ></TextView>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/platinum"
+            ></TextView>
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/platinum"
+            android:layout_alignParentRight="true">
+
+
+        </TextView>
+
+        <RelativeLayout
+            android:layout_marginLeft="22dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvorderdatetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order date"
+
+                ></TextView>
+            <TextView
+                android:id="@+id/tvorderidtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Id"
+                android:layout_marginTop="6dp"
+                android:layout_below="@+id/tvorderdatetxt"
+                ></TextView>
+
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:id="@+id/tvordertotaltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order total"
+                android:layout_below="@+id/tvorderidtxt"
+                ></TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="22dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:id="@+id/tvorderdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order date"
+                android:textColor="@color/black"
+                ></TextView>
+            <TextView
+                android:id="@+id/tvorderid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Id"
+                android:layout_marginTop="6dp"
+                android:layout_below="@+id/tvorderdate"
+                android:textColor="@color/black"
+                ></TextView>
+
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:id="@+id/tvordertotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order total"
+                android:layout_below="@+id/tvorderid"
+                android:textColor="@color/black"
+                ></TextView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

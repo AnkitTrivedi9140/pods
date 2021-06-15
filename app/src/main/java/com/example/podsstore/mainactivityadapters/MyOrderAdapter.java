@@ -131,18 +131,25 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         holder.tvAssetType.setText(cartResponse.getProducttype());
         holder.description.setText("$_"+cartResponse.getPrice());
         holder.tvqty.setText("Qty: "+cartResponse.getQty());
-        holder.tvorderdate.setText(cartResponse.getItempresentin().toString());
+
         holder.tvcome.setText("Order Status- "+cartResponse.getCurrentorderstatus());
-        if(cartResponse.getCurrentorderstatus().toString().equalsIgnoreCase("delivered")){
+        if(cartResponse.getItempresentin()==null){
 
-            holder.tvreturn.setVisibility(View.VISIBLE);
-            holder.tvreview.setVisibility(View.VISIBLE);
+        }else{
+            holder.tvorderdate.setText(cartResponse.getItempresentin().toString());
+        }if(cartResponse.getCurrentorderstatus()==null){}else {
+            if(cartResponse.getCurrentorderstatus().toString().equalsIgnoreCase("delivered")){
+
+                holder.tvreturn.setVisibility(View.VISIBLE);
+                holder.tvreview.setVisibility(View.VISIBLE);
 
 
-        }else {
-            holder.tvreturn.setVisibility(View.GONE);
-            holder.tvreview.setVisibility(View.GONE);
+            }else {
+                holder.tvreturn.setVisibility(View.GONE);
+                holder.tvreview.setVisibility(View.GONE);
+            }
         }
+
         // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(cartResponse.getProductimage())
