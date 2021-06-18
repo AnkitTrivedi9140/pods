@@ -26,6 +26,19 @@ public class BannerResponse {
 
     @SerializedName("priority")
     private String priority;
+
+
+
+    @SerializedName("catid")
+    private String catid;
+
+    @SerializedName("subcatid")
+    private String subcatid;
+
+    @SerializedName("productid")
+    private String productid;
+
+
     @SerializedName("androidmove")
     private String androidmove;
 
@@ -101,6 +114,30 @@ public class BannerResponse {
         this.priority = priority;
     }
 
+    public String getCatid() {
+        return catid;
+    }
+
+    public void setCatid(String catid) {
+        this.catid = catid;
+    }
+
+    public String getSubcatid() {
+        return subcatid;
+    }
+
+    public void setSubcatid(String subcatid) {
+        this.subcatid = subcatid;
+    }
+
+    public String getProductid() {
+        return productid;
+    }
+
+    public void setProductid(String productid) {
+        this.productid = productid;
+    }
+
     @Override
     public String toString() {
         return "BannerResponse{" +
@@ -112,6 +149,9 @@ public class BannerResponse {
                 ", addeddate='" + addeddate + '\'' +
                 ", redirecturl='" + redirecturl + '\'' +
                 ", priority='" + priority + '\'' +
+                ", catid='" + catid + '\'' +
+                ", subcatid='" + subcatid + '\'' +
+                ", productid='" + productid + '\'' +
                 ", androidmove='" + androidmove + '\'' +
                 '}';
     }

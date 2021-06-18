@@ -58,4 +58,11 @@ ImageView ivlogo,tvicon;
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent signup=new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(signup);
+        finish();
+    }
 }

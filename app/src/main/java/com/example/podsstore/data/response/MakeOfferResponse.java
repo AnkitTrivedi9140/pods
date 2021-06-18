@@ -76,6 +76,11 @@ public class MakeOfferResponse {
     private String offerimage;
     @SerializedName("selleremark")
     public String sellerremark  ;
+    @SerializedName("finalupdatedamount")
+    public String finalupdatedamount  ;
+
+
+
 
     public String getOfferimage() {
         return offerimage;
@@ -269,6 +274,14 @@ public class MakeOfferResponse {
         this.offeraddress = offeraddress;
     }
 
+    public String getFinalupdatedamount() {
+        return finalupdatedamount;
+    }
+
+    public void setFinalupdatedamount(String finalupdatedamount) {
+        this.finalupdatedamount = finalupdatedamount;
+    }
+
     @Override
     public String toString() {
         return "MakeOfferResponse{" +
@@ -296,6 +309,7 @@ public class MakeOfferResponse {
                 ", offerstatus='" + offerstatus + '\'' +
                 ", offerimage='" + offerimage + '\'' +
                 ", sellerremark='" + sellerremark + '\'' +
+                ", finalupdatedamount='" + finalupdatedamount + '\'' +
                 '}';
     }
 

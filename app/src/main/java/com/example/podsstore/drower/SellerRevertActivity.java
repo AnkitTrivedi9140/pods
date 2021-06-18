@@ -60,7 +60,7 @@ public class SellerRevertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_revert);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Your Offers");
+        getSupportActionBar().setTitle("Your Offer Details");
         tvproductofferstatus = findViewById(R.id.tvproductofferstatus);
         tvproductofferadd = findViewById(R.id.tvproductofferadd);
         tvproductofferamount = findViewById(R.id.tvproductofferamount);
@@ -106,7 +106,7 @@ loadDataimage();
                         tvproductname.setText(list.get(i).getProductname());
                         tvproductlistedamount.setText("List Price: "+list.get(i).getActualamount());
                            tvproductofferadd.setText(list.get(i).getOfferaddress());
-                        tvproductofferamount.setText("Offer Price: "+list.get(i).getFirstbidamount());
+                        tvproductofferamount.setText("Offer Price: "+list.get(i).getFinalupdatedamount());
                         Glide.with(getApplicationContext())
                                 .load(list.get(i).getOfferimage())
                                 .into(ivproduct);

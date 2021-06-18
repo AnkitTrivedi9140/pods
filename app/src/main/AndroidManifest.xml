@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".banner.SellerBannerproductActivity"></activity>
+        <activity android:name=".drower.OnlineDemoActivity"></activity>
+        <activity android:name=".drower.FeedbackActivity" />
+        <activity android:name=".banner.SellerBannerproductActivity" />
         <activity android:name=".drower.SellerRevertActivity" />
         <activity android:name=".drower.ShowMakeofferdetailsActivity" />
         <activity android:name=".drower.PrivacyActivity" />

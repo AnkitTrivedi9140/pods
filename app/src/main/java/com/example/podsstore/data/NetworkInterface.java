@@ -3,7 +3,9 @@ package com.example.podsstore.data;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
+import com.example.podsstore.data.request.ContactUsRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.DemoRequest;
 import com.example.podsstore.data.request.EditMakeOfferRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.request.MakeOfferRequest;
@@ -85,7 +87,7 @@ public interface NetworkInterface {
     Single<Response<List<ProductResponse>>>getproducts();
 
 
-    @POST("bannerRest/getBannerList")
+    @POST("bannerRest/getAppBannerList")
     Single<Response<List<BannerResponse>>>getbanners();
 
 
@@ -266,7 +268,11 @@ public interface NetworkInterface {
     @POST("makerOfferRest/placeOfferOrder")
     Call<CreateLoginUserResponse>makeofferplaceorder(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("mode") String mode, @Query("txid") String txid);
 
+    @POST("contactRest/contactUs")
+    Single<Response<CreateLoginUserResponse>> contactus(@Body ContactUsRequest requests);
 
+    @POST("imageRest/demorequest")
+    Single<Response<CreateLoginUserResponse>> demoonline(@Body DemoRequest requests);
 
 }
 

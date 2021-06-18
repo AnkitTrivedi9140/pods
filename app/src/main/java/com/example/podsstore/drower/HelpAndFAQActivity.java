@@ -12,7 +12,7 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 
 public class HelpAndFAQActivity extends AppCompatActivity {
-TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,tvfaq11,tvfaq12,tvfaq13,tvfaq14,tvfaq15,tvfaq16,tvfaq17,tvfaq18,tvfaq19,tvfaq20;
+TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,tvfaq11,tvfaq12,tvfaq13,tvfaq14,tvfaq15,tvfaq16,tvfaq17,tvfaq18,tvfaq19,tvfaq20,tvfaq21,tvfaq22,tvfaq23,tvfaq24;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +41,26 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
         tvfaq19=findViewById(R.id.tvfaq19);
         tvfaq20=findViewById(R.id.tvfaq20);
 
+
+        tvfaq21=findViewById(R.id.tvfaq21);
+        tvfaq22=findViewById(R.id.tvfaq22);
+        tvfaq23=findViewById(R.id.tvfaq23);
+        tvfaq24=findViewById(R.id.tvfaq24);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Help / FAQ");
         tvfaq1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq1","tvfaq1");
                 intent.putExtra("question","How does Pods.Market work?");
                 intent.putExtra("ans","Pods.Market is the biggest and most trusted medical wholesale B2B online platform. We connecting manufacturers and suppliers from all over the world with companies, organizations and governments who seek to buy high-quality products under the best terms and conditions. \n" +
                         "Pods.Market team putting a lot of effort into the securement of each transaction, starting from legal and financial verification of Sellers and Buyers to high-level protection for payment processing.\n" +
                         "When you become a registered Seller / Buyer on Pods.Market, you will have access to the largest healthcare marketplace available on the Internet. The list of products on Pods.Market is updated every day. If you are a Seller, you can list all the products you want to sell at a preferred price based on the quantity you choose. On the other hand, the Buyer can accept your offer or make a new one with a different price for the largest quantities of goods. The offer can be accepted or rejected. Pods.Market secure all payments, verify proof of product submissions and supervise deal from the first contact between Buyer/Seller to feedback from both sides after.  \n" +
                         "For more specific/unique requests that are not listed in the general catalog, we have a Special Request Board. How does it work? Anytime you have a request for a particular medical product and cannot find it in the general Pods.Market catalog, you have the option to post it on the Special Request Board and let registered (trusted) Sellers make an offer to you.\n" +
-                        "The Pods.Market team is working daily to improve the user experience for all our customers. Please share your user experience with the Pods.Market team (link to contact form), we'd really appreciate your feedback.");
+                        "The Pods.Market team is working daily to improve the user experience for all our customers. Please share your user experience with the Pods.Market team FEEDBACK, we'd really appreciate your feedback.");
             startActivity(intent);
                 finish();
             }
@@ -61,32 +69,18 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq2","tvfaq2");
                 intent.putExtra("question","How to register?");
                 intent.putExtra("ans","\"To be able to buy or sell medical products on Pods.Market, you need to be a verified Buyer/Seller. To create a new Buyer or Seller account, select the \"\"Sing Up\"\" option in the upper right corner (for the desktop version) or Download the Pods.Market app from the online store according to your smartphone operating system.\n" +
                         "\n" +
                         "Fill in the registration form, which includes:\n" +
-                        " - Company name\n" +
+                        "- Company name\n" +
                         "- Valid Email address\n" +
                         "- Phone number\n" +
                         "Choose registration type for your company: \n" +
                         " - Buyer (SME/Corporate/Incorporate/Government) \n" +
                         " - Seller (Retailer/Allocation Holder/Distributor/Factory)\n" +
-                        "\n" +
-                        "Choose and Confirm your password. It must be at least 8 characters long and contain at least one number, one uppercase, and one lowercase letter.\n" +
-                        "\n" +
-                        "Read carefully \"\"Terms and Conditions\"\" and if you are agreeing to proceed confirm it by check the inbox \"\"I have read and accepted Terms and Conditions\"\". Check box for “I have read and accepted Terms and Conditions” \n" +
-                        " Press \"\"Submit\"\"\n" +
-                        "\n" +
-                        "If you already have an account with Pods.Market use the \"\"Sign In\"\" option.\n" +
-                        "Please, be aware, that each account at the Pods.Market requires a unique email address. It means that you can not register several accounts (Buyer or Seller) under the same email.\n" +
-                        "\n" +
-                        "After submission of the initial information for your account at Pods.Market you will receive a confirmation link (valid for 24 hours from the moment the email was delivered) at the address that you provided. Without confirmation our system will not allow you to move forward with our account verification process, that's why it is important to use a valid email to which you have full access.\n" +
-                        "\n" +
-                        "After your email address was successfully confirmed you have access to the verification procedure, which is mandatory for all Buyers and Sellers who choose a safe business environment at Pods.Market.\n" +
-                        "\n" +
-                        "\n" +
-                        "\n" +
-                        "\"\n");
+                        "\n" );
 
                 startActivity(intent);
                 finish();
@@ -96,6 +90,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq3","tvfaq3");
                 intent.putExtra("question","What is Pods.Market APP?");
                 intent.putExtra("ans","\"\n" +
                         "Pods.Market APP is innovative solution for medical B2B market. It allows Sellers and Buyer’s from all over the world register, add products, buy products, control all requests, track orders, receive information about payments via cellphone or tablet. \n" +
@@ -105,7 +100,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
                         "3.        You can add video and photo files for Prof of Product verification procedure or to product description page\n" +
                         "4.        Our APP focused on usability and user navigation – anyone can use it.\n" +
                         "5.        You can receive direct calls and messages from your Pods.Market manager\n" +
-                        "Start sell and buy medical supplies with Pods.Market app today. Download it from … …. …. \n" +
+                        "Start sell and buy medical supplies with Pods.Market app today. Download it from here \n" +
                         "\"\n");
 
                 startActivity(intent);
@@ -118,7 +113,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
-
+                intent.putExtra("tvfaq4","tvfaq4");
                 intent.putExtra("question","How I can get Pods.Market APP on my phone?");
                 intent.putExtra("ans","\"Search, get product details and specifications, read reviews, and purchase millions of medical supplies and equipment with the Pods Market app.\n" +
                         "Pods Market aap packs a variety of features and functions into this ample app, whether you’re buying or selling, reading reviews, checking specifications, or looking for the best solution and offer. \n" +
@@ -147,9 +142,9 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
-
+                intent.putExtra("tvfaq5","tvfaq5");
                 intent.putExtra("question","How to contact Pods.Market?");
-                intent.putExtra("ans","To contact the managers of Pods.Market, please fill out the contact form or send us an email with your questions at info @ ... If you are registered as a Seller /Buyer, you can call your personal manager at the phone number that you will find in your account.\n");
+                intent.putExtra("ans","To contact the managers of Pods.Market, please fill out the contact form or send us an email with your questions at info@podshealth.com If you are registered as a Seller /Buyer, you can call your personal manager at the phone number that you will find in your account.\n");
 
                 startActivity(intent);
                 finish();
@@ -159,6 +154,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq6","tvfaq6");
                 intent.putExtra("question","How can you be sure that the Seller is trustworthy?\n");
                 intent.putExtra("ans","\"All Pods Market Sellers are required to submit all officially issued documents for legal and financial due diligence. After a successful verification procedure, Pods.Market managers contact the Seller's representatives directly through a video call in real-time or in person and once again confirming the address and identity. We also require all certifications for all products presented on our marketplace.\n" +
                         "In order to secure all deals, we supervise all payments and deal closure.\n" +
@@ -173,6 +169,9 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+
+                intent.putExtra("tvfaq7","tvfaq7");
+
                 intent.putExtra("question","What I can sell on Pods.Market?\n");
                 intent.putExtra("ans","\"Pods.Market is the biggest medical B2B online marketplace. We take product safety and restrictions very seriously. Sellers should carefully review the Examples Permitted and Prohibited Listings* before listing a product. If you sell a Restricted Product, we may immediately suspend or terminate your selling privileges and block your account. The sale of illegal or unsafe products can also lead to legal action, including civil and criminal penalties. \n" +
                         "\n" +
@@ -191,8 +190,9 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq8","tvfaq8");
                 intent.putExtra("question","I want to buy a product. How can I do it?\n");
-                intent.putExtra("ans","To buy a product listed on Pods.Market you need to be registered and verified as a trusted buyer (link on the registration form). After your account was verified you can place an order on any item listed on our platform. Please, read the \"How to buy\" guide or schedule a one-on-one online Demo with our managers.  \n");
+                intent.putExtra("ans","To buy a product listed on Pods.Market you need to be registered and verified as a trusted buyer register. After your account was verified you can place an order on any item listed on our platform. Please, read the \"How to buy\" guide or schedule a one-on-one online Demo with our managers.  \n");
 
                 startActivity(intent);
                 finish();
@@ -204,6 +204,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq9","tvfaq9");
                 intent.putExtra("question","When will my order be processed?\n");
                 intent.putExtra("ans","We encourage Pods.Market Seller to proceed with requests as soon as possible, but no longer than 24 hours from the submission. The average time for a response from Sellers who operate in the same time zone as Buyer is around 2 to 4 hours. \n");
 
@@ -217,8 +218,9 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq10","tvfaq10");
                 intent.putExtra("question","What advertising opportunities are there for my company?\n");
-                intent.putExtra("ans","Please, visit our Advertising for Business page  https://docs.google.com/spreadsheets/d/1nawcRw30tenCwxKkQ_h0nqn3Yp2W1zJu-LNiKeHRl-g/edit?usp=sharing or contact your personal manager for assistance\n");
+                intent.putExtra("ans","Please, visit our Advertising for Business page or contact your personal manager for assistance\n");
 
                 startActivity(intent);
                 finish();
@@ -229,6 +231,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq11","tvfaq11");
                 intent.putExtra("question","How can I track my order?\n");
                 intent.putExtra("ans","After your order has been shipped, you will receive an email with the shipping details and tracking number.\n");
                 startActivity(intent);
@@ -239,6 +242,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq12","tvfaq12");
                 intent.putExtra("question","What are verification documents?\n");
                 intent.putExtra("ans","\"Verification documents accepted by Pods.Market are Officially issued documents, such as ID,  documents (please include a copy of the original documents and their official transcription if the main language of your documents other than English):\n" +
                         " - Person ID (Passport, first, second and last pages, Drivers License)\n" +
@@ -256,6 +260,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq13","tvfaq13");
                 intent.putExtra("question","What should I do if the company refuses to exchange/return goods?\n");
                 intent.putExtra("ans","Please contact our support team by email or phone. Include as many details as possible about the deal and your account. Please note that our support managers are required to verify your identity and that they will also contact the second party to the transaction/deal. The legal and financial team of Pods.Market works closely with each complaint and provides proactive support to resolve any issue in the shortest possible time and in the best possible way.\n");
                 startActivity(intent);
@@ -266,6 +271,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq14","tvfaq14");
                 intent.putExtra("question","I am not satisfied with your service. How do I submit an improvement suggestion or complaint about a service?\n");
                 intent.putExtra("ans","Please submit information via our Contact form or contact your personal manager directly\n");
                 startActivity(intent);
@@ -276,6 +282,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq15","tvfaq15");
                 intent.putExtra("question","Why do we ask for a lot of documents when registering?\n");
                 intent.putExtra("ans","Security and transparency are one of the main keys to all Pods.Market business processes. It is our legal and financial team's responsibility to ensure that all of our clients are can legitimate and financially trusted for any type and size of transactions that Pods.Market oversees.\n");
                 startActivity(intent);
@@ -286,6 +293,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq16","tvfaq16");
                 intent.putExtra("question","Is it safe to store information about orders on Pods.Market?\n");
                 intent.putExtra("ans","Yes. Safety and transparency are one of the main keys of all business process at Pods.Market. We guarantee, that all documentation, information about product requests, financial data, and personal information are kept under the most recent safety protocols.\n");
                 startActivity(intent);
@@ -296,6 +304,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq17","tvfaq17");
                 intent.putExtra("question","How buyers will find my products?\n");
                 intent.putExtra("ans","\"The master key to Buyer recognition is the proper name and description of your product. Please make sure there are no spelling errors in it. Include all product information: proper name, brand, photos, material, size chart, country of origin, certification, standardization, shelf life, industrial use, etc.\n" +
                         "Be sure to select the correct category and subcategory, if applicable. Products with the most complete and complete description will have priority in the ranking of the product list along with the personal rating of the Seller.\n" +
@@ -307,6 +316,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq18","tvfaq18");
                 intent.putExtra("question","I cannot enter the platform. What to do?\n");
                 intent.putExtra("ans","Please, contact our support team by email or phone. Include as much as possible information about your account. Be aware, that our support team managers are obligated to ensure your identity and legal right to access an existing account with compleated verification at Pods.Market. We appreciate your patience and acceptance of our high standards of security procedures.\n");
                 startActivity(intent);
@@ -317,6 +327,7 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq19","tvfaq19");
                 intent.putExtra("question","I do not remember the login and password to enter the site/APP. What to do?\n");
                 intent.putExtra("ans","\"To find and reset your password:\n" +
                         "\n" +
@@ -334,8 +345,64 @@ TextView tvfaq1,tvfaq2,tvfaq3,tvfaq4,tvfaq5,tvfaq6,tvfaq7,tvfaq8,tvfaq9,tvfaq10,
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq20","tvfaq20");
                 intent.putExtra("question","I don't understand anything. What to do?\n");
                 intent.putExtra("ans","Do not panic! We are here for you! Let's start with your guides - How to Sell and How to Buy. If you cannot find answers to your questions with them, we will be more than happy to help you! Just select a time (link to request a demo form) for our custom demo and our managers will provide complete training for you and your team.\n");  startActivity(intent);
+                finish();
+            }
+        });
+
+        tvfaq21.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq21","tvfaq21");
+                intent.putExtra("question","Trademark / mark /patent copyright infringement. What should i do ?\n");
+                intent.putExtra("ans","Contact your manager or send us information through the contact form. Your request will be reviewed by moderators and a team of lawyers. We also may ask you to provide additional information by email or phone. Please be aware that we may also contact the third party if mentioned in your request.\n");  startActivity(intent);
+                finish();
+            }
+        });
+        tvfaq22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq22","tvfaq22");
+                intent.putExtra("question","How do i leave a helpful review ?\n");
+                intent.putExtra("ans","Tell us about your personal experience of communicating with the company: evaluate the service, the relevance of the information, the general impression you have at all stages of the order. If you enjoyed working with the company, tell us about it - other customers will be grateful to you!\n" +
+                        "\n" +
+                        "We do not welcome reviews based on the words of others or retelling someone else's experience.\n" +
+                        "\n" +
+                        "Be objective. Even if you have mixed impressions of the transaction, try to figure out if the company or the matter is to blame for other factors that the seller could not influence. For example, the delivery service was late in delivering the product, although the seller shipped it on time.\n" +
+                        "\n" +
+                        "Did you write a review, but it did not appear on the company profile?\n" +
+                        "\n" +
+                        "After you have written a review, it does not immediately appear on the Pods.Market. The review is checked by moderators and published within 3 days.\n" +
+                        "\n" +
+                        "Sometimes we may ask you to confirm that a transaction or just communication between you and the company took place before posting your opinion. If what you write does not quite comply with the posting guidelines, we may ask you to edit it so that we can publish it.\n" +
+                        "\n" +
+                        "Having a problem with the Seller?\n" +
+                        "\n" +
+                        "Contact the Pods.Market Quality Control Service at info@podshealth.com and state the problem, we will try to help you!.\n");  startActivity(intent);
+                finish();
+            }
+        });
+        tvfaq23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq23","tvfaq23");
+                intent.putExtra("question","How many characters are available for a product description ?\n");
+                intent.putExtra("ans","Product descriptions are not limited to any specific text size. We appreciate complete descriptions with all the necessary and additional information about the goods you are about to share with Pods.Market Buyers.\n");  startActivity(intent);
+                finish();
+            }
+        });
+        tvfaq24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), HelpActivity.class);
+                intent.putExtra("tvfaq24","tvfaq24");
+                intent.putExtra("question","What are the best size for my products photo ?\n");
+                intent.putExtra("ans","The best image size is 800X800 pixels. Formats: jpg, png\n");  startActivity(intent);
                 finish();
             }
         });

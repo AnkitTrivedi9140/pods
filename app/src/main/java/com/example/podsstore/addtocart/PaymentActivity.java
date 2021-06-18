@@ -41,6 +41,7 @@ import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
+import com.example.podsstore.drower.ShowMakeofferActivity;
 import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
@@ -152,9 +153,7 @@ showAlertDialog(path);
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-                startActivity(intent);
-                finish();
+            onBackPressed();
                 return true;
         }
 
@@ -164,9 +163,16 @@ showAlertDialog(path);
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
-        startActivity(intent);
-        finish();
+        if(getIntent().getStringExtra("offerid")==null){
+            Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Intent intent = new Intent(getApplicationContext(), ShowMakeofferActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
 
     }
 

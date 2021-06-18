@@ -1,4 +1,4 @@
-package com.example.podsstore.aboutpod;
+package com.example.podsstore.drower;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,17 +9,23 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.podsstore.R;
+import com.example.podsstore.aboutpod.AboutActivity;
+import com.example.podsstore.aboutpod.ConnectwithPodActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.ContactUsRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.google.gson.Gson;
+import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,22 +35,35 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class ConnectwithPodActivity extends AppCompatActivity {
-EditText etusername,etphone,etemail,etquery;
-TextView btnsubmit;
+public class FeedbackActivity extends AppCompatActivity {
+    EditText etusername,etphone,etemail,etquery,etconcern,etbusiness;
+    TextView btnsubmit;
     String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+    CountryCodePicker countryCodePicker;
+    String phonecode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connectwith_pod);
+        setContentView(R.layout.activity_web_view);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Connect with POD");
-
+        getSupportActionBar().setTitle("Contact Us");
+        countryCodePicker=findViewById(R.id.et1);
+        etbusiness=findViewById(R.id.etbusiness);
+        etconcern=findViewById(R.id.etconcern);
         etusername=findViewById(R.id.eturname);
         etphone=findViewById(R.id.etphone);
         etemail=findViewById(R.id.etemail);
         etquery=findViewById(R.id.etquery);
         btnsubmit=findViewById(R.id.tvsubmit);
+       countryCodePicker.setCountryForNameCode("US");
+       phonecode=countryCodePicker.getSelectedCountryCode();
+        countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                phonecode=countryCodePicker.getSelectedCountryCode();
+               // etphone.setText(countryCodePicker.getSelectedCountryName().toString());
+            }
+        });
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,15 +80,23 @@ TextView btnsubmit;
                 else if (!etemail.getText().toString().matches(regex)) {
                     etemail.setError("Email Address is not valid!");
 
+                }else if (TextUtils.isEmpty(etbusiness.getText().toString())) {
+                    etbusiness.setError("Business Can't Blank!");
+
+                }
+                else if (TextUtils.isEmpty(etconcern.getText().toString())) {
+                    etconcern.setError("Concern Can't Blank!");
+
                 }
                 else if (TextUtils.isEmpty(etquery.getText().toString())) {
                     etquery.setError("Query Can't Blank!");
 
                 }else{
-                    smallCarton(etusername.getText().toString(),etphone.getText().toString(),etemail.getText().toString(),etquery.getText().toString());
+
+                   smallCarton(etusername.getText().toString(),phonecode+etphone.getText().toString(),etemail.getText().toString(),etbusiness.getText().toString(),etconcern.getText().toString(),etquery.getText().toString());
                 }
 
-                //smallCarton(etusername.getText().toString(),etphone.getText().toString(),etemail.getText().toString(),etquery.getText().toString());
+                //   smallCarton(etusername.getText().toString(),etphone.getText().toString(),etemail.getText().toString(),etquery.getText().toString());
             }
         });
 
@@ -78,7 +105,7 @@ TextView btnsubmit;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-onBackPressed();
+                onBackPressed();
 
                 return true;
         }
@@ -93,15 +120,17 @@ onBackPressed();
     }
 
     @SuppressLint("CheckResult")
-    private void smallCarton(String username,String mobile,String email,String query) {
+    private void smallCarton(String username,String mobile,String email,String business,String concern,String remark) {
         // binding.progressbar.setVisibility(View.VISIBLE);
-        List<TellUsMoreResquest> list = new ArrayList<>();
+        List<ContactUsRequest> list = new ArrayList<>();
 
-        TellUsMoreResquest r = new TellUsMoreResquest();
-        r.setYourfullname(username);
-        r.setYourmobileno(mobile);
-        r.setEmailaddress(email);
-        r.setYourquery(query);
+        ContactUsRequest r = new ContactUsRequest();
+        r.setContactUsName(username);
+        r.setContactUsEmail(mobile);
+        r.setContactUsNumber(email);
+        r.setContactUsBusiness(business);
+        r.setContactUsConcern(concern);
+        r.setContactUsRemark(remark);
         list.add(r);
 
 
@@ -109,7 +138,7 @@ onBackPressed();
 
         Log.e("postData", new Gson().toJson(r));
 
-        ApiClient.getApiClient(). tellusmore(PreferenceManagerss.getStringValue(Preferences.USER_EMAIL),r)
+        ApiClient.getApiClient(). contactus(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
@@ -124,9 +153,12 @@ onBackPressed();
 
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            Intent login = new Intent(ConnectwithPodActivity.this, AboutActivity.class);
-                            startActivity(login);
-                           finish();
+                          //  Toast.makeText(getApplicationContext(),"Your feedback submit successfully",Toast.LENGTH_LONG).show();
+                            onBackPressed();
+
+                            //                            Intent login = new Intent(ConnectwithPodActivity.this, AboutActivity.class);
+//                            startActivity(login);
+//                            finish();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {

@@ -56,8 +56,7 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
             tvtotalqty = (TextView) view.findViewById(R.id.tvtotalqty);
 
             tvtotalamount = view.findViewById(R.id.tvtotalamount);
-            tvofferstatus = view.findViewById(R.id.tvofferstatus);
-            tvdate = view.findViewById(R.id.tvdate);
+
             tvaddress = view.findViewById(R.id.tvaddress);
 
             tvviewofferdetails.setOnClickListener(v -> {
@@ -104,17 +103,26 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
     public void onBindViewHolder(ShowMakeofferAdapter.MyViewHolder holder, int position) {
         MakeOfferResponse cartResponse = productResponseList.get(position);
         if(cartResponse!=null){
-            holder.tvproductname.setText(cartResponse.getFirstbidamount());
-            holder.tvdate.setText(cartResponse.getRemarks());
+            if(cartResponse.getFinalupdatedamount()==null){
+                holder.tvproductname.setText(cartResponse.getFirstbidamount());
+            }else{
+                holder.tvproductname.setText(cartResponse.getFinalupdatedamount());
+            }
+
+
+//            holder.tvdate.setText(cartResponse.getRemarks());
 
                holder.tvdateddd.setText(cartResponse.getOffercreatedat());
 
             holder. tvdatess.setText(cartResponse.getOfferstatus());
-            holder.tvofferstatus.setText(cartResponse.getOfferaddress());
+         //   holder.tvofferstatus.setText(cartResponse.getOfferaddress());
             holder.tvremarks.setText(cartResponse.getActualamount());
             holder.tvtotalqty.setText(cartResponse.getQuantitydetails());
-           Double aa=Double.valueOf(cartResponse.getQuantitydetails())*Double.valueOf(cartResponse.getFirstbidamount());
-            holder.tvtotalamount.setText(String.valueOf(aa));
+            if(cartResponse.getFinalupdatedamount()==null){}else{
+                Double aa=Double.valueOf(cartResponse.getQuantitydetails())*Double.valueOf(cartResponse.getFinalupdatedamount());
+                holder.tvtotalamount.setText(String.valueOf(aa));
+            }
+
             Glide.with(context)
                     .load(cartResponse.getOfferimage())
                     .into(holder.ivproduct);

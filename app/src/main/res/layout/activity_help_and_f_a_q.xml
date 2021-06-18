@@ -59,7 +59,7 @@
         android:src="@drawable/goo"
         android:layout_alignParentRight="true"
 
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="44dp"
         ></ImageView>
 
     <TextView
@@ -89,7 +89,7 @@
         android:src="@drawable/goo"
 
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="44dp"
         ></ImageView>
 
     <TextView
@@ -151,7 +151,7 @@
         android:src="@drawable/goo"
 
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="44dp"
         ></ImageView>
 
     <TextView
@@ -195,7 +195,7 @@
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq6"
         android:id="@+id/tvfaq7"
-        android:text="What should I do if I have questions regarding the services and product questions after my purchase? "
+        android:text="What I can sell on Pods.Market? "
         android:layout_width="match_parent"
         android:layout_toLeftOf="@+id/ivgofaq2"
         android:textSize="16dp"
@@ -211,7 +211,7 @@
         android:src="@drawable/goo"
 
         android:layout_alignParentRight="true"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="44dp"
         ></ImageView>
 
             <TextView
@@ -242,7 +242,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -266,7 +266,7 @@
                 android:layout_height="wrap_content"></TextView>
 
             <ImageView
-                android:layout_below="@+id/tvfaq7"
+                android:layout_below="@+id/tvfaq8"
                 android:id="@+id/ivgofaq9"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -274,7 +274,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -342,7 +342,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -376,7 +376,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -537,7 +537,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -570,7 +570,7 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="44dp"
                 ></ImageView>
 
 
@@ -636,8 +636,144 @@
                 android:src="@drawable/goo"
 
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="44dp"
+                ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq20"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq20"
+                android:id="@+id/tvfaq21"
+                android:text="Trademark / mark /patent copyright infringement. What should i do ?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+
+                android:layout_below="@+id/tvfaq20"
+                android:id="@+id/ivgofaq21"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="58dp"
                 ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq21"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq21"
+                android:id="@+id/tvfaq22"
+                android:text="How do i leave a helpful review ?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+
+                android:layout_below="@+id/tvfaq21"
+                android:id="@+id/ivgofaq22"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="44dp"
+                ></ImageView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq22"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq22"
+                android:id="@+id/tvfaq23"
+                android:text="How many characters are available for a product description
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+
+                android:layout_below="@+id/tvfaq22"
+                android:id="@+id/ivgofaq23"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/platinum"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/tvfaq23"
+                ></TextView>
+            <TextView
+                android:layout_marginTop="44dp"
+                android:layout_below="@+id/tvfaq23"
+                android:id="@+id/tvfaq24"
+                android:text="What are the best size for my products photo ?
+"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/ivgofaq2"
+                android:textSize="16dp"
+                android:layout_marginRight="11dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <ImageView
+
+                android:layout_below="@+id/tvfaq23"
+                android:id="@+id/ivgofaq24"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/goo"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="58dp"
+                ></ImageView>
+
         </RelativeLayout>
     </ScrollView>
 

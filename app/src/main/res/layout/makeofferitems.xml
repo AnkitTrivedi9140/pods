@@ -12,11 +12,11 @@
     <ImageView
    android:src="@color/platinum"
         android:id="@+id/ivproduct"
-        android:layout_width="111dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="99dp"
+        android:layout_marginTop="33dp"
         android:layout_marginLeft="6dp"
-        android:visibility="gone"
-        android:layout_height="222dp"></ImageView>
+
+        android:layout_height="99dp"></ImageView>
 
     <RelativeLayout
         android:id="@+id/rl"
@@ -27,26 +27,26 @@
 
         <TextView
             android:id="@+id/tvmargin"
-            android:layout_marginLeft="33dp"
+            android:layout_marginLeft="11dp"
             android:layout_toRightOf="@+id/tvtotalqtyhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
         <TextView
             android:id="@+id/tvproductnameremarkhead"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:text="List Price"
-            android:textStyle="bold"
+
 
             android:layout_width="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"></TextView>
 <TextView
     android:layout_toRightOf="@+id/tvmargin"
-    android:layout_marginRight="12dp"
-    android:textStyle="bold"
+    android:layout_marginRight="4dp"
+
     android:textColor="@color/black"
     android:id="@+id/tvremarks"
-    android:textSize="16dp"
+    android:textSize="14dp"
     android:layout_marginTop="8dp"
     android:layout_alignParentRight="true"
     android:layout_width="wrap_content"
@@ -54,160 +54,118 @@
 
     <TextView
         android:id="@+id/tvproductnamehead"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:text="Offer Price"
-        android:textStyle="bold"
+
         android:layout_below="@+id/tvremarks"
         android:layout_width="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_height="wrap_content"></TextView>
     <TextView
         android:layout_toRightOf="@+id/tvmargin"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@+id/tvremarks"
         android:id="@+id/tvproductname"
-        android:layout_marginRight="12dp"
-        android:textStyle="bold"
+        android:layout_marginRight="4dp"
+
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
 
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+
         android:id="@+id/tvtotalqtyhead"
         android:text="Total Quantity"
        android:layout_below="@+id/tvproductname"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@+id/tvmargin"
         android:layout_below="@+id/tvproductname"
         android:id="@+id/tvtotalqty"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_marginRight="12dp"
-        android:textStyle="bold"
+        android:layout_marginRight="4dp"
+
         android:textColor="@color/black"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@+id/tvtotalqty"
         android:id="@+id/tvtotalamounthead"
-        android:textSize="16dp"
-        android:textStyle="bold"
+        android:textSize="14dp"
+
         android:text="Offer total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
     <TextView
-        android:layout_marginTop="8dp"
-       android:layout_marginRight="12dp"
-        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+       android:layout_marginRight="4dp"
+
         android:textColor="@color/black"
         android:id="@+id/tvtotalamount"
         android:layout_toRightOf="@+id/tvmargin"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_below="@+id/tvtotalqty"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
-    <TextView
-        android:layout_marginTop="8dp"
-        android:id="@+id/tvofferstatushead"
-        android:textSize="16dp"
-        android:text="Offer Address"
-        android:textStyle="bold"
-        android:layout_below="@+id/tvtotalamount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="12dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_toRightOf="@+id/tvmargin"
-        android:id="@+id/tvofferstatus"
-        android:textSize="16dp"
-        android:layout_below="@+id/tvtotalamount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></TextView>
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/tvofferstatus"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/tvtotalamount"
             android:id="@+id/tvofferdateheadss"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:textSize="14dp"
+
             android:text="Offer Status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
         <TextView
             android:layout_toRightOf="@+id/tvmargin"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="12dp"
-            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+
             android:textColor="@color/black"
             android:id="@+id/tvdatess"
-            android:textSize="16dp"
-            android:layout_below="@+id/tvofferstatus"
+            android:textSize="14dp"
+            android:layout_below="@+id/tvtotalamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
         </TextView>
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_below="@+id/tvdatess"
             android:id="@+id/tvofferdateheadddd"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:textSize="14dp"
+
             android:text="Offer Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
         <TextView
             android:layout_toRightOf="@+id/tvmargin"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="12dp"
-            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+
             android:textColor="@color/black"
             android:id="@+id/tvdateddd"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:layout_below="@+id/tvdatess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
         </TextView>
 
-    <TextView
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/tvdateddd"
-        android:id="@+id/tvofferdatehead"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:text="Remarks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:layout_toRightOf="@+id/tvmargin"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="12dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:id="@+id/tvdate"
-        android:textSize="16dp"
-        android:layout_below="@+id/tvdateddd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </TextView>
 
 
 

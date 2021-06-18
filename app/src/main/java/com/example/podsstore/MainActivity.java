@@ -58,6 +58,7 @@ import com.example.podsstore.data.response.ProfileResponses;
 import com.example.podsstore.data.response.TopBrandsProductResponse;
 import com.example.podsstore.data.response.TopBrandsResponse;
 import com.example.podsstore.drower.AddressesActivity;
+import com.example.podsstore.drower.FeedbackActivity;
 import com.example.podsstore.drower.HelpAndFAQActivity;
 import com.example.podsstore.drower.PrivacyActivity;
 import com.example.podsstore.drower.ShowMakeofferActivity;
@@ -292,12 +293,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                dl.open();
 
-                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                    dl.open();
-                } else {
-                    showAlertDialog();
-                }
 
 
             }
@@ -412,23 +409,40 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.nvscan:
-                        Intent nvscan = new Intent(MainActivity.this, MyOrderActivity.class);
-                        startActivity(nvscan);
-                        dl.closeDrawers();
+
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent nvscan = new Intent(MainActivity.this, MyOrderActivity.class);
+                            startActivity(nvscan);
+                            dl.closeDrawers();
+                        } else {
+                            showAlertDialog();
+                        }
+
+
                         break;
                     case R.id.nvsettings:
-                        Intent nvsettings = new Intent(MainActivity.this, ShowMakeofferActivity.class);
-                        startActivity(nvsettings);
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent nvsettings = new Intent(MainActivity.this, ShowMakeofferActivity.class);
+                            startActivity(nvsettings);
 
-                        dl.closeDrawers();
+                            dl.closeDrawers();
+                        } else {
+                            showAlertDialog();
+                        }
+
                         break;
                     case R.id.nvhistory:
-                        Intent nvhistory = new Intent(MainActivity.this, AddressesActivity.class);
-                        startActivity(nvhistory);
-                        dl.closeDrawers();
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent nvhistory = new Intent(MainActivity.this, AddressesActivity.class);
+                            startActivity(nvhistory);
+                            dl.closeDrawers();
+                        } else {
+                            showAlertDialog();
+                        }
+
                         break;
                     case R.id.nvrate:
-                        Intent connct = new Intent(MainActivity.this, ConnectwithPodActivity.class);
+                        Intent connct = new Intent(MainActivity.this, FeedbackActivity.class);
                         startActivity(connct);
                         dl.closeDrawers();
                         break;
@@ -984,25 +998,39 @@ alert.dismiss();
                 profileimage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
-                        finish();
+                      //  Toast.makeText(getApplicationContext(),"profle",Toast.LENGTH_LONG).show();
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            showAlertDialog();
+                        }
                     }
                 });
                 headerusername.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            showAlertDialog();
+                        }
+
                     }
                 });
                 tvemail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            showAlertDialog();
+                        }
                     }
                 });
             }
@@ -1067,10 +1095,19 @@ uploadbanner(list);
                 @Override
                 public void onSliderClick(BaseSliderView slider) {
                     Log.d("dddddddsss",String.valueOf(s.getId()+" "+s.getBannername()));
-                    if(s.getAndroidmove().equalsIgnoreCase("bestseller")){
-                        Intent i=new Intent(getApplicationContext(), SellerBannerproductActivity.class);
+
+                    if(s.getAndroidmove()==null){}else{
+                        if(s.getAndroidmove().equalsIgnoreCase("bestseller")){
+                            Intent i=new Intent(getApplicationContext(), SellerBannerproductActivity.class);
+                            startActivity(i);
+                        }
+                    }
+                    if(s.getCatid()==null){}else {
+                        Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
+                       i.putExtra("userid",s.getCatid().toString());
                         startActivity(i);
                     }
+
                 }
             });
             slider.addSlider(sliderView);

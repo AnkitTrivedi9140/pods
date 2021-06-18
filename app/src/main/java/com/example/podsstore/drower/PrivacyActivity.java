@@ -69,7 +69,7 @@ TextView tvcookiestext,tvaccessreview,tvadditional,tvquestion;
             @Override
             public void onClick(View textView) {
                 //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
-                Uri uri = Uri.parse("www.google.com/policies/privacy/partners/"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("http://www.google.com/policies/privacy/partners/"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
@@ -107,7 +107,7 @@ TextView tvcookiestext,tvaccessreview,tvadditional,tvquestion;
             @Override
             public void onClick(View textView) {
                 //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
-                Uri uri = Uri.parse("support@pods.market"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("http://support@pods.market"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

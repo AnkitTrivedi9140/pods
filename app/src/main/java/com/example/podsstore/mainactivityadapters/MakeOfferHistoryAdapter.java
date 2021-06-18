@@ -188,8 +188,9 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
                     holder.ivdeclined.setVisibility(View.VISIBLE);
                     holder.ivedit.setVisibility(View.VISIBLE);
                     holder.ivaccept.setVisibility(View.VISIBLE);
-                    //holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+                    holder.tvplaceordermakeoffer.setVisibility(View.GONE);
                 }else{
+                    holder.tvplaceordermakeoffer.setVisibility(View.GONE);
                     holder.ivdeclined.setVisibility(View.GONE);
                     holder.ivedit.setVisibility(View.GONE);
                     holder.ivaccept.setVisibility(View.GONE);
