@@ -64,6 +64,7 @@ import com.example.podsstore.drower.PrivacyActivity;
 import com.example.podsstore.drower.ShowMakeofferActivity;
 import com.example.podsstore.drower.TermsActivity;
 import com.example.podsstore.getorder.MyOrderActivity;
+import com.example.podsstore.login.LoginActivity;
 import com.example.podsstore.mainactivityadapters.BestPricedAdapter;
 import com.example.podsstore.mainactivityadapters.BestSellingProductAdapter;
 import com.example.podsstore.mainactivityadapters.CategoryHorigentalAdapter;
@@ -155,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
         dl = (DrawerLayout) findViewById(R.id.mainactivity);
         //  t = new ActionBarDrawerToggle(this, dl,toolbar,R.string.Open, R.string.Close);
         Log.e("packagename",String.valueOf(getApplicationContext().getPackageName() ));
+
+
+        View headerView = nv.getHeaderView(0);
+        headerusername = headerView.findViewById(R.id.headerusername);
+        tvemail = headerView.findViewById(R.id.tvemail);
+        profileimage = headerView.findViewById(R.id.profileimage);
+
 
         topbrandrv = findViewById(R.id.topbrandrv);
         tvbestpriceseeall = findViewById(R.id.tvbestpriceseeall);
@@ -469,38 +477,39 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawers();
                         break;
                     case R.id.nvsolution:
+                        if(item.getTitle()=="Log In"){
+Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+startActivity(intent);
+                        }else{
+                            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                            dialog.setCancelable(true);
+                            dialog.setTitle("Exit from Pod!");
+                            dialog.setMessage("Are you sure you want to exit from POD?");
+                            dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Action for "Delete".
+                                    PreferenceManagerss.logout();
 
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                        dialog.setCancelable(true);
-                        dialog.setTitle("Exit from Pod!");
-                        dialog.setMessage("Are you sure you want to exit from POD?");
-                        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                //Action for "Delete".
-                                PreferenceManagerss.logout();
-                              /*  finish();
-                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_HOME);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);*/
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(getIntent());
-                                overridePendingTransition(0, 0);
-                            }
-                        })
-                                .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //Action for "Cancel".
-                                        dialog.cancel();
-                                    }
-                                });
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                    startActivity(getIntent());
+                                    overridePendingTransition(0, 0);
+                                }
+                            })
+                                    .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //Action for "Cancel".
+                                            dialog.cancel();
+                                        }
+                                    });
 
-                        final AlertDialog alert = dialog.create();
-                        alert.show();
-                        dl.closeDrawers();
+                            final AlertDialog alert = dialog.create();
+                            alert.show();
+                            dl.closeDrawers();
+                        }
+
                         break;
 //                    case R.id.mycart:
 //                        Toast.makeText(MainActivity.this, "My Cart",Toast.LENGTH_SHORT).show();break;
@@ -516,7 +525,54 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        Menu nav_Menu = nv.getMenu();
 
+        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+
+        } else {
+
+            nav_Menu.findItem(R.id.nvsolution).setTitle("Log In");
+        }
+
+
+        profileimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //  Toast.makeText(getApplicationContext(),"profle",Toast.LENGTH_LONG).show();
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showAlertDialog();
+                }
+            }
+        });
+        headerusername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showAlertDialog();
+                }
+
+            }
+        });
+        tvemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showAlertDialog();
+                }
+            }
+        });
 
 
         profileloadData();
@@ -947,10 +1003,7 @@ alert.dismiss();
                  Log.e("getMaterialMasters",String.valueOf(response.code()) );
                  if (response.isSuccessful()) {
                      List<ProfileResponses> list = response.body();
-            View headerView = nv.getHeaderView(0);
-            headerusername = headerView.findViewById(R.id.headerusername);
-            tvemail = headerView.findViewById(R.id.tvemail);
-            profileimage = headerView.findViewById(R.id.profileimage);
+
             // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
             Log.e("getprofile", String.valueOf(response.code()));
             if (response.isSuccessful()) {
@@ -995,44 +1048,8 @@ alert.dismiss();
                 }
 
                }
-                profileimage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                      //  Toast.makeText(getApplicationContext(),"profle",Toast.LENGTH_LONG).show();
-                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            showAlertDialog();
-                        }
-                    }
-                });
-                headerusername.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            showAlertDialog();
-                        }
 
-                    }
-                });
-                tvemail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            showAlertDialog();
-                        }
-                    }
-                });
+
             }
 //                    for (int i = 0; i < list.size(); i++) {
                  //    placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));

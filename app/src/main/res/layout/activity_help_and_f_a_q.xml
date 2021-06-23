@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 <TextView
+    android:textColor="#3B3B3B"
     android:id="@+id/tvfaq1"
     android:text="How does Pods.Market work?"
     android:layout_width="match_parent"
@@ -25,6 +26,7 @@
     android:layout_height="wrap_content"></TextView>
 
 <ImageView
+
     android:id="@+id/ivgofaq1"
     android:layout_width="22dp"
     android:layout_height="22dp"
@@ -40,6 +42,7 @@
     android:layout_below="@+id/tvfaq1"
     ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq1"
         android:id="@+id/tvfaq2"
@@ -70,6 +73,7 @@
         android:layout_below="@+id/tvfaq2"
         ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq2"
         android:id="@+id/tvfaq3"
@@ -100,6 +104,7 @@
         android:layout_below="@+id/tvfaq3"
         ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq3"
         android:id="@+id/tvfaq4"
@@ -132,6 +137,7 @@
         android:layout_below="@+id/tvfaq4"
         ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq4"
         android:id="@+id/tvfaq5"
@@ -162,6 +168,7 @@
         android:layout_below="@+id/tvfaq5"
         ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq5"
         android:id="@+id/tvfaq6"
@@ -192,6 +199,7 @@
         android:layout_below="@+id/tvfaq6"
         ></TextView>
     <TextView
+        android:textColor="#3B3B3B"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/tvfaq6"
         android:id="@+id/tvfaq7"
@@ -222,6 +230,7 @@
                 android:layout_below="@+id/tvfaq7"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq7"
                 android:id="@+id/tvfaq8"
@@ -258,7 +267,7 @@
                 android:layout_below="@+id/tvfaq8"
                 android:id="@+id/tvfaq9"
                 android:text="When will my order be processed?"
-
+                android:textColor="#3B3B3B"
                 android:layout_width="match_parent"
                 android:layout_toLeftOf="@+id/ivgofaq2"
                 android:textSize="16dp"
@@ -288,6 +297,7 @@
                 android:layout_below="@+id/tvfaq9"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq9"
                 android:id="@+id/tvfaq10"
@@ -322,6 +332,7 @@
                 android:layout_below="@+id/tvfaq10"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq10"
                 android:id="@+id/tvfaq11"
@@ -356,6 +367,7 @@
                 android:layout_below="@+id/tvfaq11"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq11"
                 android:id="@+id/tvfaq12"
@@ -391,6 +403,7 @@
                 android:layout_below="@+id/tvfaq12"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq12"
                 android:id="@+id/tvfaq13"
@@ -421,6 +434,7 @@
                 android:layout_below="@+id/tvfaq13"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq13"
                 android:id="@+id/tvfaq14"
@@ -454,6 +468,7 @@
                 android:layout_below="@+id/tvfaq14"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq14"
                 android:id="@+id/tvfaq15"
@@ -486,6 +501,7 @@
                 android:layout_below="@+id/tvfaq15"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq15"
                 android:id="@+id/tvfaq16"
@@ -517,6 +533,7 @@
                 android:layout_below="@+id/tvfaq16"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq16"
                 android:id="@+id/tvfaq17"
@@ -550,6 +567,7 @@
                 android:layout_below="@+id/tvfaq17"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq17"
                 android:id="@+id/tvfaq18"
@@ -583,6 +601,7 @@
                 android:layout_below="@+id/tvfaq18"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq18"
                 android:id="@+id/tvfaq19"
@@ -615,6 +634,7 @@
                 android:layout_below="@+id/tvfaq19"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq19"
                 android:id="@+id/tvfaq20"
@@ -649,6 +669,7 @@
                 android:layout_below="@+id/tvfaq20"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq20"
                 android:id="@+id/tvfaq21"
@@ -683,6 +704,7 @@
                 android:layout_below="@+id/tvfaq21"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq21"
                 android:id="@+id/tvfaq22"
@@ -716,6 +738,7 @@
                 android:layout_below="@+id/tvfaq22"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq22"
                 android:id="@+id/tvfaq23"
@@ -750,6 +773,7 @@
                 android:layout_below="@+id/tvfaq23"
                 ></TextView>
             <TextView
+                android:textColor="#3B3B3B"
                 android:layout_marginTop="44dp"
                 android:layout_below="@+id/tvfaq23"
                 android:id="@+id/tvfaq24"
