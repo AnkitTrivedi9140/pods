@@ -47,6 +47,7 @@ import com.example.podsstore.profile.AddressActivity;
 import com.example.podsstore.search.SearchActivity;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,7 +199,9 @@ public class BuyNowActivity extends AppCompatActivity {
                        productorice : "0");
                 Double value = v1 * v2;
                 //ettotalamount.setText(value.toString());
-                tvProductpricetotal.setText(value.toString());
+                DecimalFormat df = new DecimalFormat();
+                df.setMaximumFractionDigits(2);
+                tvProductpricetotal.setText(String.valueOf(df.format(value)));
             }
         });
 
@@ -781,7 +784,7 @@ startActivity(i);
 
                                         if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
                                             //  Toast.makeText(getApplicationContext(),prnumber.getText().toString(),Toast.LENGTH_SHORT).show();
-                                            smallCartonbuy(list.get(finalI).getId(), list.get(finalI).getProdname(), Long.parseLong(list.get(finalI).getPrice()), Long.parseLong(prnumber.getText().toString()));
+                                            smallCartonbuy(list.get(finalI).getId(), list.get(finalI).getProdname(), list.get(finalI).getPrice().toString(), Long.parseLong(prnumber.getText().toString()));
                                         } else {
                                             // showAlertDialog();
                                         }
@@ -820,7 +823,7 @@ addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
     }
 
     @SuppressLint("CheckResult")
-    private void smallCartonbuy(Long prodid, String prodname, Long price, Long qty) {
+    private void smallCartonbuy(Long prodid, String prodname, String price, Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -863,7 +866,7 @@ addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Item already in cart.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Waiting for seller acceptance", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -899,8 +902,9 @@ addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
 
                     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
                     int totalPrice = 0;
+
                     for (int i = 0; i < list.size(); i++) {
-                        totalPrice += (list.get(i).getPrice() * Integer.valueOf(list.get(i).getQty().toString()));
+                        totalPrice += (Double.valueOf(String.valueOf(list.get(i).getPrice().toString())) *Double.valueOf( String.valueOf(list.get(i).getQty().toString())));
 
 
                         // totalPrice += (list.get(i).getPrice());

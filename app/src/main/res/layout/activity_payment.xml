@@ -289,7 +289,7 @@
             android:text="  Pay Later"
             android:layout_marginTop="12dp"
             android:layout_below="@+id/radiocorporate"
-
+android:visibility="gone"
             android:textSize="16dp"
             android:textColor="@color/manatee"
 

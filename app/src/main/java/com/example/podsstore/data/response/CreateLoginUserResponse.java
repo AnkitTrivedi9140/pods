@@ -6,7 +6,7 @@ public class CreateLoginUserResponse {
     @SerializedName("status")
     private String status;
     @SerializedName("statusCode")
-    private String statuscode;
+    private Long statuscode;
 
     @SerializedName("message")
     private String message;
@@ -19,20 +19,20 @@ public class CreateLoginUserResponse {
         this.status = status;
     }
 
-    public String getStatuscode() {
-        return statuscode;
-    }
-
-    public void setStatuscode(String statuscode) {
-        this.statuscode = statuscode;
-    }
-
     public String getMessage() {
         return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Long getStatuscode() {
+        return statuscode;
+    }
+
+    public void setStatuscode(Long statuscode) {
+        this.statuscode = statuscode;
     }
 
     @Override

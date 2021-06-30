@@ -75,8 +75,10 @@ RecyclerView recyclerView;
                     productListAdapter.addAll(list);
                     getSupportActionBar().setTitle("Your Wishlist"+" ("+list.size()+")");
                     int totalPrice = 0;
+
                     for (int i = 0; i < list.size(); i++) {
-                        totalPrice += list.get(i).getPrice();
+                        totalPrice += (Double.valueOf(String.valueOf(list.get(i).getPrice().toString())) *Double.valueOf( String.valueOf(list.get(i).getQty().toString())));
+
                         //Log.e("onResponses", list.get(i).getPrice().toString());
 //                        tvsubtotaltxt.setText(String.valueOf(totalPrice));
 //                        tvtotaltxt.setText(String.valueOf(totalPrice));

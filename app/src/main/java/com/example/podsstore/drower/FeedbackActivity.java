@@ -126,8 +126,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
         ContactUsRequest r = new ContactUsRequest();
         r.setContactUsName(username);
-        r.setContactUsEmail(mobile);
-        r.setContactUsNumber(email);
+        r.setContactUsEmail(email);
+        r.setContactUsNumber(mobile);
         r.setContactUsBusiness(business);
         r.setContactUsConcern(concern);
         r.setContactUsRemark(remark);

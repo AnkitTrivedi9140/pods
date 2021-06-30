@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PodsStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drower.OnlineDemoActivity"></activity>
+        <activity android:name=".addtocart.WebViewActivity"></activity>
+        <activity android:name=".drower.OnlineDemoActivity" />
         <activity android:name=".drower.FeedbackActivity" />
         <activity android:name=".banner.SellerBannerproductActivity" />
         <activity android:name=".drower.SellerRevertActivity" />
@@ -59,6 +60,9 @@
         <activity android:name=".aboutpod.AboutActivity" />
         <activity android:name=".category.CategoryActivity" />
         <activity android:name=".SplashActivity" />
+        <activity android:name=".CheckoutActivityJava">
+
+    </activity>
         <activity android:name=".productdetails.ProductDetailsActivity" />
         <activity android:name=".product.ProductListActivity" />
         <activity android:name=".login.CreateAccountActivity" />

@@ -50,6 +50,7 @@ import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.banner.SellerBannerproductActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.category.SubCategoryActivity;
+import com.example.podsstore.category.SubCategoryProductActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.response.BannerResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
@@ -682,7 +683,7 @@ startActivity(intent);
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, TopBrandsProductActivity.class);
 
-        i.putExtra("userid", data.getBrandname().toString());
+   i.putExtra("userid", data.getSellerid().toString());
         startActivity(i);
 
 
@@ -1086,7 +1087,7 @@ alert.dismiss();
                             List<BannerResponse> list = response.body();
                             Log.e("getProduct", String.valueOf(list.size()));
 
-uploadbanner(list);
+                             uploadbanner(list);
 
                         } else {
 
@@ -1113,15 +1114,31 @@ uploadbanner(list);
                 public void onSliderClick(BaseSliderView slider) {
                     Log.d("dddddddsss",String.valueOf(s.getId()+" "+s.getBannername()));
 
-                    if(s.getAndroidmove()==null){}else{
+                    if(s.getAndroidmove()==null){
+
+                    }else{
                         if(s.getAndroidmove().equalsIgnoreCase("bestseller")){
                             Intent i=new Intent(getApplicationContext(), SellerBannerproductActivity.class);
                             startActivity(i);
                         }
                     }
-                    if(s.getCatid()==null){}else {
+                    if(s.getCatid()!=null && s.getSubcatid()!=null){
+                        Intent i=new Intent(getApplicationContext(), SubCategoryProductActivity.class);
+                       i.putExtra("userid", s.getSubcatid().toString());
+                       i.putExtra("catid",s.getCatid().toString());
+                       startActivity(i);
+                      // Toast.makeText(getApplicationContext(),s.getSubcatid().toString()+"///"+s.getCatid().toString(),Toast.LENGTH_LONG).show();
+                    }else if(s.getCatid()!=null){
                         Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
                        i.putExtra("userid",s.getCatid().toString());
+                        startActivity(i);
+                    }
+
+                    if(s.getProductid()==null){
+
+                    }else {
+                        Intent i=new Intent(getApplicationContext(), ProductDetailsActivity.class);
+                        i.putExtra("userid",s.getProductid().toString());
                         startActivity(i);
                     }
 

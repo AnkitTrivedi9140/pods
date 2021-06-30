@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.podsstore.R;
 import com.example.podsstore.data.response.AddressResponse;
-import com.example.podsstore.mainactivityadapters.AddressAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

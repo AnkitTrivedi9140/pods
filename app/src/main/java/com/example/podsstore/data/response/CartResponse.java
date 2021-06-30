@@ -23,7 +23,7 @@ public class CartResponse {
     private Long qty;
 
     @SerializedName("price")
-    private Long price;
+    private String price;
 
     @SerializedName("discount")
     private String discount;
@@ -45,7 +45,7 @@ public class CartResponse {
     @SerializedName("addedDate")
     private String addeddate;
 
-    public CartResponse(Long cartid, Long userid, Long productid, String productname, String imageUrl, Long qty, Long price, String discount, String totalprice, String producttype, String minqty, String itempresentin, String addeddate) {
+    public CartResponse(Long cartid, Long userid, Long productid, String productname, String imageUrl, Long qty, String price, String discount, String totalprice, String producttype, String minqty, String itempresentin, String addeddate) {
         this.cartid = cartid;
         this.userid = userid;
         this.productid = productid;
@@ -125,11 +125,11 @@ public class CartResponse {
         this.qty = qty;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -4,16 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
+import android.widget.RelativeLayout;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
-import com.example.podsstore.data.response.BusinessCatResponse;
+
 import com.example.podsstore.data.response.TopBrandsResponse;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -89,7 +87,7 @@ public class TopBrandAdapter extends RecyclerView.Adapter<TopBrandAdapter.MyView
 //        for(int i=0;i<movies){}
 
         Glide.with(context)
-                .load(movies.getBrandimage())
+                .load(movies.getImage())
                 .into(holder.ivtopbrand);
 
     }

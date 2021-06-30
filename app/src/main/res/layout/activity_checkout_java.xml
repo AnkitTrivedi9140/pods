@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivityJava">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <WebView
+        android:visibility="gone"
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:layout_width="111dp"
+        android:layout_height="99dp"
+        android:id="@+id/demo"
+android:layout_marginTop="8dp"
+        android:src="@drawable/kkkkk"
+
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_below="@+id/demo"
+        android:id="@+id/amounttotal"
+        android:layout_width="wrap_content"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="0dp"
+        android:text="$32453323"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/eachprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/amounttotal"
+        android:layout_centerHorizontal="true"
+        android:textSize="18dp">
+
+    </TextView>
+
+    <com.stripe.android.view.CardMultilineWidget
+
+        android:layout_below="@+id/eachprice"
+        android:id="@+id/cardInputWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:layout_marginTop="18dp"
+android:background="@drawable/edittext_bg"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+    <Button
+        android:text="Pay"
+        android:layout_below="@id/cardInputWidget"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/payButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+
+    />
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
+</RelativeLayout>

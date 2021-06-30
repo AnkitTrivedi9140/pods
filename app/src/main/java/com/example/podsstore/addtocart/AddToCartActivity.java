@@ -46,6 +46,7 @@ import com.example.podsstore.profile.ProfileActivity;
 import com.google.gson.Gson;
 import com.hbb20.CountryCodePicker;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,20 +141,22 @@ String prodid;
                     productListAdapter.clear();
                     productListAdapter.addAll(list);
                     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
-                    int totalPrice = 0;
+                    Double totalPrice=0.0  ;
 
                     for (int i = 0; i < list.size(); i++) {
-                        totalPrice += (list.get(i).getPrice() * Integer.valueOf(list.get(i).getQty().toString()));
+                        totalPrice += (Float.valueOf(String.valueOf(list.get(i).getPrice().toString())) *Float.valueOf( String.valueOf(list.get(i).getQty().toString())));
 
 
                            // totalPrice += (list.get(i).getPrice());
 
 
                         Log.e("onResponses", list.get(i).getQty().toString());
-                        tvsubtotaltxt.setText(String.valueOf(totalPrice));
-                        tvtotaltxt.setText(String.valueOf(totalPrice));
+                        DecimalFormat df = new DecimalFormat();
+                        df.setMaximumFractionDigits(2);
+                        tvsubtotaltxt.setText(String.valueOf(df.format(totalPrice)));
+                        tvtotaltxt.setText(String.valueOf(df.format(totalPrice)));
                         //  Toast.makeText(getApplicationContext(),totalPrice,Toast.LENGTH_SHORT).show();
-
+                        Log.d("onResponsetotalprice",String.valueOf(totalPrice));
                         AddtoCartWithQty addtoCartWithQty = new AddtoCartWithQty();
                         addtoCartWithQty.setOrderid("1");
                         addtoCartWithQty.setProductid(list.get(i).getProductid().toString());
@@ -244,9 +247,9 @@ String prodid;
         });
     }
 
-    private int grandTotal(List<CartResponse> items) {
+    private String grandTotal(List<CartResponse> items) {
 
-        int totalPrice = 0;
+        String totalPrice="";
         for (int i = 0; i < items.size(); i++) {
             totalPrice += items.get(i).getPrice();
         }
@@ -461,7 +464,7 @@ showAlertDialogqty(data.getProductid().toString());
     }
 
     @SuppressLint("CheckResult")
-    private void addtowishlist(Long prodid, String prodname, Long price, Long qty) {
+    private void addtowishlist(Long prodid, String prodname, String price, Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -804,7 +807,9 @@ etaddress.setOnClickListener(new View.OnClickListener() {
                 Double v2 = Double.parseDouble(!etofferamount.getText().toString().isEmpty() ?
                         etofferamount.getText().toString() : "0");
                 Double value = v1 * v2;
-                ettotalamount.setText(String.valueOf(value.toString()));
+                DecimalFormat df = new DecimalFormat();
+                df.setMaximumFractionDigits(2);
+                ettotalamount.setText(String.valueOf(String.format("%.2f", value)));
             }
         });
 
@@ -828,7 +833,8 @@ etaddress.setOnClickListener(new View.OnClickListener() {
                 Double v2 = Double.parseDouble(!etqty.getText().toString().isEmpty() ?
                         etqty.getText().toString() : "0");
                 Double value = v1 * v2;
-                ettotalamount.setText(String.valueOf(value.toString()));
+                ;
+                ettotalamount.setText(String.valueOf(String.format("%.2f", value)));
             }
         });
 
@@ -1021,7 +1027,7 @@ finish();
 
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Some problems getting from server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Dear User, you have already made an offer for this product, we will get back to you shortly. Please choose another product to make offer", Toast.LENGTH_SHORT).show();
 
                         }
                     }

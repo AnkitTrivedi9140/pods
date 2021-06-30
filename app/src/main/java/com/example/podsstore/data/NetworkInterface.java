@@ -3,6 +3,7 @@ package com.example.podsstore.data;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
+import com.example.podsstore.data.request.CheckoutRequest;
 import com.example.podsstore.data.request.ContactUsRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
 import com.example.podsstore.data.request.DemoRequest;
@@ -21,6 +22,7 @@ import com.example.podsstore.data.response.BannerResponse;
 import com.example.podsstore.data.response.BestSellingProductResponse;
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
+import com.example.podsstore.data.response.CheckoutResponse;
 import com.example.podsstore.data.response.CountryResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
@@ -123,15 +125,15 @@ public interface NetworkInterface {
     Single<Response<List<BusinessCatResponse>>>getbusinesscat();
 
 
-    @POST("brandRest/getBrandDetails")
+    @POST("adverRest/getBottomAd")
     Single<Response<List<TopBrandsResponse>>>gettopbrands();
 
 
     @POST("businessRest/homeSubCategory")
     Single<Response<List<SubCategoryResponce>>>getsubcategory(@Query("id") String id);
 
-    @POST("productRest/getProductByBrandName")
-    Single<Response<List<TopBrandsProductResponse>>>gettopbrandproduct(@Query("brandName") String brandname);
+    @POST("adverRest/getBottomAdSellerData")
+    Single<Response<List<TopBrandsProductResponse>>>gettopbrandproduct(@Query("sellerid") String brandname);
 
     @POST("businessRest/homeSubCatInfo")
     Single<Response<List<SubCategoryProductResponce>>>getproductbycategory(@Query("catid") String catid, @Query("id") String id);
@@ -273,6 +275,13 @@ public interface NetworkInterface {
 
     @POST("imageRest/demorequest")
     Single<Response<CreateLoginUserResponse>> demoonline(@Body DemoRequest requests);
+
+
+
+
+
+    @POST("paymentRest/placeOrderApp")
+    Single<Response<CheckoutResponse>> editmakeoffercheckout(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("addressId") String addressid, @Body List<CheckoutRequest>  requests);
 
 }
 

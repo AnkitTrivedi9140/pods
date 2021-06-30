@@ -12,7 +12,7 @@ public class AddtocartRequest {
     private String productname;
 
     @SerializedName("price")
-    private Long price;
+    private String price;
 
     @SerializedName("quantity")
     private Long quantity;
@@ -33,11 +33,11 @@ public class AddtocartRequest {
         this.productname = productname;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

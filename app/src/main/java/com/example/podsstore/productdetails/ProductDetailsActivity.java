@@ -48,6 +48,7 @@ import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -421,7 +422,7 @@ loadDatacart();
                             public void onClick(View v) {
 
                                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                                    smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),Long.parseLong("25"),Long.parseLong("1"));
+                                    smallCarton(list.get(finalI).getId(),list.get(finalI).getProdname(),list.get(finalI).getPrice().toString(),Long.parseLong("1"));
                                 }else{
                                     showAlertDialog();
                                 }
@@ -507,7 +508,7 @@ loadDatacart();
     }
 
     @SuppressLint("CheckResult")
-    private void smallCarton(Long prodid,String prodname,Long price,Long qty) {
+    private void smallCarton(Long prodid,String prodname,String price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -534,26 +535,15 @@ loadDatacart();
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("onSuccess", String.valueOf(response.code()));
+
                         if (response.isSuccessful()) {
 
 
                             Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             loadDatacart();
 
-//                            Log.e("onSuccessaa", successResponse.getChallanid());
-                            if (successResponse != null) {
-
-//                                if (successResponse.getMessage().equals("success")) {
-//                                    // mappingAdapter.clear();
-//
-//                                }
-
-                                //  Toaster.show(mContext, successResponse.getMessage());
-
-                            }
-                        } else {
-                          Toast.makeText(getApplicationContext(),successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        } else  {
+                    Toast.makeText(getApplicationContext(),"Product already present in cart!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -572,7 +562,7 @@ loadDatacart();
 
 
     @SuppressLint("CheckResult")
-    private void smallCartonbuy(Long prodid,String prodname,Long price,Long qty) {
+    private void smallCartonbuy(Long prodid,String prodname,String price,Long qty) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<AddressDetailsRequest> list = new ArrayList<>();
 
@@ -733,8 +723,10 @@ loadDatacart();
                             for(int i=0;i<list.size();i++){
                                 totalrating=totalrating+Double.valueOf(list.get(i).getRating().toString());
                             }
+                            DecimalFormat df = new DecimalFormat();
+                            df.setMaximumFractionDigits(1);
                             averate=totalrating/list.size();
-                            tvrating.setText(averate.toString());
+                            tvrating.setText(String.valueOf(df.format(averate)));
 
                             if(list.isEmpty()){
                                 tvrating.setVisibility(View.GONE);

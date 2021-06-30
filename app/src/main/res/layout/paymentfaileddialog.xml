@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/successgif"
+        android:layout_width="222dp"
+        android:layout_height="222dp"></ImageView>
+    <TextView
+        android:id="@+id/tvsucess"
+        android:layout_below="@+id/successgif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:text="Payment Failed! "
+        android:layout_centerHorizontal="true"
+        ></TextView>
+
+
+    <TextView
+        android:id="@+id/tvsucesstxt"
+        android:layout_below="@+id/tvsucess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textSize="16dp"
+        android:gravity="center"
+        android:text="Dear User payment has failed, Please place order again"
+        android:layout_centerHorizontal="true"
+        ></TextView>
+    <TextView
+        android:layout_below="@+id/tvsucesstxt"
+        android:background="@drawable/ripplenext"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="12dp"
+
+        android:lines="1"
+
+        android:id="@+id/tvsave"
+        android:layout_width="222dp"
+        android:layout_height="52dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="22dp"
+        android:layout_centerHorizontal="true"
+
+        android:textColor="@color/white"
+        android:text="Order Again"
+        android:gravity="center"
+        ></TextView>
+</RelativeLayout>

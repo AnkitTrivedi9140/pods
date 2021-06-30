@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.podsstore"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -102,4 +102,12 @@ dependencies {
 
     implementation 'com.daimajia.slider:library:1.1.5@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+//stripe
+
+    implementation 'com.stripe:stripe-android:16.10.0'
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+
+
 }
