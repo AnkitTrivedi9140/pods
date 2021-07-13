@@ -152,6 +152,7 @@ android:layout_toRightOf="@+id/tvaddwishlist"
                    />
 
                 <EditText
+                    android:visibility="gone"
                     android:layout_toRightOf="@+id/tvqtytext"
                     android:id="@+id/tvqtybtn"
                     android:layout_width="77dp"
@@ -175,16 +176,18 @@ android:layout_toRightOf="@+id/tvaddwishlist"
                     android:textSize="14dp"></EditText>
                 <ImageView
                     android:id="@+id/ivgo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
 android:layout_below="@+id/description"
-               android:layout_toRightOf="@+id/tvqtybtn"
+               android:layout_toRightOf="@+id/layio"
 android:layout_marginLeft="8dp"
-                    android:layout_marginTop="18dp"
 
+android:visibility="visible"
+                    android:layout_marginTop="11dp"
                     android:src="@drawable/gobtngrn">
 
                 </ImageView>
+
                 <LinearLayout
                     android:id="@+id/layio"
                     android:layout_width="wrap_content"
@@ -193,57 +196,54 @@ android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/edittext_bg"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
-                    <androidx.cardview.widget.CardView
+                    <RelativeLayout
                         android:id="@+id/less"
                         android:layout_width="33dp"
                         android:layout_height="33dp"
-                        android:background="@drawable/edittext_bg"
-                        app:cardBackgroundColor="#fff"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="9dp">
+                       android:background="@color/platinum"   >
 
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
-                            android:layout_gravity="center"
+                            android:layout_centerInParent="true"
                             android:src="@drawable/minus"
                             app:cardBackgroundColor="@color/platinum" />
 
 
-                    </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
 
-                    <TextView
+                    <EditText
+                        android:background="@drawable/edittext_bg"
                         android:id="@+id/prnumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="6dp"
-                        android:text="0"
+                        android:layout_width="77dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+android:inputType="number"
+                        android:text="0000000"
                         android:textColor="@android:color/black"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
 
 
-                    <androidx.cardview.widget.CardView
+                    <RelativeLayout
                         android:id="@+id/more"
                         android:layout_width="33dp"
                         android:layout_height="33dp"
-                        android:layout_marginLeft="6dp"
-                        android:background="@drawable/edittext_bg"
-                        app:cardBackgroundColor="@color/platinum"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="9dp">
+
+                        android:background="@color/platinum"
+                     >
 
                         <ImageView
+                            android:layout_centerInParent="true"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
                             android:src="@drawable/pluscircle"
                             app:cardBackgroundColor="@color/platinum" />
 
-                    </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
                 </LinearLayout>
 

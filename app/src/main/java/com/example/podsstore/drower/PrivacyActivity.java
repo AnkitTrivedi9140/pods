@@ -48,9 +48,8 @@ TextView tvcookiestext,tvaccessreview,tvadditional,tvquestion;
                 ds.setUnderlineText(true);
             }
         };
+
         ss6.setSpan(clickableSpan6, 150, 178, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
         tvquestion.setText(ss6);
         tvquestion.setMovementMethod(LinkMovementMethod.getInstance());
         tvquestion.setHighlightColor(Color.TRANSPARENT);
@@ -132,10 +131,10 @@ TextView tvcookiestext,tvaccessreview,tvadditional,tvquestion;
         ClickableSpan clickableSpan4 = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
-                Uri uri = Uri.parse("https://pods.market/contact"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+          startActivity(new Intent(PrivacyActivity.this, FeedbackActivity.class));
+//                Uri uri = Uri.parse("https://pods.market/contact"); // missing 'http://' will cause crashed
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
             }
             @Override
             public void updateDrawState(TextPaint ds) {

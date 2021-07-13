@@ -73,6 +73,7 @@ android:visibility="gone"
                 </TextView>
 
                 <RelativeLayout
+                    android:id="@+id/rl"
                     android:layout_marginLeft="22dp"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
@@ -120,8 +121,10 @@ android:visibility="gone"
                         ></TextView>
                 </RelativeLayout>
                 <RelativeLayout
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@+id/rl"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="22dp"
+                    android:layout_marginRight="12dp"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -220,7 +223,7 @@ android:visibility="gone"
                     android:id="@+id/tvbuyerheadremarks"
                     android:layout_marginLeft="14dp"
                     android:text="Buyer Remarks"
-
+android:visibility="gone"
                     android:paddingRight="8dp"
                     android:paddingLeft="8dp"
                     android:paddingTop="8dp"
@@ -230,6 +233,7 @@ android:visibility="gone"
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="14dp"
                     android:paddingRight="8dp"
@@ -297,7 +301,7 @@ android:visibility="gone"
                     android:id="@+id/tvsellerheadremarks"
                     android:layout_marginLeft="14dp"
                     android:text="Seller Remarks"
-
+android:visibility="gone"
                     android:paddingRight="8dp"
                     android:paddingLeft="8dp"
                     android:paddingTop="8dp"
@@ -307,6 +311,7 @@ android:visibility="gone"
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="14dp"
                     android:paddingRight="8dp"
@@ -367,6 +372,120 @@ android:layout_marginTop="8dp"
                 android:text="Place Order"
                 android:gravity="center"
                ></TextView>
+
+            <TextView
+                android:background="@drawable/ripplenext"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tvplaceordermakeoffer"
+                android:lines="1"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/tvacceptmakeoffer"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:textSize="14dp"
+
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Status waiting"
+                android:gravity="center"
+                ></TextView>
+<RelativeLayout
+    android:id="@+id/rlvideo"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/tvacceptmakeoffer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+            <TextView
+
+                android:background="@drawable/ripplenext"
+                android:layout_marginTop="8dp"
+
+                android:lines="1"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/tvvideomakeoffer"
+                android:layout_width="144dp"
+                android:layout_height="44dp"
+                android:textSize="14dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="download video"
+                android:gravity="center"
+                ></TextView>
+
+
+            <TextView
+                android:layout_toRightOf="@+id/tvvideomakeoffer"
+                android:background="@drawable/ripplenext"
+                android:layout_marginTop="8dp"
+
+                android:lines="1"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/tvdocmakeoffer"
+                android:layout_width="144dp"
+                android:layout_height="44dp"
+                android:textSize="14dp"
+
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="download doc"
+                android:gravity="center"
+                ></TextView>
+
+
+    <TextView
+
+        android:background="@drawable/ripplenext"
+        android:layout_marginTop="8dp"
+android:layout_below="@+id/tvdocmakeoffer"
+        android:lines="1"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/tvyesmakeoffer"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:textSize="14dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Satisfied"
+        android:gravity="center"
+        >
+
+    </TextView>
+
+
+    <TextView
+
+        android:layout_below="@+id/tvdocmakeoffer"
+        android:layout_toRightOf="@+id/tvvideomakeoffer"
+        android:background="@drawable/rippleabout"
+        android:layout_marginTop="8dp"
+
+        android:lines="1"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/tvnomakeoffer"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:textSize="14dp"
+
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Unsatisfied"
+        android:gravity="center"
+        >
+
+    </TextView>
+
+
+</RelativeLayout>
 
 
         </RelativeLayout>

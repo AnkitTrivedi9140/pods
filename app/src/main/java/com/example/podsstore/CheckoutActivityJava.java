@@ -4,17 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Bundle;
-import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebSettings;
+
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,7 +74,10 @@ import retrofit2.Callback;
 public class CheckoutActivityJava extends AppCompatActivity {
 
     private static final String BACKEND_URL = "https://pods.market/PodsStoreAPI/paymentRest/placeOrderApp?userEmailId=ankittrivedi9140@gmail.com&addressId=1";
-    private static final String STRIPE_PUBLISHABLE_KEY = "pk_test_51It6KYB4QGW1QrwN8uSaeQuRPEsham3BM4z7B2HgYezxen1p6sQOMqdY0l1Pw99GH7nrTgmzFMdycjhncQhDPXfe00l8DlxB3G";
+   // private static final String STRIPE_PUBLISHABLE_KEY = "pk_test_51It6KYB4QGW1QrwN8uSaeQuRPEsham3BM4z7B2HgYezxen1p6sQOMqdY0l1Pw99GH7nrTgmzFMdycjhncQhDPXfe00l8DlxB3G";
+
+    private static final String STRIPE_PUBLISHABLE_KEY = "pk_live_51It6KYB4QGW1QrwNpUBWGHpThuen6sVHvcXkDzksy2pA3eQHXyLxT07wnPGwkrfztwLskpAIIKNsggj7mpdVl7E200fSo5PHa1";
+
     TextView amounttotal,eachprice;
     private Stripe stripe;
     WebView webview;
@@ -95,8 +98,10 @@ public class CheckoutActivityJava extends AppCompatActivity {
         );
         // startCheckout();
 
-
-        if (getIntent().getStringExtra("getbuynowqty") != null) {
+        if (getIntent().getStringExtra("offerid") != null) {
+           makeofferplaceorder();
+        }
+       else if (getIntent().getStringExtra("getbuynowqty") != null) {
             singleproductdetails();
         } else {
 
@@ -323,7 +328,52 @@ public class CheckoutActivityJava extends AppCompatActivity {
                     }
                 });
     }
+    @SuppressLint("CheckResult")
+    private void makeofferplaceorder() {
 
+
+
+        // Log.e("postDatadddd", new Gson().toJson(req));
+
+        ApiClient.getApiClient().makeoffercheckout(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), getIntent().getStringExtra("offerid"), "pay online","888")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<retrofit2.Response<CheckoutResponse>>() {
+                    @Override
+                    public void onSuccess(retrofit2.Response<CheckoutResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("postData", String.valueOf(response.body()));
+                        if (response.isSuccessful()) {
+                            CheckoutResponse rer = response.body();
+                            Button payButton = findViewById(R.id.payButton);
+                            payButton.setOnClickListener((View view) -> {
+                                CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
+                                PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
+                                if (params != null) {
+                                    ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
+                                            .createWithPaymentMethodCreateParams(params, rer.getPaymentIntent());
+                                    stripe.confirmPayment(CheckoutActivityJava.this, confirmParams);
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: ", e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
     private void displayAlert(@NonNull String title,
                               @Nullable String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -372,19 +422,33 @@ public class CheckoutActivityJava extends AppCompatActivity {
 //
 //                );
                 Log.d("onSuccessdddd: ", String.valueOf(clientSecret));
+                String offerurl = "https://pods.market/PodsStoreAPI/paymentRest/successoffer?session_id=" + clientSecret;
 
                 String url = "https://pods.market/PodsStoreAPI/paymentRest/success?session_id=" + clientSecret;
+if(getIntent().getStringExtra("offerid")!=null){
+    webview.setVisibility(View.VISIBLE);
+    webview.loadUrl(offerurl);
+    showAlertDialog();
+    webview.setWebViewClient(new WebViewClient() {
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
+    });
 
-                webview.setVisibility(View.VISIBLE);
-                webview.loadUrl(url);
-                showAlertDialog();
-                webview.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                        handler.proceed();
-                    }
-                });
+}else{
+    webview.setVisibility(View.VISIBLE);
+    webview.loadUrl(url);
+    showAlertDialog();
+    webview.setWebViewClient(new WebViewClient() {
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
+    });
 
+
+}
 
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
@@ -392,17 +456,32 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         "Payment failed",
                         Objects.requireNonNull(paymentIntent.getLastPaymentError()).getMessage()
                 );
-                String url = "https://pods.market/PodsStoreAPI/paymentRest/fail?session_id=" + clientSecret;
+                String offerurl = "https://pods.market/PodsStoreAPI/paymentRest/failoffer?session_id=" + clientSecret;
 
-                webview.setVisibility(View.VISIBLE);
-                webview.loadUrl(url);
-                showAlertDialogfailed();
-                webview.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                        handler.proceed();
-                    }
-                });
+                String url = "https://pods.market/PodsStoreAPI/paymentRest/fail?session_id=" + clientSecret;
+                if(getIntent().getStringExtra("offerid")!=null){
+                    webview.setVisibility(View.VISIBLE);
+                    webview.loadUrl(offerurl);
+                    showAlertDialog();
+                    webview.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                            handler.proceed();
+                        }
+                    });
+
+                }else {
+                    webview.setVisibility(View.VISIBLE);
+                    webview.loadUrl(url);
+                    showAlertDialogfailed();
+                    webview.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                            handler.proceed();
+                        }
+                    });
+                }
+
             }
         }
 

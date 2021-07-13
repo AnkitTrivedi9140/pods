@@ -15,6 +15,7 @@ public class AddressDetailsRequest {
 
     @SerializedName("zipCode")
     private String zipcode;
+
     @SerializedName("country")
     private String country;
 

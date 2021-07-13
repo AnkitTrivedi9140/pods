@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="12dp"
+    tools:context=".addtocart.BankTransferActivity">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tvbanktransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bank Transfer"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_below="@+id/tvbanktransfer"
+        android:id="@+id/tvbanktransferheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+      android:visibility="gone"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvbanktransferheadding"
+        android:id="@+id/tvbanknameheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Bank name : "
+        >
+
+    </TextView>
+    <TextView
+        android:layout_toRightOf="@+id/tvbanknameheadding"
+    android:layout_marginTop="8dp"
+    android:layout_below="@+id/tvbanktransferheadding"
+    android:id="@+id/tvbankname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:textStyle="bold"
+    android:text="Citizens Bank"
+    />
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvbankname"
+        android:id="@+id/tvescrowheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Escrow Account No : "
+        >
+
+    </TextView>
+    <TextView
+        android:layout_toRightOf="@+id/tvescrowheadding"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvbankname"
+        android:id="@+id/tvescrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="6312781147"
+        >
+
+</TextView>
+
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvescrow"
+        android:id="@+id/tvcompanyheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Company Name : "
+        >
+
+    </TextView>
+    <TextView
+        android:layout_toRightOf="@+id/tvcompanyheadding"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvescrow"
+        android:id="@+id/tvcompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="Pods USA LLC"
+        >
+
+    </TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvcompany"
+        android:id="@+id/tvaddressheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Address : "
+        >
+
+    </TextView>
+    <TextView
+
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvaddressheadding"
+        android:id="@+id/tvaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="3411 Silverside Road Suite 104 Tatnall building Wilmington Delaware 19810."
+        >
+
+    </TextView>
+
+
+
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvaddress"
+        android:id="@+id/tvinternationheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="International Wires : "
+        >
+
+    </TextView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvinternationheadding"
+        android:id="@+id/tvinternation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="1) Swift Code : CTZIUS33 \n2) Citizens Bank Address : 1 Citizens Drive Riverside Rhode island 02915"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvinternation"
+        android:id="@+id/tvwireheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Wires within USA : "
+        >
+
+    </TextView>
+    <TextView
+
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvwireheadding"
+        android:id="@+id/tvwire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="1) Routing Number : 036076150 \n2) Citizens Bank Address : 1 Citizens Drive Riverside Rhode island 02915"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:layout_below="@+id/tvwire"
+        android:id="@+id/tvview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="22dp"
+        android:background="@color/platinum"
+        >
+
+    </TextView>
+    <TextView
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/tvview"
+        android:id="@+id/tvfundheadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Upload Proof of Funds "
+        android:layout_centerHorizontal="true"
+        android:textSize="18dp"
+        >
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/etproof"
+        android:textSize="16dp"
+        android:layout_marginTop="22dp"
+        android:hint="proof of transaction"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/tvfundheadding"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/edittext_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawableEnd="@drawable/upload"
+        android:lines="2"
+        android:editable="false"
+        android:focusable="false"
+        android:clickable="true"
+        android:drawableRight="@drawable/upload"></EditText>
+
+
+
+
+
+    <EditText
+        android:id="@+id/ettransationid"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Enter transaction id"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/etproof"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+        android:inputType="numberDecimal"
+        ></EditText>
+
+    <EditText
+        android:id="@+id/etdate"
+        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="Enter date"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/ettransationid"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:editable="false"
+        ></EditText>
+    <EditText
+        android:id="@+id/etremarks"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Your Remarks"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/etdate"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/edittext_bg"
+        android:padding="10dp"
+        android:gravity="start"
+        ></EditText>
+    <TextView
+        android:layout_below="@+id/etremarks"
+        android:background="@drawable/ripplenext"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="22dp"
+        android:lines="1"
+        android:id="@+id/tvsavepwd"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="22dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:text="SUBMIT"
+        android:gravity="center"
+        ></TextView>
+
+    </RelativeLayout>
+
+</ScrollView>
+</RelativeLayout>

@@ -115,9 +115,10 @@ android:inputType="numberDecimal"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
         android:gravity="start"
+        android:visibility="gone"
         ></EditText>
     <TextView
-        android:layout_below="@+id/etremarks"
+        android:layout_below="@+id/etaddress"
         android:background="@drawable/ripplenext"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

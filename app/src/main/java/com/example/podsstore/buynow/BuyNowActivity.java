@@ -63,12 +63,12 @@ public class BuyNowActivity extends AppCompatActivity {
     TextView tvProductpricetotal,tvProductname, tvProductprice, tvdetails, tvfeature, tvfunction, tvcartsize, tvdetailtitle, tvfeaturetitle, tvfunctiontitle;
     TextView logInBtn, tvbuynow;
 
-    EditText tvqtybtn;
+    EditText tvqtybtn, prnumber;
 
-    public TextView description, tvAssetType, tvqty, prnumber;
+    public TextView description, tvAssetType, tvqty;
     public ImageView productiv, deleteproductiv;
-    public CardView cardView, less, more;
-    RelativeLayout wishlist;
+    public CardView cardView;
+    RelativeLayout wishlist, less, more;
     ArrayList<String> arrayList;
     int counter = 1;
     String prodid;
@@ -120,22 +120,23 @@ public class BuyNowActivity extends AppCompatActivity {
 
         less.setOnClickListener(v -> {
 
-            counter = counter - 1;
+            counter = Integer.valueOf(prnumber.getText().toString()) - 1;
             if (counter <= 0) {
                 prnumber.setText(String.valueOf("1"));
             } else {
                 prnumber.setText(String.valueOf(counter));
             }
 
-            int totalPrice = 0;
-            String mynum1 = prnumber.getText().toString();
+            Double v1 = Double.parseDouble(!prnumber.getText().toString().isEmpty() ?
+                    prnumber.getText().toString() : "0");
+            Double v2 = Double.parseDouble(!productorice.isEmpty() ?
+                    productorice : "0");
+            Double value = v1 * v2;
+            //ettotalamount.setText(value.toString());
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(2);
+            tvProductpricetotal.setText(String.valueOf(df.format(value)));
 
-
-            String mynum2 = tvProductprice.getText().toString();
-
-
-            totalPrice += Integer.valueOf(mynum1) * Integer.valueOf("25");
-            tvProductprice.setText(String.valueOf("$ " + totalPrice));
 
         });
         ivtoggle.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +148,7 @@ public class BuyNowActivity extends AppCompatActivity {
 
 
         more.setOnClickListener(v -> {
-            counter = counter + 1;
+            counter = Integer.valueOf(prnumber.getText().toString()) + 1;
 
             if (counter <= 0) {
                 prnumber.setText(String.valueOf("1"));
@@ -156,15 +157,22 @@ public class BuyNowActivity extends AppCompatActivity {
             }
             //  prnumber.setText(String.valueOf(counter));
 
-            int totalPrice = 0;
+            Double totalPrice = 0.0;
             String mynum1 = prnumber.getText().toString();
 
 
             String mynum2 = tvProductprice.getText().toString();
 
+            Double v1 = Double.parseDouble(!prnumber.getText().toString().isEmpty() ?
+                    prnumber.getText().toString() : "0");
+            Double v2 = Double.parseDouble(!productorice.isEmpty() ?
+                    productorice : "0");
+            Double value = v1 * v2;
+            //ettotalamount.setText(value.toString());
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(2);
+            tvProductpricetotal.setText(String.valueOf(df.format(value)));
 
-            totalPrice += Integer.valueOf(mynum1) * Integer.valueOf("25");
-            tvProductprice.setText(String.valueOf("$ " + totalPrice));
             for (int j = 0; j < arrayList.size(); j++) {
 
 /*
@@ -180,7 +188,7 @@ public class BuyNowActivity extends AppCompatActivity {
 
         //  tvtotaltxt.setText(String.valueOf(totalPrice));
         //  Toast.makeText(getApplicationContext(),t
-        tvqtybtn.addTextChangedListener(new TextWatcher() {
+        prnumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -193,8 +201,8 @@ public class BuyNowActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Double v1 = Double.parseDouble(!tvqtybtn.getText().toString().isEmpty() ?
-                        tvqtybtn.getText().toString() : "0");
+                Double v1 = Double.parseDouble(!prnumber.getText().toString().isEmpty() ?
+                        prnumber.getText().toString() : "0");
                 Double v2 = Double.parseDouble(!productorice.isEmpty() ?
                        productorice : "0");
                 Double value = v1 * v2;
@@ -772,11 +780,11 @@ startActivity(i);
                         tvbuynow.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if(tvqtybtn.getText().toString().equalsIgnoreCase("") ||tvqtybtn.getText().toString()==null||tvqtybtn.getText().toString().equalsIgnoreCase("0")){
+                                if(prnumber.getText().toString().equalsIgnoreCase("") ||prnumber.getText().toString()==null||prnumber.getText().toString().equalsIgnoreCase("0")){
                                     Toast.makeText(getApplicationContext(),"Please check your Quantity!",Toast.LENGTH_SHORT).show();
 
                                 }else {
-                                     if (Integer.valueOf(tvqtybtn.getText().toString()) < Integer.valueOf(list.get(finalI).getMinqty().toString())) {
+                                     if (Integer.valueOf(prnumber.getText().toString()) < Integer.valueOf(list.get(finalI).getMinqty().toString())) {
                                         Toast.makeText(getApplicationContext(),"Minimum Quantity of this product is"+list.get(finalI).getMinqty().toString(),Toast.LENGTH_SHORT).show();
 
                                     }else{
@@ -849,7 +857,7 @@ addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
 
                         Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
                         intent.putExtra("userid", getIntent().getStringExtra("userid"));
-                        intent.putExtra("getbuynowqty", tvqtybtn.getText().toString());
+                        intent.putExtra("getbuynowqty", prnumber.getText().toString());
                         startActivity(intent);
                         finish();
                         Log.e("onSuccess", String.valueOf(response.code()));

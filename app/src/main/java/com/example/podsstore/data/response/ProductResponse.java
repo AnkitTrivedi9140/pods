@@ -76,6 +76,64 @@ public class ProductResponse {
     @SerializedName("imageurl4")
     private String imageurl4;
 
+
+    @SerializedName("returnpolicyurl")
+    private String returnpolicyurl;
+
+    @SerializedName("location")
+    private String location;
+    @SerializedName("proofoffundurl")
+    private String proofoffundurl;
+
+    @SerializedName("certificateurl")
+    private String certificateurl;
+
+
+
+    @SerializedName("pricetype")
+    private String pricetype;
+
+
+    public String getReturnpolicyurl() {
+        return returnpolicyurl;
+    }
+
+    public void setReturnpolicyurl(String returnpolicyurl) {
+        this.returnpolicyurl = returnpolicyurl;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getProofoffundurl() {
+        return proofoffundurl;
+    }
+
+    public void setProofoffundurl(String proofoffundurl) {
+        this.proofoffundurl = proofoffundurl;
+    }
+
+    public String getCertificateurl() {
+        return certificateurl;
+    }
+
+    public void setCertificateurl(String certificateurl) {
+        this.certificateurl = certificateurl;
+    }
+
+    public String getPricetype() {
+        return pricetype;
+    }
+
+    public void setPricetype(String pricetype) {
+        this.pricetype = pricetype;
+    }
+
     public String getImageurl1() {
         return imageurl1;
     }
@@ -268,6 +326,7 @@ public class ProductResponse {
         this.price = price;
     }
 
+
     @Override
     public String toString() {
         return "ProductResponse{" +
@@ -295,6 +354,11 @@ public class ProductResponse {
                 ", imageurl2='" + imageurl2 + '\'' +
                 ", imageurl3='" + imageurl3 + '\'' +
                 ", imageurl4='" + imageurl4 + '\'' +
+                ", returnpolicyurl='" + returnpolicyurl + '\'' +
+                ", location='" + location + '\'' +
+                ", proofoffundurl='" + proofoffundurl + '\'' +
+                ", certificateurl='" + certificateurl + '\'' +
+                ", pricetype='" + pricetype + '\'' +
                 '}';
     }
 }

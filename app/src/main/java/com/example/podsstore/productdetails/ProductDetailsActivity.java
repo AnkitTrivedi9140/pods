@@ -6,15 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +58,23 @@ import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.product.ProductListActivity;
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.CookieManager;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
+import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
+import es.voghdev.pdfviewpager.library.remote.DownloadFile;
+import es.voghdev.pdfviewpager.library.util.FileUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -60,16 +82,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity implements DownloadFile.Listener{
 ImageView ivproduct,ivtoggle,ivcart;
 TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanufacture,
         tvmanufacturetitle,tvstanderd,tvstanderdtitle,tvbrand,tvbrandtitle,tvcountry,
         tvcountrytitle,tvreviewhead,tvProductname,tvProductprice,tvdetails,tvfeature
-        ,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle;
-    TextView logInBtn,tvbuynow,tvrating;
+        ,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle,tvproductlocationtitle,tvproductlocation;
+    TextView logInBtn,tvbuynow,tvrating,tvreturnpolicy;
     RecyclerView recyclerView;
     ReviewAdapter productListAdapter;
     SliderLayout slider;
+    // Progress Dialog
+    private ProgressDialog pDialog;
+    public static final int progress_bar_type = 0;
+    private RemotePDFViewPager remotePDFViewPager;
+
+    private PDFPagerAdapter pdfPagerAdapter;
+    // File url to download
+    private static String file_url = "http://www.qwikisoft.com/demo/ashade/20001.kml";
+
+String productidpdf;
+
+RelativeLayout rlproductdetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +114,10 @@ TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanuf
         productListAdapter = new ReviewAdapter(ProductDetailsActivity.this);
 
         slider=findViewById(R.id.slider);
+        rlproductdetails=findViewById(R.id.rlproductdetails);
 
-
+        tvproductlocation=findViewById(R.id.tvproductlocation);
+        tvproductlocationtitle=findViewById(R.id.tvproductlocationtitle);
         tvserialno=findViewById(R.id.tvserialno);
 
         tvserialnotitle=findViewById(R.id.tvserialnotitle);
@@ -106,7 +142,7 @@ TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanuf
         tvcountry=findViewById(R.id.tvcountry);
         tvcountrytitle=findViewById(R.id.tvcountrytitle);
 
-
+        tvreturnpolicy=findViewById(R.id.tvreturnpolicy);
         tvrating=findViewById(R.id.tvrating);
         tvreviewhead=findViewById(R.id.tvreviewhead);
         ivproduct=findViewById(R.id.ivproduct);
@@ -131,6 +167,8 @@ TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanuf
         recyclerView.setAdapter(productListAdapter);
 
         loadData();
+
+
         ivtoggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,7 +325,7 @@ loadDatacart();
             public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
 
                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("getMaterialMasters",String.valueOf(response.code()) );
+                Log.e("getMaterialMasters",String.valueOf(response.body()) );
                 if (response.isSuccessful()) {
                     List<ProductResponse> list = response.body();
                     uploadbanner(list);
@@ -298,9 +336,9 @@ loadDatacart();
 //                        Glide.with(getApplicationContext())
 //                                .load(list.get(i).getImageurl().trim().toString())
 //                                .into(ivproduct);
-
+productidpdf=list.get(i).getReturnpolicyurl().toString();
                         tvProductname.setText(list.get(i).getProdtype());
-                        tvProductprice.setText("$ "+list.get(i).getPrice());
+                        tvProductprice.setText("$ "+list.get(i).getPrice()+" ("+list.get(i).getPricetype()+")");
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
@@ -313,7 +351,11 @@ loadDatacart();
                             tvserialno.setText(list.get(i).getSerialno().toString());
 
                         }
+                        if(list.get(i).getLocation()==null){
+                        }else{
+                            tvproductlocation.setText(list.get(i).getLocation().toString());
 
+                        }
                         tvmanufacture.setText(list.get(i).getManufacturer().toString());
                         tvbrand.setText(list.get(i).getBrand().toString());
 
@@ -381,7 +423,14 @@ loadDatacart();
                             tvserialnotitle.setVisibility(View.GONE);
                         }
 
-
+                        if(tvproductlocation.getText().toString().length()>2){
+                            tvproductlocation.setVisibility(View.VISIBLE);
+                            tvproductlocationtitle.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvproductlocation.setVisibility(View.GONE);
+                            tvproductlocationtitle.setVisibility(View.GONE);
+                        }
 
 
 
@@ -445,6 +494,18 @@ loadDatacart();
                                 }
 
 
+                            }
+                        });
+
+
+                         int finalI1 = i;
+                        tvreturnpolicy.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                  //       new DownloadFileFromURL().execute(list.get(finalI1).getRedirecturl());
+                                Log.d("onClickfff: ",String.valueOf(list.get(finalI1).getReturnpolicyurl()+"//"+String.valueOf(list.get(finalI1).getId().toString())));
+                                remotePDFViewPager = new RemotePDFViewPager(ProductDetailsActivity.this, productidpdf, ProductDetailsActivity.this);
+                              //  new DownloadFileFromURL().execute(String.valueOf(list.get(finalI1).getReturnpolicyurl()));
                             }
                         });
                     }
@@ -753,4 +814,52 @@ loadDatacart();
                 });
 
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case progress_bar_type: // we set this to 0
+                pDialog = new ProgressDialog(this);
+                pDialog.setMessage("Downloading file. Please wait...");
+                pDialog.setIndeterminate(false);
+                pDialog.setMax(100);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                pDialog.setCancelable(true);
+                pDialog.show();
+                return pDialog;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onSuccess(String url, String destinationPath) {
+        pdfPagerAdapter = new PDFPagerAdapter(this, FileUtil.extractFileNameFromURL(url));
+        remotePDFViewPager.setAdapter(pdfPagerAdapter);
+        updateLayout();
+    }
+    private void updateLayout() {
+
+        rlproductdetails.addView(remotePDFViewPager,
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+    }
+    @Override
+    public void onFailure(Exception e) {
+
+    }
+
+    @Override
+    public void onProgressUpdate(int progress, int total) {
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (pdfPagerAdapter != null) {
+            pdfPagerAdapter.close();
+        }
+    }
+
+
 }

@@ -24,6 +24,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHistoryAdapter.MyViewHolder> {
 
     private MakeOfferHistoryAdapter. AdapterListener adapterListener;
+    private MakeOfferHistoryAdapter. AcceptAdapterListener acceptadapterListener;
+
+    private MakeOfferHistoryAdapter. VideoAdapterListener videoadapterListener;
+    private MakeOfferHistoryAdapter. DocAdapterListener docadapterListener;
+    private MakeOfferHistoryAdapter. YesAdapterListener yesadapterListener;
+    private MakeOfferHistoryAdapter. NoAdapterListener noadapterListener;
+
     private List<MakeofferhistoryResponse> productResponseList;
     private Context context;
 
@@ -33,6 +40,25 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
     public void setAdapterListener(MakeOfferHistoryAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
+    public void setAcceptAdapterListener(MakeOfferHistoryAdapter.AcceptAdapterListener adapterListener) {
+        this.acceptadapterListener = adapterListener;
+    }
+
+
+    public void setVideoAdapterListener(MakeOfferHistoryAdapter.VideoAdapterListener adapterListener) {
+        this.videoadapterListener = adapterListener;
+    }
+    public void setDocAdapterListener(MakeOfferHistoryAdapter.DocAdapterListener adapterListener) {
+        this.docadapterListener = adapterListener;
+    }
+
+    public void setyesAdapterListener(MakeOfferHistoryAdapter.YesAdapterListener adapterListener) {
+        this.yesadapterListener = adapterListener;
+    }
+    public void setnoAdapterListener(MakeOfferHistoryAdapter.NoAdapterListener adapterListener) {
+        this.noadapterListener = adapterListener;
+    }
+
 
     public void setAdapterListeners(MakeOfferHistoryAdapter.InventoryAdapterListener adapterListener) {
         this.openListener = adapterListener;
@@ -44,7 +70,9 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
         this.placeListener = adapterListener;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvorderqtytotal,tvplaceordermakeoffer,tvproductname,tvorderdate,tvorderid ,tvordertotal,tvorderqty,tvbuyerofferprice,tvbuyerofferremarks,tvsellerofferprice,tvsellerofferremarks;
+        public TextView tvyesmakeoffer,tvnomakeoffer,tvvideomakeoffer,tvdocmakeoffer,tvacceptmakeoffer,tvorderqtytotal,tvplaceordermakeoffer,tvproductname
+                ,tvorderdate,tvorderid ,tvordertotal,tvorderqty,tvbuyerofferprice
+                ,tvbuyerofferremarks,tvsellerofferprice,tvsellerofferremarks;
         public ImageView ivaccept,ivedit,ivdeclined;
         public CardView cardView;
         CircleImageView productimage;
@@ -53,6 +81,15 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
         int counter=0;
         public MyViewHolder(View view) {
             super(view);
+
+
+            tvyesmakeoffer = view.findViewById(R.id.tvyesmakeoffer);
+            tvnomakeoffer = view.findViewById(R.id.tvnomakeoffer);
+
+            tvvideomakeoffer = view.findViewById(R.id.tvvideomakeoffer);
+            tvdocmakeoffer = view.findViewById(R.id.tvdocmakeoffer);
+
+            tvacceptmakeoffer = view.findViewById(R.id.tvacceptmakeoffer);
             tvorderqtytotal = view.findViewById(R.id.tvorderqtytotal);
             rlbuyerprice = view.findViewById(R.id.rlbuyerprice);
             rlbuyerremaks = view.findViewById(R.id.rlbuyerremarks);
@@ -74,6 +111,41 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
             ivaccept = view.findViewById(R.id.ivaccept);
             ivedit = view.findViewById(R.id.ivedit);
             ivdeclined = view.findViewById(R.id.ivdeclined);
+
+            tvvideomakeoffer.setOnClickListener(v -> {
+
+                if (videoadapterListener != null) {
+                    videoadapterListener.onItemClickvedio(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvdocmakeoffer.setOnClickListener(v -> {
+
+                if (docadapterListener != null) {
+                    docadapterListener.onItemClickdoc(productResponseList.get(getAdapterPosition()));
+                }
+            });
+
+            tvyesmakeoffer.setOnClickListener(v -> {
+
+                if (yesadapterListener != null) {
+                    yesadapterListener.onItemyesClickvedio(productResponseList.get(getAdapterPosition()));
+                }
+            });
+            tvnomakeoffer.setOnClickListener(v -> {
+
+                if (noadapterListener != null) {
+                    noadapterListener.onItemnoClickdoc(productResponseList.get(getAdapterPosition()));
+                }
+            });
+
+
+
+            tvacceptmakeoffer.setOnClickListener(v -> {
+
+                if (acceptadapterListener != null) {
+                    acceptadapterListener.onItemClickaccept(productResponseList.get(getAdapterPosition()));
+                }
+            });
 
             ivaccept.setOnClickListener(v -> {
 
@@ -174,12 +246,41 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
                 holder.rlsellerprice.setVisibility(View.VISIBLE);
                 holder.rlsellerremarks.setVisibility(View.VISIBLE);
             }
+            if(cartResponse.getStatus()!=null){
+                if(cartResponse.getStatus().equalsIgnoreCase("SellerUpload")){
+
+                    holder.tvvideomakeoffer.setVisibility(View.VISIBLE);
+                    holder.tvdocmakeoffer.setVisibility(View.VISIBLE);
+                    holder.tvyesmakeoffer.setVisibility(View.VISIBLE);
+                    holder.tvnomakeoffer.setVisibility(View.VISIBLE);
+                } else{
+                    holder.tvyesmakeoffer.setVisibility(View.GONE);
+                    holder.tvnomakeoffer.setVisibility(View.GONE);
+                    holder.tvvideomakeoffer.setVisibility(View.GONE);
+                    holder.tvdocmakeoffer.setVisibility(View.GONE);
+                }
+            }
+            if(cartResponse.getStatus()!=null){
+                if(cartResponse.getStatus().equalsIgnoreCase("Waiting")){
+                    holder.tvacceptmakeoffer.setVisibility(View.VISIBLE);
+                }else{
+                    holder.tvacceptmakeoffer.setVisibility(View.GONE);
+                }
+            }
 
             if(cartResponse.getStatus()==null){
                 holder.ivdeclined.setVisibility(View.GONE);
                 holder.ivedit.setVisibility(View.GONE);
                 holder.ivaccept.setVisibility(View.GONE);
                 holder.tvplaceordermakeoffer.setVisibility(View.GONE);
+
+
+
+                holder.tvyesmakeoffer.setVisibility(View.GONE);
+                holder.tvnomakeoffer.setVisibility(View.GONE);
+                holder.tvvideomakeoffer.setVisibility(View.GONE);
+                holder.tvdocmakeoffer.setVisibility(View.GONE);
+                holder.tvacceptmakeoffer.setVisibility(View.GONE);
             }else{
                 if(cartResponse.getUsertype().equalsIgnoreCase("Seller") && cartResponse.getStatus().equalsIgnoreCase("New") ){
                     holder.rlbuyerprice.setVisibility(View.GONE);
@@ -216,17 +317,17 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
 
             }
 
-            if(cartResponse.getSellerprice()==null){
-                holder.tvsellerofferprice.setText("");
-                holder.ivdeclined.setVisibility(View.GONE);
-                holder.ivedit.setVisibility(View.GONE);
-                holder.ivaccept.setVisibility(View.GONE);
-            }else{
-                holder.tvsellerofferprice.setText(cartResponse.getSellerprice().toString());
-                holder.ivdeclined.setVisibility(View.VISIBLE);
-                holder.ivedit.setVisibility(View.VISIBLE);
-                holder.ivaccept.setVisibility(View.VISIBLE);
-            }
+//            if(cartResponse.getSellerprice()==null){
+//                holder.tvsellerofferprice.setText("");
+//                holder.ivdeclined.setVisibility(View.GONE);
+//                holder.ivedit.setVisibility(View.GONE);
+//                holder.ivaccept.setVisibility(View.GONE);
+//            }else{
+//                holder.tvsellerofferprice.setText(cartResponse.getSellerprice().toString());
+//                holder.ivdeclined.setVisibility(View.VISIBLE);
+//                holder.ivedit.setVisibility(View.VISIBLE);
+//                holder.ivaccept.setVisibility(View.VISIBLE);
+//            }
 
             if(cartResponse.getStatus()==null){
                 holder.ivdeclined.setVisibility(View.GONE);
@@ -297,6 +398,32 @@ public class MakeOfferHistoryAdapter extends RecyclerView.Adapter<MakeOfferHisto
     public interface AdapterListener {
 
         void onItemClick(MakeofferhistoryResponse data);
+    }
+
+    public interface VideoAdapterListener {
+
+        void onItemClickvedio(MakeofferhistoryResponse data);
+    }
+
+
+    public interface DocAdapterListener {
+
+        void onItemClickdoc(MakeofferhistoryResponse data);
+    }
+
+    public interface YesAdapterListener {
+
+        void onItemyesClickvedio(MakeofferhistoryResponse data);
+    }
+
+
+    public interface NoAdapterListener {
+
+        void onItemnoClickdoc(MakeofferhistoryResponse data);
+    }
+    public interface AcceptAdapterListener {
+
+        void onItemClickaccept(MakeofferhistoryResponse data);
     }
 
     public interface InventoryAdapterListener {

@@ -120,7 +120,7 @@ public class ShowMakeofferAdapter extends RecyclerView.Adapter<ShowMakeofferAdap
             holder.tvtotalqty.setText(cartResponse.getQuantitydetails());
             if(cartResponse.getFinalupdatedamount()==null){}else{
                 Double aa=Double.valueOf(cartResponse.getQuantitydetails())*Double.valueOf(cartResponse.getFinalupdatedamount());
-                holder.tvtotalamount.setText(String.valueOf(aa));
+                holder.tvtotalamount.setText(String.valueOf(aa)+"("+cartResponse.getPricetype()+")");
             }
 
             Glide.with(context)

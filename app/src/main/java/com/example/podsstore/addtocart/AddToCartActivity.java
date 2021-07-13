@@ -380,15 +380,7 @@ showAlertDialogqty(data.getProductid().toString());
 
             //  Toast.makeText(getApplicationContext(), qty.toString(), Toast.LENGTH_SHORT).show();
             tvdiscounttxt.setText("0.00");
-            String aa = viewModel.isexist(data.getProductid().toString());
 
-            if (aa == null) {
-                // Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
-                insert(data.getProductid().toString(), qty, "1");
-            } else {
-                //Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
-                update(qty, data.getProductid().toString());
-            }
         }
 
 
@@ -399,69 +391,12 @@ showAlertDialogqty(data.getProductid().toString());
         @Override
         public void onItemClickless(CartResponse data, String qty) {
             tvdiscounttxt.setText("0.00");
-            String aa = viewModel.isexist(data.getProductid().toString());
-            if (aa == null) {
-                //  Toast.makeText(getApplicationContext(), "insert", Toast.LENGTH_SHORT).show();
-                insert(data.getProductid().toString(), qty, "1");
-            } else {
-                // Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
-                update(qty, data.getProductid().toString());
-            }
+
         }
 
     };
 
-    public void insert(String productid, String qty, String userid) {
 
-        Completable.fromAction(() -> viewModel.insert(productid, qty, userid))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i("onComplete: ", "completessss");
-
-                        loadData();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        Log.e("onError: ", e.getMessage());
-                    }
-                });
-    }
-
-    public void update(String qty, String productid) {
-        //   Toast.makeText(context,"hogya",Toast.LENGTH_SHORT).show();
-        Completable.fromAction(() -> viewModel.update(qty, productid))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.e("onupdate: ", "complete");
-                        loadData();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("onErrorup: ", e.getMessage());
-                    }
-                });
-
-
-    }
 
     @SuppressLint("CheckResult")
     private void addtowishlist(Long prodid, String prodname, String price, Long qty) {
@@ -769,7 +704,7 @@ showAlertDialog(data.getProductid().toString(),data.getProducttype().toString())
         EditText ettotalamount =customLayout.findViewById(R.id.ettotalammount);
        etaddress =customLayout.findViewById(R.id.etaddress);
 
-        EditText etremarka =customLayout.findViewById(R.id.etremarks);
+       // EditText etremarka =customLayout.findViewById(R.id.etremarks);
 
         etprodid.setText(prodid);
         AlertDialog alert = alertDialog.create();
@@ -854,7 +789,7 @@ etaddress.setOnClickListener(new View.OnClickListener() {
                 String offer = etofferamount.getText().toString().trim();
                 String total = ettotalamount.getText().toString().trim();
 
-                String remarks = etremarka.getText().toString().trim();
+           //     String remarks = etremarka.getText().toString().trim();
 
 
                 String address = etaddress.getText().toString().trim();
@@ -895,13 +830,13 @@ ettotalamount.setText(aaa.toString());*/
                 else if(TextUtils.isEmpty(address)){
                     etaddress.setError("Please choose address!");
                 }
-                else if(TextUtils.isEmpty(remarks)){
-                    etremarka.setError("remarks Can't Blank!");
-                }
+//                else if(TextUtils.isEmpty(remarks)){
+//                    etremarka.setError("remarks Can't Blank!");
+//                }
 
                 //   loadData(et.getText().toString().trim());
                 else {
-makeoffer(prodtype.toString(),String.valueOf(ettotalamount.getText().toString()),etofferamount.getText().toString(),"288",etqty.getText().toString(),etremarka.getText().toString());
+makeoffer(prodtype.toString(),String.valueOf(ettotalamount.getText().toString()),etofferamount.getText().toString(),"288",etqty.getText().toString(),"");
 
                alert.dismiss();
                 }

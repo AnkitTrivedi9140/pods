@@ -52,7 +52,7 @@ public class AddtocartAdapter extends RecyclerView.Adapter<AddtocartAdapter.MyVi
     private Context context;
     DataTransferInterface dtInterface;
 String qty;
-    private QuantityViewModel viewModel;
+
     private AddtocartAdapter.InventoryAdapterListener openListener;
     private AddtocartAdapter.AdapterListenerplus adapterListenerplus;
     private AddtocartAdapter.AdapterListenerless adapterListenerless;
@@ -83,7 +83,9 @@ String qty;
         public TextView description, tvAssetType,tvqty,prnumber;
         EditText tvqtybtn;
         public ImageView productiv,deleteproductiv,ivgo;
-        public CardView cardView,less,more;
+        public CardView cardView;
+
+                RelativeLayout less,more;
         RelativeLayout wishlist;
         ArrayList<String> arrayList;
         int counter=1;
@@ -138,7 +140,7 @@ String qty;
 
             less.setOnClickListener(v -> {
 
-            counter=counter-1;
+            counter=Integer.valueOf(prnumber.getText().toString())-1;
             if(counter<=0)  {
                 prnumber.setText(String.valueOf("1"));
             }else{
@@ -151,7 +153,7 @@ String qty;
                 }
             });
             more.setOnClickListener(v -> {
-                counter=counter+1;
+                counter=Integer.valueOf(prnumber.getText().toString())+1;
 
                 if(counter<=0)  {
                     prnumber.setText(String.valueOf("1"));
@@ -160,14 +162,6 @@ String qty;
                 }
               //  prnumber.setText(String.valueOf(counter));
 
-                for(int i=0;i<productResponseList.size();i++) {
-                    for(int j=0;j<arrayList.size();j++) {
-
-/*
-                        update(arrayList.get(j),productResponseList.get(i).getProductid().toString());*/
-
-                    }
-                }
                 if (adapterListener != null) {
                     adapterListenerless.onItemClickless(productResponseList.get(getAdapterPosition()),prnumber.getText().toString());
                 }
@@ -220,19 +214,11 @@ if(cartResponse.getOfferflag()==null){
     holder.wishlist.setVisibility(View.GONE);
 }
 if(cartResponse.getQty().toString().equalsIgnoreCase("0")){
-    holder.tvqtybtn.setText("1");
+    holder.prnumber.setText("1");
 }else{
-    holder.tvqtybtn.setText(cartResponse.getQty().toString());
+    holder.prnumber.setText(cartResponse.getQty().toString());
 }
 
-        viewModel = ViewModelProviders.of((FragmentActivity) context).get(QuantityViewModel.class);
-        String lastqty = viewModel.getqty(cartResponse.getProductid().toString());
-
-if(lastqty==null){
-    holder.prnumber.setText(String.valueOf("1"));
-}else {
-    holder.prnumber.setText(String.valueOf(lastqty));
-}
 
       // Toast.makeText(context,movies.getImageUrl(),Toast.LENGTH_LONG).show();
       Glide.with(context)
@@ -242,7 +228,7 @@ if(lastqty==null){
 holder.ivgo.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        String aa=extractInt(  holder.tvqtybtn.getText().toString());
+        String aa=extractInt(  holder.prnumber.getText().toString());
         // for(int i=0;i<productResponseList.size();i++){
         if(aa.contains("-")){
             // Toast.makeText(context,"-----",Toast.LENGTH_LONG).show();

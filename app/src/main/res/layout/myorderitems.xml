@@ -104,15 +104,15 @@ android:textStyle="bold"
                     android:id="@+id/tvqty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+android:layout_marginTop="3dp"
                     android:visibility="visible"
                     android:lines="1"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_below="@+id/tvAssetType"
                     android:text="Qty_1"
                     android:layout_toRightOf="@+id/description"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="14dp"
                     android:textStyle="normal" />
 
 

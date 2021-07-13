@@ -19,7 +19,7 @@ import com.example.podsstore.data.request.ReviewRequest;
 import com.example.podsstore.data.request.TellUsMoreResquest;
 import com.example.podsstore.data.response.AddressResponse;
 import com.example.podsstore.data.response.BannerResponse;
-import com.example.podsstore.data.response.BestSellingProductResponse;
+
 import com.example.podsstore.data.response.BusinessCatResponse;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CheckoutResponse;
@@ -39,6 +39,7 @@ import com.example.podsstore.data.response.SubCategoryResponce;
 import com.example.podsstore.data.response.TopBrandsProductResponse;
 import com.example.podsstore.data.response.TopBrandsResponse;
 import com.example.podsstore.data.response.UploadImageResponse;
+import com.example.podsstore.data.response.VedioResponse;
 
 import java.util.List;
 
@@ -168,6 +169,11 @@ public interface NetworkInterface {
     @POST("imageRest/uploadProfilePhoto")
     Call<CreateLoginUserResponse> uploadImage(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
                                           @Part("userEmailId") RequestBody  userEmailId );
+   @Multipart
+    @POST("makerOfferRest/uploadOfferDoc")
+    Call<CreateLoginUserResponse> uploadImagemakeoffer(@Header("Authorization") String authHeader, @Part MultipartBody.Part file,
+                                              @Part("userEmailId") RequestBody  userEmailId,@Part("offerid") RequestBody  offerid  );
+
 
     @Multipart
     @POST("productRest/uploadProofOfFund")
@@ -254,6 +260,13 @@ public interface NetworkInterface {
     Call<CreateLoginUserResponse>makeofferdeclined(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
 
 
+
+
+    @POST("makerOfferRest/updateFinalStatusByBuyer")
+    Call<CreateLoginUserResponse>makeofferyes(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("flag") String remark);
+
+
+
     @POST("makerOfferRest/offerAceptByBuyer")
     Call<CreateLoginUserResponse>makeofferaccept(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("remark") String remark);
 
@@ -276,12 +289,18 @@ public interface NetworkInterface {
     @POST("imageRest/demorequest")
     Single<Response<CreateLoginUserResponse>> demoonline(@Body DemoRequest requests);
 
-
-
-
-
     @POST("paymentRest/placeOrderApp")
     Single<Response<CheckoutResponse>> editmakeoffercheckout(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("addressId") String addressid, @Body List<CheckoutRequest>  requests);
+
+    @POST("paymentRest/placeOrderOfferApp")
+    Single<Response<CheckoutResponse>>makeoffercheckout(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("mode") String mode, @Query("txid") String txid);
+
+
+
+
+    @POST("makerOfferRest/getSellerProofInfo")
+    Call<List<VedioResponse>>getvideo(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid);
+
 
 }
 

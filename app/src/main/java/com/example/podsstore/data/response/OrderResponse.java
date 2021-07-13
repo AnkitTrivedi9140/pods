@@ -52,6 +52,19 @@ public class OrderResponse {
 
 
 
+
+    @SerializedName("pricetype")
+    private String pricetype  ;
+
+
+    public String getPricetype() {
+        return pricetype;
+    }
+
+    public void setPricetype(String pricetype) {
+        this.pricetype = pricetype;
+    }
+
     public String getCurrentorderstatus() {
         return currentorderstatus;
     }
@@ -167,20 +180,21 @@ public class OrderResponse {
     @Override
     public String toString() {
         return "OrderResponse{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", orderid='" + orderid + '\'' +
-                ", userid=" + userid +
-                ", productid=" + productid +
+                ", userid='" + userid + '\'' +
+                ", productid='" + productid + '\'' +
                 ", productname='" + productname + '\'' +
                 ", producttype='" + producttype + '\'' +
                 ", productimage='" + productimage + '\'' +
                 ", qty=" + qty +
-                ", price=" + price +
+                ", price='" + price + '\'' +
                 ", totalprice='" + totalprice + '\'' +
                 ", itempresentin='" + itempresentin + '\'' +
                 ", currentorderstatus='" + currentorderstatus + '\'' +
                 ", sellerid='" + sellerid + '\'' +
-                ", orderaddress=" + orderaddress +
+                ", orderaddress='" + orderaddress + '\'' +
+                ", pricetype='" + pricetype + '\'' +
                 '}';
     }
 

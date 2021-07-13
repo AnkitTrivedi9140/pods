@@ -80,7 +80,17 @@ public class MakeOfferResponse {
     public String finalupdatedamount  ;
 
 
+    @SerializedName("pricetype")
+    public String pricetype  ;
 
+
+    public String getPricetype() {
+        return pricetype;
+    }
+
+    public void setPricetype(String pricetype) {
+        this.pricetype = pricetype;
+    }
 
     public String getOfferimage() {
         return offerimage;
@@ -310,6 +320,7 @@ public class MakeOfferResponse {
                 ", offerimage='" + offerimage + '\'' +
                 ", sellerremark='" + sellerremark + '\'' +
                 ", finalupdatedamount='" + finalupdatedamount + '\'' +
+                ", pricetype='" + pricetype + '\'' +
                 '}';
     }
 

@@ -129,7 +129,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
     public void onBindViewHolder(MyOrderAdapter.MyViewHolder holder, int position) {
         OrderResponse cartResponse = productResponseList.get(position);
         holder.tvAssetType.setText(cartResponse.getProducttype());
-        holder.description.setText("$_"+cartResponse.getPrice());
+        holder.description.setText("$_"+cartResponse.getPrice()+"("+cartResponse.getPricetype()+")");
         holder.tvqty.setText("Qty: "+cartResponse.getQty());
 
         holder.tvcome.setText("Order Status- "+cartResponse.getCurrentorderstatus());

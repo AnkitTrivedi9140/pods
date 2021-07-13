@@ -125,7 +125,7 @@ android:visibility="gone"
                     android:text="Procuct Details"
 
                     android:textColor="@color/black"
-                    android:layout_toLeftOf="@+id/layio"
+
                     android:textSize="18dp"
                     ></TextView>
 
@@ -178,6 +178,7 @@ android:layout_toLeftOf="@+id/tvqtybtn"
                     android:textColor="#13B3A7"
                     android:layout_alignParentRight="true"></TextView>
                 <EditText
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                       android:id="@+id/tvqtybtn"
                     android:layout_width="wrap_content"
@@ -291,29 +292,28 @@ android:visibility="gone"
                 </ImageView>
                 </RelativeLayout>
                 <LinearLayout
-                    android:visibility="gone"
-                  android:layout_alignParentEnd="true"
+                    android:visibility="visible"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="8dp"
                     android:id="@+id/layio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_bg"
-android:layout_centerVertical="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="14dp"
 
                     android:orientation="horizontal"
                     android:layout_alignParentRight="true">
 
-                    <androidx.cardview.widget.CardView
+                    <RelativeLayout
                         android:id="@+id/less"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/edittext_bg"
-                        app:cardBackgroundColor="#fff"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="9dp">
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:background="@color/platinum"
+                     >
 
                         <ImageView
+                            android:layout_centerInParent="true"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center"
@@ -322,33 +322,35 @@ android:layout_centerVertical="true"
                             tools:ignore="MissingPrefix" />
 
 
-                    </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
 
-                    <TextView
+                    <EditText
                         android:id="@+id/prnumber"
-                        android:layout_marginLeft="6dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:inputType="number"
+                        android:layout_width="77dp"
+                        android:layout_height="33dp"
                         android:layout_gravity="center"
-                        android:textSize="22dp"
+                        android:textSize="16dp"
                         android:text="1"
+                        android:background="@drawable/edittext_bg"
                         android:gravity="center"
                         android:textColor="@android:color/black"
                         />
 
 
-                    <androidx.cardview.widget.CardView
+                    <RelativeLayout
                         android:id="@+id/more"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="6dp"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
 
-                        app:cardCornerRadius="5dp"
-                        android:background="@drawable/edittext_bg"
-                        app:cardElevation="9dp">
+
+
+                        android:background="@color/platinum"
+                      >
 
                         <ImageView
+                            android:layout_centerInParent="true"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             app:cardBackgroundColor="@color/platinum"
@@ -356,7 +358,7 @@ android:layout_centerVertical="true"
                             android:src="@drawable/pluscircle"
                             tools:ignore="MissingPrefix" />
 
-                    </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
                 </LinearLayout>
             </RelativeLayout>

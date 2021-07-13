@@ -92,7 +92,7 @@ startActivity(intent);
                 progressBar.setVisibility(View.GONE);
                 progresstext.setVisibility(View.GONE);
                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                Log.e("cartaaamake",String.valueOf(response.code()) );
+                Log.e("cartaaamake",String.valueOf(response.body()) );
                 if (response.isSuccessful()) {
                     List<MakeOfferResponse> list = response.body();
                     productListAdapter.addAll(list);

@@ -20,6 +20,7 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.category.CategoryActivity;
+import com.example.podsstore.drower.FeedbackActivity;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.profile.ProfileActivity;
@@ -131,7 +132,7 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "///" + PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
                 if (!PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN).isEmpty()) {
-                    Intent    in = new Intent(getBaseContext(), ConnectwithPodActivity.class);
+                    Intent    in = new Intent(getBaseContext(), FeedbackActivity.class);
                     startActivity(in);
                 } else {
                     showAlertDialog();
