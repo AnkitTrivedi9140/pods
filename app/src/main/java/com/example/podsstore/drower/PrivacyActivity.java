@@ -106,9 +106,12 @@ TextView tvcookiestext,tvaccessreview,tvadditional,tvquestion;
             @Override
             public void onClick(View textView) {
                 //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
-                Uri uri = Uri.parse("http://support@pods.market"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "info@podshealth.com" });
+                intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+                startActivity(Intent.createChooser(intent, ""));
             }
             @Override
             public void updateDrawState(TextPaint ds) {

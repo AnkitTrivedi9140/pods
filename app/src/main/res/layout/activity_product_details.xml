@@ -439,21 +439,51 @@ android:layout_below="@+id/tvProductname"
 
 
 
+
+
         <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvmaterialtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tvproductlocation"
+            android:layout_marginTop="22dp"
+            android:text="Product Material"
+            android:textColor="@color/black"
+            android:textSize="18dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvmaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvmaterialtitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#505A63"
+            android:textSize="14dp"></TextView>
+
+
+
+
+        <TextView
+            android:layout_below="@+id/tvmaterial"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:id="@+id/tvreturnpolicy"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Return Policy"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/btngrn"
 
             android:textSize="18dp"
 
-            android:textStyle="bold"
+            android:textStyle="italic"
             ></TextView>
 
 

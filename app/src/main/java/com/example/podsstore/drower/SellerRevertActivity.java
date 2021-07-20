@@ -1,16 +1,21 @@
 package com.example.podsstore.drower;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -24,6 +29,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -33,6 +40,8 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.example.podsstore.DownloadFileAsync;
+import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 
 import com.example.podsstore.addtocart.PaymentActivity;
@@ -50,6 +59,7 @@ import com.example.podsstore.mainactivityadapters.MakeOfferHistoryAdapter;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 
+import com.example.podsstore.productdetails.DownloadZipActivity;
 import com.example.podsstore.productdetails.ShowPDFActivity;
 import com.google.gson.Gson;
 
@@ -88,7 +98,7 @@ public class SellerRevertActivity extends AppCompatActivity {
     public static final int progress_bar_type = 0;
     VideoView videoView;
     // File url to download
-
+WebView webview;
     String ss;
     private static String file_url = "https://pods.market/PodsStoreAPI/makerOfferRest/downloadZip?";
 
@@ -98,6 +108,8 @@ public class SellerRevertActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seller_revert);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Your Offer Details");
+        webview = findViewById(R.id.webview);
+
         tvproductofferstatus = findViewById(R.id.tvproductofferstatus);
         tvproductofferadd = findViewById(R.id.tvproductofferadd);
         tvproductofferamount = findViewById(R.id.tvproductofferamount);
@@ -200,12 +212,77 @@ showAlertDialogmakeoffer(data.getOfferid().toString());
 
     };
     private MakeOfferHistoryAdapter.DocAdapterListener docAdapterListener = data -> {
-//Intent intent=new Intent(getApplicationContext(), WebViewActivity.class);
-//startActivity(intent);
+String yyy=file_url+"userEmailId="+PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)+"&offerid="+data.getOfferid();
+        Uri uri = Uri.parse(yyy); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(SellerRevertActivity.this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Downloaded Successfully!");
+        dialog.setMessage("File downloaded in downloads folder phone storage.");
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //Action for "Delete".
+//Intent intent1=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
+//startActivity(intent1);
 //finish();
-        //arvind1997jha@gmail.com769281
-        new DownloadFileFromURL().execute(file_url+"userEmailId="+PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)+"&offerid="+data.getOfferid());
+
+                dialog.cancel();
+            }
+
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
+
+
     };
+//    private void downloadAndUnzipContent(String ziplink,String offerid){
+//
+//        DownloadFileAsync download = new DownloadFileAsync("/sdcard/"+"offerid_"+offerid+".zip", this, new DownloadFileAsync.PostDownload(){
+//            @Override
+//            public void downloadDone(File file) {
+//                Log.i("TAG", "file download completed");
+//
+//                // check unzip file now
+////                Decompress unzip = new Decompress(Home.this, file);
+////                unzip.unzip();
+//
+//                Log.i("TAG", "file unzip completed");
+//            }
+//        });
+//        download.execute(ziplink);
+//    }
+
+private void start(String urlzip,String offerid){
+    DownloadManager.Request request=new DownloadManager.Request(Uri.parse(urlzip));
+    request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+request.setTitle("OfferId_"+offerid);
+request.setDescription("offertakedoc");
+request.allowScanningByMediaScanner();
+request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,""+System.currentTimeMillis());
+DownloadManager manager=(DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+manager.enqueue(request);
+}
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case 1000:{
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"not Permission",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+    }
 
     private MakeOfferHistoryAdapter.YesAdapterListener yesAdapterListener = data -> {
 
@@ -280,7 +357,11 @@ ss=list.get(i).getFileurl().toString();
                 if (response.isSuccessful()) {
                     CreateLoginUserResponse list = response.body();
                     Log.e("getimageurl", String.valueOf(list.toString()));
+
                     Toast.makeText(getApplicationContext(), list.getMessage(), Toast.LENGTH_SHORT).show();
+                   Intent intent=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
+                   startActivity(intent);
+                   finish();
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -553,6 +634,7 @@ showAlertDialog(data.getOfferid());
         protected void onPreExecute() {
             super.onPreExecute();
             showDialog(progress_bar_type);
+
         }
 
         /**
@@ -723,7 +805,9 @@ showAlertDialog(data.getOfferid());
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-
+                            Intent intent1=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
+                            startActivity(intent1);
+                            finish();
 
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
 
@@ -877,7 +961,9 @@ showAlertDialog(data.getOfferid());
                     CreateLoginUserResponse list = response.body();
 
                     Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
-
+                    Intent intent1=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
+                    startActivity(intent1);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Code is not correct!", Toast.LENGTH_SHORT).show();
                 }
@@ -908,7 +994,9 @@ showAlertDialog(data.getOfferid());
                     CreateLoginUserResponse list = response.body();
 
                     Toast.makeText(getApplicationContext(),list.getMessage(),Toast.LENGTH_SHORT).show();
-
+                    Intent intent1=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
+                    startActivity(intent1);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Code is not correct!", Toast.LENGTH_SHORT).show();
                 }

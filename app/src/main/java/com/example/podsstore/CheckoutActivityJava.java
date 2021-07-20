@@ -244,7 +244,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("postData", String.valueOf(response.body()));
+                        Log.e("postDatacart", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             CheckoutResponse rer = response.body();
                             Button payButton = findViewById(R.id.payButton);
@@ -299,7 +299,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         // binding.progressbar.setVisibility(View.GONE);
 
 
-                        Log.e("postData", String.valueOf(response.body()));
+                        Log.e("postDatacode", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             CheckoutResponse rer = response.body();
                             Button payButton = findViewById(R.id.payButton);

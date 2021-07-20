@@ -281,7 +281,7 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
                             CreateLoginUserResponse successResponse = response.body();
 
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-regNoti();
+                                   regNoti();
                             //                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
 //                            startActivity(login);
 //                            finish();

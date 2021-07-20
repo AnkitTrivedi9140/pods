@@ -148,11 +148,20 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
                         //showAlertDialog(path);
                         break;
                     case R.id.radiocorporate:
-
-                        Intent intent = new Intent(getApplicationContext(), BankTransferActivity.class);
-
-                        startActivity(intent);
-                       finish();
+if(getIntent().getStringExtra("addressid")==null){
+    Intent intent = new Intent(getApplicationContext(), BankTransferActivity.class);
+    intent.putExtra("offerid", getIntent().getStringExtra("offerid"));
+    startActivity(intent);
+    finish();
+}else{
+    Intent intent = new Intent(getApplicationContext(), BankTransferActivity.class);
+    intent.putExtra("userid", getIntent().getStringExtra("userid"));
+    intent.putExtra("getbuynowqty", getIntent().getStringExtra("getbuynowqty"));
+    intent.putExtra("offerid", getIntent().getStringExtra("offerid"));
+    intent.putExtra("addressid",  getIntent().getStringExtra("addressid"));
+    startActivity(intent);
+    finish();
+}
 
 
                     //    showAlertDialog(path);
@@ -181,12 +190,20 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (getIntent().getStringExtra("offerid") == null) {
-            Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+        if (getIntent().getStringExtra("offerid") != null) {
+            Intent intent = new Intent(getApplicationContext(), ShowMakeofferActivity.class);
             startActivity(intent);
             finish();
+
         } else {
-            Intent intent = new Intent(getApplicationContext(), ShowMakeofferActivity.class);
+
+            Intent intent = new Intent(getApplicationContext(), SelectAddressActivity.class);
+
+            intent.putExtra("userid", getIntent().getStringExtra("userid"));
+            intent.putExtra("getbuynowqty", getIntent().getStringExtra("getbuynowqty"));
+            intent.putExtra("offerid", getIntent().getStringExtra("offerid"));
+            intent.putExtra("addressid",  getIntent().getStringExtra("addressid"));
+
             startActivity(intent);
             finish();
         }
@@ -208,6 +225,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
                 if (response.isSuccessful()) {
                     List<CartResponse> list = response.body();
                     Log.e("list", String.valueOf(list));
+
                     //     getSupportActionBar().setTitle("Cart" + " (" + list.size() + ")");
 
                     placeorderbtn.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +246,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
 //                                        radioButton.getText(), Toast.LENGTH_SHORT).show();
 
 
-//Toast.makeText(getApplicationContext(),radioButton.getText().toString(),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),radioButton.getText().toString(),Toast.LENGTH_SHORT).show();
                                 //  placeorder("1", String.valueOf(list.get(i).getProductid().toString()), String.valueOf(list.get(i).getProductname()), String.valueOf(list.get(i).getImageUrl()), String.valueOf(list.get(i).getQty()), String.valueOf(list.get(i).getTotalprice()), String.valueOf(list.get(i).getPrice().toString()), radioButton.getText().toString());
 
                                 Intent in = new Intent(PaymentActivity.this, CheckoutActivityJava.class);
@@ -358,134 +376,134 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
 
         }
     }
-
-    @SuppressLint("CheckResult")
-    private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal, String mode) {
-//Toast.makeText(getApplicationContext(),"mila nhi",Toast.LENGTH_SHORT).show();
-        List<PlaceOrderRequest> list = new ArrayList<>();
-
-        PlaceOrderRequest r = new PlaceOrderRequest();
-        // r.setAddress(getIntent().getStringExtra("addressid").toString());
-        r.setOrderid(orderid);
-        r.setProductid(productid);
-        r.setProductname(productname);
-        r.setProductimage(productimage);
-        r.setQuantity(qty);
-        r.setTotalprice(totalprice);
-        r.setSubtotal(subtotal);
-
-
-        list.add(r);
-
-
-        // Log.e("postDatalist", txnid);
-
-
-        Log.e("postData", new Gson().toJson(list));
-
-        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), getIntent().getStringExtra("addressid").toString(), mode, txnid, list)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
-                    @Override
-                    public void onSuccess(Response<CreateLoginUserResponse> response) {
-
-                        // binding.progressbar.setVisibility(View.GONE);
-
-
-                        Log.e("postData", String.valueOf(response.body()));
-                        if (response.isSuccessful()) {
-
-                            CreateLoginUserResponse successResponse = response.body();
-                            // if(successResponse.getMessage().equalsIgnoreCase()){}
-                            Log.e("onSuccesseeee", successResponse.getMessage());
-                            regNoti(orderid.toString());
-                            //    Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            Intent main = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(main);
-                            finish();
-                            if (successResponse != null) {
-
-
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        Log.e("onError: ", e.getMessage());
-                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-    }
-
-    @SuppressLint("CheckResult")
-    private void regNoti(String orderid) {
-
-        List<PlaceOrderNotificationRequest> list = new ArrayList<>();
-
-        PlaceOrderNotificationRequest r = new PlaceOrderNotificationRequest();
-
-        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
-        r.setOrderid("");
-        list.add(r);
-
-
-        Log.e("postData", new Gson().toJson(r));
-
-        ApiClientNoti.getApiClients().ordernoti(r)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
-                    @Override
-                    public void onSuccess(Response<CreateLoginUserResponse> response) {
-
-                        // binding.progressbar.setVisibility(View.GONE);
-
-
-                        Log.e("onSuccess", String.valueOf(response.code()));
-                        if (response.isSuccessful()) {
-
-                            CreateLoginUserResponse successResponse = response.body();
-                            //     Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
-//                            startActivity(login);
-//                            finish();
-
-//                            Log.e("onSuccessaa", successResponse.getChallanid());
-                            if (successResponse != null) {
-
-//                                if (successResponse.getMessage().equals("success")) {
-//                                    // mappingAdapter.clear();
 //
-//                                }
-
-                                //  Toaster.show(mContext, successResponse.getMessage());
-
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        Log.e("onError: ", e.getMessage());
-                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
-
-
-                    }
-                });
-
-
-    }
+//    @SuppressLint("CheckResult")
+//    private void placeorder(String orderid, String productid, String productname, String productimage, String qty, String totalprice, String subtotal, String mode) {
+////Toast.makeText(getApplicationContext(),"mila nhi",Toast.LENGTH_SHORT).show();
+//        List<PlaceOrderRequest> list = new ArrayList<>();
+//
+//        PlaceOrderRequest r = new PlaceOrderRequest();
+//        // r.setAddress(getIntent().getStringExtra("addressid").toString());
+//        r.setOrderid(orderid);
+//        r.setProductid(productid);
+//        r.setProductname(productname);
+//        r.setProductimage(productimage);
+//        r.setQuantity(qty);
+//        r.setTotalprice(totalprice);
+//        r.setSubtotal(subtotal);
+//
+//
+//        list.add(r);
+//
+//
+//        // Log.e("postDatalist", txnid);
+//
+//
+//        Log.e("postData", new Gson().toJson(list));
+//
+//        ApiClient.getApiClient().placeOrder(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), getIntent().getStringExtra("addressid").toString(), mode, txnid, list)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+//                    @Override
+//                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+//
+//                        // binding.progressbar.setVisibility(View.GONE);
+//
+//
+//                        Log.e("postData", String.valueOf(response.body()));
+//                        if (response.isSuccessful()) {
+//
+//                            CreateLoginUserResponse successResponse = response.body();
+//                            // if(successResponse.getMessage().equalsIgnoreCase()){}
+//                            Log.e("onSuccesseeee", successResponse.getMessage());
+//                            regNoti(orderid.toString());
+//                            //    Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent main = new Intent(getApplicationContext(), MainActivity.class);
+//                            startActivity(main);
+//                            finish();
+//                            if (successResponse != null) {
+//
+//
+//                            }
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                        Log.e("onError: ", e.getMessage());
+//                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//    }
+//
+//    @SuppressLint("CheckResult")
+//    private void regNoti(String orderid) {
+//
+//        List<PlaceOrderNotificationRequest> list = new ArrayList<>();
+//
+//        PlaceOrderNotificationRequest r = new PlaceOrderNotificationRequest();
+//
+//        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+//        r.setOrderid("");
+//        list.add(r);
+//
+//
+//        Log.e("postData", new Gson().toJson(r));
+//
+//        ApiClientNoti.getApiClients().ordernoti(r)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+//                    @Override
+//                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+//
+//                        // binding.progressbar.setVisibility(View.GONE);
+//
+//
+//                        Log.e("onSuccess", String.valueOf(response.code()));
+//                        if (response.isSuccessful()) {
+//
+//                            CreateLoginUserResponse successResponse = response.body();
+//                            //     Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+////                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+////                            startActivity(login);
+////                            finish();
+//
+////                            Log.e("onSuccessaa", successResponse.getChallanid());
+//                            if (successResponse != null) {
+//
+////                                if (successResponse.getMessage().equals("success")) {
+////                                    // mappingAdapter.clear();
+////
+////                                }
+//
+//                                //  Toaster.show(mContext, successResponse.getMessage());
+//
+//                            }
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                        Log.e("onError: ", e.getMessage());
+//                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+//
+//
+//                    }
+//                });
+//
+//
+//    }
 
     @Override
     public void onSetValues(ArrayList<String> al) {
@@ -511,7 +529,7 @@ public class PaymentActivity extends AppCompatActivity implements AddtocartAdapt
                     // find the radio button by returned id
                     RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
-                    placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()), radioButton.getText().toString());
+                 //   placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()), radioButton.getText().toString());
 
 
                     if (list != null) {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
 
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
 
 app:cardUseCompatPadding="true"
@@ -197,16 +198,17 @@ android:visibility="gone"
                     >
 
                 </TextView>
+
                 <TextView
                     android:id="@+id/tvbuyerofferprice"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="22dp"
-                    android:text="Buyer Price"
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true">
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="22dp"
+                    android:text="Buyer Price"
+                    android:textColor="@color/black">
 
                 </TextView>
             </RelativeLayout>
@@ -388,7 +390,7 @@ android:layout_marginTop="8dp"
                 android:paddingRight="14dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Status waiting"
+                android:text="Please Upload proof of funds"
                 android:gravity="center"
                 ></TextView>
 <RelativeLayout
@@ -397,52 +399,66 @@ android:layout_marginTop="8dp"
     android:layout_below="@+id/tvacceptmakeoffer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
             <TextView
 
-                android:background="@drawable/ripplenext"
-                android:layout_marginTop="8dp"
-
                 android:lines="1"
-                android:layout_marginBottom="8dp"
                 android:id="@+id/tvvideomakeoffer"
-                android:layout_width="144dp"
-                android:layout_height="44dp"
-                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:textSize="18dp"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="download video"
+                android:textColor="@color/colorGreen"
+                android:textStyle="italic"
+                android:text="Show Video"
                 android:gravity="center"
                 ></TextView>
 
 
             <TextView
-                android:layout_toRightOf="@+id/tvvideomakeoffer"
-                android:background="@drawable/ripplenext"
-                android:layout_marginTop="8dp"
 
+
+android:layout_below="@+id/tvvideomakeoffer"
                 android:lines="1"
-                android:layout_marginBottom="8dp"
+
                 android:id="@+id/tvdocmakeoffer"
-                android:layout_width="144dp"
-                android:layout_height="44dp"
-                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:textSize="18dp"
 
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="download doc"
+                android:textColor="@color/colorGreen"
+                android:textStyle="italic"
+                android:text="Download doc"
                 android:gravity="center"
                 ></TextView>
 
 
+<TextView
+
+    android:layout_below="@+id/tvdocmakeoffer"
+    android:id="@+id/tvadd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:justificationMode="inter_word"
+    android:text="Are you satisfied with this proof of product video and certificates.
+if you satisfied with this then click on satisfied button.
+if you not satisfied with this then click on Not Satisfied button.
+"
+    ></TextView>
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
 
         android:background="@drawable/ripplenext"
         android:layout_marginTop="8dp"
-android:layout_below="@+id/tvdocmakeoffer"
+
         android:lines="1"
         android:layout_marginBottom="8dp"
         android:id="@+id/tvyesmakeoffer"
@@ -461,12 +477,12 @@ android:layout_below="@+id/tvdocmakeoffer"
 
 
     <TextView
+android:layout_toRightOf="@+id/tvyesmakeoffer"
 
-        android:layout_below="@+id/tvdocmakeoffer"
-        android:layout_toRightOf="@+id/tvvideomakeoffer"
+
         android:background="@drawable/rippleabout"
         android:layout_marginTop="8dp"
-
+android:layout_marginLeft="12dp"
         android:lines="1"
         android:layout_marginBottom="8dp"
         android:id="@+id/tvnomakeoffer"
@@ -484,7 +500,7 @@ android:layout_below="@+id/tvdocmakeoffer"
 
     </TextView>
 
-
+    </RelativeLayout>
 </RelativeLayout>
 
 

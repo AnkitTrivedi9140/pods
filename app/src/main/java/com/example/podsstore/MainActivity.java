@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivallproduct, ivcart, ivtoggle, ivgo;
     EditText search;
     ViewPager viewPager;
-    Integer[] imageId = {R.drawable.catc, R.drawable.catb, R.drawable.catd, R.drawable.cata, R.drawable.cate, R.drawable.catf};
+    Integer[] imageId = {};
     String[] imagesName = {"image1", "image2", "image3", "image4"};
     SliderLayout slider;
     int currentPage = 0;
@@ -132,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManagerss.init(MainActivity.this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         getSupportActionBar().hide();
-        slider=findViewById(R.id.slider);
-
+        slider = findViewById(R.id.slider);
 
 
 //        getSupportActionBar().setTitle("  Pod");
@@ -146,17 +145,17 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().setLogo(R.drawable.toggle);
         // getMenuInflater().inflate(R.menu.main_menu, menu);
 
-    String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
-  //      Log.e( "deviceid", String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        //      Log.e( "deviceid", String.valueOf(FirebaseInstanceId.getInstance().getToken()));
         toolbar = findViewById(R.id.toolbar);
         ivcountry = findViewById(R.id.ivcountry);
 
         nv = (NavigationView) findViewById(R.id.nv);
         dl = (DrawerLayout) findViewById(R.id.mainactivity);
         //  t = new ActionBarDrawerToggle(this, dl,toolbar,R.string.Open, R.string.Close);
-        Log.e("packagename",String.valueOf(getApplicationContext().getPackageName() ));
+        Log.e("packagename", String.valueOf(getApplicationContext().getPackageName()));
 
 
         View headerView = nv.getHeaderView(0);
@@ -305,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
                 dl.open();
 
 
-
             }
         });
         ivgo.setOnClickListener(new View.OnClickListener() {
@@ -343,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+      //  dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -478,10 +476,10 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawers();
                         break;
                     case R.id.nvsolution:
-                        if(item.getTitle()=="Log In"){
-Intent intent=new Intent(MainActivity.this, LoginActivity.class);
-startActivity(intent);
-                        }else{
+                        if (item.getTitle() == "Log In") {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        } else {
                             AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                             dialog.setCancelable(true);
                             dialog.setTitle("Exit from Pod!");
@@ -523,7 +521,6 @@ startActivity(intent);
 
             }
         });
-
 
 
         Menu nav_Menu = nv.getMenu();
@@ -582,7 +579,7 @@ startActivity(intent);
     @Override
     protected void onResume() {
         super.onResume();
-        if (slider != null){
+        if (slider != null) {
             slider.startAutoCycle();
         }
         loadDatacart();
@@ -683,7 +680,7 @@ startActivity(intent);
         // Toast.makeText(getApplicationContext(), data.getImageurl(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, TopBrandsProductActivity.class);
 
-   i.putExtra("userid", data.getSellerid().toString());
+        i.putExtra("userid", data.getSellerid().toString());
         startActivity(i);
 
 
@@ -901,7 +898,7 @@ startActivity(intent);
                 Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
                 startActivity(intent);
                 finish();
-alert.dismiss();
+                alert.dismiss();
             }
         });
         alert.show();
@@ -992,89 +989,89 @@ alert.dismiss();
 //            }
 //        });
 
-     @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     private void profileloadData() {
-         Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN)+"????"+getIntent().getStringExtra("userid") );
+        Log.e("getssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN) + "????" + getIntent().getStringExtra("userid"));
 
-         ApiClient.getApiClient(). profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
-             @Override
-             public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
+        ApiClient.getApiClient().profile(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL)).enqueue(new Callback<List<ProfileResponses>>() {
+            @Override
+            public void onResponse(Call<List<ProfileResponses>> call, Response<List<ProfileResponses>> response) {
 
-                 // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-                 Log.e("getMaterialMasters",String.valueOf(response.code()) );
-                 if (response.isSuccessful()) {
-                     List<ProfileResponses> list = response.body();
+                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                Log.e("getMaterialMasters", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    List<ProfileResponses> list = response.body();
 
-            // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
-            Log.e("getprofile", String.valueOf(response.code()));
-            if (response.isSuccessful()) {
+                    // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
+                    Log.e("getprofile", String.valueOf(response.code()));
+                    if (response.isSuccessful()) {
 
 //                  for (int i = 0; i < list.getAddress().size(); i++) {
 //                      // tvaddress.setText(list.getAddress().get(i).getAddressline1().toString()+", "+list.getAddress().get(i).getAddressline2().toString()+"\n"+list.getAddress().get(i).getAddressline3().toString());
 //
 //                  }
 
-               for (int i = 0; i < list.size(); i++) {
-                   if(list.get(i).getData()!=null){
-                       Log.e("getprofilesss", String.valueOf(list.get(i).getData().userimageurl));
-                       GlideUrl glideUrl = new GlideUrl(list.get(i).getData().userimageurl,
-                               new LazyHeaders.Builder()
-                                       .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i).getData() != null) {
+                                Log.e("getprofilesss", String.valueOf(list.get(i).getData().userimageurl));
+                                GlideUrl glideUrl = new GlideUrl(list.get(i).getData().userimageurl,
+                                        new LazyHeaders.Builder()
+                                                .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
-                                       .build());
+                                                .build());
 
-                       Glide.with(getApplicationContext())
-                               .load(glideUrl)
-                               .into(profileimage);
+                                Glide.with(getApplicationContext())
+                                        .load(glideUrl)
+                                        .into(profileimage);
 
-                   }
+                            }
 
-                   headerusername.setText(list.get(i).getUsername());
+                            headerusername.setText(list.get(i).getUsername());
 
-                   tvemail.setText(list.get(i).getUseremailid());
+                            tvemail.setText(list.get(i).getUseremailid());
 
-                if(list.get(0).countryname==null) {
-                    //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    GlideUrl glideUrls = new GlideUrl(list.get(i).getCountryname().getImageurl().toString(),
-                            new LazyHeaders.Builder()
-                                    .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
+                            if (list.get(0).countryname == null) {
+                                //Toast.makeText(getApplicationContext(),"no image",Toast.LENGTH_LONG).show();
+                            } else {
+                                GlideUrl glideUrls = new GlideUrl(list.get(i).getCountryname().getImageurl().toString(),
+                                        new LazyHeaders.Builder()
+                                                .addHeader("Authorization", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN))
 
-                                    .build());
+                                                .build());
 
-                    Glide.with(getApplicationContext())
-                            .load(glideUrls)
-                            .into(ivcountry);
-                }
+                                Glide.with(getApplicationContext())
+                                        .load(glideUrls)
+                                        .into(ivcountry);
+                            }
 
-               }
+                        }
 
 
-            }
+                    }
 //                    for (int i = 0; i < list.size(); i++) {
-                 //    placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
+                    //    placeorder("1", String.valueOf(list.get(0).getId().toString()), String.valueOf(list.get(0).getProdname()), String.valueOf(list.get(0).getImageurl()), getIntent().getStringExtra("getbuynowqty"), String.valueOf(list.get(0).getPrice()), String.valueOf(list.get(0).getPrice().toString()));
 
-                     //   }
-                     if (list != null) {
+                    //   }
+                    if (list != null) {
 
 
-                     }
+                    }
 
-                 }
-             }
+                }
+            }
 
-             @Override
-             public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
-                 Log.e("onerrors",t.getMessage());
-             }
-         });
+            @Override
+            public void onFailure(Call<List<ProfileResponses>> call, Throwable t) {
+                Log.e("onerrors", t.getMessage());
+            }
+        });
     }
+
     @SuppressLint("CheckResult")
     private void loadDatabanner() {
 
         // binding.progress.setVisibility(View.VISIBLE);
-        Log.e("getProductMasterssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE)+" "+ PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN));
+        Log.e("getProductMasterssss", PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN));
         ApiClient.getApiClient().getbanners()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1082,12 +1079,12 @@ alert.dismiss();
                     @Override
                     public void onSuccess(Response<List<BannerResponse>> response) {
 
-                        Log.d("onSuccess: ",String.valueOf(response.code()));
+                        Log.d("onSuccess: ", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
                             List<BannerResponse> list = response.body();
                             Log.e("getProduct", String.valueOf(list.size()));
 
-                             uploadbanner(list);
+                            uploadbanner(list);
 
                         } else {
 
@@ -1105,40 +1102,39 @@ alert.dismiss();
                 });
     }
 
-    public void uploadbanner(List<BannerResponse> list)
-    {
+    public void uploadbanner(List<BannerResponse> list) {
         for (BannerResponse s : list) {
             DefaultSliderView sliderView = new DefaultSliderView(this);
             sliderView.image(s.getBannerimgurl()).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(BaseSliderView slider) {
-                    Log.d("dddddddsss",String.valueOf(s.getId()+" "+s.getBannername()));
+                    Log.d("dddddddsss", String.valueOf(s.getId() + " " + s.getBannername()));
 
-                    if(s.getAndroidmove()==null){
+                    if (s.getAndroidmove() == null) {
 
-                    }else{
-                        if(s.getAndroidmove().equalsIgnoreCase("bestseller")){
-                            Intent i=new Intent(getApplicationContext(), SellerBannerproductActivity.class);
+                    } else {
+                        if (s.getAndroidmove().equalsIgnoreCase("bestseller")) {
+                            Intent i = new Intent(getApplicationContext(), SellerBannerproductActivity.class);
                             startActivity(i);
                         }
                     }
-                    if(s.getCatid()!=null && s.getSubcatid()!=null){
-                        Intent i=new Intent(getApplicationContext(), SubCategoryProductActivity.class);
-                       i.putExtra("userid", s.getSubcatid().toString());
-                       i.putExtra("catid",s.getCatid().toString());
-                       startActivity(i);
-                      // Toast.makeText(getApplicationContext(),s.getSubcatid().toString()+"///"+s.getCatid().toString(),Toast.LENGTH_LONG).show();
-                    }else if(s.getCatid()!=null){
-                        Intent i=new Intent(getApplicationContext(), SubCategoryActivity.class);
-                       i.putExtra("userid",s.getCatid().toString());
+                    if (s.getCatid() != null && s.getSubcatid() != null) {
+                        Intent i = new Intent(getApplicationContext(), SubCategoryProductActivity.class);
+                        i.putExtra("userid", s.getSubcatid().toString());
+                        i.putExtra("catid", s.getCatid().toString());
+                        startActivity(i);
+                        // Toast.makeText(getApplicationContext(),s.getSubcatid().toString()+"///"+s.getCatid().toString(),Toast.LENGTH_LONG).show();
+                    } else if (s.getCatid() != null) {
+                        Intent i = new Intent(getApplicationContext(), SubCategoryActivity.class);
+                        i.putExtra("userid", s.getCatid().toString());
                         startActivity(i);
                     }
 
-                    if(s.getProductid()==null){
+                    if (s.getProductid() == null) {
 
-                    }else {
-                        Intent i=new Intent(getApplicationContext(), ProductDetailsActivity.class);
-                        i.putExtra("userid",s.getProductid().toString());
+                    } else {
+                        Intent i = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+                        i.putExtra("userid", s.getProductid().toString());
                         startActivity(i);
                     }
 
@@ -1163,7 +1159,7 @@ alert.dismiss();
 
             @Override
             public void onPageSelected(int position) {
-    Log.d("ddddddd",String.valueOf(position));
+                Log.d("ddddddd", String.valueOf(position));
 
             }
 
@@ -1174,13 +1170,12 @@ alert.dismiss();
         });
 
 
-
-
         slider.getPagerIndicator().setDefaultIndicatorColor(Color.parseColor("#01309A"), Color.parseColor("#cecdcd"));
         // slider.setPresetTransformer(SliderLayout.Transformer.Default);
         //slider.setPresetIndicator(com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom);
         slider.setDuration(8000);
     }
+
     protected void onStop() {
 
         slider.stopAutoCycle();

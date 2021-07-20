@@ -874,7 +874,7 @@ addqty(tvqtybtn.getText().toString(),list.get(finalI).getId().toString());
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Waiting for seller acceptance", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "item already in cart.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

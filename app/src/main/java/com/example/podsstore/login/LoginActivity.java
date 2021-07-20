@@ -264,7 +264,7 @@ ivshow.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(), "Please check your email id or password!",Toast.LENGTH_SHORT).show();
 
                         }else if(String.valueOf(response.code()).contains("400")){
-                            Toast.makeText(getApplicationContext(), "User is seller...!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "please wait, your documents are not approoved by admin!",Toast.LENGTH_SHORT).show();
 
                         } else {
                      Toast.makeText(getApplicationContext(), "Please complete you documentation process to login..!",Toast.LENGTH_SHORT).show();

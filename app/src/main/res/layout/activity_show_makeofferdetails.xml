@@ -402,7 +402,7 @@
                 android:id="@+id/ivedit"
                 android:layout_marginTop="26dp"
                 android:layout_below="@+id/rladdress"
-                android:src="@drawable/chat"
+
                 android:layout_width="55dp"
                 android:layout_alignParentEnd="true"
                 android:layout_height="55dp"

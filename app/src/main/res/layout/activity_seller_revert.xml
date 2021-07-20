@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
 
     tools:context=".drower.ShowMakeofferActivity">
+    <WebView
+        android:visibility="gone"
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
 <RelativeLayout
     android:id="@+id/rlimage"
 
@@ -16,6 +21,7 @@
 
 
     <ImageView
+
 android:layout_marginLeft="8dp"
         android:id="@+id/ivproduct"
         android:src="@drawable/kkkkk"

@@ -84,7 +84,7 @@ import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity implements DownloadFile.Listener{
 ImageView ivproduct,ivtoggle,ivcart;
-TextView tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanufacture,
+TextView tvmaterialtitle,tvmaterial,tvserialno,tvserialnotitle,tvcertificationtitle,tvcertification,tvmanufacture,
         tvmanufacturetitle,tvstanderd,tvstanderdtitle,tvbrand,tvbrandtitle,tvcountry,
         tvcountrytitle,tvreviewhead,tvProductname,tvProductprice,tvdetails,tvfeature
         ,tvfunction,tvcartsize,tvdetailtitle,tvfeaturetitle,tvfunctiontitle,tvproductlocationtitle,tvproductlocation;
@@ -119,9 +119,9 @@ RelativeLayout rlproductdetails;
         tvproductlocation=findViewById(R.id.tvproductlocation);
         tvproductlocationtitle=findViewById(R.id.tvproductlocationtitle);
         tvserialno=findViewById(R.id.tvserialno);
-
+        tvmaterial=findViewById(R.id.tvmaterial);
         tvserialnotitle=findViewById(R.id.tvserialnotitle);
-
+        tvmaterialtitle=findViewById(R.id.tvmaterialtitle);
         tvcertificationtitle=findViewById(R.id.tvcertificationtitle);
 
         tvcertification=findViewById(R.id.tvcertification);
@@ -338,7 +338,7 @@ loadDatacart();
 //                                .into(ivproduct);
 productidpdf=list.get(i).getReturnpolicyurl().toString();
                         tvProductname.setText(list.get(i).getProdtype());
-                        tvProductprice.setText("$ "+list.get(i).getPrice()+" ("+list.get(i).getPricetype()+")");
+                        tvProductprice.setText("$ "+list.get(i).getPrice());
                         tvdetails.setText(list.get(i).getDescription());
                         tvfeature.setText(list.get(i).getFeature());
                         tvfunction.setText(list.get(i).getFunctions());
@@ -349,6 +349,11 @@ productidpdf=list.get(i).getReturnpolicyurl().toString();
                         if(list.get(i).getSerialno()==null){
                                 }else{
                             tvserialno.setText(list.get(i).getSerialno().toString());
+
+                        }
+                        if(list.get(i).getMaterials()==null){
+                        }else{
+                            tvmaterial.setText(list.get(i).getMaterials().toString());
 
                         }
                         if(list.get(i).getLocation()==null){
@@ -423,6 +428,14 @@ productidpdf=list.get(i).getReturnpolicyurl().toString();
                             tvserialnotitle.setVisibility(View.GONE);
                         }
 
+                        if(tvmaterial.getText().toString().length()>2){
+                            tvmaterial.setVisibility(View.VISIBLE);
+                            tvmaterialtitle.setVisibility(View.VISIBLE);
+                            // Toast.makeText(getApplicationContext(),tvfunction.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvmaterial.setVisibility(View.GONE);
+                            tvmaterialtitle.setVisibility(View.GONE);
+                        }
                         if(tvproductlocation.getText().toString().length()>2){
                             tvproductlocation.setVisibility(View.VISIBLE);
                             tvproductlocationtitle.setVisibility(View.VISIBLE);
@@ -504,7 +517,15 @@ productidpdf=list.get(i).getReturnpolicyurl().toString();
                             public void onClick(View v) {
                   //       new DownloadFileFromURL().execute(list.get(finalI1).getRedirecturl());
                                 Log.d("onClickfff: ",String.valueOf(list.get(finalI1).getReturnpolicyurl()+"//"+String.valueOf(list.get(finalI1).getId().toString())));
-                                remotePDFViewPager = new RemotePDFViewPager(ProductDetailsActivity.this, productidpdf, ProductDetailsActivity.this);
+              //       remotePDFViewPager = new RemotePDFViewPager(ProductDetailsActivity.this, productidpdf, ProductDetailsActivity.this);
+//                                String yyy=productidpdf;
+//                                Uri uri = Uri.parse(yyy); // missing 'http://' will cause crashed
+//                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                                startActivity(intent);
+                                Intent browserIntent = new Intent(getApplicationContext(),DownloadZipActivity.class);
+                                browserIntent.putExtra("pdf",productidpdf);
+                                startActivity(browserIntent);
+
                               //  new DownloadFileFromURL().execute(String.valueOf(list.get(finalI1).getReturnpolicyurl()));
                             }
                         });
@@ -835,8 +856,11 @@ productidpdf=list.get(i).getReturnpolicyurl().toString();
     @Override
     public void onSuccess(String url, String destinationPath) {
         pdfPagerAdapter = new PDFPagerAdapter(this, FileUtil.extractFileNameFromURL(url));
+
         remotePDFViewPager.setAdapter(pdfPagerAdapter);
-        updateLayout();
+
+setContentView(remotePDFViewPager);
+        //updateLayout();
     }
     private void updateLayout() {
 

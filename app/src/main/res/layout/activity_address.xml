@@ -150,7 +150,7 @@
 
 
             <EditText
-
+android:visibility="gone"
                 android:id="@+id/etstate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -169,7 +169,7 @@
                 android:id="@+id/tvsubmit"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_below="@+id/etstate"
+                android:layout_below="@+id/etzipcode"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="28dp"

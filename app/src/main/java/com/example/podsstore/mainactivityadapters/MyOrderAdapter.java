@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.podsstore.R;
-import com.example.podsstore.addtocart.AddtocartAdapter;
-import com.example.podsstore.data.response.CartResponse;
+
 import com.example.podsstore.data.response.OrderResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHolder> {
+
     private MyOrderAdapter.AdapterListener adapterListener;
 
     private MyOrderAdapter.AdapterListenerviewdetails adapterListenerviewdetails;
@@ -35,9 +35,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
     public void setAdapterListener(MyOrderAdapter.AdapterListener adapterListener) {
         this.adapterListener = adapterListener;
     }
+
     public void setAdapterListenerviewdetails(MyOrderAdapter.AdapterListenerviewdetails adapterListenerviewdetails) {
         this.adapterListenerviewdetails = adapterListenerviewdetails;
     }
+
 
 
 

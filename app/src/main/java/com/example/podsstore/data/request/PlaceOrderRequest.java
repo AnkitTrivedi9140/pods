@@ -11,7 +11,7 @@ public class PlaceOrderRequest {
     private String address;
 
     @SerializedName("productId")
-    private String productid;
+    private Long productid;
 
     @SerializedName("productName")
     private String productname;
@@ -19,13 +19,13 @@ public class PlaceOrderRequest {
     @SerializedName("productImage")
     private String productimage;
     @SerializedName("quantity")
-    private String quantity;
+    private Integer quantity;
 
 
     @SerializedName("totalPrice")
     private String totalprice;
 
-    @SerializedName("subTotal")
+    @SerializedName("Integer")
     private String subtotal;
 
     public String getAddress() {
@@ -44,13 +44,7 @@ public class PlaceOrderRequest {
         this.orderid = orderid;
     }
 
-    public String getProductid() {
-        return productid;
-    }
 
-    public void setProductid(String productid) {
-        this.productid = productid;
-    }
 
     public String getProductname() {
         return productname;
@@ -68,11 +62,19 @@ public class PlaceOrderRequest {
         this.productimage = productimage;
     }
 
-    public String getQuantity() {
+    public Long getProductid() {
+        return productid;
+    }
+
+    public void setProductid(Long productid) {
+        this.productid = productid;
+    }
+
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

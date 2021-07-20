@@ -86,7 +86,7 @@ private TextView tvsubmit;
                 String zipcode = etzipcode.getText().toString();
                 String country = etcountry.getText().toString();
                 String phone = etphone.getText().toString();
-                String state = etstate.getText().toString();
+               // String state = etstate.getText().toString();
 
 
                 if (TextUtils.isEmpty(address1)) {
@@ -110,10 +110,11 @@ private TextView tvsubmit;
                     etcountry.setError("please choose country Dropdown!");
 
                 }
-                else if (TextUtils.isEmpty(state)) {
-                    etstate.setError("state can't blank!");
-
-                }else{
+//                else if (TextUtils.isEmpty(state)) {
+//                    etstate.setError("state can't blank!");
+//
+//                }
+               else{
                     smallCarton(etaddress1.getText().toString(),etaddress2.getText().toString(),etaddress3.getText().toString(),etzipcode.getText().toString(),etcountry.getText().toString());
 
                 }

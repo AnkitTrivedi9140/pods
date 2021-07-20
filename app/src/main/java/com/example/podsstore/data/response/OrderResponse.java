@@ -51,8 +51,6 @@ public class OrderResponse {
     private String orderaddress  ;
 
 
-
-
     @SerializedName("pricetype")
     private String pricetype  ;
 

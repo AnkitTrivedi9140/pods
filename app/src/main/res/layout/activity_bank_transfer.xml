@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:layout_margin="12dp"
     tools:context=".addtocart.BankTransferActivity">
+
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -215,7 +217,7 @@ android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:text="Upload Proof of Funds "
+        android:text="Upload Proof of Bank Transfer "
         android:layout_centerHorizontal="true"
         android:textSize="18dp"
         >
@@ -258,7 +260,7 @@ android:layout_marginTop="8dp"
         android:layout_height="44dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
-        android:inputType="numberDecimal"
+
         ></EditText>
 
     <EditText
@@ -312,4 +314,22 @@ android:layout_marginTop="8dp"
     </RelativeLayout>
 
 </ScrollView>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:tooltipText="djsadjkahdskjdsah"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:visibility="gone"
+        android:text="Loading..."
+        android:id="@+id/progresstext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/progress"
+        ></TextView>
+
 </RelativeLayout>
