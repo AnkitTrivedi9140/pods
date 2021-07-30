@@ -69,12 +69,10 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView ivlogo,tvicons;
     //dricpt
     public static final String PROVIDER = "BC";
-    public static final int SALT_LENGTH = 20;
+
     public static final int IV_LENGTH = 16;
     public static final int PBE_ITERATION_COUNT = 100;
 
-    private static final String RANDOM_ALGORITHM = "SHA1PRNG";
-    private static final String HASH_ALGORITHM = "SHA-512";
     private static final String PBE_ALGORITHM = "PBEWithSHA256And256BitAES-CBC-BC";
     private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5Padding";
     public static final String SECRET_KEY_ALGORITHM = "AES";

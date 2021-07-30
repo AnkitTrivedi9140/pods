@@ -37,7 +37,7 @@ public class DownloadZipActivity extends AppCompatActivity {
         setContentView(R.layout.activity_download_zip);
         pdfView=findViewById(R.id.pdfView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Return Policy");
+        getSupportActionBar().setTitle("Product Policy");
         Log.d( "onCreate: ",getIntent().getStringExtra("pdf"));
         new RetrivePDFfromUrl().execute(getIntent().getStringExtra("pdf"));
     }

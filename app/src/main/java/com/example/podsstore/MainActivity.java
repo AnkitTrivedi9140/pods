@@ -1171,7 +1171,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         slider.getPagerIndicator().setDefaultIndicatorColor(Color.parseColor("#01309A"), Color.parseColor("#cecdcd"));
-        // slider.setPresetTransformer(SliderLayout.Transformer.Default);
+        //slider.setPresetTransformer(SliderLayout.Transformer.Default);
         //slider.setPresetIndicator(com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom);
         slider.setDuration(8000);
     }

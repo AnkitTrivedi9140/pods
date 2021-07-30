@@ -25,6 +25,7 @@ import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CheckoutResponse;
 import com.example.podsstore.data.response.CountryResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
+import com.example.podsstore.data.response.FaqResponse;
 import com.example.podsstore.data.response.LoginResponse;
 import com.example.podsstore.data.response.MakeOfferResponse;
 import com.example.podsstore.data.response.MakeofferhistoryResponse;
@@ -92,6 +93,10 @@ public interface NetworkInterface {
 
     @POST("bannerRest/getAppBannerList")
     Single<Response<List<BannerResponse>>>getbanners();
+
+
+    @POST("faqRest/getAllData")
+    Single<Response<List<FaqResponse>>>getfaq();
 
 
     @POST("productRest/getProd")
@@ -294,9 +299,6 @@ public interface NetworkInterface {
 
     @POST("paymentRest/placeOrderOfferApp")
     Single<Response<CheckoutResponse>>makeoffercheckout(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("mode") String mode, @Query("txid") String txid);
-
-
-
 
     @POST("makerOfferRest/getSellerProofInfo")
     Call<List<VedioResponse>>getvideo(@Header("Authorization") String authHeader, @Query("userEmailId") String emailId, @Query("offerid") String offerid);

@@ -440,9 +440,6 @@ ss=list.get(i).getFileurl().toString();
     protected void onStop() {
         super.onStop();
 
-        // Media playback takes a lot of resources, so everything should be
-        // stopped and released at this time.
-//        videoView.stopPlayback();
     }
     @SuppressLint("NewApi")
     private void showAlertDialogvideo(String paths) {

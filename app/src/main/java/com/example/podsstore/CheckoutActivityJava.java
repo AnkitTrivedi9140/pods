@@ -30,15 +30,19 @@ import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.CheckoutRequest;
 import com.example.podsstore.data.request.EditMakeOfferRequest;
+import com.example.podsstore.data.request.NotificationRequest;
+import com.example.podsstore.data.request.PlaceOrderNotificationRequest;
 import com.example.podsstore.data.request.PlaceOrderRequest;
 import com.example.podsstore.data.response.CartResponse;
 import com.example.podsstore.data.response.CheckoutResponse;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.drower.AddressesActivity;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.profile.ProfileActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -69,16 +73,17 @@ import okhttp3.OkHttpClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CheckoutActivityJava extends AppCompatActivity {
 
     private static final String BACKEND_URL = "https://pods.market/PodsStoreAPI/paymentRest/placeOrderApp?userEmailId=ankittrivedi9140@gmail.com&addressId=1";
-   // private static final String STRIPE_PUBLISHABLE_KEY = "pk_test_51It6KYB4QGW1QrwN8uSaeQuRPEsham3BM4z7B2HgYezxen1p6sQOMqdY0l1Pw99GH7nrTgmzFMdycjhncQhDPXfe00l8DlxB3G";
+    // private static final String STRIPE_PUBLISHABLE_KEY = "pk_test_51It6KYB4QGW1QrwN8uSaeQuRPEsham3BM4z7B2HgYezxen1p6sQOMqdY0l1Pw99GH7nrTgmzFMdycjhncQhDPXfe00l8DlxB3G";
 
     private static final String STRIPE_PUBLISHABLE_KEY = "pk_live_51It6KYB4QGW1QrwNpUBWGHpThuen6sVHvcXkDzksy2pA3eQHXyLxT07wnPGwkrfztwLskpAIIKNsggj7mpdVl7E200fSo5PHa1";
 
-    TextView amounttotal,eachprice;
+    TextView amounttotal, eachprice;
     private Stripe stripe;
     WebView webview;
 
@@ -99,15 +104,14 @@ public class CheckoutActivityJava extends AppCompatActivity {
         // startCheckout();
 
         if (getIntent().getStringExtra("offerid") != null) {
-           makeofferplaceorder();
-        }
-       else if (getIntent().getStringExtra("getbuynowqty") != null) {
+            makeofferplaceorder();
+        } else if (getIntent().getStringExtra("getbuynowqty") != null) {
             singleproductdetails();
         } else {
 
             loadData();
         }
-
+        regNotiplaceorder();
     }
 
     @SuppressLint("CheckResult")
@@ -139,9 +143,9 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
                     DecimalFormat df = new DecimalFormat();
                     df.setMaximumFractionDigits(2);
-                    eachPrice=totalPrice/Float.valueOf(String.valueOf(getIntent().getStringExtra("getbuynowqty")));
+                    eachPrice = totalPrice / Float.valueOf(String.valueOf(getIntent().getStringExtra("getbuynowqty")));
                     amounttotal.setText(String.valueOf("$" + df.format(totalPrice)));
-                    eachprice.setText("Qty "+String.valueOf(getIntent().getStringExtra("getbuynowqty"))+", "+"$"+String.valueOf(df.format(eachPrice))+" each");
+                    eachprice.setText("Qty " + String.valueOf(getIntent().getStringExtra("getbuynowqty")) + ", " + "$" + String.valueOf(df.format(eachPrice)) + " each");
 
                     placeordersingle(String.valueOf(list.get(0).getId()), getIntent().getStringExtra("getbuynowqty"));
                     if (list != null) {
@@ -196,10 +200,10 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
                                 totalqty += list.get(i).getQty();
                                 totalPrice += (Float.valueOf(String.valueOf(list.get(i).getPrice().toString())) * Float.valueOf(String.valueOf(list.get(i).getQty().toString())));
-                               eachPrice=totalPrice/totalqty;
+                                eachPrice = totalPrice / totalqty;
                                 amounttotal.setText("$" + String.valueOf(df.format(totalPrice)));
-                                eachprice.setText("Qty "+String.valueOf(totalqty)+", "+"$"+String.valueOf(df.format(eachPrice))+" each");
-                                Log.d( "onResponse: Qty", String.valueOf(totalqty));
+                                eachprice.setText("Qty " + String.valueOf(totalqty) + ", " + "$" + String.valueOf(df.format(eachPrice)) + " each");
+                                Log.d("onResponse: Qty", String.valueOf(totalqty));
                             }
 
                             placeorder(req);
@@ -328,14 +332,14 @@ public class CheckoutActivityJava extends AppCompatActivity {
                     }
                 });
     }
+
     @SuppressLint("CheckResult")
     private void makeofferplaceorder() {
 
 
-
         // Log.e("postDatadddd", new Gson().toJson(req));
 
-        ApiClient.getApiClient().makeoffercheckout(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), getIntent().getStringExtra("offerid"), "pay online","888")
+        ApiClient.getApiClient().makeoffercheckout(PreferenceManagerss.getStringValue(Preferences.TOKEN_TYPE) + " " + PreferenceManagerss.getStringValue(Preferences.ACCESS_TOKEN), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL), getIntent().getStringExtra("offerid"), "pay online", "888")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<retrofit2.Response<CheckoutResponse>>() {
@@ -374,6 +378,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
                     }
                 });
     }
+
     private void displayAlert(@NonNull String title,
                               @Nullable String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -425,30 +430,32 @@ public class CheckoutActivityJava extends AppCompatActivity {
                 String offerurl = "https://pods.market/PodsStoreAPI/paymentRest/successoffer?session_id=" + clientSecret;
 
                 String url = "https://pods.market/PodsStoreAPI/paymentRest/success?session_id=" + clientSecret;
-if(getIntent().getStringExtra("offerid")!=null){
-    webview.setVisibility(View.VISIBLE);
-    webview.loadUrl(offerurl);
-    showAlertDialog();
-    webview.setWebViewClient(new WebViewClient() {
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed();
-        }
-    });
+                if (getIntent().getStringExtra("offerid") != null) {
+                    webview.setVisibility(View.VISIBLE);
+                    webview.loadUrl(offerurl);
+                    showAlertDialog();
+                    regNotiplaceorder();
+                    webview.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                            handler.proceed();
+                        }
+                    });
 
-}else{
-    webview.setVisibility(View.VISIBLE);
-    webview.loadUrl(url);
-    showAlertDialog();
-    webview.setWebViewClient(new WebViewClient() {
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed();
-        }
-    });
+                } else {
+                    webview.setVisibility(View.VISIBLE);
+                    webview.loadUrl(url);
+                    showAlertDialog();
+                    regNotiplaceorder();
+                    webview.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                            handler.proceed();
+                        }
+                    });
 
 
-}
+                }
 
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
@@ -459,10 +466,11 @@ if(getIntent().getStringExtra("offerid")!=null){
                 String offerurl = "https://pods.market/PodsStoreAPI/paymentRest/failoffer?session_id=" + clientSecret;
 
                 String url = "https://pods.market/PodsStoreAPI/paymentRest/fail?session_id=" + clientSecret;
-                if(getIntent().getStringExtra("offerid")!=null){
+                if (getIntent().getStringExtra("offerid") != null) {
                     webview.setVisibility(View.VISIBLE);
                     webview.loadUrl(offerurl);
                     showAlertDialog();
+                    regNotiplaceorder();
                     webview.setWebViewClient(new WebViewClient() {
                         @Override
                         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -470,7 +478,7 @@ if(getIntent().getStringExtra("offerid")!=null){
                         }
                     });
 
-                }else {
+                } else {
                     webview.setVisibility(View.VISIBLE);
                     webview.loadUrl(url);
                     showAlertDialogfailed();
@@ -581,5 +589,69 @@ if(getIntent().getStringExtra("offerid")!=null){
         });
         alert.show();
     }
+    @SuppressLint("CheckResult")
+    private void regNotiplaceorder() {
+
+        List<PlaceOrderNotificationRequest> list = new ArrayList<>();
+
+        PlaceOrderNotificationRequest r = new PlaceOrderNotificationRequest();
+        Log.d("regNotiplaceorder",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().ordernoti(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
+
 
 }

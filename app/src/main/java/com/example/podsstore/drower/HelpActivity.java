@@ -26,6 +26,7 @@ import com.example.podsstore.aboutpod.ConnectwithPodActivity;
 import com.example.podsstore.addtocart.AddToCartActivity;
 import com.example.podsstore.login.CreateAccountActivity;
 import com.example.podsstore.product.ProductListActivity;
+import com.example.podsstore.productdetails.DownloadZipActivity;
 
 public class HelpActivity extends AppCompatActivity {
 TextView tvhelpheadingtxt,tvhelpheading,podno,email;
@@ -168,9 +169,12 @@ if(getIntent().getStringExtra("tvfaq1")==null){
                     public void onClick(View textView) {
 
                         //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
-                        Uri uri = Uri.parse("https://pods.market/productinforequirment/"); // missing 'http://' will cause crashed
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
+//                        Uri uri = Uri.parse("https://pods.market/productinforequirment/"); // missing 'http://' will cause crashed
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        startActivity(intent);
+                        Intent browserIntent = new Intent(getApplicationContext(), DownloadZipActivity.class);
+                        browserIntent.putExtra("pdf","https://www.pods.market/static/media/Examples%20Permitted%20and%20Prohibited%20Listings.6c044314.pdf");
+                        startActivity(browserIntent);
                     }
                     @Override
                     public void updateDrawState(TextPaint ds) {
@@ -178,6 +182,21 @@ if(getIntent().getStringExtra("tvfaq1")==null){
                         ds.setUnderlineText(true);
                     }
                 };
+                ClickableSpan clickableSpan14 = new ClickableSpan() {
+                    @Override
+                    public void onClick(View textView) {
+Toast.makeText(getApplicationContext(),"jbjhgj",Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(TermsActivity.this, PrivacyActivity.class));
+
+                    }
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setUnderlineText(true);
+                    }
+                };
+                //additional.setSpan(clickableSpan14, 61, 94, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 additional.setSpan(clickableSpan4, 161, 194, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tvhelpheadingtxt.setText(additional);
                 tvhelpheadingtxt.setMovementMethod(LinkMovementMethod.getInstance());

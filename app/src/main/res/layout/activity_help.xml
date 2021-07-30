@@ -26,6 +26,8 @@ android:textColor="@color/black"
 
         ></TextView>
     <TextView
+        android:autoLink="web"
+        android:linksClickable="true"
         android:justificationMode="inter_word"
         android:layout_marginTop="8dp"
         android:id="@+id/tvhelpheadingtxt"
