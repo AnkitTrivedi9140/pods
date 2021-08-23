@@ -47,6 +47,7 @@ import com.example.podsstore.R;
 import com.example.podsstore.addtocart.PaymentActivity;
 import com.example.podsstore.addtocart.WebViewActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.CustomNotificationRequest;
 import com.example.podsstore.data.request.EditMakeOfferRequest;
 
 import com.example.podsstore.data.response.CreateLoginUserResponse;
@@ -56,11 +57,13 @@ import com.example.podsstore.data.response.MakeofferhistoryResponse;
 import com.example.podsstore.data.response.VedioResponse;
 import com.example.podsstore.mainactivityadapters.MakeOfferHistoryAdapter;
 
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 
 import com.example.podsstore.productdetails.DownloadZipActivity;
 import com.example.podsstore.productdetails.ShowPDFActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
@@ -71,6 +74,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -357,7 +361,7 @@ ss=list.get(i).getFileurl().toString();
                 if (response.isSuccessful()) {
                     CreateLoginUserResponse list = response.body();
                     Log.e("getimageurl", String.valueOf(list.toString()));
-
+                    customNotification("upload proof of funds");
                     Toast.makeText(getApplicationContext(), list.getMessage(), Toast.LENGTH_SHORT).show();
                    Intent intent=new Intent(getApplicationContext(),ShowMakeofferActivity.class);
                    startActivity(intent);
@@ -372,6 +376,70 @@ ss=list.get(i).getFileurl().toString();
                 progressBar.setVisibility(View.VISIBLE);
             }
         });
+    }
+    @SuppressLint("CheckResult")
+    private void customNotification(String event) {
+
+        List<CustomNotificationRequest> list = new ArrayList<>();
+
+        CustomNotificationRequest r = new CustomNotificationRequest();
+        Log.d("regNotiplaceorder",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+        r.setEvent(event);
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().customnoti(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
     }
     public String convertMediaUriToPath(Uri uri) {
         String[] proj = {MediaStore.Images.Media.DATA};

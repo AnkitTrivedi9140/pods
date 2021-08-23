@@ -34,16 +34,19 @@ import com.example.podsstore.addtocart.PaymentActivity;
 import com.example.podsstore.data.ApiClient;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.AddtocartRequest;
+import com.example.podsstore.data.request.CustomNotificationRequest;
 import com.example.podsstore.data.request.ReturnRequest;
 import com.example.podsstore.data.request.ReviewRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.OrderResponse;
 import com.example.podsstore.mainactivityadapters.MyOrderAdapter;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
 import com.example.podsstore.productdetails.ProductDetailsActivity;
 import com.example.podsstore.topbrands.TopBrandsProductActivity;
 import com.example.podsstore.topbrands.TopBrandsProductAdapter;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -305,6 +308,9 @@ loadData();
 //                            startActivity(login);
 //                            finish();
 
+
+                            customNotification("product review");
+
 //                            Log.e("onSuccessaa", successResponse.getChallanid());
                             if (successResponse != null) {
 
@@ -334,6 +340,70 @@ loadData();
                 });
     }
     @SuppressLint("CheckResult")
+    private void customNotification(String event) {
+
+        List<CustomNotificationRequest> list = new ArrayList<>();
+
+        CustomNotificationRequest r = new CustomNotificationRequest();
+        Log.d("regNotiplaceorder",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+        r.setEvent(event);
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().customnoti(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
+    @SuppressLint("CheckResult")
     private void returninit(String orderstatus, String orderid,String remarks) {
         // binding.progressbar.setVisibility(View.VISIBLE);
         List<ReturnRequest> list = new ArrayList<>();
@@ -360,7 +430,7 @@ loadData();
 
                         Log.e("onSuccesswish", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
-
+                            customNotification("product return");
                             CreateLoginUserResponse successResponse = response.body();
                             Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent login = new Intent(MyOrderActivity.this, MyOrderActivity.class);

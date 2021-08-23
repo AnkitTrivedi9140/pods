@@ -17,7 +17,6 @@ public interface QuantityDao {
             "WHERE NOT EXISTS (SELECT 1 FROM product_qty WHERE product_id = :productid);"*/)
     long insert(String productid, String qty,String userid);
 
-
     @Query("SELECT * FROM product_qty")
     Single<List<ProductEntity>> getSelectedItems();
 
@@ -29,4 +28,5 @@ public interface QuantityDao {
 
     @Query("SELECT quantity FROM product_qty where product_id=:productid")
     String getqty(String productid);
+
 }

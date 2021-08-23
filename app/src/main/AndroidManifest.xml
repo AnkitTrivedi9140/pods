@@ -74,6 +74,7 @@
         <activity android:name=".product.ProductListActivity" />
         <activity android:name=".login.CreateAccountActivity" />
         <activity android:name=".login.LoginActivity" />
+
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden">

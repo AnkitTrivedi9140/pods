@@ -1,6 +1,8 @@
 package com.example.podsstore.notification;
 
+import com.example.podsstore.data.request.AddUserHistoryNotiRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.CustomNotificationRequest;
 import com.example.podsstore.data.request.NotificationRequest;
 import com.example.podsstore.data.request.PlaceOrderNotificationRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
@@ -17,5 +19,13 @@ public interface NetworkInterfaceNoti {
 
     @POST("noti/orderplace")
     Single<Response<CreateLoginUserResponse>> ordernoti(@Body PlaceOrderNotificationRequest requests);
+
+    @POST("noti/custom")
+    Single<Response<CreateLoginUserResponse>>customnoti(@Body CustomNotificationRequest requests);
+
+
+    @POST("noti/addUserHistory")
+    Single<Response<CreateLoginUserResponse>>addUserHistorynotificationhistory(@Body AddUserHistoryNotiRequest requests);
+
 
 }

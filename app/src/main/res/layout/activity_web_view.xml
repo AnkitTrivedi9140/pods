@@ -15,7 +15,6 @@
             <TextView
                 android:id="@+id/tvheading"
                 android:text="Connect with POD"
-                android:layout_below="@+id/ivabout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"

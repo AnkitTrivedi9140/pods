@@ -50,6 +50,7 @@ public class PreferenceManagerss {
         }
 
         public  static void logout(){
+
             editor = preferences.edit();
             editor.clear();
             editor.apply();

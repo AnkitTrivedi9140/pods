@@ -25,13 +25,16 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.AddUserHistoryNotiRequest;
 import com.example.podsstore.data.request.AddressDetailsRequest;
 import com.example.podsstore.data.request.ChangePasswordRequest;
 import com.example.podsstore.data.request.LoginUserRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.LoginResponse;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -227,7 +230,7 @@ ivshow.setVisibility(View.VISIBLE);
         List<LoginUserRequest> list = new ArrayList<>();
 
         LoginUserRequest r = new LoginUserRequest();
-//        r.setUsername(username);
+//      r.setUsername(username);
         r.setUseremail(useremail);
         r.setPassword(password);
 
@@ -246,7 +249,7 @@ ivshow.setVisibility(View.VISIBLE);
                     public void onSuccess(Response<LoginResponse> response) {
 
                         // binding.progressbar.setVisibility(View.GONE);
-
+                     customNotification(useremail);
 
                         Log.e("onSuccesslogin", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
@@ -475,5 +478,68 @@ changepassword(password,passwordagain);
         // binding.progressbar.setVisibility(View.VISIBLE);
 
     }
+    @SuppressLint("CheckResult")
+    private void customNotification(String email) {
 
+        List<AddUserHistoryNotiRequest> list = new ArrayList<>();
+
+        AddUserHistoryNotiRequest r = new AddUserHistoryNotiRequest();
+        Log.d("regNotiplaceordercreate",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+        r.setEmailid(email);
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().addUserHistorynotificationhistory(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
 }

@@ -25,6 +25,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.podsstore.addtocart.SelectAddressActivity;
 import com.example.podsstore.data.ApiClient;
@@ -57,6 +62,9 @@ import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardMultilineWidget;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.ref.WeakReference;
 
 import java.text.DecimalFormat;
@@ -83,7 +91,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
     private static final String STRIPE_PUBLISHABLE_KEY = "pk_live_51It6KYB4QGW1QrwNpUBWGHpThuen6sVHvcXkDzksy2pA3eQHXyLxT07wnPGwkrfztwLskpAIIKNsggj7mpdVl7E200fSo5PHa1";
 
-    TextView amounttotal, eachprice;
+    TextView amounttotal,eachprice;
     private Stripe stripe;
     WebView webview;
 
@@ -111,7 +119,8 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
             loadData();
         }
-        regNotiplaceorder();
+
+       // regNotiplaceorder();
     }
 
     @SuppressLint("CheckResult")
@@ -496,12 +505,14 @@ public class CheckoutActivityJava extends AppCompatActivity {
         @Override
         public void onError(@NonNull Exception e) {
             final CheckoutActivityJava activity = activityRef.get();
+
+            Log.d( "onError: ",String.valueOf(e));
             if (activity == null) {
                 return;
             }
-            // Payment request failed – allow retrying using the same payment method
-            //activity.displayAlert("Error", e.toString());
+
             showAlertDialogfailed();
+
         }
     }
 
@@ -653,5 +664,26 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
     }
 
+    private void testurl(String url) {
+        //creating a string request to send request to the url
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //hiding the progressbar after completion
 
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //displaying the error in toast if occurrs
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        //  Toaster.show(getApplicationContext(), "Enter url is not correct!");
+
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }

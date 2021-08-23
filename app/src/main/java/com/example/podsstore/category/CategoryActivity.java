@@ -56,7 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
         progresstext=findViewById(R.id.progresstext);
         recyclerView = findViewById(R.id.productrv);
         productListAdapter = new CategoryAdapter(CategoryActivity.this);
-        recyclerView = findViewById(R.id.productrv);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
 //      recyclerView.setEmptyView(binding.emptyView);
         productListAdapter.setAdapterListener(adapterListener);

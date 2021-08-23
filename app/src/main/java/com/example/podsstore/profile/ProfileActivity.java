@@ -31,11 +31,15 @@ import com.example.podsstore.R;
 import com.example.podsstore.aboutpod.AboutActivity;
 import com.example.podsstore.category.CategoryActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.CustomNotificationRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.data.response.ProductResponse;
 import com.example.podsstore.data.response.ProfileResponses;
+import com.example.podsstore.notification.ApiClientNoti;
 import com.example.podsstore.prefs.PreferenceManagerss;
 import com.example.podsstore.prefs.Preferences;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 import com.hbb20.CountryCodePicker;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -43,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.Cipher;
@@ -52,6 +57,9 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -468,7 +476,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void uploadData(Uri fileUri) {
-progressBar.setVisibility(View.VISIBLE);
+    progressBar.setVisibility(View.VISIBLE);
 
         File file = new File(convertMediaUriToPath(fileUri));
         RequestBody requestUserEmailId = RequestBody.create(MediaType.parse("multipart/form-data"), PreferenceManagerss.getStringValue(Preferences.USER_EMAIL));
@@ -481,13 +489,14 @@ progressBar.setVisibility(View.VISIBLE);
             @Override
             public void onResponse(Call<CreateLoginUserResponse> call, Response<CreateLoginUserResponse> response) {
 
-                // Toast.makeText(getApplicationContext(),"calll",Toast.LENGTH_SHORT).show();
                 Log.e("getimage", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     CreateLoginUserResponse list = response.body();
                     Log.e("getimageurl", String.valueOf(list.toString()));
                     Toast.makeText(getApplicationContext(), list.getMessage(), Toast.LENGTH_SHORT).show();
+                   customNotification("Image Upload");
                     progressBar.setVisibility(View.GONE);
+
                 }
             }
 
@@ -498,7 +507,70 @@ progressBar.setVisibility(View.VISIBLE);
             }
         });
     }
+    @SuppressLint("CheckResult")
+    private void customNotification(String event) {
 
+        List<CustomNotificationRequest> list = new ArrayList<>();
+
+        CustomNotificationRequest r = new CustomNotificationRequest();
+        Log.d("regNotiplaceorder",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+        r.setEvent(event);
+
+        list.add(r);
+
+
+
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().customnoti(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        // binding.progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent login = new Intent(CreateAccountActivity.this, SplashActivity.class);
+//                            startActivity(login);
+
+//                            Log.e("onSuccessaa", successResponse.getChallanid());
+                            if (successResponse != null) {
+
+//                                if (successResponse.getMessage().equals("success")) {
+//                                    // mappingAdapter.clear();
+//
+//                                }
+
+                                //  Toaster.show(mContext, successResponse.getMessage());
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
@@ -516,8 +588,6 @@ progressBar.setVisibility(View.VISIBLE);
                 if (resultCode == RESULT_OK) {
 
                     Uri selectedImage = imageReturnedIntent.getData();
-
-
                     File file = new File(selectedImage.getPath());
                     uploadData(selectedImage);
 

@@ -202,9 +202,6 @@ public interface NetworkInterface {
     @POST("orderRest/getOrderInfo")
     Call<List<OrderInfoResponse>>getplaceorderinfo(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId,@Body OrderInfoRequest requests);
 
-
-
-
     @POST("orderRest/placeOrder")
     Single<Response<CreateLoginUserResponse>> placeOrder(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Query("addressId") String addressid, @Query("mode") String mode, @Query("txid") String txnid,@Body List<PlaceOrderRequest> requests  );
 
@@ -266,10 +263,8 @@ public interface NetworkInterface {
 
 
 
-
     @POST("makerOfferRest/updateFinalStatusByBuyer")
     Call<CreateLoginUserResponse>makeofferyes(@Header("Authorization") String authHeader,  @Query("userEmailId") String emailId, @Query("offerid") String offerid, @Query("flag") String remark);
-
 
 
     @POST("makerOfferRest/offerAceptByBuyer")
@@ -278,7 +273,6 @@ public interface NetworkInterface {
 
     @POST("makerOfferRest/getOfferHistory")
     Call<List<MakeofferhistoryResponse>>makeofferhistory(@Header("Authorization") String authHeader, @Query("offerid") String offerid);
-
 
     @POST("makerOfferRest/updateOfferByBuyer")
     Single<Response<CreateLoginUserResponse>> editmakeoffer(@Header("Authorization") String authHeader,@Query("userEmailId") String emailId, @Body EditMakeOfferRequest requests);

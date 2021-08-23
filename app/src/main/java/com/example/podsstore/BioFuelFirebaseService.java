@@ -45,7 +45,7 @@ public class BioFuelFirebaseService extends FirebaseMessagingService {
                         }
 
                         // Get new Instance ID token
-                        String token = task.getResult().getToken();
+                       String token = task.getResult().getToken();
                         Log.e("My Token",token);
                     }
                 });
@@ -102,9 +102,7 @@ public class BioFuelFirebaseService extends FirebaseMessagingService {
                     URL url = new URL(remoteMessage.getNotification().getImageUrl()+"");
                     Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 
-                    Log.d("imageUrl: ", ""+bitmap);
-
-                    NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
+                        NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
                     bigPictureStyle.setBigContentTitle(title);
                     bigPictureStyle.bigPicture(bitmap);
                     NotificationCompat.Builder builder =
@@ -115,7 +113,7 @@ public class BioFuelFirebaseService extends FirebaseMessagingService {
                                     .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.bluelogo))
                                     .setSmallIcon(R.drawable.bluelogo)
                                     .setStyle(bigPictureStyle)
-                                    .setContentText("")
+                                    .setContentText(remoteMessage.getNotification().getBody())
                                     .setContentIntent(pi)
                             ;
 
@@ -131,6 +129,31 @@ public class BioFuelFirebaseService extends FirebaseMessagingService {
 
 
             }
+
+
+        }else{
+            NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
+            bigPictureStyle.setBigContentTitle(title);
+            Log.d("imageUrlsss: ", ""+remoteMessage.getNotification().getBody());
+
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(
+                            getApplicationContext(), "222")
+                            .setContentTitle(remoteMessage.getNotification().getTitle())
+                            .setContentText(remoteMessage.getNotification().getBody())
+                            .setAutoCancel(true)
+                            .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.bluelogo))
+                            .setSmallIcon(R.drawable.bluelogo)
+                            .setStyle(bigPictureStyle)
+
+                            .setContentIntent(pi)
+                    ;
+
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+
+            nm.notify(123, builder.build());
 
 
         }

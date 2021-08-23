@@ -34,7 +34,9 @@ import com.example.podsstore.MainActivity;
 import com.example.podsstore.R;
 import com.example.podsstore.SplashActivity;
 import com.example.podsstore.data.ApiClient;
+import com.example.podsstore.data.request.AddUserHistoryNotiRequest;
 import com.example.podsstore.data.request.CreateLoginUserRequest;
+import com.example.podsstore.data.request.CustomNotificationRequest;
 import com.example.podsstore.data.request.NotificationRequest;
 import com.example.podsstore.data.response.CreateLoginUserResponse;
 import com.example.podsstore.notification.ApiClientNoti;
@@ -275,6 +277,7 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
                         // binding.progressbar.setVisibility(View.GONE);
 
 
+                        customNotification(useremail);
                         Log.e("onSuccess", String.valueOf(response.code()));
                         if (response.isSuccessful()) {
 
@@ -445,4 +448,53 @@ RadioGroup radioGroup=customLayout.findViewById(R.id.radioGroup);
         startActivity(i);
         finish();
     }
+    @SuppressLint("CheckResult")
+    private void customNotification(String email) {
+
+        List<AddUserHistoryNotiRequest> list = new ArrayList<>();
+
+        AddUserHistoryNotiRequest r = new AddUserHistoryNotiRequest();
+        Log.d("regNotiplaceordercreate",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        r.setGcmtoken(FirebaseInstanceId.getInstance().getToken());
+        r.setEmailid(email);
+
+        list.add(r);
+
+        Log.e("postData", new Gson().toJson(r));
+
+        ApiClientNoti.getApiClients().addUserHistorynotificationhistory(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<CreateLoginUserResponse>>() {
+                    @Override
+                    public void onSuccess(Response<CreateLoginUserResponse> response) {
+
+                        Log.e("onSuccess", String.valueOf(response.code()));
+                        if (response.isSuccessful()) {
+
+                            CreateLoginUserResponse successResponse = response.body();
+                            Toast.makeText(getApplicationContext(), successResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            if (successResponse != null) {
+
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your email id...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.e("onError: " , e.getMessage());
+                        Toast.makeText(getApplicationContext(), "server error", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+    }
+
 }
